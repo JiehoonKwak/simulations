@@ -1,0 +1,12 @@
+# Local and restricted inputs
+.DS_Store
+.env
+.env.*
+*.pem
+*.key
+__pycache__/
+*.pyc
+.venv/
+data/raw/
+private/
+outputs/
