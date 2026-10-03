@@ -38,7 +38,11 @@ an observed group weight or a claim about clinic/hospital ownership.
 
 ## Assumptions and quantitative reading
 
-The assumptions drawer provides six contrasting presets and15 controls. The
+The assumptions drawer provides four matched comparisons, six additional presets
+and 15 controls. The primary paths sequentially change demand, staffing response
+and salaried gain participation while preserving the other inputs. The default,
+reset and dashed reference use **Less work, same care**. The compact scenario
+name also opens this drawer. The
 primary controls address documentation, care demand, payment, staffing response
 and salaried gain participation. Further task/deployment/capacity/distribution
 conditions remain in a disclosure. Changing a control recomputes the same
@@ -49,17 +53,29 @@ role earnings paths, required work, retained positions, the role earnings ratio
 and conditional between-role dispersion. The app does not report an observed
 national Gini, individual layoffs or simulated hospital closures.
 
+A collapsed **2036 earnings break-even** section shows each role's minimum demand
+growth and gain participation to reach its own original-member earnings index 100.
+Each calculation changes one control while holding the others fixed. Demand
+thresholds include staffing feedback and capacity limits. **Not reachable** means
+the target cannot be reached through that control under the remaining inputs.
+The interface uses the retained-rights rule; the report compares growth-only
+sharing separately. Thresholds always concern 2036, even when playback shows an
+earlier year, and do not promise maintenance throughout the intervening years.
+
 Sensitivity bands and ranges use the same `web/sensitivity.mjs` design as the
 research report:243 finite alternatives for active/custom scenarios,27 structural
 alternatives for the no-change control. Bands show minima/maxima, not confidence
 intervals. The default comparison remains dashed. Method/source disclosures
 identify the2020 earnings anchor, reconstructed weights, separate2024 workforce
 context and future assumptions. JSON export includes parameters, structure,
-source hashes, frames, default comparison and sensitivity design/results.
+source hashes, frames, current/default scenario identities, endpoint earnings
+conditions and sensitivity design/results. The source disclosure includes the
+new 2026 MOHW release as context and all 12 selected primary-study links.
 
 ## Build and visual verification
 
-The standalone builder embeds the baseline, model, sensitivity helper, renderer
+The standalone builder embeds the baseline, model, sensitivity and earnings-condition
+helpers, matched comparisons, renderer
 and styles. Direct file opening requires no network calculation service; source
 links are optional outbound references. Browser verification must inspect the
 exact built HTML at desktop and narrow viewports, not only the source page.

@@ -7,7 +7,10 @@ physicians**, with assumptions, source evidence and sensitivity results in drawe
 
 The empirical anchors are official 2020 adjusted physician remuneration means.
 Official 2023/2024 workforce and utilization tables provide separate context.
-Eight primary clinical AI studies inform mechanisms and a trial-transport check.
+Twelve primary studies inform mechanisms and a trial-transport check, including
+four Korean workflow, consultation-time and fee-policy sources. The September
+2026 official release adds a 2023 overall earnings mean as separate context;
+matched role means remain anchored to the verified 2020 table.
 Future 2026–2036 paths are conditional scenarios, not fitted national forecasts.
 
 ## Open and run
@@ -20,6 +23,11 @@ npm run dev
 Open <http://127.0.0.1:8765>. The two work settings remain visible while time
 advances; change assumptions, pause/scrub, inspect the earnings range, or download
 an exact scenario and its results. Default playback is 16 seconds with a loop.
+
+Four matched paths isolate more care, staffing adjustment and unequal gain
+sharing. The results drawer shows the minimum demand growth or gain participation
+needed to maintain each role's own baseline earnings at 2036, including conditions
+where that target is unreachable. Earlier presets remain available.
 
 ```sh
 npm test
@@ -35,8 +43,10 @@ and figure generation use `uv` with the committed `pyproject.toml` and `uv.lock`
   <http://127.0.0.1:8765/film.html>.
 - [Numerical findings and interpretation](artifacts/analysis-report.md).
 - [Reproducible scenario report](artifacts/scenario-report.json),
-  [trajectory CSV](artifacts/scenario-trajectories.csv), and
-  [threshold-grid CSV](artifacts/threshold-grid.csv).
+  [matched trajectories](artifacts/comparison-trajectories.csv), and
+  [earnings-maintenance curves](artifacts/earnings-maintenance-curves.csv).
+- Main figures: [matched paths](artifacts/figures/matched-comparisons.pdf) and
+  [earnings-maintenance conditions](artifacts/figures/earnings-maintenance.pdf).
 - [Figure captions](artifacts/figure-captions.md) and editable figures under
   `artifacts/figures/`.
 
@@ -67,6 +77,13 @@ scenario assumption; it is not an estimated ownership effect or hospital balance
 sheet. Outside earnings and passive returns after exit are outside the modeled
 original practice. The animation's physician slots and patient movement are
 schematic, not sampled people or a queue model.
+
+The main analysis targets each role's original-member earnings at the endpoint.
+It compares two compensation rules and 54 task-mix/payment/cost alternatives per
+matched path. Preserving positions while expanding care maintains earnings in
+every tested alternative; staffing adjustment is sensitive to the compensation
+rule. This finite-design result is conditional on its stated assumptions, without
+an assigned probability. See the numerical report for thresholds and boundaries.
 
 ## Project owners
 

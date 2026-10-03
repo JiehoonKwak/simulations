@@ -19,13 +19,20 @@ The source entries are `/` and `/cinema.html`. The current engine is
    retention and clinical work with the current model frame. Retention is a share
    of original modeled positions; it is not a national headcount or an inference
    from the 8/16 illustrative actor slots.
+   Exercise all four primary comparisons: only demand, then staffing response,
+   then salaried participation change. Default/reset/reference use Less work,
+   same care; preset changes retain the current year. Expand 2036 earnings
+   break-even and compare both minimum inputs with the helper, including a
+   capacity-limited Not reachable case. These conditions target 2036 even if the
+   scene is showing an earlier year.
 4. Check the chart's sensitivity bands and numerical ranges against the exported
    finite design. The ranges are extrema, not confidence intervals. Workforce
    context must not be described as role weights; observed earnings must say 2020
    and the 2026 index must be identified as an assumed relative baseline.
 5. Download scenario/results using the UI. Inspect the actual saved JSON, then
    rerun its parameters and structure through the engine and sensitivity helper.
-   Require exact annual-frame and sensitivity equality. A completed click or a
+   Require exact annual-frame, sensitivity and earnings-condition equality, plus
+   correct current/reference scenario identities. A completed click or a
    browser download-event timeout alone does not establish the file outcome.
 6. Inspect desktop and 390x844: both buildings and their signs, moving people,
    readouts and playback controls fit. Open both drawers; check readable source

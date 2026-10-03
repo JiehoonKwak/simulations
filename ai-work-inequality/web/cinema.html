@@ -37,6 +37,13 @@
           <div>
             <p class="eyebrow">2026–2036 SCENARIOS</p>
             <h1>Who shares the gains?</h1>
+            <button
+              id="current-scenario"
+              aria-controls="settings"
+              aria-expanded="false"
+            >
+              Less work, same care ↗
+            </button>
           </div>
           <div class="year-block">
             <strong id="year">2026</strong><span>→ 2036</span>
@@ -139,18 +146,33 @@
         <dl id="distribution-results"></dl>
         <h3>Earnings through time</h3>
         <p class="chart-note">
-          Each group starts at 100 · solid: current · dashed: default
+          Each group starts at 100 · solid: current · dashed: Less work, same
+          care
         </p>
         <svg
           id="earnings-chart"
           viewBox="0 0 320 150"
           role="img"
-          aria-label="Two groups' earnings paths with sensitivity ranges under current and default assumptions"
+          aria-label="Two groups' earnings paths with sensitivity ranges under current and Less work, same care assumptions"
         ></svg>
         <div class="mini-legend">
           <span>● Proprietors</span><span>● Salaried</span
           ><span class="band-key">▰ Sensitivity</span>
         </div>
+        <details id="break-even">
+          <summary>2036 earnings break-even</summary>
+          <p class="muted">
+            Original-group mean earnings = 100. Demand growth varies at current
+            gain participation; gain participation varies at current demand.
+            Each condition changes one input at a time.
+          </p>
+          <div id="break-even-results"></div>
+          <p class="chart-note">
+            Central rule: retained rights. Conditional model results, not
+            observed estimates. “Not reachable” means the target cannot be met
+            within the model’s allowed range and capacity constraints.
+          </p>
+        </details>
         <details>
           <summary>Observed anchor &amp; sources</summary>
           <p class="muted">

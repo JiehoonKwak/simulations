@@ -5,18 +5,24 @@
   "scientific_object": "Deterministic conditional scenario, not a sampled person or institution",
   "source_report": {
     "path": "artifacts/scenario-report.json",
-    "sha256": "a93bd755f110082282973cc9123039d043f4c5f5764c873f69bab4bf345083f7"
+    "sha256": "b7d5ece5a890ec9f5764db924061d1643580dd219be3489bd0c43969098f1e30"
   },
   "model_version": "physicians-0.2.0",
   "model_sha256": "a5361ccf5b47c7f619677b6bb10926341884b90ae723e29905bc37165ca34387",
   "input_sha256": {
-    "income": "66649a04842a9b82f7cf179b456634f6329799e65f5caa5934ef4fdd8fb5f30e",
+    "income": "a4f5f5635f486b2bf53b049d206aa25ba7f33aad08e0c0480d19a8e232123e94",
     "workforce": "5bc62a7e0e5be005636e3eec003a233929a2b7f5db42d1cc9c855d0659724733",
-    "ai-evidence": "b14cf238ad127c61ce24a0ff65b5c700484e36330e66c0a5d8f0d656a14043ea"
+    "ai-evidence": "6d425516f9fc42eea912adfa4bf9a2ddbdd90f2343cb34bb9696ff435aee589f"
+  },
+  "analysis_helper_sha256": {
+    "scripts/analyze-empirical.mjs": "63bb5b399efa5404b5fae74df5ea8dbdf6395d4bfee63f1bd4aeebfe870e8ab5",
+    "web/earnings-conditions.mjs": "21b81b185bf3479bb796e9ed3b6e3b6b8500928d95cf8618f64608ec0bce4811",
+    "web/comparisons.mjs": "528ffab232ced5cea3791ea376d320961d972c73a43c770bf12fef0c24bb9ae0",
+    "web/sensitivity.mjs": "ef6137feb594fac5be0d3d94f7b66482083fdc3d2d768469e6a0446f72966752"
   },
   "generation": {
     "path": "scripts/plot-results.py",
-    "sha256": "cfcedba66fee41b990ba9012d43dab5938d2e5cc8f4f48b4d0d9c88f32f79e15",
+    "sha256": "262505f21383aea25b2bc6a22c6d6139b5ee4d2e6b2068c557f055c1ae9695c2",
     "command": "uv run python scripts/plot-results.py"
   },
   "software": {
@@ -85,6 +91,7 @@
         "150"
       ],
       "off_panel_evidence": "artifacts/figure-captions.md",
+      "role": "supplemental",
       "rendered_text": [
         "0",
         "100",
@@ -176,6 +183,7 @@
         "-16"
       ],
       "off_panel_evidence": "artifacts/figure-captions.md",
+      "role": "supplemental",
       "rendered_text": [
         "-5",
         "0",
@@ -221,10 +229,181 @@
         "font_Arial_in_pdf": true,
         "editable_svg_text_elements": 35
       }
+    },
+    "matched-comparisons": {
+      "height_mm": 116,
+      "role": "main",
+      "question": "How do demand, staffing and gain participation alter earnings per original role member under matched technology?",
+      "criterion": "Own-role 2036 earnings index at least 100 means maintenance of original-member remuneration.",
+      "metric": "Own-role earnings per original member, 2026=100",
+      "eligibility": "All four matched comparisons, both roles and all eleven years",
+      "dimensions_shown": [
+        "matched comparison",
+        "year",
+        "role",
+        "finite parameter-grid extrema"
+      ],
+      "uncertainty": "Pointwise range across 243 finite parameter combinations; not CI; excludes compensation-rule countermodel",
+      "geometry": "2 by 2 shared-axis facets; y limits75 to145",
+      "composite_reason": "Matched technology permits ordered demand, staffing and gain-participation comparisons.",
+      "color_role_map": {
+        "proprietor": "#AC765C",
+        "salaried": "#658B82"
+      },
+      "displayed_text": [
+        "Less work, same care",
+        "More care, same positions",
+        "Fewer positions, shared gains",
+        "Fewer positions, unequal gains",
+        "Proprietor",
+        "Salaried",
+        "Design range",
+        "Year",
+        "Earnings index (2026 = 100)",
+        "2026",
+        "2031",
+        "2036",
+        "80",
+        "100",
+        "120",
+        "140"
+      ],
+      "off_panel_evidence": "artifacts/figure-captions.md",
+      "rendered_text": [
+        "100",
+        "120",
+        "140",
+        "2026",
+        "2031",
+        "2036",
+        "80",
+        "Design range",
+        "Earnings index (2026 = 100)",
+        "Fewer positions, shared gains",
+        "Fewer positions, unequal gains",
+        "Less work, same care",
+        "More care, same positions",
+        "Proprietor",
+        "Salaried",
+        "Year"
+      ],
+      "actual_inches": [
+        6.614173228346457,
+        4.566929133858268
+      ],
+      "export_readback": {
+        "svg_width": "476.220472pt",
+        "svg_height": "328.818898pt",
+        "pdf_mediabox_pt": [
+          0.0,
+          0.0,
+          476.2204724409,
+          328.8188976378
+        ],
+        "png_pixels": [
+          1984,
+          1370
+        ],
+        "png_dpi": [
+          299.9994,
+          299.9994
+        ],
+        "font_Arial_in_pdf": true,
+        "editable_svg_text_elements": 23
+      }
+    },
+    "earnings-maintenance": {
+      "height_mm": 142,
+      "role": "main",
+      "question": "What demand growth maintains original-group earnings at 2036 under alternative participation and compensation rules?",
+      "criterion": "Minimum purchased-care demand growth with endpoint own-role original-member earnings index >=100",
+      "metric": "Minimum demand growth (%); unavailable retained as null and encoded only in nonnumeric strips",
+      "eligibility": "Balanced task profile, capacity20/40, staffing0/0.5/1, both rules, all101 gain shares",
+      "dimensions_shown": [
+        "capacity",
+        "staffing",
+        "gain share",
+        "compensation rule",
+        "required demand",
+        "reachability"
+      ],
+      "uncertainty": "Deterministic thresholds; no CI; alternative task profiles retained in numerical report",
+      "geometry": "Capacity rows and staffing columns; each facet includes a separate two-row reachability strip",
+      "composite_reason": "Common-scale comparisons isolate capacity, staffing and compensation-rule changes.",
+      "null_encoding": "Absent numeric curve; x-hatched strip over unavailable sampled gain shares (R or G). No sentinel ordinate.",
+      "displayed_text": [
+        "Staffing response = 0",
+        "Staffing response = 0.5",
+        "Staffing response = 1",
+        "Capacity +20%",
+        "Capacity +40%",
+        "Required demand growth (%)",
+        "Gain participation",
+        "Retained rights (R)",
+        "Growth only (G)",
+        "Not reachable",
+        "R",
+        "G",
+        "0",
+        "10",
+        "20",
+        "30",
+        "40",
+        "0.0",
+        "0.5",
+        "1.0"
+      ],
+      "off_panel_evidence": "artifacts/figure-captions.md",
+      "rendered_text": [
+        "0",
+        "0.0",
+        "0.5",
+        "1.0",
+        "10",
+        "20",
+        "30",
+        "40",
+        "Capacity +20%",
+        "Capacity +40%",
+        "G",
+        "Gain participation",
+        "Growth only (G)",
+        "Not reachable",
+        "R",
+        "Required demand growth (%)",
+        "Retained rights (R)",
+        "Staffing response = 0",
+        "Staffing response = 0.5",
+        "Staffing response = 1"
+      ],
+      "actual_inches": [
+        6.614173228346457,
+        5.590551181102363
+      ],
+      "export_readback": {
+        "svg_width": "476.220472pt",
+        "svg_height": "402.519685pt",
+        "pdf_mediabox_pt": [
+          0.0,
+          0.0,
+          476.2204724409,
+          402.5196850394
+        ],
+        "png_pixels": [
+          1984,
+          1677
+        ],
+        "png_dpi": [
+          299.9994,
+          299.9994
+        ],
+        "font_Arial_in_pdf": true,
+        "editable_svg_text_elements": 41
+      }
     }
   },
   "acceptance": [
-    "two standalone figures",
+    "two main and two supplemental standalone figures",
     "168 mm exact canvas width",
     "source-native unchanged values",
     "readable decoding text only",
@@ -233,17 +412,61 @@
   ],
   "review": {
     "scientific": "Source fields and definitions checked; empirical and structural assumptions remain conditional",
-    "visual": "PASS: current 100 dpi declared-size color and grayscale proofs inspected; readable axes/legends, no clipping or overlap; role lines distinguished by dash, ratio sign/zero distinguished by labeled contours. No specific journal release approval.",
+    "visual": "PASS: current four figure color/grayscale proofs reviewed; new matched and maintenance figures readable at declared168mm width, no clipping; unavailable thresholds in separate R/G strips, never numeric sentinel values.",
     "user_acceptance": "not requested",
     "proofs": [
+      "earnings-maintenance-grayscale.png",
+      "earnings-maintenance-proof.png",
+      "matched-comparisons-grayscale.png",
+      "matched-comparisons-proof.png",
       "role-earnings-grayscale.png",
       "role-earnings-proof.png",
       "role-gap-thresholds-grayscale.png",
       "role-gap-thresholds-proof.png"
     ]
   },
-  "caption_sha256": "2c5c54725807dcf43fe3c56daefa8111a0362d1f5e36127e1e7ea04fc532e884",
+  "caption_sha256": "6efc0072d3c5cb539a488953c85dacdc3a982a12340f2c904c71a976c42c8282",
   "artifacts": {
+    "earnings-maintenance-grayscale.png": {
+      "sha256": "3a16a01644b5a84bdea9ea9f1ccf0f3b17a86da58142b38b2d8c9628a7c0877b",
+      "bytes": 18179
+    },
+    "earnings-maintenance-proof.png": {
+      "sha256": "ab929c73932f0907761984cb4973fb178dfd944647ad7f7d01cbc32e4dd33f39",
+      "bytes": 41468
+    },
+    "earnings-maintenance.pdf": {
+      "sha256": "65679564941b3cac5d1d3d336765e3b4006c2955c15fe3a3ce36bca9b5b1263d",
+      "bytes": 45693
+    },
+    "earnings-maintenance.png": {
+      "sha256": "4953e41746cf7049246fde7d99d6258ecb6923a67f98d82f710ad9f47970a963",
+      "bytes": 163129
+    },
+    "earnings-maintenance.svg": {
+      "sha256": "9c0dbd03cd5a613761b2204984bd893c6a948fc73e0acacc8342509786c64f5e",
+      "bytes": 58875
+    },
+    "matched-comparisons-grayscale.png": {
+      "sha256": "4f60293f94f0f30e2da1ee3b3e0b8c31b66c374ad686aef9c6ed92e7ceb9152e",
+      "bytes": 14983
+    },
+    "matched-comparisons-proof.png": {
+      "sha256": "588b4b501cc7b169de9bb7116869d4fd8f778c08a4111185510bc7000becb3cc",
+      "bytes": 36270
+    },
+    "matched-comparisons.pdf": {
+      "sha256": "f5d1451c53afb3e507f0df36b6f1b7657c91cdbda49afca66f6db3613daf472f",
+      "bytes": 36993
+    },
+    "matched-comparisons.png": {
+      "sha256": "121fe21a1df76947e0e8abc51b214b133fdec5410cdae994b43469ba7c15db44",
+      "bytes": 130602
+    },
+    "matched-comparisons.svg": {
+      "sha256": "3076e4fa4da26af7c9eba762f694a4bd6a3841afb2ebc627d2c60df274c69f64",
+      "bytes": 26472
+    },
     "role-earnings-grayscale.png": {
       "sha256": "c96275752850fbced70ee3738063875b4dfbc9486cf995946ac66ceb75bbfd08",
       "bytes": 15223
@@ -253,7 +476,7 @@
       "bytes": 36609
     },
     "role-earnings.pdf": {
-      "sha256": "ad1907d5253b3d3105c0c9044223e59ad5d3a3aa30f962f78709b0e87e0a7a67",
+      "sha256": "741a9a7a2949cc2e04b1ec40d2a412c871efacc0ab17d26f103009d99c036207",
       "bytes": 37760
     },
     "role-earnings.png": {
@@ -261,7 +484,7 @@
       "bytes": 138100
     },
     "role-earnings.svg": {
-      "sha256": "b7f2a41463a13baa17197d44e0625a985adbce6286dcd870ef0fdacc2c01ffcd",
+      "sha256": "41123383f72387dc45cfa9678a91575e67cf1f8196e2f49c2bd7b0c5b8f98d16",
       "bytes": 37450
     },
     "role-gap-thresholds-grayscale.png": {
@@ -273,7 +496,7 @@
       "bytes": 26132
     },
     "role-gap-thresholds.pdf": {
-      "sha256": "9e2c91facdded6108ae53b21297a0658f93471c3ab9d31d46ab81653da7007c1",
+      "sha256": "8351bb393240562f4d413c5e0cbf603878b2aa46256f6e60685fd5cba1ead083",
       "bytes": 91752
     },
     "role-gap-thresholds.png": {
@@ -281,7 +504,7 @@
       "bytes": 96963
     },
     "role-gap-thresholds.svg": {
-      "sha256": "e6a44fcc96e73e3dafb1ca24911329b5590a262733d5e555d886c83ec5f34266",
+      "sha256": "f2620c4392ad9c900bf7b4c4c935edf1576c9141ddc071f26534d3dc07cf602a",
       "bytes": 637389
     }
   }

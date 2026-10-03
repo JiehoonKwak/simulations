@@ -1,9 +1,11 @@
 # Korean physician remuneration data
 
-Retrieved 2026-10-02. The observed income year is **2020**, published in 2022.
+Baseline sources retrieved 2026-10-02; methods and newer context checked
+2026-10-03. The calibrated income year remains **2020**, published in 2022.
 The simulation's 2026 starting year is not an observation year. The canonical
 machine-readable extract is [income.json](../data/processed/income.json).
-No within-group distribution has been generated.
+The separate 2023 context does not change role calibration or generate a
+within-group distribution.
 
 ## Sources and acquisition
 
@@ -27,11 +29,22 @@ visually inspected. The release identifies MOHW license records linked with NHIS
 qualification/contribution records; these remuneration figures are administrative
 statistics, not the separate online volunteer survey.
 
+The [full first-survey report](https://www.mohw.go.kr/board.es?mid=a10411010200&bid=0019&act=view&list_no=373498),
+posted by MOHW on 2022-11-02, was retrieved directly on 2026-10-03. This resolves
+the initial unsuccessful KIHASA repository route. Its
+[PDF](https://www.mohw.go.kr/boardDownload.es?bid=0019&list_no=373498&seq=1)
+is 34,751,483 bytes, SHA-256
+`b6c1403d50e6c9ae98c8458f3a378bb18bb82fb56365906bb1870b5605e68f76`.
+Printed pp.318-319 (physical PDF pp.366-367) define the remuneration measure.
+Tables 5-26 and 5-31, printed p.350 and pp.357-358 (PDF p.398 and pp.405-406),
+provide the overall and role means with their eligibility notes.
+
 Raw downloads, source landing pages, the correction notice, and SHA-256 manifest
 are retained under `data/raw/income/`, which is ignored by Git. The canonical
-extractor is [scripts/extract-income.py](../scripts/extract-income.py). The JSON
-records the exact source sheet and cell for every observed numerical value.
-No restricted microdata were acquired.
+extractor is [scripts/extract-income.py](../scripts/extract-income.py). Each
+workbook value in the JSON records its source sheet and cell; the newer PDF value
+records its page locator and manual verification method. No restricted microdata
+were acquired.
 
 ### Reuse terms
 
@@ -39,6 +52,13 @@ The MOHW release landing page and PDF visibly carry **KOGL Type 1 (attribution)*
 Its [terms page](https://www.mohw.go.kr/menu.es?mid=a10103020100) is recorded in the
 JSON. Attribution: Ministry of Health and Welfare, *보건의료인력 실태조사 결과 발표*,
 July 7, 2022, using NHIS-linked administrative statistics.
+
+The full report's landing page specifies **KOGL Type 4: attribution,
+noncommercial, no derivatives** ([terms](https://www.mohw.go.kr/menu.es?mid=a10103020400)).
+It remains an ignored local research input. The September 29, 2026 release and
+its factsheet attachment are provided under **KOGL Type 1**, as marked on their
+shared release page. Their titles, publisher, URLs, retrieval dates, and terms
+are recorded in the JSON.
 
 No file-specific KOGL marking was established for the NHIS workbook. Keep that
 raw workbook local and do not redistribute it on the basis of public access.
@@ -54,6 +74,10 @@ by 12**. For full-time physicians, the reported working pattern is at least
 public-health and military physicians are included. Region means refer to the
 workplace on 2020 administrative boundaries.
 
+The full report restricts both the overall mean (Table 5-26) and the role means
+(Table 5-31) to **valid-remuneration recipients**. A valid-record selection
+algorithm or remuneration-eligible role counts were not located in the report.
+
 For proprietors, the source definition is business income of the relevant
 workplace, excluding rental income. For employees, it is labor income of the
 relevant workplace. Neither is provider billings or household disposable income.
@@ -61,9 +85,13 @@ The proprietor measure does not separately identify a clinical wage, return to
 capital, retained profit, or cash withdrawal by the owner. A model splitting it
 into labor and ownership components must identify that split as an assumption.
 
-The excerpt does not provide a complete reconciliation from revenue through
-expenses and personal taxation. Preserve the label **administrative remuneration**;
-do not call it exact taxable income, after-tax take-home pay, or owner dividends.
+Printed p.319 of the full report defines gross remuneration to include
+social-security contributions and employees' income tax, explicitly identifying
+this as the same definition used in the preceding remuneration section. Employee
+pay therefore includes those amounts. The report does not provide a complete
+bridge from proprietor revenue through expenses to cash owner draws. Preserve
+the label **administrative remuneration**; do not call it after-tax take-home pay
+or owner dividends.
 NHIS's current [reporting explanation](https://www.nhis.or.kr/nhis/minwon/wbhapa01000m01.do?articleNo=10946882&mode=view)
 confirms that annual settlement uses reported remuneration and operating-period
 income. It does not retrospectively identify every adjustment in the 2020 extract.
@@ -132,7 +160,7 @@ residents and therefore are **not** denominators for the remuneration means.
 The counts are retained in a clearly separate JSON context block.
 
 Sheet 17, *시도별, 의료기관 유형별 의료기관 근무의사(일반의/전문의) 연평균 임금(2020년)*,
-provides institution-type means (E column). Its notes include the additional
+provides institution-type means (E column). Its notes include the
 restriction `유효보수 대상자에 한에 산출` (valid remuneration records only, B333).
 
 | Institution | Annualized mean KRW, rounded | Cell |
@@ -146,12 +174,15 @@ restriction `유효보수 대상자에 한에 산출` (valid remuneration record
 | Public-health institution | 79,002,319 | E21 |
 | Other | 151,770,997 | E22 |
 
-Sheet 17's national mean differs from Sheet 15 by about 3.1%. The added footnote
-is a possible contributor; the exact cause is unresolved. These values are
-reference margins, not additional calibration constraints on the two-role
-population. No institution x proprietor/employee remuneration cross-tab was
-found in this workbook. Institution-type means must not be called employee-only
-salaries or used to assign all proprietors to clinics.
+Sheet 17's national mean differs from Sheet 15 by about 3.1%. The full report
+also applies valid-remuneration eligibility to the overall and role means, so
+that restriction does not explain the discrepancy. This corrects the initial
+interpretation based on the workbook's different footnote wording; the cause
+remains unresolved. These values are reference margins, not additional
+calibration constraints on the two-role population. No institution x
+proprietor/employee remuneration cross-tab was found in this workbook.
+Institution-type means must not be called employee-only salaries or used to
+assign all proprietors to clinics.
 
 Sheet 16 uses the OECD definition and explicitly **includes Korean-medicine
 doctors**. Its values must not replace the medical-doctor-only Sheet 15 series.
@@ -161,13 +192,34 @@ doctors**. Its values must not replace the medical-doctor-only Sheet 15 series.
 The 2024 court-submission series of 2022 physician remuneration was identified
 through [reporting about the government submission](https://www.hankyung.com/article/202405148020i).
 Its original official table, complete methods, and file terms were not obtained
-in this retrieval. It is excluded from the input values. MOHW's live
-[approved-statistics page](https://www.mohw.go.kr/statView.es?mid=a10406010100&stts_data_seq=211)
-listed the next health-workforce survey publication for October 2026 when checked.
-This does not establish that no newer income statistic exists elsewhere.
-The KIHASA catalog initially supplied for the task is a summary-report catalog;
-the full-report catalog links to a repository page that returned a JavaScript
-access page, so it was not counted as a retrieved full report.
+in the initial retrieval or the bounded official-source follow-up on 2026-10-03.
+It remains excluded from calibration; the reported institution-type margins
+cannot substitute for national proprietor/employee means.
+
+MOHW published the [second-survey release on September 29, 2026](https://www.mohw.go.kr/board.es?mid=a10503010100&bid=0027&act=view&list_no=1492074).
+This actual publication supersedes the October 2026 expectation recorded during
+the initial retrieval. The [main PDF](https://www.mohw.go.kr/boardDownload.es?bid=0027&list_no=1492074&seq=2)
+is 647,597 bytes, SHA-256
+`54c95938718297bfaf78d4ec28827a1fdd10b351ff4c88faff62ac5e874e0dc3`.
+Its p.10 specifies the NHIS monthly-remuneration basis, full-time work of at
+least 40 hours/week, resident exclusion, and first/99th percentile replacement.
+
+The [occupation factsheets](https://www.mohw.go.kr/boardDownload.es?bid=0027&list_no=1492074&seq=4)
+give the **2023 all-physician mean of KRW 285,182,871** on physical PDF p.3,
+printed p.1, section 4. The PDF is 810,821 bytes, SHA-256
+`91f9cf70313530be93ff40e4b46bee340823b1aa16a438d9aa8c071dec7ba1ff`.
+This value was manually transcribed and verified against the rendered page and
+extracted text. It is retained in `newerContext`, separate from the runtime role
+calibration and reconstructed weights; the extractor verifies its source hash
+but does not automatically parse this PDF value.
+
+Neither retrieved attachment supplies proprietor/employee means or
+remuneration-eligible role counts. Workforce headcounts in the factsheet have a
+different eligibility boundary. Matching headline exclusions and tail adjustment
+do not establish identical role populations, valid-record selection, or percentile
+reference pools. The release says detailed final results will be posted later
+(p.11); its listed item 19 (p.14) is the relevant sex/region/role remuneration
+table for 2013-2023. Detailed role data were not obtained as of 2026-10-03.
 
 For 2026-2036 scenarios, using the observed 2020 relative role means requires an
 explicit persistence assumption. No CPI adjustment or extrapolation is applied
@@ -185,17 +237,23 @@ an empirical confidence interval.
 
 ## Reproduction and checks
 
-Download both source files from the exact URLs above to
-`data/raw/income/nhis-physician-statistics.xlsx` and
-`data/raw/income/mohw-20220707-release.pdf`. Keep these raw sources out of Git.
-From the `ai-work-inequality` project root, run:
+Download all five sources from the exact URLs above to these paths under
+`data/raw/income/`:
+
+- `nhis-physician-statistics.xlsx`
+- `mohw-20220707-release.pdf`
+- `mohw-2021-full-report.pdf`
+- `mohw-20260929-release.pdf`
+- `mohw-20260929-occupation-factsheets.pdf`
+
+Keep the raw sources out of Git. From the `ai-work-inequality` project root, run:
 
 ```sh
 uv run python scripts/extract-income.py
 ```
 
 The script locates inputs and output relative to its own project directory,
-checks both source SHA-256 hashes before extraction, and exits with download URLs
+checks all five source SHA-256 hashes before extraction, and exits with download URLs
 when inputs are missing. A source revision fails the hash check and requires
 inspection before accepting a new hash. It does not download or update sources.
 `openpyxl` loads the stored numeric values; no Excel recalculation or rounding is
@@ -208,9 +266,10 @@ converted to zeros. No institution weighting, inflation adjustment, or synthetic
 person-level allocation occurs in extraction.
 
 The project-root `uv run` command was verified with Python 3.13.5 and openpyxl
-3.1.5; a separate Python 3.12.14 run produced the same result. The regenerated
-JSON was byte-identical to the original extract, with SHA-256
-`66649a04842a9b82f7cf179b456634f6329799e65f5caa5934ef4fdd8fb5f30e`.
+3.1.5. The October 3 methods/context correction preserves every original 2020
+numeric anchor, role ratio, reconstructed weight, and between-role dispersion
+value. Repeated extraction produces identical output bytes, with JSON SHA-256
+`a4f5f5635f486b2bf53b049d206aa25ba7f33aad08e0c0480d19a8e232123e94`.
 Missing inputs and an altered copy of each source were separately verified to
-stop before writing output. Running from a different working directory also
-preserved the same output bytes.
+stop before writing output, including when an earlier output exists. Running
+from a different working directory also produces the same output bytes.

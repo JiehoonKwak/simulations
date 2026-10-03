@@ -28,7 +28,8 @@ national row: CV7, CW7 and CX7. It records administrative monthly remuneration
 annualized by multiplying by 12. Eligibility is full-time work (at least 40 hours
 per week), with interns/residents excluded. Proprietor remuneration is business
 income of the workplace excluding rental income; employee remuneration is labor
-income of the workplace. Both tails are winsorized at the 1st/99th percentiles.
+income of the workplace including tax and social contributions. These means use
+records with valid remuneration. Both tails are winsorized at the 1st/99th percentiles.
 The cutoff population is not documented in the retrieved excerpt.
 
 | Observed anchor                | 2020 annualized nominal KRW |
@@ -42,6 +43,11 @@ All absolute currency values shown in the interface are these 2020 anchors.
 The 2026 starting index carries their relative structure forward as a persistence
 assumption; it is not an observed 2026 income estimate or an inflation-adjusted
 2026 salary. Future displays use real indices.
+
+The September 29, 2026 MOHW release reports a 2023 overall mean of KRW 285,182,871.
+The retrieved attachments do not provide matched role means or eligible role
+counts; detailed tables were announced for later release. This newer value is
+recorded as context, without replacing or rescaling the verified role anchors.
 
 ### Reconstructed weights and incompatible margins
 
@@ -76,7 +82,7 @@ identified in [workforce-data.md](workforce-data.md).
 
 ## What clinical research contributes
 
-Eight selected primary studies are recorded in
+Twelve selected primary studies are recorded in
 `data/processed/ai-evidence.json`. They inform the mechanisms and plausibility
 checks, not fitted Korean 2036 coefficients:
 
@@ -89,6 +95,12 @@ checks, not fitted Korean 2036 coefficients:
   realized throughput and the entire patient journey are different outcomes.
 - Mammography reading and ex-vivo surgical autonomy establish bounded task
   precedents, not whole-episode physician replacement or a licensing date.
+- Two Korean ED studies support a narrow note-drafting benefit, but share a site
+  and system lineage. A virtual-EHR experiment and a small voluntary deployment
+  with recalled times do not identify whole-day savings, visits or earnings.
+- Korean consultation-time and fee-policy studies constrain interpretation:
+  allocated/ideal times are not measured task shares, and a changed Saturday
+  visit/billing share is not a whole-week demand or physician-wage elasticity.
 
 Current intervention effects compare contemporary workflows. The future controls
 here concern _additional_ change relative to the 2026 scenario baseline, which
@@ -200,6 +212,61 @@ modeled earnings in the original practice end; passive capital returns,
 liquidation proceeds and earnings elsewhere are not estimated. The source cannot
 separate a proprietor's clinical wage from business returns.
 
+### Own-role earnings maintenance
+
+`web/earnings-conditions.mjs` asks which single-input changes reach `E=1` at
+2036, holding the remaining scenario inputs fixed. This is an endpoint condition,
+not a guarantee for every intervening year. For fixed care and retained share,
+write `B=min(r,R)` and `A=r×max(0,R−r)`. Minimum gain participation is
+
+```text
+c_min = (1 + C − B) / A
+```
+
+If `B−C >= 1`, no positive participation is needed. Otherwise `A=0` or a required
+share above one makes maintenance unreachable through participation alone.
+Minimum demand is solved over the interface's −60% to +100% growth range,
+recomputing care and retained positions at each candidate. Both physician-time
+and other-care capacity still bind. Unreachable results retain a null threshold
+and the maximum attainable earnings; they are not plotted at an arbitrary ceiling.
+
+The rule implies `E <= max(0,R−C)`, so maintenance requires `R >= 1+C`.
+At `R=1`, its maximum is `max(0,1−(1−r)^2−C)`: a positive cost or position
+reduction prevents preservation of original-group earnings. With all positions
+retained, unchanged real payment and positive participation, minimum care is
+`1+C/c`, if capacity permits. Observed role means and population weights cancel
+from these own-role index thresholds.
+
+The analysis also evaluates a **growth-only** rule:
+
+```text
+E_growth = max(0, min(r,R) + r×c×max(0,R−1) − C)
+```
+
+It preserves the original-member estimand, payment-loss branch, cost and
+zero-position limit, but shares only payment growth above the original baseline.
+The two rules coincide when all positions remain; growth-only earnings cannot
+exceed retained-rights earnings. Neither rule is estimated from Korean contracts.
+The interface uses retained-rights; the report and figures expose both rules.
+
+### Four matched comparisons
+
+`web/comparisons.mjs` provides four primary paths with common hypothetical
+technology (2036 human time per care unit 0.73), deployment, payment, AI cost and
+other capacity. They change demand, then staffing, then salaried participation:
+
+| Path                           | Demand growth | Staffing response | Proprietor / salaried participation |
+| ------------------------------ | ------------: | ----------------: | ----------------------------------: |
+| Less work, same care           |            0% |                 0 |                           80% / 80% |
+| More care, same positions      |           25% |                 0 |                           80% / 80% |
+| Fewer positions, shared gains  |           25% |                 1 |                           80% / 80% |
+| Fewer positions, unequal gains |           25% |                 1 |                           80% / 20% |
+
+All use +40% other capacity, unchanged real payment and 2% AI cost at full
+additional deployment (90% realized deployment gives a 1.8% endpoint cost).
+These contrasts isolate imposed mechanisms; their labels do not predict which
+future will occur. The earlier six presets remain additional explorations.
+
 ## Metrics and depiction
 
 - Main work/care indices are weighted averages of within-role indices. All
@@ -235,6 +302,15 @@ robustness of gap direction. A separate trial-transport exercise applies each
 ambient-scribe study arm's estimate and CI endpoints once under assumed
 20/35/50% documentation shares. Study uncertainty and future scenario uncertainty
 are not pooled.
+
+Earnings-maintenance analysis crosses three task mixes, both earnings rules,
+real-payment offsets of −10/0/+10 percentage points and AI cost assumptions of
+0/2/5%: 54 alternatives per matched path. Role weights and currency anchors are
+omitted because they cancel from the target. These finite alternatives have no
+empirical probability interpretation. Threshold curves additionally cross two
+other-capacity limits (+20/+40%) and staffing responses 0/.5/1. Gap-direction
+robustness under task shares alone is weak evidence: with common technology and
+costs, its direction is already set by the chosen role participation difference.
 
 Source scripts verify original SHA-256 hashes, source cells and aggregate
 reconciliations. Model tests check observed mean reproduction, common baseline,

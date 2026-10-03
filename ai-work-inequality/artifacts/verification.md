@@ -232,3 +232,77 @@ The reusable verification skill and feature map now distinguish this empirical
 model from legacy prototypes. These checks establish source reconstruction,
 internal consistency, reproducibility, figure rendering and observed UI behavior.
 They do not establish out-of-sample national income or employment forecast accuracy.
+
+## Matched comparisons and earnings-maintenance release — 2026-10-03
+
+The follow-up adds four matched paths, endpoint maintenance conditions and a
+compensation-rule sensitivity analysis to the unchanged `physicians-0.2.0`
+engine. Commit 151ef04 preserves the preceding evidence-anchored release.
+
+### Evidence and numerical boundary
+
+- The complete 2022 MOHW report corrected valid-remuneration eligibility and
+  employee tax/social-contribution definitions. All original numerical income
+  anchors remain unchanged. The September 29, 2026 release adds the 2023 overall
+  mean as separate context; retrieved files contain no matched role means or
+  valid-remuneration counts. Income extraction verifies five pinned raw files.
+- Four Korean studies extend the ledger to 12 primary sources, preserving the
+  eight previous entries. ED note-drafting endpoints, shared system lineage,
+  recalled versus measured time, consultation allocation and Saturday billing
+  shares remain distinct. None is silently fitted to whole-day savings, national
+  demand, staffing or earnings participation.
+- `npm run extract`, `npm test` (37 passed), `npm run build`, `npm run analyze`
+  and `npm run figures` passed. The final analysis records 13,972 deterministic
+  model runs, 3,636 maintenance-curve rows and 54 alternatives per comparison.
+  Maximum work/capacity residual is 5.551115123125783e-17.
+- Eight new tests cover hand-calculated thresholds, replay above/below the target,
+  capacity/no-participation/zero-work boundaries, alternative-rule reversal and
+  comparison isolation. They passed again after test-only formatting.
+- Independent read-only review replayed 448 role/rule results and found no
+  actionable defects. Adjacent comparisons change only demand, staffing and
+  salaried participation in sequence. Reachable thresholds attain own-role
+  original-member earnings 100; smaller inputs fail. Inaccessible thresholds
+  remain below target at maximum feasible care. Analytical bounds, design counts,
+  report claims and portable source embeddings reconcile.
+- Both new main figures were inspected at 168 mm width; the worker also reviewed
+  grayscale proofs. Original supplemental figures remain. Current PDF/SVG/PNG,
+  report/model/input/helper/script/caption hashes match the manifest. Main panels
+  retain decoding labels; explanatory qualifications remain in captions.
+
+### Current portable-interface checks
+
+The final 411,839-byte HTML was served at `/film.html`, including all new helpers
+and comparisons. Desktop 1280×720, mobile 390×844 and normal viewport checks passed.
+
+- At 2036, the four paths displayed own-role earnings 98.2/98.2, 118.2/118.2,
+  114.1/114.1 and 114.1/95.6. Care/work/retention remained consistent with the
+  intended one-input contrasts. Scenario changes retained 2036.
+- Expanded break-even results showed 2.25% demand growth and unreachable
+  participation for flat demand; the expanded-care path showed 7.20% required
+  participation. Full staffing adjustment showed 12.24% demand and 34.26%
+  participation; lowering salaried participation to 20% changed its required
+  demand to 30.29%. The additional Unequal gain sharing preset correctly showed
+  salaried demand maintenance as Not reachable under its capacity limit.
+- Changing the actual salaried-participation slider from 20% to 30% produced Custom
+  assumptions, earnings 98.7, demand threshold 26.49% and signature `bf080999`.
+  Reset returned the first matched comparison while preserving 2036. All 17 source
+  links were present, including both new official publications and all 12 studies.
+- The UI downloaded `physician-scenario-results (1).json` at
+  2026-10-03T14:33:01.522Z. Independent engine/helper reruns exactly reproduced
+  all 11 frames, the 243-run sensitivity result, earnings conditions, custom
+  identity and the first-comparison reference identity/frames/signature.
+- Mobile document width was 390 px; the drawer client/scroll widths were 352 px.
+  Both buildings, controls and group labels fit; break-even values and both
+  drawers remained readable with sticky close controls.
+- At 2× with Loop disabled, Restart advanced to time 10.000/motion 16.016 and stopped.
+  Reduced-motion reload started paused at 0.000; explicit Play advanced to 0.146.
+  Temporary media/viewport overrides were reset. A normal-speed pause at
+  time 6.366/motion 10.185 produced byte-identical screenshots across independent
+  observations. Browser warning/error logs were empty.
+- `earnings-maintenance-film.jpg` records the reviewed final interface. The
+  delivered tab remains at normal speed with Loop and playback enabled.
+
+These results verify the conditional calculation and user-visible workflow.
+Direct `file:` execution remains untested through the browser tool. Role-specific
+2023 remuneration, national task shares, compensation contracts and out-of-sample
+income/employment forecast accuracy remain unidentified, not completed validations.

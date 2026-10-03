@@ -7,7 +7,7 @@ export const BASELINE = Object.freeze({
     "proprietorWeight": 0.41609154512036045,
     "weightMethod": "Reconstructed mixture weights, not observed headcounts or national workforce proportions.",
     "weightAssumption": "The three Sheet 15 national cells must be arithmetic means of a common eligible population partitioned exhaustively into proprietor and employee. Same headers and footnotes support this operational choice, but raw eligible counts and aggregation code were not retrieved.",
-    "definition": "Adjusted annual administrative remuneration of full-time physicians; residents excluded. Proprietor business income excludes rental income; employee remuneration is labor income. Both tails were winsorized at the 1st/99th percentiles.",
+    "definition": "Adjusted annual administrative remuneration of full-time physicians with valid remuneration records; residents excluded. Proprietor business income excludes rental income; employee remuneration includes taxes and social contributions. Both tails were winsorized at the 1st/99th percentiles.",
     "sourceCells": {
       "proprietor": {
         "value": 294282306.4032603,
@@ -157,6 +157,26 @@ export const BASELINE = Object.freeze({
     ],
     "interpretation": "Institution-reported workforce context. It does not supply the earnings sample weights or a long-run trend from 2023 to 2024."
   },
+  "newerIncomeContext": {
+    "status": "Separate descriptive context; excluded from runtime role calibration and mixture weights.",
+    "observationYear": 2023,
+    "publicationDate": "2026-09-29",
+    "retrievedDate": "2026-10-03",
+    "allPhysicianMeanAnnualKRW": {
+      "value": 285182871,
+      "sourceId": "mohw-second-survey-factsheets",
+      "locator": "PDF p.3, printed p.1, physician factsheet section 4.",
+      "extractionMethod": "Manual transcription from the rendered official PDF, verified against its extracted text; source bytes are hash-checked, but this value is not automatically parsed."
+    },
+    "methodSourceId": "mohw-second-survey-release",
+    "methodLocator": "PDF p.10, section 5.",
+    "eligibilityAndTransformation": "NHIS monthly remuneration basis; full-time >=40 hours/week; interns and residents excluded; values outside the first/99th percentiles replaced with those cutoffs.",
+    "roleMeansAvailableInRetrievedSources": false,
+    "incomeEligibleRoleCountsAvailableInRetrievedSources": false,
+    "comparisonBoundary": "The common headline exclusions and tail adjustment support descriptive comparison, but the retrieved attachments do not establish matching role populations, valid-record selection, or the exact percentile reference pool. No 2020 role values are replaced.",
+    "detailedDataStatus": "The release states that detailed final results will be posted later to MOHW, KOSIS, and NHIS (PDF p.11). Detailed role remuneration and eligible role counts were not obtained as of 2026-10-03.",
+    "nextRelevantTable": "Release PDF p.14, item 19: sex/region/role remuneration for 2013-2023. Workforce headcounts must still be distinguished from remuneration-eligible counts."
+  },
   "sources": [
     {
       "id": "nhis-income",
@@ -169,6 +189,18 @@ export const BASELINE = Object.freeze({
       "title": "MOHW workforce survey definitions",
       "year": 2022,
       "url": "https://www.mohw.go.kr/board.es?act=view&bid=0027&list_no=372084&mid=a10503010100"
+    },
+    {
+      "id": "mohw-full-methods",
+      "title": "MOHW first survey: full methods",
+      "year": 2022,
+      "url": "https://www.mohw.go.kr/board.es?mid=a10411010200&bid=0019&act=view&list_no=373498"
+    },
+    {
+      "id": "mohw-second-survey",
+      "title": "MOHW second survey: newer aggregate context",
+      "year": 2026,
+      "url": "https://www.mohw.go.kr/board.es?mid=a10503010100&bid=0027&act=view&list_no=1492074"
     },
     {
       "id": "nhis-workforce",
@@ -211,6 +243,42 @@ export const BASELINE = Object.freeze({
       "title": "Ambient AI: multicenter throughput study",
       "year": 2026,
       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13044793/"
+    },
+    {
+      "id": "masai-2025",
+      "title": "MASAI AI-supported mammography screening",
+      "year": 2025,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/39904652/"
+    },
+    {
+      "id": "srth-2025",
+      "title": "SRT-H surgical step autonomy",
+      "year": 2025,
+      "url": "https://arxiv.org/html/2505.10251v1"
+    },
+    {
+      "id": "song-2025-korea-ed",
+      "title": "Korean ED discharge documentation: virtual EHR experiment",
+      "year": 2025,
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12541540/"
+    },
+    {
+      "id": "lee-2025-korea-ed",
+      "title": "Korean ED documentation: actual EHR implementation",
+      "year": 2025,
+      "url": "https://www.nature.com/articles/s41598-025-24659-4"
+    },
+    {
+      "id": "kim-2020-korea-rheumatology",
+      "title": "Korean hospital rheumatology consultation-time survey",
+      "year": 2020,
+      "url": "https://synapse.koreamed.org/upload/synapsedata/pdfdata/1010jrd/jrd-27-45.pdf"
+    },
+    {
+      "id": "ha-2016-korea-saturday-fee",
+      "title": "Korean Saturday consultation-fee supplement: claims study",
+      "year": 2016,
+      "url": "https://ir.ymlib.yonsei.ac.kr/bitstream/22282913/147002/1/T201601930.pdf"
     }
   ],
   "evidence": [
@@ -385,11 +453,183 @@ export const BASELINE = Object.freeze({
       "interpretation": "An assistant reloads clips and changes instruments; exposed anatomy is prepared. This is neither whole human surgery nor a clinical deployment rate.",
       "modelUse": "Procedural autonomy remains a speculative scenario with setup and other-care constraints.",
       "retrieval": "Full author preprint; publisher full text inaccessible"
+    },
+    {
+      "id": "song-2025-korea-ed",
+      "shortTitle": "Korean ED discharge documentation: virtual EHR experiment",
+      "year": 2025,
+      "doi": "10.1001/jamanetworkopen.2025.38427",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12541540/",
+      "design": "Single Seoul 2400-bed tertiary hospital; six emergency physicians each wrote notes for 50 selected cases in a virtual EHR. Manual session always first; same cases in randomized order after a one-hour washout with preloaded AI drafts. 300 manual and 300 assisted notes, not 600 independent cases.",
+      "setting": "Patient records September 2022 to August 2023; 592 development cases and 50 validation cases. Y-KNOT ED discharge-note assistant; physician editing retained.",
+      "unit": "Median writing seconds per ED discharge note; arm-specific medians, not a randomized treatment-effect estimate",
+      "effects": [
+        {
+          "arm": "Manual",
+          "estimate": 69.5,
+          "ci95": [
+            65.5,
+            78
+          ]
+        },
+        {
+          "arm": "AI-assisted",
+          "estimate": 32,
+          "ci95": [
+            29.5,
+            36
+          ]
+        }
+      ],
+      "comparison": {
+        "pValue": "<0.001",
+        "derivedReductionPercent": 54,
+        "derivation": "100*(69.5-32.0)/69.5, rounded; ratio of reported medians, not an effect estimate with a confidence interval",
+        "ci95Status": "No confidence interval calculated for the derived reduction"
+      },
+      "dependenceGroup": "severance-y-knot-ed",
+      "interpretation": "Selected-case drafting/editing endpoint. Fixed condition order permits recall/order bias, and preloaded drafts exclude generation latency. Same institution/system lineage as lee-2025-korea-ed; not independent replication.",
+      "modelUse": "Narrow ED discharge-document drafting plausibility anchor only. Does not identify national documentation task share, whole-day working time, completed visits, staffing or wages. Not automatically an additional gain after the 2026 baseline.",
+      "retrieval": "Full primary author manuscript, methods, results and limitations; verified arm-specific time intervals",
+      "retrievedDate": "2026-10-03"
+    },
+    {
+      "id": "lee-2025-korea-ed",
+      "shortTitle": "Korean ED documentation: actual EHR implementation",
+      "year": 2025,
+      "doi": "10.1038/s41598-025-24659-4",
+      "url": "https://www.nature.com/articles/s41598-025-24659-4",
+      "design": "Uncontrolled pre/post implementation at Severance Hospital, Seoul; eight volunteer attending physicians of 15 invited; surveys before, three days after and five weeks after implementation.",
+      "setting": "On-premises Y-KNOT assistant integrated into the actual ED EHR in November 2024; average 10.9 discharge notes per physician per day. Physician review, editing and signoff retained.",
+      "unit": "Self-reported writing seconds per discharge note",
+      "effects": [
+        {
+          "arm": "Before implementation (T1)",
+          "estimate": 127.5
+        },
+        {
+          "arm": "Five weeks after implementation (T3)",
+          "estimate": 42.8
+        }
+      ],
+      "comparison": {
+        "pValue": "0.002",
+        "derivedReductionPercent": 66.4,
+        "derivation": "100*(127.5-42.8)/127.5, rounded; derived from reported values",
+        "ci95Status": "No effect confidence interval supplied in the extracted results; none inferred"
+      },
+      "secondaryOutcomes": [
+        {
+          "outcome": "NASA-TLX workload",
+          "unit": "0-20 scale",
+          "before": 11,
+          "threeDays": 8,
+          "fiveWeeks": 6.9,
+          "pValue": "0.040"
+        },
+        {
+          "outcome": "NASA-TLX mental demand, physical demand and frustration",
+          "result": "Changes not statistically significant"
+        }
+      ],
+      "dependenceGroup": "severance-y-knot-ed",
+      "interpretation": "Writing time is recall-based. No reliable preimplementation EHR start timestamp existed, so this is not an objective pre/post time estimate. No completed-visit or total-shift-time outcome. Same institution/system lineage as song-2025-korea-ed; not independent replication. Use actual reported seconds rather than ambiguous abstract wording about one-third.",
+      "modelUse": "Domestic feasibility and perceived burden evidence only; no national task-composition, throughput, adoption, retention or wage coefficient. Contemporary deployment effects are not automatically incremental 2026-2036 savings.",
+      "retrieval": "Full primary publisher article, methods, results, tables and limitations; later publisher access attempts encountered a redirect",
+      "retrievedDate": "2026-10-03"
+    },
+    {
+      "id": "kim-2020-korea-rheumatology",
+      "shortTitle": "Korean hospital rheumatology consultation-time survey",
+      "year": 2020,
+      "doi": "10.4078/jrd.2020.27.1.45",
+      "url": "https://synapse.koreamed.org/upload/synapsedata/pdfdata/1010jrd/jrd-27-45.pdf",
+      "design": "November 2018 to February 2019 survey of Korean College of Rheumatology hospital members; 106 respondents (78 online, 28 paper), 48.4% response.",
+      "unit": "Self-reported allocated consultation minutes per patient; means with standard deviations, not measured time-motion fractions",
+      "effects": [
+        {
+          "arm": "New patient",
+          "estimate": 12.3,
+          "sd": 5.4
+        },
+        {
+          "arm": "Established patient",
+          "estimate": 4.8,
+          "sd": 1.8
+        }
+      ],
+      "uncertainty": "Reported SDs describe respondent variability, not confidence intervals; no confidence interval inferred.",
+      "secondaryOutcomes": [
+        {
+          "outcome": "Patients per outpatient session",
+          "statistic": "Median (range)",
+          "estimate": 40,
+          "range": [
+            10,
+            200
+          ]
+        },
+        {
+          "outcome": "Insufficient time adversely affects proper documentation",
+          "numerator": 81,
+          "denominator": 106,
+          "percent": 76.4
+        }
+      ],
+      "interpretation": "Table 1 reports allocated visit lengths; Table 3 reports perceived ideal task times for rheumatoid arthritis/systemic lupus erythematosus, not observed task-time shares. Single-specialty hospital sample and response selection limit transport; not a proprietor-versus-employee comparison.",
+      "modelUse": "Supports case-mix and scheduling constraints and documentation burden. Does not calibrate national documentation/reasoning/procedure/interaction fractions or a national throughput or compensation response.",
+      "retrieval": "Full six-page primary PDF; methods and original Tables 1-4 checked, including question-specific denominators",
+      "retrievedDate": "2026-10-03"
+    },
+    {
+      "id": "ha-2016-korea-saturday-fee",
+      "shortTitle": "Korean Saturday consultation-fee supplement: claims study",
+      "year": 2016,
+      "doi": "10.1136/bmjopen-2016-011248",
+      "url": "https://ir.ymlib.yonsei.ac.kr/bitstream/22282913/147002/1/T201601930.pdf",
+      "design": "Longitudinal NHIS claims/HIRA clinic study, October 2012 to March 2014; 2837 internal/family-medicine clinics and approximately 66.83 million outpatient cases; adjusted multilevel mixed model.",
+      "setting": "October 2013 introduction of a 30% consultation-fee supplement for Saturday 09:00-13:00 care. Clinics with no Saturday activity for more than one month excluded. Supplement applies to consultation fees, not all revenue.",
+      "unit": "Adjusted percentage-point change in Saturday share of total weekly clinic activity; not total-volume growth or an elasticity",
+      "effects": [
+        {
+          "arm": "Saturday visit share",
+          "estimate": 2.065,
+          "pValue": "<0.0001"
+        },
+        {
+          "arm": "Saturday billing share",
+          "estimate": 3.518,
+          "pValue": "<0.0001"
+        }
+      ],
+      "uncertainty": "Table 3 supplies coefficients and p values, not confidence intervals; no interval inferred.",
+      "rawBeforeAfter": [
+        {
+          "outcome": "Saturday visit share",
+          "unit": "Percent of total weekly visits",
+          "before": 13.53,
+          "beforeSd": 3.24,
+          "after": 13.28,
+          "afterSd": 2.75
+        },
+        {
+          "outcome": "Saturday billing share",
+          "unit": "Percent of total weekly billings",
+          "before": 14,
+          "beforeSd": 3.47,
+          "after": 15.21,
+          "afterSd": 3.26
+        }
+      ],
+      "interpretation": "Raw visit share decreases while the adjusted coefficient is positive; retain both estimands. Friday/Saturday activity increased while other weekday activity decreased. Estimates can reflect redistribution and short-term trends, not total demand, individual earnings or net profit. Abstract/results report 66825881 cases; methods report 66825882, a one-case discrepancy. Publisher correction concerns co-first authorship only.",
+      "modelUse": "Supports distinct payment and care-schedule sensitivity. Does not estimate a universal demand/payment elasticity, salaried wage pass-through, proprietor net-income capture or staffing response.",
+      "retrieval": "Full eight-page primary publisher PDF from Yonsei repository; original Tables 2-3 and methods checked; publisher correction checked",
+      "retrievedDate": "2026-10-03"
     }
   ],
   "inputHashes": {
-    "income": "66649a04842a9b82f7cf179b456634f6329799e65f5caa5934ef4fdd8fb5f30e",
+    "income": "a4f5f5635f486b2bf53b049d206aa25ba7f33aad08e0c0480d19a8e232123e94",
     "workforce": "5bc62a7e0e5be005636e3eec003a233929a2b7f5db42d1cc9c855d0659724733",
-    "ai-evidence": "b14cf238ad127c61ce24a0ff65b5c700484e36330e66c0a5d8f0d656a14043ea"
+    "ai-evidence": "6d425516f9fc42eea912adfa4bf9a2ddbdd90f2343cb34bb9696ff435aee589f"
   }
 });

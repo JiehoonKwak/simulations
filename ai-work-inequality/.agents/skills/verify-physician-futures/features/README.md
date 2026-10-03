@@ -1,7 +1,8 @@
 # Feature map
 
-- [Empirical scenarios](empirical.md): official-source extraction, group earnings,
-  explicit future assumptions, finite sensitivity ranges, figures and replay.
+- [Empirical scenarios](empirical.md): official-source extraction, matched paths,
+  own-role earnings-maintenance conditions, alternative compensation rules,
+  finite sensitivity ranges, figures and replay.
 - [Cinematic exploration](cinema.md): an English streetscape with two physician
   groups, continuous motion, sparse controls, source disclosure and results.
 - [Legacy interactive exploration](exploration.md): the preserved v0.1 model's

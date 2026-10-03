@@ -40,6 +40,7 @@ manifest = {
     'source_report': {'path': str(REPORT.relative_to(ROOT)), 'sha256': sha(REPORT)},
     'model_version': report['version'], 'model_sha256': report['modelHash'],
     'input_sha256': report['inputHashes'],
+    'analysis_helper_sha256': report['analysisHashes'],
     'generation': {'path': 'scripts/plot-results.py', 'sha256': sha(Path(__file__)),
                    'command': 'uv run python scripts/plot-results.py'},
     'software': {'python': platform.python_version(), 'matplotlib': matplotlib.__version__,
@@ -86,11 +87,49 @@ manifest = {
             'off_panel_evidence': 'artifacts/figure-captions.md',
         },
     },
-    'acceptance': ['two standalone figures', '168 mm exact canvas width', 'source-native unchanged values',
+    'acceptance': ['two main and two supplemental standalone figures', '168 mm exact canvas width', 'source-native unchanged values',
                    'readable decoding text only', 'no clipping', 'role linetypes and labeled contours survive grayscale'],
     'review': {'scientific': 'Source fields and definitions checked; empirical and structural assumptions remain conditional',
                'visual': 'Awaiting current rendered proof inspection', 'user_acceptance': 'not requested'},
 }
+MATCHED_LABELS = {c['id']: c['label'] for c in report['comparisons']}
+manifest['figures'].update({
+    'matched-comparisons': {
+        'height_mm': 116, 'role': 'main',
+        'question': 'How do demand, staffing and gain participation alter earnings per original role member under matched technology?',
+        'criterion': 'Own-role 2036 earnings index at least 100 means maintenance of original-member remuneration.',
+        'metric': 'Own-role earnings per original member, 2026=100',
+        'eligibility': 'All four matched comparisons, both roles and all eleven years',
+        'dimensions_shown': ['matched comparison', 'year', 'role', 'finite parameter-grid extrema'],
+        'uncertainty': 'Pointwise range across 243 finite parameter combinations; not CI; excludes compensation-rule countermodel',
+        'geometry': '2 by 2 shared-axis facets; y limits75 to145',
+        'composite_reason': 'Matched technology permits ordered demand, staffing and gain-participation comparisons.',
+        'color_role_map': COLORS,
+        'displayed_text': list(MATCHED_LABELS.values()) + ['Proprietor', 'Salaried', 'Design range', 'Year',
+                           'Earnings index (2026 = 100)', '2026', '2031', '2036', '80', '100', '120', '140'],
+        'off_panel_evidence': 'artifacts/figure-captions.md',
+    },
+    'earnings-maintenance': {
+        'height_mm': 142, 'role': 'main',
+        'question': 'What demand growth maintains original-group earnings at 2036 under alternative participation and compensation rules?',
+        'criterion': 'Minimum purchased-care demand growth with endpoint own-role original-member earnings index >=100',
+        'metric': 'Minimum demand growth (%); unavailable retained as null and encoded only in nonnumeric strips',
+        'eligibility': 'Balanced task profile, capacity20/40, staffing0/0.5/1, both rules, all101 gain shares',
+        'dimensions_shown': ['capacity', 'staffing', 'gain share', 'compensation rule', 'required demand', 'reachability'],
+        'uncertainty': 'Deterministic thresholds; no CI; alternative task profiles retained in numerical report',
+        'geometry': 'Capacity rows and staffing columns; each facet includes a separate two-row reachability strip',
+        'composite_reason': 'Common-scale comparisons isolate capacity, staffing and compensation-rule changes.',
+        'null_encoding': 'Absent numeric curve; x-hatched strip over unavailable sampled gain shares (R or G). No sentinel ordinate.',
+        'displayed_text': ['Staffing response = 0', 'Staffing response = 0.5', 'Staffing response = 1',
+                           'Capacity +20%', 'Capacity +40%', 'Required demand growth (%)',
+                           'Gain participation', 'Retained rights (R)', 'Growth only (G)', 'Not reachable',
+                           'R', 'G', '0', '10', '20', '30', '40', '0.0', '0.5', '1.0'],
+        'off_panel_evidence': 'artifacts/figure-captions.md',
+    },
+})
+for name in ['role-earnings', 'role-gap-thresholds']:
+    manifest['figures'][name]['role'] = 'supplemental'
+
 manifest_path = OUT / 'manifest.json'
 previous = json.loads(manifest_path.read_text()) if manifest_path.exists() else {}
 manifest_path.write_text(json.dumps(manifest, indent=2) + '\n')
@@ -168,23 +207,103 @@ bar.outline.set_linewidth(.5)
 bar.set_label('Role-ratio change (%)',fontsize=9,fontweight='bold',labelpad=5)
 save(fig,'role-gap-thresholds')
 
+fig, axes = plt.subplots(2, 2, figsize=(168/25.4,116/25.4),sharex=True,sharey=True)
+fig.subplots_adjust(left=.112,right=.978,bottom=.14,top=.875,wspace=.19,hspace=.43)
+for ax, comparison in zip(axes.flat, report['comparisons']):
+    for role in ['proprietor','salaried']:
+        points = sorted([p for p in report['comparisonTrajectories']
+                         if p['scenario']==comparison['id'] and p['group']==role],key=lambda p:p['year'])
+        years = [p['year'] for p in points]
+        envelope = [next(g for g in f['groups'] if g['id']==role)['earnings']
+                    for f in comparison['envelope']['frames']]
+        ax.fill_between(years,[e['min'] for e in envelope],[e['max'] for e in envelope],
+                        color=COLORS[role],alpha=.14,linewidth=0)
+        ax.plot(years,[p['earnings'] for p in points],color=COLORS[role],lw=1.5,
+                ls='-' if role=='proprietor' else (0,(3,2)))
+    ax.axhline(100,color='#989898',lw=.55,ls=(0,(2,3)),zorder=0)
+    ax.set_title(MATCHED_LABELS[comparison['id']],loc='left',pad=8)
+    ax.set(xlim=(2026,2036),ylim=(75,145),xticks=[2026,2031,2036],yticks=[80,100,120,140])
+    ax.spines[['top','right']].set_visible(False)
+fig.supxlabel('Year',y=.035,fontsize=9,fontweight='bold')
+fig.supylabel('Earnings index (2026 = 100)',x=.018,fontsize=9,fontweight='bold')
+fig.legend(handles=[Line2D([],[],color=COLORS['proprietor'],lw=1.5,label='Proprietor'),
+                    Line2D([],[],color=COLORS['salaried'],lw=1.5,ls=(0,(3,2)),label='Salaried'),
+                    Patch(facecolor='#c6c6c6',alpha=.6,label='Design range')],
+           loc='upper center',bbox_to_anchor=(.55,.985),frameon=False,ncol=3,handlelength=2.3)
+save(fig,'matched-comparisons')
+
+fig = plt.figure(figsize=(168/25.4,142/25.4))
+outer = fig.add_gridspec(2,3,left=.14,right=.98,bottom=.14,top=.87,wspace=.23,hspace=.36)
+for row, capacity in enumerate([20,40]):
+    for col, staffing in enumerate([0,.5,1]):
+        inner = outer[row,col].subgridspec(2,1,height_ratios=[1,.19],hspace=.035)
+        ax = fig.add_subplot(inner[0])
+        strip = fig.add_subplot(inner[1],sharex=ax)
+        for rule, style, ypos in [('retained-rights','-',1),('growth-only',(0,(3,2)),0)]:
+            points = sorted([r for r in report['maintenanceCurves'] if r['profile']=='balanced'
+                             and r['capacityGrowth']==capacity and r['staffingResponse']==staffing
+                             and r['rule']==rule],key=lambda r:r['gainShare'])
+            x=np.array([r['gainShare'] for r in points])
+            y=np.array([r['minimumDemandGrowth'] if r['minimumDemandGrowth'] is not None else np.nan for r in points])
+            ax.plot(x,y,color='#394e53',ls=style,lw=1.35)
+            unavailable=np.isnan(y)
+            indices=np.flatnonzero(unavailable)
+            if len(indices):
+                runs=np.split(indices,np.where(np.diff(indices)>1)[0]+1)
+                for group in runs:
+                    left=max(0,x[group[0]]-.005);right=min(1,x[group[-1]]+.005)
+                    strip.add_patch(plt.Rectangle((left,ypos-.34),right-left,.68,
+                                    facecolor='#eceeec',edgecolor='#7e8885',lw=.35,hatch='xxxx'))
+        ax.set(xlim=(0,1),ylim=(0,40),yticks=[0,10,20,30,40])
+        ax.spines[['top','right']].set_visible(False)
+        ax.tick_params(axis='x',bottom=False,labelbottom=False)
+        if col: ax.tick_params(axis='y',labelleft=False)
+        if row==0: ax.set_title(f'Staffing response = {staffing:g}',loc='left',pad=9)
+        strip.set(ylim=(-.6,1.6),yticks=[1,0],yticklabels=['R','G'],xticks=[0,.5,1])
+        strip.spines[['top','right','left']].set_visible(False)
+        strip.tick_params(axis='y',length=0,pad=3)
+        if row==0: strip.tick_params(axis='x',labelbottom=False)
+    fig.text(.065,.705 if row==0 else .345,f'Capacity +{capacity}%',rotation=90,
+             ha='center',va='center',fontsize=8)
+fig.supylabel('Required demand growth (%)',x=.013,fontsize=9,fontweight='bold')
+fig.supxlabel('Gain participation',y=.045,fontsize=9,fontweight='bold')
+fig.legend(handles=[Line2D([],[],color='#394e53',lw=1.35,label='Retained rights (R)'),
+                    Line2D([],[],color='#394e53',lw=1.35,ls=(0,(3,2)),label='Growth only (G)'),
+                    Patch(facecolor='#eceeec',edgecolor='#7e8885',lw=.35,hatch='xxxx',label='Not reachable')],
+           loc='upper center',bbox_to_anchor=(.54,.982),frameon=False,ncol=3,handlelength=2.4,columnspacing=1.6)
+save(fig,'earnings-maintenance')
+
 captions='''# Figure captions
 
-## Role earnings across six conditional scenarios
+## Main figure: Matched technology, different economic choices
+
+Solid clay and dashed sage trajectories show earnings per original proprietor or salaried group member, each normalized to its own 2026 value of 100. The four matched comparisons hold technology, adoption, payment and AI cost fixed, changing demand, staffing response and gain participation in sequence. In reading order: flat demand with positions retained; demand +25% with positions retained; demand +25% with full staffing adjustment and both groups participating at 80%; then salaried participation reduced to 20% with all other conditions unchanged. Central technology is documentation/reasoning/procedure/interaction time savings of 50/30/15/10%, adoption 90% in both roles, no additional licensing change, capacity growth 40%, unchanged payment and AI cost 2%. The balanced task mix is 35/25/20/20% and the oversight floor is 20%.
+
+The horizontal reference at 100 indicates remuneration maintenance per original member, including lost participation after position reduction; it is not earnings per retained physician. Equal index paths do not imply equal absolute remuneration. Shading shows pointwise minima and maxima from 243 finite parameter combinations per comparison (three task mixes, oversight floors, reconstructed role weights, payment offsets and demand offsets). These envelopes use the retained-rights compensation rule; they do not include the growth-only structural countermodel. They are parameter-grid ranges, not confidence intervals. Bands describe sensitivity around each center and should not be read as a perfectly matched contrast between every pair of envelope extrema. No probabilities or tests are assigned to the finite design.
+
+## Main figure: Conditions for maintaining original-group earnings
+
+Each curve gives the minimum purchased-care demand growth required to reach an own-role remuneration index of at least 100 per original group member in 2036. Columns vary staffing response (0, 0.5, 1); rows vary nonlabor capacity growth (+20%, +40%). The x-axis is the gain participation share. The balanced task mix and matched technology are fixed as in the preceding figure, with unchanged fees and AI cost 2%; alternative task profiles and payment/cost sensitivities remain in the numerical report. No role weighting is needed for this own-role target.
+
+Solid curves use the current retained-rights rule (R); dashed curves use the growth-only structural alternative (G). If r is the retained-position fraction, R is gross care revenue relative to baseline, c is AI cost and s is gain participation, the earnings ratio is min(r,R) + s*r*max(0,R-r) - c under retained rights, versus min(r,R) + s*r*max(0,R-1) - c under growth only. Both subtract the same AI cost and truncate negative earnings at zero. Thus the countermodel restricts shared gains to revenue above the original baseline, rather than revenue above retained base remuneration. R in the equation means revenue; R in the strip is a retained-rights legend code.
+
+Unavailable thresholds are absent from the numerical curve and appear as x-hatched segments in the separate R/G strips below each facet. They mean the earnings target cannot be reached even at the attainable care ceiling, not zero demand or a demand of 100%. Strip edges follow the sampled participation grid (steps 0.01), extending half a step to the neighboring cell boundary; exact boundary values are in the report. Finite curves join deterministic numerical threshold solutions and are not statistical fits. Under zero staffing response the two compensation rules coincide. Capacity facets have identical 0–40% demand axes. Neither the threshold nor its availability is a national job forecast; the target concerns earnings from the original modeled practice.
+
+## Supplemental figure: Role earnings across six conditional scenarios
 
 Solid clay and dashed sage lines show proprietor and salaried earnings, respectively, within the original modeled practice. Each role is normalized to its own 2026 earnings = 100, so equal indices do not imply equal currency earnings. The 2026 scenario origin carries forward the relative structure of the 2020 adjusted administrative remuneration anchors (proprietor KRW 294.3 million; salaried KRW 185.4 million). It is not an observed 2026 income estimate. Lines are the central scenario and shaded bands are pointwise minima and maxima over the declared deterministic design: three task mixes × three oversight floors × three reconstructed role weights × three payment offsets × three demand offsets (243 combinations per active scenario). The no-change scenario varies only structure (27 combinations). These bands combine structural and economic sensitivity; they are not sampling, trial, or forecast confidence intervals. When roles coincide, their lines and ranges overlap. The baseline reference is 100.
 
 The scientific unit is a conditional model scenario, not an individual physician, hospital, or independent statistical replicate. Earnings account for position retention and gain participation in the original practice; outside earnings and passive returns after exit are excluded. Simultaneous facets share identical axes so the size and timing of scenario differences remain comparable. No inferential tests are performed.
 
-## Demand and gain participation define the role-gap surface
+## Supplemental figure: Demand and gain participation define the role-gap surface
 
 Color shows the percentage change by 2036 in the proprietor-to-salaried earnings ratio, relative to its initial ratio: 100 × [(ratio in 2036 / initial ratio) − 1]. Positive values indicate widening and negative values narrowing. Columns hold staffing response at 0, 0.5, or 1. The axes vary purchased-care demand change and salaried gain participation. The grid retains the unequal-gain-sharing technology assumptions, fixes proprietor gain participation at 0.8 and capacity growth at 60%, and uses the balanced task mix and default oversight floor and role weights. Exact inputs remain in the scenario report and analysis generator.
 
-Cells represent a deterministic grid (demand −40% to +60%, steps of 2 percentage points; salaried participation 0 to 1, steps of 0.05). The color scale is symmetric about zero with common limits of −32% and +32%. Contours, linearly interpolated between grid points, identify selected signed values; the zero contour is heavier. Absolute changes below 1e-8 percentage points are set to zero solely for rendering to suppress floating-point contour artifacts. White regions may be flat zero-valued regions, not missing data. The no-response region reflects no distributable productivity gain under those conditions. Task-mix alternatives and their min–max outcomes remain in the numerical report; this color surface shows the balanced task mix alone. Grid density has no probabilistic interpretation. These surfaces are conditional comparative results, not national employment forecasts or causal estimates of ownership.
+Cells represent a deterministic grid (demand −40% to +60%, steps of 2 percentage points; salaried participation 0 to 1, steps of 0.05). The color scale is symmetric about zero with common limits of −32% and +32%. Contours, linearly interpolated between grid points, identify selected signed values; the zero contour is heavier. Absolute changes below 1e-8 percentage points are set to zero solely for rendering to suppress floating-point contour artifacts. White regions may be flat zero-valued regions, not missing data. The no-response region reflects no distributable productivity gain under those conditions. Task-mix alternatives and their min–max outcomes remain in the numerical report; this color surface shows the balanced task mix alone. Grid density has no probabilistic interpretation. The gap boundary largely follows the specified sharing rule and should not be treated as an empirical discovery. These surfaces are conditional comparative results, not national employment forecasts or causal estimates of ownership.
 
 ## Production
 
-Both figures are separate 168 mm-wide assets in editable PDF/SVG and 300 dpi PNG. Arial is used at 8 pt for labels/ticks and 9 pt bold for axis labels. The role figure is 116 mm high; the threshold figure is 91 mm high. Files ending in `-proof.png` are 100 dpi inspection renders, and `-grayscale.png` checks redundant role linetypes and signed contours. The manifest records the figure contract, source/model/input hashes, pipeline versions, exact displayed text and exported file hashes. Reproduce with `uv run python scripts/plot-results.py`.
+All four figures are separate 168 mm-wide assets in editable PDF/SVG and 300 dpi PNG. Arial is used at 8 pt for labels/ticks and 9 pt bold for axis labels. The matched-comparison and supplemental role figures are 116 mm high, the maintenance figure 142 mm, and the supplemental gap figure 91 mm. Files ending in `-proof.png` are 100 dpi inspection renders, and `-grayscale.png` checks redundant role linetypes and signed contours. The manifest records the figure contract, source/model/input hashes, pipeline versions, exact displayed text and exported file hashes. Reproduce with `uv run python scripts/plot-results.py`.
 '''
 (ROOT/'artifacts/figure-captions.md').write_text(captions)
 manifest['caption_sha256']=sha(ROOT/'artifacts/figure-captions.md')
@@ -209,4 +328,4 @@ if previous.get('review', {}).get('visual', '').startswith('PASS:') and all(
     manifest['review']['visual'] = previous['review']['visual']
     manifest['review']['proofs'] = proofs
 manifest_path.write_text(json.dumps(manifest,indent=2)+'\n')
-print('Exported two 168 mm figures with PDF, SVG, PNG and inspection proofs.')
+print('Exported four 168 mm figures with PDF, SVG, PNG and inspection proofs.')

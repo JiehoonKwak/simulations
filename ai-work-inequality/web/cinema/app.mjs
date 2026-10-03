@@ -5,6 +5,8 @@ import {
   PRESETS,
   VERSION,
 } from "../empirical-model.mjs";
+import { COMPARISONS } from "../comparisons.mjs";
+import { earningsConditions } from "../earnings-conditions.mjs";
 import { scenarioEnvelope } from "../sensitivity.mjs";
 import { drawContinuous } from "./continuous.mjs";
 
@@ -22,9 +24,11 @@ const state = {
   provider: "P1",
   hover: null,
 };
-let params = { ...DEFAULT_PARAMS },
+const scenarios = [...COMPARISONS, ...PRESETS];
+const initialParams = { ...DEFAULT_PARAMS, ...COMPARISONS[0].params };
+let params = { ...initialParams },
   run = simulate(params),
-  reference = simulate(DEFAULT_PARAMS);
+  reference = simulate(initialParams);
 let width = 0,
   height = 0,
   dpr = 1,
@@ -33,6 +37,21 @@ let width = 0,
   dirty = true,
   uiKey = "";
 let envelopeCache = null;
+let conditionsCache = null;
+function conditionsForRun() {
+  if (conditionsCache?.signature !== run.signature)
+    conditionsCache = earningsConditions(run);
+  return conditionsCache;
+}
+function selectedScenario() {
+  const selected = scenarios.find((p) => p.id === $("#preset").value);
+  return selected
+    ? { id: selected.id, label: selected.label }
+    : { id: "custom", label: "Custom assumptions" };
+}
+function updateScenarioLabel() {
+  $("#current-scenario").textContent = selectedScenario().label + " ↗";
+}
 function envelopeForRun() {
   const varyEconomy = $("#preset").value !== "hold";
   const key = `${run.signature}:${varyEconomy}`;
@@ -68,6 +87,7 @@ function pause() {
 function closeDrawers() {
   for (const id of ["settings", "inspector"]) $(`#${id}`).hidden = true;
   $("#settings-open").setAttribute("aria-expanded", "false");
+  $("#current-scenario").setAttribute("aria-expanded", "false");
   $("#inspect").setAttribute("aria-expanded", "false");
 }
 function openDrawer(id) {
@@ -80,6 +100,8 @@ function openDrawer(id) {
       "aria-expanded",
       "true",
     );
+    if (id === "settings")
+      $("#current-scenario").setAttribute("aria-expanded", "true");
     renderInspector();
     $(`#${id} [data-close]`).focus({ preventScroll: true });
   }
@@ -117,6 +139,13 @@ function renderInspector() {
       )
       .join("") +
     `<p class="chart-note">Adjusted annual earnings · full-time physicians; residents excluded · 2020</p><p class="muted">${run.baseline.workforce.year} institution-reported physicians: ${fmt(run.baseline.workforce.physicians, 0)}. Context only; not earnings sample weights.</p>`;
+  const conditions = conditionsForRun();
+  $("#break-even-results").innerHTML = conditions.groups
+    .map(
+      (g) =>
+        `<section class="break-even-group"><h3>${escapeHTML(g.label)}</h3><p><span>Demand growth needed</span><strong>${g.minimumDemandGrowth.status === "reachable" ? fmt(g.minimumDemandGrowth.value, 2) + "%" : "Not reachable"}</strong></p><p><span>Gain participation needed</span><strong>${g.minimumParticipation.status === "reachable" ? fmt(g.minimumParticipation.value * 100, 2) + "%" : "Not reachable"}</strong></p></section>`,
+    )
+    .join("");
   $("#signature").textContent = `${run.signature}`;
   renderChart();
 }
@@ -251,17 +280,22 @@ function updateParams() {
   }
 }
 function initControls() {
+  const comparisonOptions = document.createElement("optgroup");
+  comparisonOptions.label = "Matched comparisons";
+  comparisonOptions.append(
+    ...COMPARISONS.map((p) => new Option(p.label, p.id)),
+  );
+  const stressOptions = document.createElement("optgroup");
+  stressOptions.label = "Controls & stress checks";
+  stressOptions.append(...PRESETS.map((p) => new Option(p.label, p.id)));
   $("#preset").replaceChildren(
-    ...PRESETS.map((p) => new Option(p.label, p.id)),
+    comparisonOptions,
+    stressOptions,
     new Option("Custom assumptions", "custom"),
   );
-  const active = PRESETS.find(
-    (p) =>
-      JSON.stringify({ ...DEFAULT_PARAMS, ...p.params }) ===
-      JSON.stringify(params),
-  );
-  $("#preset").value = active?.id || "custom";
-  $("#preset-description").textContent = active?.description || "";
+  $("#preset").value = COMPARISONS[0].id;
+  $("#preset-description").textContent = COMPARISONS[0].description;
+  updateScenarioLabel();
   const primary = [
     "documentationSavings",
     "demandChange",
@@ -279,6 +313,7 @@ function initControls() {
     item.querySelector("input").oninput = (e) => {
       params[p.key] = Number(e.target.value);
       $("#preset").value = "custom";
+      updateScenarioLabel();
       $("#preset-description").textContent = "";
       pause();
       recompute();
@@ -342,6 +377,7 @@ $("#speed").onchange = (e) => {
   last = null;
 };
 $("#settings-open").onclick = () => openDrawer("settings");
+$("#current-scenario").onclick = () => openDrawer("settings");
 $("#inspect").onclick = () => openDrawer("inspector");
 for (const b of document.querySelectorAll("[data-group]"))
   b.onclick = () => {
@@ -358,31 +394,29 @@ document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") closeDrawers();
 });
 $("#preset").onchange = (e) => {
-  const p = PRESETS.find((p) => p.id === e.target.value);
+  const p = scenarios.find((p) => p.id === e.target.value);
   if (!p) return;
   params = { ...DEFAULT_PARAMS, ...p.params };
   $("#preset-description").textContent = p.description || "";
+  updateScenarioLabel();
   pause();
   recompute();
   updateParams();
 };
 $("#reset-conditions").onclick = () => {
-  params = { ...DEFAULT_PARAMS };
+  params = { ...initialParams };
+  $("#preset").value = COMPARISONS[0].id;
+  $("#preset-description").textContent = COMPARISONS[0].description;
+  updateScenarioLabel();
   pause();
   recompute();
   updateParams();
-  const p = PRESETS.find(
-    (p) =>
-      JSON.stringify({ ...DEFAULT_PARAMS, ...p.params }) ===
-      JSON.stringify(params),
-  );
-  $("#preset").value = p?.id || "custom";
-  $("#preset-description").textContent = p?.description || "";
 };
 $("#export-results").onclick = () => {
   const data = {
     schema: "physician-empirical-scenario-v1",
     modelVersion: VERSION,
+    scenario: selectedScenario(),
     signature: run.signature,
     params: run.params,
     structure: run.structure,
@@ -391,7 +425,9 @@ $("#export-results").onclick = () => {
     frames: run.frames,
     checks: run.checks,
     sensitivity: envelopeForRun(),
+    earningsConditions: conditionsForRun(),
     comparison: {
+      scenario: { id: COMPARISONS[0].id, label: COMPARISONS[0].label },
       params: reference.params,
       structure: reference.structure,
       signature: reference.signature,

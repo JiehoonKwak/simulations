@@ -6,6 +6,8 @@ const project = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const names = [
   "empirical-model.mjs",
   "sensitivity.mjs",
+  "earnings-conditions.mjs",
+  "comparisons.mjs",
   "cinema/continuous.mjs",
 ];
 const [template, style, source, ...modules] = await Promise.all(
@@ -21,10 +23,11 @@ modules[0] = modules[0].replace(
   JSON.stringify(baselineURL),
 );
 const engineURL = `data:text/javascript;base64,${Buffer.from(modules[0]).toString("base64")}`;
-modules[1] = modules[1].replace(
-  '"./empirical-model.mjs"',
-  JSON.stringify(engineURL),
-);
+for (let i = 1; i < modules.length; i++)
+  modules[i] = modules[i].replace(
+    '"./empirical-model.mjs"',
+    JSON.stringify(engineURL),
+  );
 for (const [i, name] of names.entries()) {
   const local = name.startsWith("cinema/")
     ? `./${name.split("/").at(-1)}`

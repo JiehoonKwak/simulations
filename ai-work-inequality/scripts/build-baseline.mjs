@@ -36,7 +36,7 @@ const baseline = {
     weightMethod: income.calibration.weightStatus,
     weightAssumption: income.calibration.weightAssumption,
     definition:
-      "Adjusted annual administrative remuneration of full-time physicians; residents excluded. Proprietor business income excludes rental income; employee remuneration is labor income. Both tails were winsorized at the 1st/99th percentiles.",
+      "Adjusted annual administrative remuneration of full-time physicians with valid remuneration records; residents excluded. Proprietor business income excludes rental income; employee remuneration includes taxes and social contributions. Both tails were winsorized at the 1st/99th percentiles.",
     sourceCells: means,
   },
   workforce: {
@@ -58,6 +58,7 @@ const baseline = {
     interpretation:
       "Institution-reported workforce context. It does not supply the earnings sample weights or a long-run trend from 2023 to 2024.",
   },
+  newerIncomeContext: income.newerContext,
   sources: [
     {
       id: "nhis-income",
@@ -72,6 +73,20 @@ const baseline = {
       url: income.sources[1].landingUrl,
     },
     {
+      id: "mohw-full-methods",
+      title: "MOHW first survey: full methods",
+      year: 2022,
+      url: income.sources.find((s) => s.id === "mohw-first-survey-full-report")
+        .landingUrl,
+    },
+    {
+      id: "mohw-second-survey",
+      title: "MOHW second survey: newer aggregate context",
+      year: 2026,
+      url: income.sources.find((s) => s.id === "mohw-second-survey-release")
+        .landingUrl,
+    },
+    {
       id: "nhis-workforce",
       title: "NHIS / HIRA statistical yearbook",
       year: 2024,
@@ -79,14 +94,12 @@ const baseline = {
         (s) => s.id === "nhis-yearbook-2024-tables.zip",
       ).landing_url,
     },
-    ...evidence.studies
-      .slice(0, 6)
-      .map((s) => ({
-        id: s.id,
-        title: s.shortTitle,
-        year: s.year,
-        url: s.url,
-      })),
+    ...evidence.studies.map((s) => ({
+      id: s.id,
+      title: s.shortTitle,
+      year: s.year,
+      url: s.url,
+    })),
   ],
   evidence: evidence.studies,
   inputHashes: Object.fromEntries(

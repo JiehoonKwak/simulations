@@ -890,3 +890,39 @@ h3 {
 .mini-legend .band-key {
   color: #879486;
 }
+
+#current-scenario {
+  font-size: 11px;
+  padding: 7px 0 0;
+  color: var(--muted);
+  text-align: left;
+  line-height: 1.4;
+}
+.break-even-group {
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 8px;
+}
+.break-even-group h3 {
+  margin: 20px 0 10px;
+  font-size: 12px;
+}
+.break-even-group p {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  font-size: 11px;
+  color: var(--muted);
+}
+.break-even-group strong {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink);
+  white-space: nowrap;
+}
+@media (max-width: 650px) {
+  #current-scenario {
+    font-size: 10px;
+    max-width: 235px;
+  }
+}

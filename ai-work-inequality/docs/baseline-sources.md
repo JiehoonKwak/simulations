@@ -1,6 +1,6 @@
 # Empirical source map
 
-Acquired 2026-10-02; integrated in the current v0.2 model. Publication year,
+Acquired 2026-10-02–03; integrated in the current v0.2 model. Publication year,
 observation year and the 2026 scenario origin remain distinct.
 
 | Source                                                                                                                                             | Verified input                                                                                           | Runtime use                                                                                             | Boundary                                                                                                                                                |
@@ -13,6 +13,21 @@ observation year and the 2026 scenario origin remain distinct.
 | Primary clinical AI research in [evidence.md](evidence.md)                                                                                         | Documentation, reasoning, consultation and specific procedure results with units/design                  | Four net task-time channels, negative/null scenarios, bottlenecks, separate trial-transport sensitivity | No estimate identifies Korean 2036 adoption, staffing, earnings capture or licensing.                                                                   |
 
 ## Canonical extraction and provenance
+
+The follow-up acquired the [complete 2022 MOHW report](https://www.mohw.go.kr/board.es?mid=a10411010200&bid=0019&act=view&list_no=373498)
+and the [September 29, 2026 second-survey release and factsheet](https://www.mohw.go.kr/board.es?mid=a10503010100&bid=0027&act=view&list_no=1492074).
+The full report confirms that overall and role means both require valid
+remuneration, and employee remuneration includes tax/social contributions. The
+earlier hypothesis that this footnote explained the separate-table 3.1% mismatch
+was unsupported; the discrepancy remains unresolved. Calibration values did not
+change. The new factsheet reports a 2023 overall mean of KRW 285,182,871, but no
+retrieved matched role means or valid-remuneration counts. It is stored as newer
+context, with document/page locators and hashes, without inferring new role anchors.
+
+The evidence ledger now includes 12 studies. Two Korean ED AI reports share a
+site/system lineage; narrow drafting-time benefits do not calibrate total work
+or visit gains. Korean consultation-time and Saturday-fee studies clarify why
+task shares, total demand and remuneration response remain unidentified.
 
 - `data/processed/income.json` and [income-data.md](income-data.md) retain source
   sheet/cell locators, downloaded-file SHA-256 hashes, definitions, same-table
@@ -33,7 +48,8 @@ workforce snapshot into a current 2026 census.
 ## Reuse
 
 Raw originals remain in ignored `data/raw/`, with exact acquisition URLs and
-hashes. The MOHW release has KOGL Type 1 attribution terms. The HIRA 2024 release
+hashes. The MOHW press releases have KOGL Type 1 attribution terms; the complete
+2022 report is marked Type 4. The HIRA 2024 release
 has a verified Type 1 marking on its alternative publication page. No
 file-specific marking was established for the NHIS income workbook, so it remains
 a local research input. The repository contains limited factual extracts and
