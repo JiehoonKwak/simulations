@@ -1,0 +1,288 @@
+{
+  "state": "review_candidate",
+  "mode": "standalone_scientific_assets",
+  "target": "Project print profile; no named journal submission",
+  "scientific_object": "Deterministic conditional scenario, not a sampled person or institution",
+  "source_report": {
+    "path": "artifacts/scenario-report.json",
+    "sha256": "a93bd755f110082282973cc9123039d043f4c5f5764c873f69bab4bf345083f7"
+  },
+  "model_version": "physicians-0.2.0",
+  "model_sha256": "a5361ccf5b47c7f619677b6bb10926341884b90ae723e29905bc37165ca34387",
+  "input_sha256": {
+    "income": "66649a04842a9b82f7cf179b456634f6329799e65f5caa5934ef4fdd8fb5f30e",
+    "workforce": "5bc62a7e0e5be005636e3eec003a233929a2b7f5db42d1cc9c855d0659724733",
+    "ai-evidence": "b14cf238ad127c61ce24a0ff65b5c700484e36330e66c0a5d8f0d656a14043ea"
+  },
+  "generation": {
+    "path": "scripts/plot-results.py",
+    "sha256": "cfcedba66fee41b990ba9012d43dab5938d2e5cc8f4f48b4d0d9c88f32f79e15",
+    "command": "uv run python scripts/plot-results.py"
+  },
+  "software": {
+    "python": "3.13.5",
+    "matplotlib": "3.10.7",
+    "numpy": "2.5.3",
+    "font_file": "/System/Library/Fonts/Supplemental/Arial.ttf",
+    "font_sha256": "525979822591a3447cfc49d943d6f7683508e25543407871c0ed8fed05fd2bd9"
+  },
+  "profile": {
+    "width_mm": 168,
+    "font": "Arial",
+    "axis_pt": 9,
+    "tick_legend_pt": 8,
+    "axis_weight": "bold",
+    "png_dpi": 300,
+    "proof_dpi": 100,
+    "background": "white",
+    "vector_text": "editable PDF TrueType and SVG text"
+  },
+  "figures": {
+    "role-earnings": {
+      "height_mm": 116,
+      "question": "How do paired role earnings trajectories differ across declared scenarios?",
+      "criterion": "Compare role paths on common axes and against their own initial index of 100.",
+      "metric": "Own-role earnings index in the original modeled practice; 2026=100",
+      "groups": [
+        "proprietor",
+        "salaried"
+      ],
+      "eligibility": "All six report scenarios; all eleven annual frames; both roles",
+      "dimensions_shown": [
+        "scenario",
+        "year",
+        "role",
+        "finite design extrema"
+      ],
+      "uncertainty": "Pointwise min-max across declared design, not a confidence interval",
+      "aggregation": "Each role is a model group; no person-level distribution is implied",
+      "geometry": "2 rows by 3 equal facets; shared x and y scales",
+      "composite_reason": "Common-scale simultaneous trajectory comparison across all scenarios",
+      "primary_marks": "Solid proprietor and dashed salaried trajectories",
+      "comparison_marks": "Role-colored min-max ribbons; own-role baseline at 100",
+      "color_role_map": {
+        "proprietor": "#AC765C",
+        "salaried": "#658B82"
+      },
+      "displayed_text": [
+        "Assistive care",
+        "No additional change",
+        "Shared productivity",
+        "Unequal gain sharing",
+        "Payment and demand squeeze",
+        "High automation",
+        "Proprietor",
+        "Salaried",
+        "Design range",
+        "Year",
+        "Earnings index (2026 = 100)",
+        "2026",
+        "2031",
+        "2036",
+        "0",
+        "50",
+        "100",
+        "150"
+      ],
+      "off_panel_evidence": "artifacts/figure-captions.md",
+      "rendered_text": [
+        "0",
+        "100",
+        "150",
+        "2026",
+        "2031",
+        "2036",
+        "50",
+        "Assistive care",
+        "Design range",
+        "Earnings index (2026 = 100)",
+        "High automation",
+        "No additional change",
+        "Payment and demand squeeze",
+        "Proprietor",
+        "Salaried",
+        "Shared productivity",
+        "Unequal gain sharing",
+        "Year"
+      ],
+      "actual_inches": [
+        6.614173228346457,
+        4.566929133858268
+      ],
+      "export_readback": {
+        "svg_width": "476.220472pt",
+        "svg_height": "328.818898pt",
+        "pdf_mediabox_pt": [
+          0.0,
+          0.0,
+          476.2204724409,
+          328.8188976378
+        ],
+        "png_pixels": [
+          1984,
+          1370
+        ],
+        "png_dpi": [
+          299.9994,
+          299.9994
+        ],
+        "font_Arial_in_pdf": true,
+        "editable_svg_text_elements": 28
+      }
+    },
+    "role-gap-thresholds": {
+      "height_mm": 91,
+      "question": "Where does the proprietor-to-salaried earnings ratio widen or narrow?",
+      "criterion": "Positive ratio change indicates widening; zero contour marks unchanged ratio.",
+      "metric": "100 * [(2036 proprietor/salaried ratio)/(baseline ratio) - 1]",
+      "eligibility": "All threshold cells; central balanced task mix; staffing 0, 0.5, 1",
+      "dimensions_shown": [
+        "demand change",
+        "salaried gain participation",
+        "staffing response",
+        "role ratio change"
+      ],
+      "fixed_parameters": "Concentrated preset; proprietor participation 0.8; capacity growth 60%; balanced task mix",
+      "uncertainty": "No interval; other task profiles retained in source report, not pooled into color",
+      "geometry": "Three equal facets; shared axes and zero-centered color scale",
+      "composite_reason": "Compare the same response surface under three staffing rules",
+      "primary_marks": "Cell-centered heatmap without data interpolation; absolute changes below 1e-8 percentage points snapped to zero to suppress floating-point contour artifacts",
+      "comparison_marks": "Labeled contours at -5, 0, 10, 20 percentage points; zero heavier",
+      "displayed_text": [
+        "Staffing response = 0",
+        "Staffing response = 0.5",
+        "Staffing response = 1",
+        "Demand change (%)",
+        "Salaried gain participation",
+        "Role-ratio change (%)",
+        "\u221240",
+        "\u221220",
+        "0",
+        "20",
+        "40",
+        "60",
+        "0.0",
+        "0.5",
+        "1.0",
+        "\u221232",
+        "\u221216",
+        "16",
+        "32",
+        "-5",
+        "10",
+        "-40",
+        "-20",
+        "-32",
+        "-16"
+      ],
+      "off_panel_evidence": "artifacts/figure-captions.md",
+      "rendered_text": [
+        "-5",
+        "0",
+        "0.0",
+        "0.5",
+        "1.0",
+        "10",
+        "16",
+        "20",
+        "32",
+        "60",
+        "Demand change (%)",
+        "Role-ratio change (%)",
+        "Salaried gain participation",
+        "Staffing response = 0",
+        "Staffing response = 0.5",
+        "Staffing response = 1",
+        "\u221216",
+        "\u221232",
+        "\u221240"
+      ],
+      "actual_inches": [
+        6.614173228346457,
+        3.582677165354331
+      ],
+      "export_readback": {
+        "svg_width": "476.220472pt",
+        "svg_height": "257.952756pt",
+        "pdf_mediabox_pt": [
+          0.0,
+          0.0,
+          476.2204724409,
+          257.9527559055
+        ],
+        "png_pixels": [
+          1984,
+          1074
+        ],
+        "png_dpi": [
+          299.9994,
+          299.9994
+        ],
+        "font_Arial_in_pdf": true,
+        "editable_svg_text_elements": 35
+      }
+    }
+  },
+  "acceptance": [
+    "two standalone figures",
+    "168 mm exact canvas width",
+    "source-native unchanged values",
+    "readable decoding text only",
+    "no clipping",
+    "role linetypes and labeled contours survive grayscale"
+  ],
+  "review": {
+    "scientific": "Source fields and definitions checked; empirical and structural assumptions remain conditional",
+    "visual": "PASS: current 100 dpi declared-size color and grayscale proofs inspected; readable axes/legends, no clipping or overlap; role lines distinguished by dash, ratio sign/zero distinguished by labeled contours. No specific journal release approval.",
+    "user_acceptance": "not requested",
+    "proofs": [
+      "role-earnings-grayscale.png",
+      "role-earnings-proof.png",
+      "role-gap-thresholds-grayscale.png",
+      "role-gap-thresholds-proof.png"
+    ]
+  },
+  "caption_sha256": "2c5c54725807dcf43fe3c56daefa8111a0362d1f5e36127e1e7ea04fc532e884",
+  "artifacts": {
+    "role-earnings-grayscale.png": {
+      "sha256": "c96275752850fbced70ee3738063875b4dfbc9486cf995946ac66ceb75bbfd08",
+      "bytes": 15223
+    },
+    "role-earnings-proof.png": {
+      "sha256": "78f9808c778bbfe522c1ce9c324dd7a45f16c2ecd8a42c74be2e797cde188f10",
+      "bytes": 36609
+    },
+    "role-earnings.pdf": {
+      "sha256": "ad1907d5253b3d3105c0c9044223e59ad5d3a3aa30f962f78709b0e87e0a7a67",
+      "bytes": 37760
+    },
+    "role-earnings.png": {
+      "sha256": "04f2cee285e10020dcdb9e548e9d667810a98f83e74d73d112691d00660161ff",
+      "bytes": 138100
+    },
+    "role-earnings.svg": {
+      "sha256": "b7f2a41463a13baa17197d44e0625a985adbce6286dcd870ef0fdacc2c01ffcd",
+      "bytes": 37450
+    },
+    "role-gap-thresholds-grayscale.png": {
+      "sha256": "366f882ffe8a7cbbf1e99d31f1562e05355d7e53fba4a2bb4bd5ae1a2736d8ec",
+      "bytes": 11200
+    },
+    "role-gap-thresholds-proof.png": {
+      "sha256": "743acd0dce3f32021dfacbd746170cd8cc2e83b85ff4df5fb8391f1052e15a76",
+      "bytes": 26132
+    },
+    "role-gap-thresholds.pdf": {
+      "sha256": "9e2c91facdded6108ae53b21297a0658f93471c3ab9d31d46ab81653da7007c1",
+      "bytes": 91752
+    },
+    "role-gap-thresholds.png": {
+      "sha256": "8c3bf8e07880416f2d85e1d028945f2bad230ae75e6e9f5816559d3e1b3f978f",
+      "bytes": 96963
+    },
+    "role-gap-thresholds.svg": {
+      "sha256": "e6a44fcc96e73e3dafb1ca24911329b5590a262733d5e555d886c83ec5f34266",
+      "bytes": 637389
+    }
+  }
+}

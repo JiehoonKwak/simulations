@@ -7,6 +7,6 @@
 __pycache__/
 *.pyc
 .venv/
-data/raw/
+**/data/raw/
 private/
 outputs/

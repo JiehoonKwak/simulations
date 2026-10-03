@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="ko">
+  <meta charset="utf-8" /><meta
+    name="viewport"
+    content="width=device-width,initial-scale=1"
+  /><title>동네를 내려다보면</title
+  ><style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      background: #f3f0e7;
+      color: #3a4a40;
+      font-family: Arial, "Apple SD Gothic Neo", sans-serif;
+      overflow: hidden;
+    }
+    main {
+      height: 100dvh;
+      min-height: 500px;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      padding: 24px 30px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      position: relative;
+      z-index: 1;
+    }
+    h1 {
+      font-size: 24px;
+      letter-spacing: -1px;
+      font-weight: 500;
+      margin: 0 0 9px;
+    }
+    small {
+      font-size: 11px;
+      color: #798277;
+    }
+    #year {
+      font-size: 64px;
+      line-height: 0.95;
+      font-weight: 300;
+      letter-spacing: -4px;
+    }
+    select {
+      display: block;
+      margin-top: 12px;
+      max-width: 190px;
+      padding: 6px 0;
+      background: transparent;
+      border: 0;
+      border-bottom: 1px solid #c3c9bb;
+      color: #526150;
+      font-size: 12px;
+    }
+    #stage {
+      flex: 1;
+      min-height: 280px;
+      position: relative;
+    }
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+    .legend {
+      font-size: 11px;
+      text-align: center;
+      color: #687465;
+      margin: 0;
+      padding: 8px 15px;
+    }
+    .legend b {
+      color: #b56d50;
+      font-weight: 500;
+    }
+    .legend em {
+      font-style: normal;
+      color: #52877b;
+    }
+    footer {
+      padding: 9px 30px 21px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+    button {
+      border: 0;
+      padding: 10px 0;
+      min-width: 44px;
+      color: #4b5b4a;
+      background: transparent;
+      font-size: 13px;
+      cursor: pointer;
+    }
+    input {
+      flex: 1;
+      min-width: 45px;
+      accent-color: #6b8f76;
+    }
+    #time {
+      font-size: 11px;
+      font-variant-numeric: tabular-nums;
+    }
+    button:focus-visible,
+    select:focus-visible {
+      outline: 2px solid #6b8f76;
+      outline-offset: 3px;
+    }
+    @media (max-width: 600px) {
+      header {
+        padding: 20px 19px 0;
+      }
+      h1 {
+        font-size: 21px;
+      }
+      #year {
+        font-size: 49px;
+      }
+      .legend {
+        font-size: 10px;
+        line-height: 1.7;
+        padding: 4px 20px;
+      }
+      footer {
+        padding: 7px 19px 13px;
+        gap: 12px;
+      }
+    }
+  </style>
+  <main>
+    <header>
+      <div>
+        <h1>동네를 내려다보면</h1>
+        <small>16개 병원 · 가상 모형</small
+        ><select id="scenario" aria-label="시나리오">
+          <option value="reference">기준 가정</option>
+          <option value="permission">광범위 자동화 허용</option>
+        </select>
+      </div>
+      <div id="year">2026</div>
+    </header>
+    <div id="stage">
+      <canvas
+        id="scene"
+        role="img"
+        aria-label="병원 16개의 진료 의사와 AI 도입을 보여주는 동네 모형"
+      ></canvas>
+    </div>
+    <p class="legend">
+      <b>불 켜진 창 하나 = 진료 의사 1명</b>　·　<em
+        >지붕 장비의 밝기 = AI 도입률</em
+      >
+    </p>
+    <footer>
+      <button id="play" aria-label="일시정지">Ⅱ 정지</button
+      ><button id="replay" aria-label="처음부터 다시 재생">↺ 다시</button
+      ><input
+        id="scrub"
+        type="range"
+        min="0"
+        max="10"
+        step=".01"
+        value="0"
+        aria-label="연도"
+      /><span id="time">00 / 24 s</span>
+    </footer>
+  </main>
+  <script type="module">
+    import { simulate, DEFAULT_PARAMS, PRESETS } from "../model.mjs";
+    const $ = (s) => document.querySelector(s),
+      canvas = $("#scene"),
+      ctx = canvas.getContext("2d"),
+      reduced = matchMedia("(prefers-reduced-motion: reduce)");
+    let run = simulate(DEFAULT_PARAMS, 42),
+      t = 0,
+      playing = !reduced.matches,
+      last = 0,
+      w = 0,
+      h = 0,
+      proj;
+    const mix = (a, b, f) => a + (b - a) * f;
+    function polygon(points, color) {
+      ctx.fillStyle = color;
+      ctx.beginPath();
+      points.forEach((p, i) => {
+        const q = proj(...p);
+        i ? ctx.lineTo(...q) : ctx.moveTo(...q);
+      });
+      ctx.closePath();
+      ctx.fill();
+    }
+    function ground(x, y, b, d, color, z = 0) {
+      polygon(
+        [
+          [x, y, z],
+          [x + b, y, z],
+          [x + b, y + d, z],
+          [x, y + d, z],
+        ],
+        color,
+      );
+    }
+    function cube(x, y, b, d, z, front, side, roof) {
+      polygon(
+        [
+          [x, y + d, 0],
+          [x + b, y + d, 0],
+          [x + b, y + d, z],
+          [x, y + d, z],
+        ],
+        front,
+      );
+      polygon(
+        [
+          [x + b, y, 0],
+          [x + b, y + d, 0],
+          [x + b, y + d, z],
+          [x + b, y, z],
+        ],
+        side,
+      );
+      ground(x, y, b, d, roof, z);
+    }
+    function tree(x, y, size = 9) {
+      const p = proj(x, y, 0),
+        q = proj(x, y, size * 1.7);
+      ctx.strokeStyle = "#8d8f74";
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(...p);
+      ctx.lineTo(...q);
+      ctx.stroke();
+      ctx.fillStyle = "#9dad87";
+      ctx.beginPath();
+      ctx.ellipse(
+        q[0],
+        q[1],
+        size * proj.scale,
+        size * 1.12 * proj.scale,
+        0,
+        0,
+        Math.PI * 2,
+      );
+      ctx.fill();
+      ctx.fillStyle = "#b1be98";
+      ctx.beginPath();
+      ctx.ellipse(
+        q[0] - size * 0.24 * proj.scale,
+        q[1] - size * 0.27 * proj.scale,
+        size * 0.6 * proj.scale,
+        size * 0.68 * proj.scale,
+        0,
+        0,
+        Math.PI * 2,
+      );
+      ctx.fill();
+    }
+    function draw() {
+      ctx.clearRect(0, 0, w, h);
+      const mobile = w < 600,
+        cols = mobile ? 2 : 4,
+        rows = 16 / cols,
+        pitch = 128,
+        W = cols * pitch,
+        H = rows * pitch,
+        skew = mobile ? 0.055 : 0.43;
+      const scale =
+        Math.min((w - 30) / (W + H * skew + 30), (h - 28) / (H * 0.57 + 85)) *
+        (reduced.matches ? 1 : 1 + 0.025 * Math.sin((t / 10) * Math.PI));
+      const ox = (w - (W + H * skew) * scale) / 2,
+        oy = (h - H * 0.57 * scale) / 2 + 25 * scale;
+      proj = (x, y, z = 0) => [
+        ox + (x + y * skew) * scale,
+        oy + (y * 0.57 - z) * scale,
+      ];
+      proj.scale = scale;
+      // Streets, lawns and trees are scenery; only hospital windows and roof lights encode data.
+      ground(-13, -13, W + 26, H + 26, "#e5e3d6");
+      for (let r = 0; r <= rows; r++)
+        ground(-13, r * pitch - 12, W + 26, 15, "#c5c9bf");
+      for (let c = 0; c <= cols; c++)
+        ground(c * pitch - 12, -13, 15, H + 26, "#c5c9bf");
+      for (let r = 0; r < rows; r++)
+        for (let c = 0; c < cols; c++) {
+          const x = c * pitch,
+            y = r * pitch;
+          ground(x + 6, y + 5, 103, 99, "#efede3");
+          ground(x + 88, y + 18, 15, 55, "#c6ceaf");
+          ground(x + 12, y + 93, 62, 5, "#d3ccbc");
+          for (let k = 0; k < 4; k++)
+            ground(x + 21 + k * 13, y - 10, 6, 10, "#efeee3");
+        }
+      const a = run.frames[Math.floor(t)],
+        b = run.frames[Math.min(10, Math.floor(t) + 1)],
+        f = t % 1;
+      for (let r = 0; r < rows; r++)
+        for (let c = 0; c < cols; c++) {
+          const i = r * cols + c,
+            pa = a.providers[i],
+            pb = b.providers[i],
+            people = a.physicians.filter((p) => p.providerId === pa.id),
+            next = b.physicians.filter((p) => p.providerId === pa.id),
+            large = people.length === 16,
+            x = c * pitch + 15,
+            y = r * pitch + 17,
+            bw = large ? 65 : 55,
+            depth = large ? 57 : 49,
+            z = large ? 52 : 32,
+            adoption = mix(pa.adoption, pb.adoption, f);
+          ground(x + 10, y + 9, bw + 10, depth + 12, "#d1d2c1");
+          cube(
+            x,
+            y,
+            bw,
+            depth,
+            z,
+            pa.closed ? "#c0c2b6" : "#f9f7ed",
+            pa.closed ? "#abae9f" : "#d7ccba",
+            pa.closed ? "#b3b8a8" : "#e7dfce",
+          );
+          // Front windows have a fixed identity and exactly match the 8- or 16-person team.
+          people.forEach((p, j) => {
+            const col = j % 4,
+              row = Math.floor(j / 4),
+              wx = x + 8 + (col * (bw - 16)) / 4,
+              wz = z - 8 - row * 10,
+              v = mix(+p.employed, +next[j].employed, f);
+            polygon(
+              [
+                [wx, y + depth, wz],
+                [wx + 7, y + depth, wz],
+                [wx + 7, y + depth, wz - 6],
+                [wx, y + depth, wz - 6],
+              ],
+              "#c6cfc6",
+            );
+            ctx.globalAlpha = v;
+            polygon(
+              [
+                [wx, y + depth, wz],
+                [wx + 7, y + depth, wz],
+                [wx + 7, y + depth, wz - 6],
+                [wx, y + depth, wz - 6],
+              ],
+              "#ca8059",
+            );
+            ctx.globalAlpha = 1;
+          });
+          polygon(
+            [
+              [x + bw * 0.43, y + depth, 0],
+              [x + bw * 0.58, y + depth, 0],
+              [x + bw * 0.58, y + depth, 9],
+              [x + bw * 0.43, y + depth, 9],
+            ],
+            "#8eab9c",
+          );
+          // Roof equipment becomes illuminated with adoption; its area stays fixed.
+          ground(x + 9, y + 10, 22, 19, "#99aaa1", z + 0.5);
+          ctx.globalAlpha = adoption;
+          ground(x + 9, y + 10, 22, 19, "#61b99f", z + 1);
+          ctx.globalAlpha = 1;
+          for (let k = 0; k < 3; k++) {
+            ctx.globalAlpha = 0.25 + 0.75 * adoption;
+            ground(x + 12 + k * 6, y + 13, 3, 12, "#def8d7", z + 1.5);
+            ctx.globalAlpha = 1;
+          }
+          ground(x + bw - 19, y + 12, 4, 14, "#b67760", z + 1);
+          ground(x + bw - 24, y + 17, 14, 4, "#b67760", z + 1);
+          tree(c * pitch + 96, r * pitch + 30, 9);
+          tree(c * pitch + 96, r * pitch + 63, 7);
+          tree(c * pitch + 21, r * pitch + 104, 6);
+        }
+      $("#year").textContent = 2026 + Math.floor(t);
+      $("#scrub").value = t;
+      $("#time").textContent =
+        `${String(Math.round(t * 2.4)).padStart(2, "0")} / 24 s`;
+      canvas.setAttribute(
+        "aria-label",
+        `${2026 + Math.floor(t)}년, 16개 기관, 진료 의사 ${a.physicians.filter((p) => p.employed).length}명. 창문 하나는 의사 한 명, 지붕 장비 밝기는 AI 도입률.`,
+      );
+    }
+    function resize() {
+      const r = canvas.getBoundingClientRect();
+      w = r.width;
+      h = r.height;
+      const dpr = devicePixelRatio || 1;
+      canvas.width = Math.round(w * dpr);
+      canvas.height = Math.round(h * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      draw();
+    }
+    function sync() {
+      $("#play").textContent = playing ? "Ⅱ 정지" : "▶ 재생";
+      $("#play").setAttribute("aria-label", playing ? "일시정지" : "재생");
+    }
+    $("#play").onclick = () => {
+      if (t >= 10) t = 0;
+      playing = !playing;
+      last = 0;
+      sync();
+      draw();
+    };
+    $("#replay").onclick = () => {
+      t = 0;
+      last = 0;
+      playing = !reduced.matches;
+      sync();
+      draw();
+    };
+    $("#scrub").oninput = (e) => {
+      t = +e.target.value;
+      playing = false;
+      sync();
+      draw();
+    };
+    $("#scenario").onchange = (e) => {
+      run = simulate(PRESETS.find((p) => p.id === e.target.value).params, 42);
+      t = 0;
+      playing = !reduced.matches;
+      last = 0;
+      sync();
+      draw();
+    };
+    reduced.addEventListener("change", (e) => {
+      if (e.matches) {
+        playing = false;
+        sync();
+        draw();
+      }
+    });
+    document.addEventListener("visibilitychange", () => (last = 0));
+    new ResizeObserver(resize).observe(canvas);
+    resize();
+    sync();
+    function tick(now) {
+      if (playing && !document.hidden) {
+        if (last) t = Math.min(10, t + (now - last) / 2400);
+        if (t >= 10) {
+          playing = false;
+          sync();
+        }
+        draw();
+      }
+      last = now;
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  </script>
+</html>

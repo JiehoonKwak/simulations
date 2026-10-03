@@ -1,0 +1,593 @@
+{
+  "schemaVersion": 1,
+  "retrievedDate": "2026-10-02",
+  "observationYear": 2020,
+  "publishedYear": 2022,
+  "unit": "nominal KRW per eligible physician per annualized year",
+  "sources": [
+    {
+      "id": "nhis-physician-workbook",
+      "title": "1.의사 실태조사 통계.xlsx",
+      "publisher": "National Health Insurance Service, Republic of Korea",
+      "landingUrl": "https://www.nhis.or.kr/nhis/policy/wbhaea02600m02.do?mode=view&articleNo=10821112",
+      "downloadUrl": "https://www.nhis.or.kr/nhis/policy/wbhaea02600m02.do?mode=download&articleNo=10821112&attachNo=332792",
+      "originalReleaseDate": "2022-07-29",
+      "announcedCorrectionDate": "2022-08-31",
+      "correctionUrl": "https://www.nhis.or.kr/nhis/policy/wbhaea02600m02.do?mode=view&articleNo=10823868",
+      "correctionScope": "Sheet 6: age <=29 cells outside Seoul; no income correction announced in this notice.",
+      "rawPath": "data/raw/income/nhis-physician-statistics.xlsx",
+      "sha256": "bc119065bb47b8aaa3b123675af4b21b00087e39ff5a309f4d6983b2812b6428",
+      "bytes": 678226,
+      "redistribution": "No file-specific KOGL marking established. Raw workbook is a local, ignored research input; do not redistribute it based on public accessibility alone."
+    },
+    {
+      "id": "mohw-release",
+      "title": "보건의료인력 실태조사 결과 발표",
+      "publisher": "Ministry of Health and Welfare, Republic of Korea",
+      "publicationDate": "2022-07-07",
+      "landingUrl": "https://www.mohw.go.kr/board.es?act=view&bid=0027&list_no=372084&mid=a10503010100",
+      "downloadUrl": "https://www.mohw.go.kr/boardDownload.es?bid=0027&list_no=372084&seq=3",
+      "rawPath": "data/raw/income/mohw-20220707-release.pdf",
+      "sha256": "2dc69c667c476e3fe7f3f6a06e97c07d0fd92ab13c4b4b7c5c2bdcff910d5217",
+      "bytes": 1189724,
+      "license": "KOGL Type 1 (attribution), shown on landing page and PDF",
+      "termsUrl": "https://www.mohw.go.kr/menu.es?mid=a10103020100",
+      "definitionLocator": "PDF page 17, printed pp.33-34; national role means in release section 6."
+    }
+  ],
+  "definition": {
+    "measure": "Annualized NHIS remuneration after annual settlement, not provider revenue or household disposable income.",
+    "annualization": "Mean monthly income multiplied by 12; not necessarily actual earnings received over a full calendar year for every physician.",
+    "eligiblePopulation": "Full-time (reported >=40 hours/week) medical doctors working at healthcare institutions. Interns and residents excluded. Public-health and military physicians included according to Sheet 15 footnote.",
+    "proprietor": "Business income of the relevant workplace excluding rental income. Not gross billings, and not a separately identified wage plus owner dividend.",
+    "employee": "Labor income of the relevant workplace. Not an after-tax take-home measure.",
+    "taxAndExpenseBoundary": "The survey excerpt does not state a complete reconciliation from revenue through deductible expenses and personal tax. Treat as administrative remuneration; do not relabel as raw taxable income or cash owner draws.",
+    "tailTreatment": "Values above the 99th percentile replaced by that percentile value; below the 1st percentile replaced by that percentile value.",
+    "tailTreatmentUnresolved": "The retrieved footnotes do not identify the exact reference population used for percentile cutoffs.",
+    "geography": "Workplace region, on 2020 administrative boundaries.",
+    "crossSectionCounts": "Income-eligible role counts are not published in the retrieved income table.",
+    "no2026RebaseApplied": true,
+    "footnoteCells": [
+      "15. 의료기관 근무의 임금(성별, 시도별, 직역별)!B61:B63"
+    ]
+  },
+  "roleMeans": {
+    "proprietor": {
+      "value": 294282306.4032603,
+      "sourceId": "nhis-physician-workbook",
+      "sheet": "15. 의료기관 근무의 임금(성별, 시도별, 직역별)",
+      "cell": "CV7"
+    },
+    "employee": {
+      "value": 185390558.43601876,
+      "sourceId": "nhis-physician-workbook",
+      "sheet": "15. 의료기관 근무의 임금(성별, 시도별, 직역별)",
+      "cell": "CW7"
+    },
+    "all": {
+      "value": 230699494.09856516,
+      "sourceId": "nhis-physician-workbook",
+      "sheet": "15. 의료기관 근무의 임금(성별, 시도별, 직역별)",
+      "cell": "CX7"
+    }
+  },
+  "regionRoleMeans": [
+    {
+      "regionKorean": "서울",
+      "proprietor": {
+        "value": 272376309.12813336,
+        "sourceId": "nhis-physician-workbook",
+        "sheet": "15. 의료기관 근무의 임금(성별, 시도별, 직역별)",
+        "cell": "CV10"
+      },
+      "employee": {
+        "value": 171909646.64164406,
+        "sourceId": "nhis-physician-workbook",
+        "sheet": "15. 의료기관 근무의 임금(성별, 시도별, 직역별)",
+        "cell": "CW10"
+      },
+      "all": {
+        "value": 210053268.62148643,
+        "sourceId": "nhis-physician-workbook",
+        "sheet": "15. 의료기관 근무의 임금(성별, 시도별, 직역별)",
+        "cell": "CX10"
+      }
+    },
+    {
+      "regionKorean": "부산",
+      "proprietor": {
+        "value": 282934474.2042389,
+        "sourceId": "nhis-physician-workbook",
+        "sheet": "15. 의료기관 근무의 임금(성별, 시도별, 직역별)",
+        "cell": "CV13"
+      },
+      "employee": {
+        "value": 197625434.8138614,
+        "sourceId": "nhis-physician-workbook",
+        "sheet": "15. 의료기관 근무의 임금(성별, 시도별, 직역별)",
+        "cell": "CW13"
+      },
+      "all": {
+        "value": 230990462.27701584,
+        "sourceId": "nhis-physician-workbook",
+        "sheet": "15. 의료기관 근무의 임금(성별, 시도별, 직역별)",
+        "cell": "CX13"
+      }
+    },
+    {
+      "regionKorean": "대구",
+      "proprietor": {
+        "value": 306805017.7906755,
+        "sourceId": "nhis-physician-workbook",
+        "sheet": "15. 의료기관 근무의 임금(성별, 시도별, 직역별)",
+        "cell": "CV16"
+      },
+      "employee": {
+        "value": 173823732,
+        "sourceId": "nhis-physician-workbook",
+        "sheet": "15. 의료기관 근무의 임금(성별, 시도별, 직역별)",
+        "cell": "CW16"
+      },
+      "all": {
+        "value": 233615531.51486632,
+        "sourceId": "nhis-physician-workbook",
+        "sheet": "15. 의료기관 근무의 임금(성별, 시도별, 직역별)",
+        "cell": "CX16"
+      }
+    },
+    {
+      "regionKorean": "인천",
+      "proprietor": {
+        "value": 304355271.64685106,
+        "sourceId": "nhis-physician-workbook",
+        "sheet": "15. 의료기관 근무의 임금(성별, 시도별, 직역별)",
+        "cell": "CV19"
+      },
+      "employee": {
+        "value": 182856697.54158214,
+        "sourceId": "nhis-physician-workbook",
+        "sheet": "15. 의료기관 근무의 임금(성별, 시도별, 직역별)",
+        "cell": "CW19"
+      },
+      "all": {
+        "value": 232430683.46974063,
+        "sourceId": "nhis-physician-workbook",
+        "sheet": "15. 의료기관 근무의 임금(성별, 시도별, 직역별)",
+        "cell": "CX19"
+      }
+    },
+    {
+      "regionKorean": "광주",
+      "proprietor": {
+        "value": 315043894.0165041,
+        "sourceId": "nhis-physician-workbook",
+        "sheet": "15. 의료기관 근무의 임금(성별, 시도별, 직역별)",
+        "cell": "CV22"
+      },
+      "employee": {
+        "value": 180885440.67595395,
+        "sourceId": "nhis-physician-workbook",
+        "sheet": "15. 의료기관 근무의 임금(성별, 시도별, 직역별)",
+        "cell": "CW22"
+      },
+      "all": {
+        "value": 240816143.8605898,
+        "sourceId": "nhis-physician-workbook",
+        "sheet": "15. 의료기관 근무의 임금(성별, 시도별, 직역별)",
+        "cell": "CX22"
+      }
+    },
+    {
+      "regionKorean": "대전",
+      "proprietor": {
+        "value": 287005530.33414835,
+        "sourceId": "nhis-physician-workbook",
+        "sheet": "15. 의료기관 근무의 임금(성별, 시도별, 직역별)",
+        "cell": "CV25"
+      },
+      "employee": {
+        "value": 166001175.43822843,
+        "sourceId": "nhis-physician-workbook",
+        "sheet": "15. 의료기관 근무의 임금(성별, 시도별, 직역별)",
+        "cell": "CW25"
+      },
+      "all": {
+        "value": 216450493.6364254,
+        "sourceId": "nhis-physician-workbook",
+        "sheet": "15. 의료기관 근무의 임금(성별, 시도별, 직역별)",
+        "cell": "CX25"
+      }
+    },
+    {
+      "regionKorean": "울산",
+      "proprietor": {
+        "value": 316320298.2175857,
+        "sourceId": "nhis-physician-workbook",
+        "sheet": "15. 의료기관 근무의 임금(성별, 시도별, 직역별)",
+        "cell": "CV28"
+      },
+      "employee": {
+        "value": 224676849.73654068,
+        "sourceId": "nhis-physician-workbook",
+        "sheet": "15. 의료기관 근무의 임금(성별, 시도별, 직역별)",
+        "cell": "CW28"
+      },
+      "all": {
+        "value": 264503762.9041451,
+        "sourceId": "nhis-physician-workbook",
+        "sheet": "15. 의료기관 근무의 임금(성별, 시도별, 직역별)",
+        "cell": "CX28"
+      }
+    },
+    {
+      "regionKorean": "세종",
+      "proprietor": {
+        "value": 297334082.2010582,
+        "sourceId": "nhis-physician-workbook",
+        "sheet": "15. 의료기관 근무의 임금(성별, 시도별, 직역별)",
+        "cell": "CV31"
+      },
+      "employee": {
+        "value": 186336390.96470588,
+        "sourceId": "nhis-physician-workbook",
+        "sheet": "15. 의료기관 근무의 임금(성별, 시도별, 직역별)",
+        "cell": "CW31"
+      },
+      "all": {
+        "value": 262900491.8540146,
+        "sourceId": "nhis-physician-workbook",
+        "sheet": "15. 의료기관 근무의 임금(성별, 시도별, 직역별)",
+        "cell": "CX31"
+      }
+    },
+    {
+      "regionKorean": "경기",
+      "proprietor": {
+        "value": 285839326.5177212,
+        "sourceId": "nhis-physician-workbook",
+        "sheet": "15. 의료기관 근무의 임금(성별, 시도별, 직역별)",
+        "cell": "CV34"
+      },
+      "employee": {
+        "value": 189305687.75412172,
+        "sourceId": "nhis-physician-workbook",
+        "sheet": "15. 의료기관 근무의 임금(성별, 시도별, 직역별)",
+        "cell": "CW34"
+      },
+      "all": {
+        "value": 231463063.36184362,
+        "sourceId": "nhis-physician-workbook",
+        "sheet": "15. 의료기관 근무의 임금(성별, 시도별, 직역별)",
+        "cell": "CX34"
+      }
+    },
+    {
+      "regionKorean": "강원",
+      "proprietor": {
+        "value": 308854815.640625,
+        "sourceId": "nhis-physician-workbook",
+        "sheet": "15. 의료기관 근무의 임금(성별, 시도별, 직역별)",
+        "cell": "CV37"
+      },
+      "employee": {
+        "value": 179231464.94467384,
+        "sourceId": "nhis-physician-workbook",
+        "sheet": "15. 의료기관 근무의 임금(성별, 시도별, 직역별)",
+        "cell": "CW37"
+      },
+      "all": {
+        "value": 229535018.9287519,
+        "sourceId": "nhis-physician-workbook",
+        "sheet": "15. 의료기관 근무의 임금(성별, 시도별, 직역별)",
+        "cell": "CX37"
+      }
+    },
+    {
+      "regionKorean": "충북",
+      "proprietor": {
+        "value": 332199657.2823779,
+        "sourceId": "nhis-physician-workbook",
+        "sheet": "15. 의료기관 근무의 임금(성별, 시도별, 직역별)",
+        "cell": "CV40"
+      },
+      "employee": {
+        "value": 197081630.62317598,
+        "sourceId": "nhis-physician-workbook",
+        "sheet": "15. 의료기관 근무의 임금(성별, 시도별, 직역별)",
+        "cell": "CW40"
+      },
+      "all": {
+        "value": 257490354.4546749,
+        "sourceId": "nhis-physician-workbook",
+        "sheet": "15. 의료기관 근무의 임금(성별, 시도별, 직역별)",
+        "cell": "CX40"
+      }
+    },
+    {
+      "regionKorean": "충남",
+      "proprietor": {
+        "value": 330815251.0710109,
+        "sourceId": "nhis-physician-workbook",
+        "sheet": "15. 의료기관 근무의 임금(성별, 시도별, 직역별)",
+        "cell": "CV43"
+      },
+      "employee": {
+        "value": 177809690.72034508,
+        "sourceId": "nhis-physician-workbook",
+        "sheet": "15. 의료기관 근무의 임금(성별, 시도별, 직역별)",
+        "cell": "CW43"
+      },
+      "all": {
+        "value": 248577718.4404946,
+        "sourceId": "nhis-physician-workbook",
+        "sheet": "15. 의료기관 근무의 임금(성별, 시도별, 직역별)",
+        "cell": "CX43"
+      }
+    },
+    {
+      "regionKorean": "전북",
+      "proprietor": {
+        "value": 296332708.6992593,
+        "sourceId": "nhis-physician-workbook",
+        "sheet": "15. 의료기관 근무의 임금(성별, 시도별, 직역별)",
+        "cell": "CV46"
+      },
+      "employee": {
+        "value": 176022337.80731708,
+        "sourceId": "nhis-physician-workbook",
+        "sheet": "15. 의료기관 근무의 임금(성별, 시도별, 직역별)",
+        "cell": "CW46"
+      },
+      "all": {
+        "value": 230343073.82876253,
+        "sourceId": "nhis-physician-workbook",
+        "sheet": "15. 의료기관 근무의 임금(성별, 시도별, 직역별)",
+        "cell": "CX46"
+      }
+    },
+    {
+      "regionKorean": "전남",
+      "proprietor": {
+        "value": 323812457.1803279,
+        "sourceId": "nhis-physician-workbook",
+        "sheet": "15. 의료기관 근무의 임금(성별, 시도별, 직역별)",
+        "cell": "CV49"
+      },
+      "employee": {
+        "value": 205469393.7311287,
+        "sourceId": "nhis-physician-workbook",
+        "sheet": "15. 의료기관 근무의 임금(성별, 시도별, 직역별)",
+        "cell": "CW49"
+      },
+      "all": {
+        "value": 259257476.29490197,
+        "sourceId": "nhis-physician-workbook",
+        "sheet": "15. 의료기관 근무의 임금(성별, 시도별, 직역별)",
+        "cell": "CX49"
+      }
+    },
+    {
+      "regionKorean": "경북",
+      "proprietor": {
+        "value": 319058902.21796757,
+        "sourceId": "nhis-physician-workbook",
+        "sheet": "15. 의료기관 근무의 임금(성별, 시도별, 직역별)",
+        "cell": "CV52"
+      },
+      "employee": {
+        "value": 215737229.0860633,
+        "sourceId": "nhis-physician-workbook",
+        "sheet": "15. 의료기관 근무의 임금(성별, 시도별, 직역별)",
+        "cell": "CW52"
+      },
+      "all": {
+        "value": 260153446.91231403,
+        "sourceId": "nhis-physician-workbook",
+        "sheet": "15. 의료기관 근무의 임금(성별, 시도별, 직역별)",
+        "cell": "CX52"
+      }
+    },
+    {
+      "regionKorean": "경남",
+      "proprietor": {
+        "value": 321408222.53695655,
+        "sourceId": "nhis-physician-workbook",
+        "sheet": "15. 의료기관 근무의 임금(성별, 시도별, 직역별)",
+        "cell": "CV55"
+      },
+      "employee": {
+        "value": 213344331.71279192,
+        "sourceId": "nhis-physician-workbook",
+        "sheet": "15. 의료기관 근무의 임금(성별, 시도별, 직역별)",
+        "cell": "CW55"
+      },
+      "all": {
+        "value": 255569338.9577405,
+        "sourceId": "nhis-physician-workbook",
+        "sheet": "15. 의료기관 근무의 임금(성별, 시도별, 직역별)",
+        "cell": "CX55"
+      }
+    },
+    {
+      "regionKorean": "제주",
+      "proprietor": {
+        "value": 279012585.37068963,
+        "sourceId": "nhis-physician-workbook",
+        "sheet": "15. 의료기관 근무의 임금(성별, 시도별, 직역별)",
+        "cell": "CV58"
+      },
+      "employee": {
+        "value": 186007149.78867924,
+        "sourceId": "nhis-physician-workbook",
+        "sheet": "15. 의료기관 근무의 임금(성별, 시도별, 직역별)",
+        "cell": "CW58"
+      },
+      "all": {
+        "value": 229422161.971831,
+        "sourceId": "nhis-physician-workbook",
+        "sheet": "15. 의료기관 근무의 임금(성별, 시도별, 직역별)",
+        "cell": "CX58"
+      }
+    }
+  ],
+  "institutionReferenceMeans": {
+    "status": "Separate published marginal; excluded from two-role calibration.",
+    "reason": "Sheet 17 national mean differs from Sheet 15; Sheet 17 explicitly adds valid-remuneration restriction. The precise cause of the difference is unresolved.",
+    "additionalFootnote": "Valid remuneration recipients only (유효보수 대상자에 한에 산출), B333.",
+    "values": [
+      {
+        "id": "all",
+        "labelKorean": "전체",
+        "meanAnnualKRW": {
+          "value": 237863411.21185818,
+          "sourceId": "nhis-physician-workbook",
+          "sheet": "17.의료기관 근무의사 임금",
+          "cell": "E5"
+        }
+      },
+      {
+        "id": "tertiaryHospital",
+        "labelKorean": "상급종합병원",
+        "meanAnnualKRW": {
+          "value": 152780790.6310648,
+          "sourceId": "nhis-physician-workbook",
+          "sheet": "17.의료기관 근무의사 임금",
+          "cell": "E6"
+        }
+      },
+      {
+        "id": "generalHospital",
+        "labelKorean": "종합병원",
+        "meanAnnualKRW": {
+          "value": 210695090.39176306,
+          "sourceId": "nhis-physician-workbook",
+          "sheet": "17.의료기관 근무의사 임금",
+          "cell": "E10"
+        }
+      },
+      {
+        "id": "hospital",
+        "labelKorean": "병원",
+        "meanAnnualKRW": {
+          "value": 327538276.58005166,
+          "sourceId": "nhis-physician-workbook",
+          "sheet": "17.의료기관 근무의사 임금",
+          "cell": "E13"
+        }
+      },
+      {
+        "id": "longTermCareHospital",
+        "labelKorean": "요양병원",
+        "meanAnnualKRW": {
+          "value": 201600218.0426841,
+          "sourceId": "nhis-physician-workbook",
+          "sheet": "17.의료기관 근무의사 임금",
+          "cell": "E17"
+        }
+      },
+      {
+        "id": "clinic",
+        "labelKorean": "의원",
+        "meanAnnualKRW": {
+          "value": 261111286.25709614,
+          "sourceId": "nhis-physician-workbook",
+          "sheet": "17.의료기관 근무의사 임금",
+          "cell": "E20"
+        }
+      },
+      {
+        "id": "publicHealthInstitution",
+        "labelKorean": "보건소 및 보건기관",
+        "meanAnnualKRW": {
+          "value": 79002318.86956522,
+          "sourceId": "nhis-physician-workbook",
+          "sheet": "17.의료기관 근무의사 임금",
+          "cell": "E21"
+        }
+      },
+      {
+        "id": "other",
+        "labelKorean": "기타",
+        "meanAnnualKRW": {
+          "value": 151770997.47239265,
+          "sourceId": "nhis-physician-workbook",
+          "sheet": "17.의료기관 근무의사 임금",
+          "cell": "E22"
+        }
+      }
+    ]
+  },
+  "headcountsContext": {
+    "status": "All provider workers, including residents and non-full-time. Not weights or sample sizes for roleMeans.",
+    "roleCounts": {
+      "all": {
+        "value": 99492,
+        "sourceId": "nhis-physician-workbook",
+        "sheet": "12. 의료기관 근무의사 수(성별, 직역별)",
+        "cell": "N5"
+      },
+      "proprietor": {
+        "value": 35907,
+        "sourceId": "nhis-physician-workbook",
+        "sheet": "12. 의료기관 근무의사 수(성별, 직역별)",
+        "cell": "N6"
+      },
+      "employee": {
+        "value": 62785,
+        "sourceId": "nhis-physician-workbook",
+        "sheet": "12. 의료기관 근무의사 수(성별, 직역별)",
+        "cell": "N7"
+      },
+      "other": {
+        "value": 800,
+        "sourceId": "nhis-physician-workbook",
+        "sheet": "12. 의료기관 근무의사 수(성별, 직역별)",
+        "cell": "N8"
+      }
+    },
+    "fullTimeAllIncludingResidents": {
+      "value": 96839,
+      "sourceId": "nhis-physician-workbook",
+      "sheet": "14.의료기관 근무의사 수( 기관 유형별, 근무유형별 )",
+      "cell": "E6"
+    },
+    "otherDefinition": "Public-health physicians and military doctors etc. (Sheet 12 B17). Role headcounts and remuneration role classification are not assumed identical."
+  },
+  "calibration": {
+    "recommendedGrouping": [
+      "proprietor",
+      "employee"
+    ],
+    "proprietorEmployeeMeanRatio": 1.5873640431630816,
+    "impliedMixtureWeights": {
+      "proprietor": 0.41609154512036045,
+      "employee": 0.5839084548796396
+    },
+    "weightFormula": "p=(all_mean-employee_mean)/(proprietor_mean-employee_mean)",
+    "weightStatus": "Reconstructed mixture weights, not observed headcounts or national workforce proportions.",
+    "weightAssumption": "The three Sheet 15 national cells must be arithmetic means of a common eligible population partitioned exhaustively into proprietor and employee. Same headers and footnotes support this operational choice, but raw eligible counts and aggregation code were not retrieved.",
+    "collapsedTwoRoleGini": 0.11467849428250225,
+    "giniInterpretation": "Dispersion after collapsing each role to its mean. A lower bound for a common nonnegative earnings population only under the mixture assumptions; not an observed all-physician Gini.",
+    "withinGroupDistribution": null,
+    "withinGroupSensitivity": "Keep within-role quantiles and national Gini unidentified. Compare role mean trajectories and income pools. Any future within-role distribution requires additional observed quantiles/microdata or explicitly named distributional assumptions.",
+    "institutionRoleCrossTabAvailable": false,
+    "starting2026Interpretation": "Carry observed 2020 relative role means into a 2026 scenario baseline only as an explicit persistence assumption. Use indices unless an explicit price/pay update is supplied."
+  },
+  "excludedSeries": [
+    {
+      "source": "NHIS workbook Sheet 16",
+      "reason": "OECD-definition series includes Korean-medicine doctors (한의사), changes scope and valid-pay restriction; not substituted for Sheet 15."
+    },
+    {
+      "source": "2024 court-submission report of 2022 physician earnings",
+      "reason": "More recent reported observation identified in media; original official table/methods and redistribution terms not retrieved. No values used in calibration. Same resident exclusion alone does not prove comparability."
+    }
+  ],
+  "checks": {
+    "roleMixtureReconstructionResidualKRW": 0.0,
+    "countRoleSumMatches": true,
+    "roleIncomeDoesNotUseAllWorkerCounts": true,
+    "sourceHashVerified": true,
+    "pressReleaseRoundedMeanAgreement": true
+  }
+}

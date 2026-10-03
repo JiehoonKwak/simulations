@@ -1,0 +1,620 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>거리를 따라가면</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: #dce5e9;
+        color: #263f4f;
+        font-family: Arial, "Apple SD Gothic Neo", sans-serif;
+        overflow: hidden;
+      }
+      main {
+        height: 100dvh;
+        min-height: 520px;
+        display: flex;
+        flex-direction: column;
+      }
+      header {
+        padding: 23px 32px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 16px;
+        z-index: 1;
+      }
+      h1 {
+        font-size: 25px;
+        font-weight: 500;
+        letter-spacing: -1px;
+        margin: 0 0 8px;
+      }
+      small {
+        font-size: 11px;
+        color: #597180;
+      }
+      select {
+        display: block;
+        margin-top: 16px;
+        padding: 7px 25px 7px 0;
+        border: 0;
+        border-bottom: 1px solid #a3b6c0;
+        background: transparent;
+        color: #263f4f;
+        font: inherit;
+        font-size: 13px;
+      }
+      .year {
+        font-size: 68px;
+        font-weight: 300;
+        letter-spacing: -4px;
+        line-height: 1;
+      }
+      .year small {
+        display: block;
+        font-size: 10px;
+        letter-spacing: 0.12em;
+        text-align: right;
+        margin-top: 10px;
+      }
+      #scene {
+        flex: 1;
+        position: relative;
+        min-height: 270px;
+      }
+      canvas {
+        width: 100%;
+        height: 100%;
+        display: block;
+        position: absolute;
+        inset: 0;
+      }
+      #view {
+        position: absolute;
+        left: 32px;
+        bottom: 18px;
+        font-size: 11px;
+        color: #d7e3e8;
+        background: #304b5dcf;
+        padding: 7px 10px;
+        border-radius: 3px;
+      }
+      footer {
+        padding: 12px 32px 19px;
+        background: #eaf0f2;
+        border-top: 1px solid #c7d4dc;
+      }
+      .controls {
+        display: flex;
+        align-items: center;
+        gap: 13px;
+      }
+      button {
+        font: inherit;
+        font-size: 13px;
+        border: 0;
+        background: #304f61;
+        color: #f1f6f8;
+        border-radius: 4px;
+        padding: 9px 15px;
+        cursor: pointer;
+        min-width: 65px;
+      }
+      button.secondary {
+        background: transparent;
+        color: #304f61;
+        min-width: 35px;
+        padding: 9px 5px;
+      }
+      input {
+        flex: 1;
+        min-width: 0;
+        accent-color: #426b7e;
+        cursor: pointer;
+      }
+      #position {
+        font-size: 12px;
+        min-width: 72px;
+        text-align: right;
+        font-variant-numeric: tabular-nums;
+      }
+      .key {
+        display: flex;
+        justify-content: space-between;
+        gap: 14px;
+        font-size: 11px;
+        color: #5e7582;
+        margin-top: 13px;
+        line-height: 1.6;
+      }
+      .key i {
+        display: inline-block;
+        width: 8px;
+        height: 10px;
+        background: #e1b775;
+        border: 1px solid #be9456;
+        margin-right: 5px;
+        vertical-align: middle;
+      }
+      .key span:last-child {
+        text-align: right;
+      }
+      .places {
+        display: flex;
+        gap: 5px;
+        align-items: center;
+        margin-top: 12px;
+      }
+      .places button {
+        min-width: 0;
+        flex: 1;
+        padding: 4px 0;
+        background: #cbd8de;
+        color: #426171;
+        font-size: 9px;
+        height: 20px;
+        border-radius: 2px;
+      }
+      .places button.visible {
+        background: #6c8b99;
+        color: white;
+      }
+      .places button:hover {
+        background: #8fa8b5;
+      }
+      button:focus-visible,
+      input:focus-visible,
+      select:focus-visible {
+        outline: 3px solid #b27943;
+        outline-offset: 3px;
+      }
+      #notice {
+        position: absolute;
+        top: 10px;
+        left: 32px;
+        max-width: 80%;
+        font-size: 12px;
+        color: #6d392e;
+      }
+      @media (max-width: 600px) {
+        header {
+          padding: 22px 21px 0;
+        }
+        h1 {
+          font-size: 22px;
+        }
+        .year {
+          font-size: 52px;
+        }
+        select {
+          font-size: 12px;
+          max-width: 195px;
+        }
+        .year small {
+          font-size: 9px;
+        }
+        footer {
+          padding: 13px 21px 18px;
+        }
+        .key {
+          font-size: 10px;
+          flex-direction: column;
+          gap: 3px;
+        }
+        .key span:last-child {
+          text-align: left;
+        }
+        #view {
+          left: 21px;
+          bottom: 17px;
+        }
+        .places {
+          gap: 3px;
+        }
+        .places button {
+          font-size: 8px;
+        }
+        .controls {
+          gap: 8px;
+        }
+        button {
+          padding: 9px 11px;
+        }
+        #position {
+          min-width: 63px;
+          font-size: 11px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <div>
+          <h1>거리를 따라가면</h1>
+          <small>06 · 시간과 함께 이동하는 거리</small
+          ><select id="scenario" aria-label="시나리오">
+            <option value="reference">기준 가정</option>
+            <option value="permission">광범위 자동화 허용</option>
+          </select>
+        </div>
+        <div class="year">
+          <span id="year">2026</span><small>의료기관 16곳 · 10년</small>
+        </div>
+      </header>
+      <div id="scene">
+        <canvas
+          id="canvas"
+          role="img"
+          aria-label="16개 의료기관을 따라 이동하는 거리. 켜진 창 하나는 진료 중인 의사 한 명입니다."
+        ></canvas>
+        <div id="view">P1 — P4</div>
+        <div id="notice" role="alert"></div>
+      </div>
+      <footer>
+        <div class="controls">
+          <button id="play" aria-pressed="false">재생</button
+          ><button id="restart" class="secondary" aria-label="처음부터">
+            ↺</button
+          ><input
+            id="time"
+            type="range"
+            min="0"
+            max="1000"
+            step="1"
+            value="0"
+            aria-label="2026년부터 2036년까지 시간"
+          /><span id="position">2026 / 2036</span>
+        </div>
+        <div
+          class="places"
+          id="places"
+          aria-label="의료기관으로 시점 이동"
+        ></div>
+        <div class="key">
+          <span
+            ><i></i>켜진 창 1개 = 진료 중인 의사 1명 · 꺼진 창 = 진료 이탈</span
+          ><span id="count">진료 중 192 / 192명</span>
+        </div>
+      </footer>
+    </main>
+    <script type="module">
+      import { simulate, PRESETS } from "../model.mjs";
+      const $ = (id) => document.getElementById(id),
+        canvas = $("canvas"),
+        ctx = canvas.getContext("2d");
+      const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+      let result,
+        progress = 0,
+        playing = false,
+        last = 0,
+        manualCamera = null,
+        width = 1280,
+        height = 380;
+      const pitch = 244,
+        streetWidth = 16 * pitch + 120;
+      function load() {
+        const preset = PRESETS.find((p) => p.id === $("scenario").value);
+        result = simulate(preset.params, 42);
+        if (!result.checks.passed) {
+          $("notice").textContent = "계산 검증을 통과하지 못했습니다.";
+          playing = false;
+          return;
+        }
+        draw();
+      }
+      function rect(x, y, w, h, fill) {
+        ctx.fillStyle = fill;
+        ctx.fillRect(x, y, w, h);
+      }
+      function line(x1, y1, x2, y2, color, w = 1) {
+        ctx.strokeStyle = color;
+        ctx.lineWidth = w;
+        ctx.beginPath();
+        ctx.moveTo(x1, y1);
+        ctx.lineTo(x2, y2);
+        ctx.stroke();
+      }
+      function text(t, x, y, size = 12, color = "#314d5e", align = "left") {
+        ctx.font = `${size}px Arial, "Apple SD Gothic Neo", sans-serif`;
+        ctx.fillStyle = color;
+        ctx.textAlign = align;
+        ctx.fillText(t, x, y);
+      }
+      function silhouette(x, y, employed) {
+        if (!employed) return;
+        ctx.fillStyle = "#5f5144";
+        ctx.beginPath();
+        ctx.arc(x, y - 7, 3.2, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.moveTo(x - 4, y + 6);
+        ctx.lineTo(x - 3, y - 2);
+        ctx.quadraticCurveTo(x, y - 5, x + 3, y - 2);
+        ctx.lineTo(x + 4, y + 6);
+        ctx.fill();
+      }
+      function tree(x, ground, size = 1) {
+        line(x, ground, x, ground - 64 * size, "#596d6a", 3);
+        ctx.fillStyle = "#8da19a";
+        for (const [a, b, r] of [
+          [-10, -73, 18],
+          [9, -86, 21],
+          [17, -66, 17],
+          [-9, -96, 14],
+        ]) {
+          ctx.beginPath();
+          ctx.ellipse(
+            x + a * size,
+            ground + b * size,
+            r * size,
+            r * 1.1 * size,
+            0,
+            0,
+            Math.PI * 2,
+          );
+          ctx.fill();
+        }
+        line(
+          x,
+          ground - 20 * size,
+          x + 9 * size,
+          ground - 70 * size,
+          "#667e73",
+          1.4,
+        );
+        rect(x - 13, ground - 3, 26, 5, "#89948c");
+      }
+      function lamp(x, ground) {
+        line(x, ground, x, ground - 99, "#607785", 3);
+        line(x, ground - 99, x + 17, ground - 99, "#607785", 3);
+        rect(x + 9, ground - 100, 20, 4, "#687d89");
+        rect(x + 10, ground - 96, 17, 2, "#e3d1a9");
+      }
+      function building(provider, index, ground, frame) {
+        const x = 60 + index * pitch,
+          w = provider.size === "large" ? 202 : 178,
+          h = provider.size === "large" ? 268 : 177,
+          y = ground - h,
+          team = frame.physicians.filter((d) => d.providerId === provider.id),
+          working = team.filter((d) => d.employed).length;
+        const wall =
+          index % 3 === 0 ? "#aebfc7" : index % 3 === 1 ? "#bcc9ce" : "#b0c1c4";
+        rect(x + 8, y + 9, w, h - 2, "#839ba64d");
+        rect(x, y, w, h, wall);
+        rect(x + w - 15, y, 15, h, "#91a8b3");
+        rect(x - 5, y - 7, w + 10, 8, "#526e80");
+        rect(x - 1, y + 5, w - 14, 4, "#cdd8dc");
+        if (provider.size === "large") {
+          rect(x + 22, y - 22, 48, 15, "#8ba4b2");
+          rect(x + 85, y - 14, 43, 8, "#c1cdd3");
+          line(x + 145, y - 7, x + 145, y - 34, "#77909d", 2);
+          line(x + 138, y - 29, x + 153, y - 29, "#77909d", 2);
+        } else {
+          rect(x + 28, y - 14, 50, 7, "#889fac");
+          rect(x + 122, y - 21, 15, 14, "#819ba7");
+        }
+        const columns = 4,
+          ww = 22,
+          wh = 29,
+          gap = 15,
+          startX = x + (w - 15 - columns * ww - (columns - 1) * gap) / 2,
+          startY = y + 44;
+        for (let j = 0; j < team.length; j++) {
+          const wx = startX + (j % columns) * (ww + gap),
+            wy = startY + Math.floor(j / columns) * 42,
+            active = team[j].employed;
+          rect(wx - 2, wy - 2, ww + 4, wh + 4, "#6b8796");
+          rect(wx, wy, ww, wh, active ? "#e4bd83" : "#68818e");
+          if (active) {
+            rect(wx + 2, wy + 2, ww - 4, wh - 4, "#edd0a0");
+            silhouette(wx + ww / 2, wy + 19, true);
+          }
+          line(wx + ww / 2, wy, wx + ww / 2, wy + wh, "#768c96", 1);
+          rect(wx - 4, wy + wh + 2, ww + 8, 3, "#a3b8c1");
+        }
+        const signY = y + 13;
+        text(
+          `${provider.id} ${provider.size === "large" ? "종합병원" : "의원"}`,
+          x + 14,
+          signY + 10,
+          12,
+          "#345569",
+        );
+        rect(x + w - 38, y + 14, 16, 16, "#dee7e9");
+        rect(x + w - 32, y + 16, 4, 12, "#5d8b8a");
+        rect(x + w - 36, y + 20, 12, 4, "#5d8b8a");
+        const doorY = ground - 43;
+        rect(x + 20, doorY, 29, 43, "#537281");
+        rect(x + 23, doorY + 3, 23, 33, "#8eacb6");
+        line(x + 34, doorY + 3, x + 34, ground, "#4f6e80", 1);
+        rect(x + 62, doorY + 2, w - 94, 29, "#8ca8b3");
+        for (let a = 0; a < 4; a++)
+          rect(
+            x + 57 + (a * (w - 83)) / 4,
+            doorY - 8,
+            (w - 83) / 4,
+            8,
+            a % 2 ? "#b9c9c9" : "#688d93",
+          );
+        text(
+          `${working} / ${team.length}명 진료`,
+          x + 62,
+          ground - 23,
+          11,
+          "#e6eef0",
+        );
+        rect(x - 4, ground - 1, w + 8, 6, "#8fa1a9");
+        rect(x - 8, ground + 5, w + 16, 4, "#bec9cb");
+        if (provider.closed) {
+          rect(x + 16, doorY - 3, w - 40, 43, "#5e707d");
+          for (let yy = doorY; yy < ground; yy += 6)
+            line(x + 16, yy, x + w - 24, yy, "#83939b");
+          rect(x + w / 2 - 27, doorY + 9, 54, 21, "#c3b5a2");
+          text("폐업", x + w / 2, doorY + 24, 12, "#5a4e45", "center");
+        }
+        text(
+          provider.region === "metro" ? "수도권" : "비수도권",
+          x + w / 2,
+          ground + 29,
+          10,
+          "#607783",
+          "center",
+        );
+        if (index % 2 === 0) {
+          rect(x + w + 7, ground - 4, 25, 7, "#8a9c9f");
+          tree(x + w + 20, ground, 0.65);
+        } else lamp(x + w + 18, ground);
+      }
+      function draw() {
+        if (!result) return;
+        const frame =
+          result.frames[Math.min(10, Math.floor(progress * 10 + 1e-7))];
+        const sceneScale = Math.min(1.22, Math.max(0.88, height / 375));
+        const viewWidth = width / sceneScale,
+          viewHeight = height / sceneScale,
+          ground = viewHeight - 79,
+          maxCamera = Math.max(0, streetWidth - viewWidth);
+        const camera =
+          manualCamera === null
+            ? (reduced ? Math.floor(progress * 10) / 10 : progress) * maxCamera
+            : Math.max(0, Math.min(maxCamera, manualCamera));
+        ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+        ctx.clearRect(0, 0, width, height);
+        ctx.scale(sceneScale, sceneScale);
+        const sky = ctx.createLinearGradient(0, 0, 0, viewHeight);
+        sky.addColorStop(0, "#dce5e9");
+        sky.addColorStop(0.75, "#ccdbe1");
+        sky.addColorStop(1, "#a9bdc8");
+        ctx.fillStyle = sky;
+        ctx.fillRect(0, 0, viewWidth, viewHeight);
+        // Parallax background is architecture only; no simulated people or patient traffic.
+        for (let i = -2; i < 30; i++) {
+          const bx = i * 158 - camera * 0.24,
+            bh = 65 + ((i * 37) % 75);
+          rect(bx, ground - bh - 8, 118, bh, "#bacbd3");
+          rect(bx + 13, ground - bh - 18, 41, 12, "#bacbd3");
+        }
+        rect(0, ground + 7, viewWidth, 35, "#c6d0d2");
+        line(0, ground + 39, viewWidth, ground + 39, "#9baeb8", 2);
+        rect(0, ground + 42, viewWidth, viewHeight - ground, "#7892a2");
+        line(0, ground + 45, viewWidth, ground + 45, "#8fa6b3", 3);
+        ctx.save();
+        ctx.translate(-camera, 0);
+        for (let i = 0; i < 16; i++) {
+          if (
+            60 + i * pitch > camera + viewWidth + 250 ||
+            60 + i * pitch + 230 < camera - 250
+          )
+            continue;
+          building(frame.providers[i], i, ground, frame);
+        }
+        for (let x = 0; x < streetWidth; x += 94) {
+          line(x, ground + 68, x + 45, ground + 68, "#b9c8ce", 2);
+          line(x, ground + 10, x, ground + 36, "#b3c1c7");
+        }
+        ctx.restore();
+        const first = Math.max(0, Math.floor((camera - 50) / pitch)),
+          lastIndex = Math.min(
+            15,
+            Math.floor((camera + viewWidth - 60) / pitch),
+          );
+        $("view").textContent =
+          `${frame.providers[first].id} — ${frame.providers[lastIndex].id} · 배치는 가상의 거리`;
+        $("year").textContent = frame.year;
+        $("position").textContent = `${frame.year} / 2036`;
+        $("time").value = Math.round(progress * 1000);
+        $("time").setAttribute("aria-valuetext", `${frame.year}년`);
+        $("count").textContent =
+          `진료 중 ${frame.physicians.filter((d) => d.employed).length} / ${frame.physicians.length}명`;
+        for (let i = 0; i < 16; i++)
+          $("place-" + i).classList.toggle(
+            "visible",
+            i >= first && i <= lastIndex,
+          );
+        canvas.setAttribute(
+          "aria-label",
+          `${frame.year}년 거리, ${frame.providers[first].id}부터 ${frame.providers[lastIndex].id}. 전체 ${frame.physicians.length}명 중 ${frame.physicians.filter((d) => d.employed).length}명 진료 중. 켜진 창 한 개는 진료 중인 의사 한 명입니다.`,
+        );
+      }
+      function pause() {
+        playing = false;
+        $("play").textContent = "재생";
+        $("play").setAttribute("aria-pressed", "false");
+      }
+      function animate(now) {
+        if (playing && !document.hidden) {
+          if (last) progress = Math.min(1, progress + (now - last) / 24000);
+          if (progress >= 1) pause();
+          draw();
+        }
+        last = now;
+        requestAnimationFrame(animate);
+      }
+      function resize() {
+        const r = $("scene").getBoundingClientRect();
+        width = r.width;
+        height = r.height;
+        canvas.width = Math.round(width * devicePixelRatio);
+        canvas.height = Math.round(height * devicePixelRatio);
+        draw();
+      }
+      $("play").onclick = () => {
+        if (playing) {
+          pause();
+          return;
+        }
+        if (progress >= 1) progress = 0;
+        manualCamera = null;
+        playing = true;
+        last = 0;
+        $("play").textContent = "일시정지";
+        $("play").setAttribute("aria-pressed", "true");
+      };
+      $("restart").onclick = () => {
+        pause();
+        progress = 0;
+        manualCamera = null;
+        draw();
+      };
+      $("time").oninput = (e) => {
+        pause();
+        progress = Number(e.target.value) / 1000;
+        manualCamera = null;
+        draw();
+      };
+      $("scenario").onchange = () => {
+        pause();
+        load();
+      };
+      for (let i = 0; i < 16; i++) {
+        const b = document.createElement("button");
+        b.id = "place-" + i;
+        b.textContent = `P${i + 1}`;
+        b.setAttribute("aria-label", `P${i + 1} 의료기관 보기, 현재 연도 유지`);
+        b.onclick = () => {
+          pause();
+          manualCamera =
+            60 +
+            i * pitch -
+            width / (2 * Math.min(1.22, Math.max(0.88, height / 375))) +
+            100;
+          draw();
+        };
+        $("places").append(b);
+      }
+      new ResizeObserver(resize).observe($("scene"));
+      load();
+      resize();
+      requestAnimationFrame(animate);
+      document.addEventListener("visibilitychange", () => (last = 0));
+      if (!reduced) $("play").click();
+    </script>
+  </body>
+</html>

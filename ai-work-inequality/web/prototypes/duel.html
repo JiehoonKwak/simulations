@@ -1,0 +1,609 @@
+<!doctype html>
+<html lang="ko">
+  <meta charset="utf-8" /><meta
+    name="viewport"
+    content="width=device-width,initial-scale=1"
+  />
+  <title>두 갈래의 미래</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      font-family: Arial, "Apple SD Gothic Neo", sans-serif;
+      background: #101923;
+      color: #f1f3f3;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+    }
+    main {
+      max-width: 1600px;
+      margin: auto;
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      padding: 28px 44px 20px;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #ffffff25;
+      padding-bottom: 18px;
+    }
+    header a {
+      color: #b8c3cd;
+      text-decoration: none;
+      font-size: 13px;
+    }
+    .kicker {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      color: #aeb9c5;
+    }
+    .title {
+      font-size: 20px;
+      margin: 8px 0 0;
+      font-weight: 500;
+    }
+    .clock {
+      text-align: right;
+      font-size: 54px;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: -3px;
+      line-height: 1;
+    }
+    .clock small {
+      font-size: 10px;
+      color: #aeb9c5;
+      letter-spacing: 1px;
+      display: block;
+      margin-top: 9px;
+    }
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      flex: 1;
+      min-height: 520px;
+    }
+    .pane {
+      position: relative;
+      padding: 32px 35px 20px 0;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+    .pane + .pane {
+      border-left: 1px solid #ffffff25;
+      padding-left: 35px;
+      padding-right: 0;
+    }
+    .scenario {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--accent);
+      margin: 0 0 18px;
+    }
+    .metrics {
+      display: flex;
+      align-items: baseline;
+      gap: 26px;
+    }
+    .value {
+      font-size: clamp(45px, 5.5vw, 82px);
+      font-weight: 400;
+      letter-spacing: -0.065em;
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+    .value span {
+      font-size: 0.35em;
+      margin-left: 5px;
+      letter-spacing: 0;
+    }
+    .metric-name {
+      font-size: 12px;
+      color: #bac5ce;
+      margin-top: 10px;
+    }
+    .income .value {
+      font-size: clamp(32px, 3.3vw, 50px);
+    }
+    .scene {
+      position: relative;
+      flex: 1;
+      min-height: 290px;
+      margin-top: 25px;
+    }
+    canvas {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      inset: 0;
+    }
+    .zone {
+      position: absolute;
+      left: 0;
+      font-size: 11px;
+      color: #aeb9c5;
+      pointer-events: none;
+    }
+    .zone.top {
+      top: 0;
+    }
+    .zone.bottom {
+      top: 69%;
+    }
+    .legend {
+      font-size: 11px;
+      color: #9ba9b8;
+      margin-top: 8px;
+    }
+    .footer {
+      border-top: 1px solid #ffffff25;
+      padding-top: 18px;
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+    button {
+      font: inherit;
+      border: 1px solid #61707e;
+      background: transparent;
+      color: #eef1f3;
+      padding: 10px 15px;
+      cursor: pointer;
+      border-radius: 3px;
+    }
+    button:hover {
+      background: #ffffff12;
+    }
+    button:focus-visible,
+    input:focus-visible {
+      outline: 2px solid white;
+      outline-offset: 5px;
+    }
+    .timeline {
+      flex: 1;
+      min-width: 0;
+    }
+    .timeline input {
+      width: 100%;
+      accent-color: #d4e0e5;
+      cursor: pointer;
+    }
+    .ticks {
+      display: flex;
+      justify-content: space-between;
+      color: #aeb9c5;
+      font-size: 10px;
+      margin-top: 7px;
+    }
+    .note {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      color: #9ba9b8;
+      font-size: 11px;
+      margin-top: 19px;
+      line-height: 1.6;
+    }
+    .restart {
+      font-size: 18px;
+      padding: 7px 13px;
+    }
+    .end {
+      font-size: 11px;
+      color: #bcc6ce;
+      width: 48px;
+      text-align: right;
+    }
+    .spark {
+      height: 38px;
+      margin-top: 15px;
+      position: relative;
+    }
+    .spark canvas {
+      opacity: 0.85;
+    }
+    .spark-label {
+      color: #9ba9b8;
+      font-size: 10px;
+      margin-top: 6px;
+    }
+    @media (max-width: 650px) {
+      main {
+        padding: 20px 18px 16px;
+      }
+      .split {
+        min-height: 460px;
+      }
+      .pane {
+        padding: 24px 15px 12px 0;
+      }
+      .pane + .pane {
+        padding: 24px 0 12px 15px;
+      }
+      .scenario {
+        font-size: 12px;
+        line-height: 1.5;
+        min-height: 36px;
+        margin-bottom: 14px;
+      }
+      .metrics {
+        display: block;
+      }
+      .income {
+        margin-top: 18px;
+      }
+      .income .value {
+        font-size: 32px;
+      }
+      .value {
+        font-size: 46px;
+      }
+      .scene {
+        min-height: 225px;
+        margin-top: 20px;
+      }
+      .metric-name {
+        font-size: 10px;
+        margin-top: 6px;
+      }
+      .legend {
+        font-size: 10px;
+        line-height: 1.5;
+      }
+      .clock {
+        font-size: 43px;
+      }
+      .title {
+        font-size: 18px;
+      }
+      .footer {
+        gap: 10px;
+      }
+      .note {
+        font-size: 10px;
+        display: block;
+      }
+      .end {
+        display: none;
+      }
+      .spark-label {
+        font-size: 9px;
+      }
+    }
+    @media (min-width: 651px) and (max-height: 740px) {
+      main {
+        height: 100svh;
+        min-height: 600px;
+        padding: 18px 32px 14px;
+      }
+      .split {
+        min-height: 0;
+      }
+      .pane {
+        padding-top: 22px;
+        padding-bottom: 12px;
+      }
+      .scene {
+        min-height: 130px;
+        margin-top: 18px;
+      }
+      .scenario {
+        margin-bottom: 14px;
+      }
+      .value {
+        font-size: 64px;
+      }
+      .income .value {
+        font-size: 42px;
+      }
+      .spark {
+        height: 26px;
+        margin-top: 10px;
+      }
+      .note {
+        margin-top: 12px;
+      }
+      .footer {
+        padding-top: 12px;
+      }
+    }
+  </style>
+  <main>
+    <header>
+      <div>
+        <div class="kicker">03 / TWO FUTURES</div>
+        <h1 class="title">같은 출발, 다른 미래</h1>
+      </div>
+      <div class="clock">
+        <span id="year">2026</span><small>2026 — 2036</small>
+      </div>
+    </header>
+    <section class="split" aria-label="두 시나리오 비교">
+      <article class="pane" style="--accent: #92c7c7">
+        <h2 class="scenario">저비용 보급 · 수행 의무 유지</h2>
+        <div class="metrics">
+          <div>
+            <div class="value">
+              <b id="emp0" style="font-weight: 400">100</b><span>%</span>
+            </div>
+            <div class="metric-name">진료 중</div>
+          </div>
+          <div class="income">
+            <div class="value" id="inc0">100</div>
+            <div class="metric-name">평균 소득</div>
+          </div>
+        </div>
+        <div class="scene">
+          <canvas
+            id="people0"
+            role="img"
+            aria-label="첫 번째 시나리오의 의사 192명"
+          ></canvas
+          ><span class="zone top">● 진료 중</span
+          ><span class="zone bottom">○ 진료 이탈</span>
+        </div>
+        <div class="legend">점 하나 = 의사 한 명</div>
+        <div class="spark">
+          <canvas id="spark0" aria-hidden="true"></canvas>
+        </div>
+        <div class="spark-label">평균 소득 궤적 · 2026 평균 = 100</div>
+      </article>
+      <article class="pane" style="--accent: #e0b18e">
+        <h2 class="scenario">광범위 자동화 허용</h2>
+        <div class="metrics">
+          <div>
+            <div class="value">
+              <b id="emp1" style="font-weight: 400">100</b><span>%</span>
+            </div>
+            <div class="metric-name">진료 중</div>
+          </div>
+          <div class="income">
+            <div class="value" id="inc1">100</div>
+            <div class="metric-name">평균 소득</div>
+          </div>
+        </div>
+        <div class="scene">
+          <canvas
+            id="people1"
+            role="img"
+            aria-label="두 번째 시나리오의 의사 192명"
+          ></canvas
+          ><span class="zone top">● 진료 중</span
+          ><span class="zone bottom">○ 진료 이탈</span>
+        </div>
+        <div class="legend">같은 192명 · 같은 시작 조건</div>
+        <div class="spark">
+          <canvas id="spark1" aria-hidden="true"></canvas>
+        </div>
+        <div class="spark-label">같은 소득 축 · 소유소득 포함</div>
+      </article>
+    </section>
+    <footer class="footer">
+      <button id="play" aria-label="일시정지">Ⅱ</button
+      ><button class="restart" id="restart" aria-label="처음부터 재생">
+        ↺
+      </button>
+      <div class="timeline">
+        <input
+          id="time"
+          type="range"
+          min="0"
+          max="10"
+          step="0.01"
+          value="0"
+          aria-label="시뮬레이션 연도"
+        />
+        <div class="ticks">
+          <span>2026</span><span>2031</span><span>2036</span>
+        </div>
+      </div>
+      <span class="end" id="elapsed">0 / 24s</span>
+    </footer>
+    <div class="note">
+      <span>가정 기반 모형 · 한국 통계 보정 전</span
+      ><span>소득에는 진료 이탈 후 소유소득도 포함</span>
+    </div>
+  </main>
+  <script type="module">
+    import { simulate, PRESETS } from "../model.mjs";
+    const runs = ["accessible", "permission"].map((id) =>
+      simulate(PRESETS.find((p) => p.id === id).params, 42),
+    );
+    const colors = ["#92c7c7", "#e0b18e"];
+    const $ = (id) => document.getElementById(id),
+      reduced = matchMedia("(prefers-reduced-motion: reduce)");
+    let time = 0,
+      playing = !reduced.matches,
+      last = 0;
+    const mix = (a, b, t) => a + (b - a) * t;
+    const prepared = runs.map((run) =>
+      run.frames.map((frame) => {
+        let active = 0,
+          exited = 0;
+        return frame.physicians.map((d) => ({
+          id: d.id,
+          employed: d.employed,
+          rank: d.employed ? active++ : exited++,
+        }));
+      }),
+    );
+    function size(canvas) {
+      const r = canvas.getBoundingClientRect(),
+        d = devicePixelRatio || 1;
+      if (
+        canvas.width !== Math.round(r.width * d) ||
+        canvas.height !== Math.round(r.height * d)
+      ) {
+        canvas.width = Math.round(r.width * d);
+        canvas.height = Math.round(r.height * d);
+      }
+      const ctx = canvas.getContext("2d");
+      ctx.setTransform(d, 0, 0, d, 0, 0);
+      ctx.clearRect(0, 0, r.width, r.height);
+      return { ctx, w: r.width, h: r.height };
+    }
+    function point(d, w, h) {
+      const columns = w < 220 ? 12 : 24;
+      const rows = Math.ceil(192 / columns),
+        pitch = (w - 12) / columns;
+      return {
+        x: 6 + ((d.rank % columns) + 0.5) * pitch,
+        y: d.employed
+          ? 30 +
+            (Math.floor(d.rank / columns) * (h * 0.55 - 34)) /
+              Math.max(1, rows - 1)
+          : h * 0.76 +
+            (Math.floor(d.rank / columns) * (h * 0.24 - 8)) /
+              Math.max(1, rows - 1),
+      };
+    }
+    const maxIncome =
+      Math.max(
+        ...runs.flatMap((r) => r.frames.map((f) => f.metrics.incomeIndex)),
+      ) * 1.08;
+    function draw() {
+      const a = Math.min(9, Math.floor(time)),
+        b = a + 1,
+        t = time - a,
+        smooth = reduced.matches ? (t < 1 ? 0 : 1) : t * t * (3 - 2 * t);
+      $("year").textContent = String(2026 + Math.floor(time));
+      $("time").value = String(time);
+      $("time").setAttribute("aria-valuetext", `${(2026 + time).toFixed(1)}년`);
+      $("elapsed").textContent = `${Math.round(time * 2.4)} / 24s`;
+      runs.forEach((run, k) => {
+        const one = run.frames[a],
+          two = run.frames[b],
+          emp = mix(one.metrics.employmentRate, two.metrics.employmentRate, t),
+          income = mix(one.metrics.incomeIndex, two.metrics.incomeIndex, t);
+        $("emp" + k).textContent = (emp * 100).toFixed(0);
+        $("inc" + k).textContent = income.toFixed(0);
+        const canvas = $("people" + k),
+          { ctx, w, h } = size(canvas);
+        canvas.setAttribute(
+          "aria-label",
+          `${2026 + Math.floor(time)}년 진료 중 ${(emp * 100).toFixed(0)}%, 평균 소득 ${income.toFixed(0)}`,
+        );
+        ctx.strokeStyle = "#ffffff18";
+        ctx.beginPath();
+        ctx.moveTo(0, h * 0.65);
+        ctx.lineTo(w, h * 0.65);
+        ctx.stroke();
+        const radius = w < 220 ? 1.8 : 2.7;
+        prepared[k][a].forEach((d, i) => {
+          const e = prepared[k][b][i],
+            p = point(d, w, h),
+            q = point(e, w, h),
+            x = mix(p.x, q.x, smooth),
+            y = mix(p.y, q.y, smooth),
+            active = mix(+d.employed, +e.employed, smooth);
+          if (
+            !reduced.matches &&
+            Math.abs(q.y - p.y) > 2 &&
+            smooth > 0 &&
+            smooth < 1
+          ) {
+            ctx.strokeStyle = colors[k];
+            ctx.globalAlpha = 0.15;
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.quadraticCurveTo(p.x, q.y, x, y);
+            ctx.stroke();
+          }
+          ctx.globalAlpha = 0.75;
+          ctx.strokeStyle = colors[k];
+          ctx.lineWidth = 0.8;
+          ctx.beginPath();
+          ctx.arc(x, y, radius, 0, Math.PI * 2);
+          ctx.stroke();
+          ctx.globalAlpha = active;
+          ctx.fillStyle = colors[k];
+          ctx.fill();
+          ctx.globalAlpha = 1;
+        });
+        const sc = size($("spark" + k)),
+          yc = (value) => sc.h - 3 - (value / maxIncome) * (sc.h - 6);
+        sc.ctx.strokeStyle = "#ffffff22";
+        sc.ctx.setLineDash([3, 4]);
+        sc.ctx.beginPath();
+        sc.ctx.moveTo(0, yc(100));
+        sc.ctx.lineTo(sc.w, yc(100));
+        sc.ctx.stroke();
+        sc.ctx.setLineDash([]);
+        sc.ctx.strokeStyle = colors[k];
+        sc.ctx.lineWidth = 2;
+        sc.ctx.beginPath();
+        for (let i = 0; i <= Math.floor(time); i++) {
+          const x = (i / 10) * (sc.w - 4) + 2,
+            y = yc(run.frames[i].metrics.incomeIndex);
+          i ? sc.ctx.lineTo(x, y) : sc.ctx.moveTo(x, y);
+        }
+        sc.ctx.lineTo((time / 10) * (sc.w - 4) + 2, yc(income));
+        sc.ctx.stroke();
+        sc.ctx.fillStyle = colors[k];
+        sc.ctx.beginPath();
+        sc.ctx.arc(
+          (time / 10) * (sc.w - 4) + 2,
+          yc(income),
+          2.8,
+          0,
+          Math.PI * 2,
+        );
+        sc.ctx.fill();
+      });
+    }
+    function button() {
+      $("play").textContent = playing ? "Ⅱ" : "▶";
+      $("play").setAttribute("aria-label", playing ? "일시정지" : "재생");
+    }
+    $("play").onclick = () => {
+      if (time >= 10) time = 0;
+      playing = !playing;
+      last = 0;
+      button();
+      draw();
+    };
+    $("restart").onclick = () => {
+      time = 0;
+      playing = true;
+      last = 0;
+      button();
+      draw();
+    };
+    $("time").oninput = (e) => {
+      time = Number(e.target.value);
+      playing = false;
+      button();
+      draw();
+    };
+    addEventListener("resize", draw);
+    reduced.addEventListener("change", () => {
+      if (reduced.matches) {
+        playing = false;
+        button();
+        draw();
+      }
+    });
+    document.addEventListener("visibilitychange", () => (last = 0));
+    function tick(now) {
+      if (playing && !document.hidden) {
+        if (last) time = Math.min(10, time + (now - last) / 2400);
+        if (time >= 10) {
+          playing = false;
+          button();
+        }
+        draw();
+      }
+      last = now;
+      requestAnimationFrame(tick);
+    }
+    button();
+    draw();
+    requestAnimationFrame(tick);
+  </script>
+</html>

@@ -1,0 +1,470 @@
+<!doctype html>
+<html lang="ko">
+  <meta charset="utf-8" /><meta
+    name="viewport"
+    content="width=device-width,initial-scale=1"
+  /><title>진료의 거리</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      background: #e9eff2;
+      color: #223b4b;
+      font-family: Arial, "Apple SD Gothic Neo", sans-serif;
+      overflow: hidden;
+    }
+    main {
+      height: 100dvh;
+      min-height: 540px;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      padding: 25px 32px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      gap: 12px;
+    }
+    h1 {
+      font-size: 25px;
+      font-weight: 500;
+      letter-spacing: -1px;
+      margin: 0 0 8px;
+    }
+    small {
+      font-size: 11px;
+      color: #58717e;
+      letter-spacing: 0.04em;
+    }
+    .year {
+      font-size: 70px;
+      line-height: 0.95;
+      font-weight: 300;
+      letter-spacing: -5px;
+      text-align: right;
+    }
+    .year small {
+      display: block;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      margin-top: 10px;
+    }
+    select {
+      margin-top: 15px;
+      border: 0;
+      border-bottom: 1px solid #b8c9d1;
+      background: transparent;
+      color: #223b4b;
+      padding: 7px 0;
+      font-size: 13px;
+      max-width: 210px;
+    }
+    #stage {
+      flex: 1;
+      position: relative;
+      min-height: 300px;
+    }
+    canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    #detail {
+      position: absolute;
+      bottom: 2px;
+      left: 24px;
+      right: 24px;
+      text-align: center;
+      font-size: 12px;
+      min-height: 15px;
+      color: #3c5867;
+    }
+    .legend {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      font-size: 12px;
+      color: #3c5867;
+      padding: 12px 16px 8px;
+    }
+    .legend span {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .swatch {
+      width: 9px;
+      height: 12px;
+      background: #d77c65;
+      display: inline-block;
+    }
+    .bar {
+      width: 21px;
+      height: 4px;
+      background: #278f91;
+      display: inline-block;
+    }
+    .revenue {
+      background: #617e96;
+    }
+    footer {
+      padding: 10px 32px 22px;
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+    button {
+      border: 0;
+      background: transparent;
+      font-size: 13px;
+      color: #223b4b;
+      cursor: pointer;
+      padding: 9px 0;
+      min-width: 44px;
+    }
+    input {
+      accent-color: #2c687c;
+      flex: 1;
+      min-width: 50px;
+    }
+    #time {
+      font-size: 11px;
+      min-width: 57px;
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+    button:focus-visible,
+    select:focus-visible,
+    canvas:focus-visible {
+      outline: 2px solid #278f91;
+      outline-offset: 3px;
+    }
+    @media (max-width: 600px) {
+      header {
+        padding: 20px 20px 0;
+      }
+      h1 {
+        font-size: 22px;
+      }
+      .year {
+        font-size: 57px;
+      }
+      .legend {
+        gap: 12px;
+        font-size: 10px;
+        flex-wrap: wrap;
+        padding: 9px 16px 3px;
+      }
+      footer {
+        padding: 9px 18px 15px;
+        gap: 10px;
+      }
+      #detail {
+        font-size: 10px;
+      }
+      select {
+        font-size: 12px;
+        max-width: 185px;
+      }
+    }
+  </style>
+  <main>
+    <header>
+      <div>
+        <h1>진료의 거리</h1>
+        <small>16개 기관 · 192명의 의사 · 가상 모형</small><br /><select
+          id="scenario"
+          aria-label="시나리오"
+        >
+          <option value="reference">기준 가정</option>
+          <option value="demand">수가 · 구매 진료량 감소</option>
+          <option value="permission">광범위 자동화 허용</option>
+        </select>
+      </div>
+      <div class="year">
+        <span id="year">2026</span><small>2026 — 2036</small>
+      </div>
+    </header>
+    <div id="stage">
+      <canvas
+        id="scene"
+        role="img"
+        aria-label="16개 기관의 진료 참여 의사를 창문으로 표시한 애니메이션. 건물을 누르면 수치를 확인합니다."
+      ></canvas>
+      <div id="detail" aria-live="polite">건물을 눌러 살펴보세요</div>
+    </div>
+    <div class="legend">
+      <span><i class="swatch"></i>불 켜진 창 = 진료 의사 1명</span
+      ><span><i class="bar"></i>지붕 선 = AI 도입 0–100%</span
+      ><span><i class="bar revenue"></i>바닥 선 = 매출 0–200% · 눈금 2026</span>
+    </div>
+    <footer>
+      <button id="play" aria-label="일시정지">Ⅱ 정지</button
+      ><button id="replay" aria-label="처음부터 다시 재생">↺ 다시</button
+      ><input
+        id="scrub"
+        type="range"
+        min="0"
+        max="10"
+        step=".01"
+        value="0"
+        aria-label="연도"
+      /><span id="time">00 / 24 s</span>
+    </footer>
+  </main>
+  <script type="module">
+    import { simulate, PRESETS } from "../model.mjs";
+    const $ = (s) => document.querySelector(s),
+      canvas = $("#scene"),
+      ctx = canvas.getContext("2d"),
+      reduced = matchMedia("(prefers-reduced-motion: reduce)");
+    let run = simulate(PRESETS[0].params, 42),
+      t = 0,
+      playing = !reduced.matches,
+      last = 0,
+      w = 0,
+      h = 0,
+      hit = [],
+      selected = null;
+    const order = run.frames[0].providers
+      .filter((p) => p.region === "metro")
+      .concat(run.frames[0].providers.filter((p) => p.region === "regional"))
+      .map((p) => p.id);
+    const mix = (a, b, f) => a + (b - a) * f;
+    function poly(points, fill) {
+      ctx.fillStyle = fill;
+      ctx.beginPath();
+      points.forEach(([x, y], i) => (i ? ctx.lineTo(x, y) : ctx.moveTo(x, y)));
+      ctx.closePath();
+      ctx.fill();
+    }
+    function line(x1, y1, x2, y2, color, width = 1) {
+      ctx.strokeStyle = color;
+      ctx.lineWidth = width;
+      ctx.beginPath();
+      ctx.moveTo(x1, y1);
+      ctx.lineTo(x2, y2);
+      ctx.stroke();
+    }
+    function label(text, x, y, size = 12, color = "#58717e", align = "left") {
+      ctx.fillStyle = color;
+      ctx.font = `${size}px Arial, 'Apple SD Gothic Neo', sans-serif`;
+      ctx.textAlign = align;
+      ctx.fillText(text, x, y);
+    }
+    function draw() {
+      ctx.clearRect(0, 0, w, h);
+      hit = [];
+      const portrait = w < 650,
+        cols = portrait ? 4 : 8,
+        rows = 16 / cols,
+        left = portrait ? 20 : 50,
+        cw = (w - left * 2) / cols,
+        top = portrait ? 37 : 50,
+        rh = (h - top - 30) / rows;
+      const a = run.frames[Math.floor(t)],
+        b = run.frames[Math.min(10, Math.floor(t) + 1)],
+        f = t % 1;
+      for (let row = 0; row < rows; row++) {
+        const y = top + (row + 1) * rh - 21;
+        line(left - 4, y + 13, w - left + 4, y + 13, "#d1dde3", 1);
+        line(left - 4, y + 20, w - left + 4, y + 20, "#f7fafb", 2);
+        if (row === 0 || row === rows / 2)
+          label(
+            row === 0 ? "수도권" : "비수도권",
+            left,
+            top + row * rh + (row === 0 ? -10 : 24),
+            portrait ? 11 : 12,
+            "#36566a",
+          );
+      }
+      order.forEach((id, i) => {
+        const pa = a.providers.find((p) => p.id === id),
+          pb = b.providers.find((p) => p.id === id),
+          base = run.frames[0].providers.find((p) => p.id === id),
+          people = a.physicians.filter((p) => p.providerId === id),
+          future = b.physicians.filter((p) => p.providerId === id);
+        const n = people.length,
+          col = i % cols,
+          row = Math.floor(i / cols),
+          bw = Math.min(portrait ? 45 : 70, cw * 0.6),
+          bh = Math.min(n === 16 ? 92 : 57, rh - 41),
+          depth = bw * 0.25,
+          x = left + col * cw + (cw - bw - depth) / 2,
+          y = top + (row + 1) * rh - 25;
+        const closed = pa.closed,
+          adoption = mix(pa.adoption, pb.adoption, f),
+          rev = mix(pa.revenue, pb.revenue, f) / base.revenue;
+        poly(
+          [
+            [x - 6, y + 7],
+            [x + bw + depth + 15, y + 7],
+            [x + bw + depth + 28, y - 4],
+            [x + depth, y - 4],
+          ],
+          "#d5dfe5",
+        );
+        poly(
+          [
+            [x, y],
+            [x + bw, y],
+            [x + bw, y - bh],
+            [x, y - bh],
+          ],
+          closed ? "#ced7dc" : "#fafcfd",
+        );
+        poly(
+          [
+            [x + bw, y],
+            [x + bw + depth, y - depth * 0.55],
+            [x + bw + depth, y - bh - depth * 0.55],
+            [x + bw, y - bh],
+          ],
+          closed ? "#b8c7cf" : "#bdcdd6",
+        );
+        poly(
+          [
+            [x, y - bh],
+            [x + depth, y - bh - depth * 0.55],
+            [x + bw + depth, y - bh - depth * 0.55],
+            [x + bw, y - bh],
+          ],
+          closed ? "#b8c7cf" : "#d1dfe5",
+        );
+        line(x, y - bh - 5, x + bw, y - bh - 5, "#becdd3", 3);
+        line(x, y - bh - 5, x + bw * adoption, y - bh - 5, "#278f91", 3);
+        const wr = n / 4,
+          ww = bw * 0.12,
+          wh = Math.min(11, ((bh - 17) / wr) * 0.53),
+          gap = (bh - 17) / wr;
+        people.forEach((p, j) => {
+          const v = mix(+p.employed, +future[j].employed, f),
+            wx = x + bw * 0.13 + (j % 4) * bw * 0.205,
+            wy = y - bh + 10 + Math.floor(j / 4) * gap;
+          ctx.fillStyle = "#dce5ea";
+          ctx.fillRect(wx, wy, ww, wh);
+          ctx.globalAlpha = v;
+          ctx.fillStyle = "#d77c65";
+          ctx.fillRect(wx, wy, ww, wh);
+          ctx.globalAlpha = 1;
+        });
+        ctx.fillStyle = closed ? "#9babb6" : "#7992a2";
+        ctx.fillRect(x + bw * 0.44, y - 9, bw * 0.12, 9);
+        line(x, y + 10, x + bw, y + 10, "#c6d3db", 3);
+        line(x, y + 10, x + (bw * Math.min(2, rev)) / 2, y + 10, "#617e96", 3);
+        line(x + bw / 2, y + 7, x + bw / 2, y + 13, "#314e62", 1);
+        label(
+          closed ? `${id} · 폐업` : id,
+          x + bw / 2,
+          y + 29,
+          portrait ? 9 : 11,
+          closed ? "#946454" : "#58717e",
+          "center",
+        );
+        if (id === selected) {
+          line(x - 4, y + 34, x + bw + 4, y + 34, "#d77c65", 2);
+        }
+        hit.push({
+          id,
+          x: x - 8,
+          y: y - bh - 15,
+          w: bw + depth + 16,
+          h: bh + 46,
+        });
+      });
+      $("#year").textContent = 2026 + Math.floor(t);
+      $("#scrub").value = t;
+      $("#time").textContent =
+        `${String(Math.round(t * 2.4)).padStart(2, "0")} / 24 s`;
+      canvas.setAttribute(
+        "aria-label",
+        `${2026 + Math.floor(t)}년. 진료 의사 ${a.physicians.filter((p) => p.employed).length}명, 폐업 ${a.providers.filter((p) => p.closed).length}개 기관. 불 켜진 창문은 진료 의사 한 명입니다.`,
+      );
+      if (selected) {
+        const p = a.providers.find((p) => p.id === selected),
+          base = run.frames[0].providers.find((p) => p.id === selected);
+        $("#detail").textContent =
+          `${selected} · ${p.size === "large" ? "16" : "8"}명 규모 · 진료 ${p.headcount}명 · AI ${Math.round(p.adoption * 100)}% · 매출 ${Math.round((p.revenue / base.revenue) * 100)}%${p.closed ? " · 폐업" : ""}`;
+      }
+    }
+    function resize() {
+      const rect = canvas.getBoundingClientRect();
+      w = rect.width;
+      h = rect.height;
+      const dpr = devicePixelRatio || 1;
+      canvas.width = Math.round(w * dpr);
+      canvas.height = Math.round(h * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      draw();
+    }
+    function sync() {
+      $("#play").textContent = playing ? "Ⅱ 정지" : "▶ 재생";
+      $("#play").setAttribute("aria-label", playing ? "일시정지" : "재생");
+    }
+    $("#play").onclick = () => {
+      if (t >= 10) t = 0;
+      playing = !playing;
+      last = 0;
+      sync();
+      draw();
+    };
+    $("#replay").onclick = () => {
+      t = 0;
+      playing = !reduced.matches;
+      last = 0;
+      sync();
+      draw();
+    };
+    $("#scrub").oninput = (e) => {
+      t = +e.target.value;
+      playing = false;
+      sync();
+      draw();
+    };
+    $("#scenario").onchange = (e) => {
+      run = simulate(PRESETS.find((p) => p.id === e.target.value).params, 42);
+      t = 0;
+      last = 0;
+      playing = !reduced.matches;
+      sync();
+      draw();
+    };
+    canvas.onclick = (e) => {
+      const r = canvas.getBoundingClientRect(),
+        x = e.clientX - r.left,
+        y = e.clientY - r.top;
+      selected =
+        hit.find(
+          (b) => x >= b.x && x <= b.x + b.w && y >= b.y && y <= b.y + b.h,
+        )?.id || null;
+      if (!selected) $("#detail").textContent = "건물을 눌러 살펴보세요";
+      draw();
+    };
+    reduced.addEventListener("change", (e) => {
+      if (e.matches) {
+        playing = false;
+        sync();
+      }
+    });
+    document.addEventListener("visibilitychange", () => (last = 0));
+    new ResizeObserver(resize).observe(canvas);
+    sync();
+    resize();
+    function animate(now) {
+      if (playing && !document.hidden) {
+        if (last) t = Math.min(10, t + (now - last) / 2400);
+        if (t >= 10) {
+          playing = false;
+          sync();
+        }
+        draw();
+      }
+      last = now;
+      requestAnimationFrame(animate);
+    }
+    requestAnimationFrame(animate);
+  </script>
+</html>

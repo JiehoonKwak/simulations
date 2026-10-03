@@ -1,0 +1,5328 @@
+{
+  "schema_version": 1,
+  "title": "Korean NHI-reported physicians, institutions and care, 2023–2024",
+  "retrieved_on": "2026-10-02",
+  "observation_years": [
+    2023,
+    2024
+  ],
+  "simulation_start_year": 2026,
+  "status": "Extracted empirical aggregates; no 2026 nowcast or joint physician microdata reconstruction.",
+  "publishers": [
+    "National Health Insurance Service",
+    "Health Insurance Review & Assessment Service"
+  ],
+  "statistics_approval_number": "920006",
+  "sources": [
+    {
+      "id": "nhis-yearbook-2023-tables.zip",
+      "local_path": "data/raw/workforce/nhis-yearbook-2023-tables.zip",
+      "url": "https://www.nhis.or.kr/nhis/together/wbhaec06300m01.do?mode=download&articleNo=10847858&attachNo=364634",
+      "bytes": 5845170,
+      "sha256": "9f20b4e42c45e815256e7c6377a9e279d6e6934e59be36ac60416e94fc4bed1b",
+      "publication_month": "2024-11",
+      "landing_url": "https://www.nhis.or.kr/nhis/together/wbhaec06300m01.do?mode=view&articleNo=10847858"
+    },
+    {
+      "id": "nhis-yearbook-2023.pdf",
+      "local_path": "data/raw/workforce/nhis-yearbook-2023.pdf",
+      "url": "https://www.nhis.or.kr/nhis/together/wbhaec06300m01.do?mode=download&articleNo=10847858&attachNo=364636",
+      "bytes": 10813749,
+      "sha256": "1b3c23af2cf09906c450e19e9447c942c42d7fddee8b11616a47906f32361181",
+      "publication_month": "2024-11"
+    },
+    {
+      "id": "hira-providers-2023.xlsx",
+      "local_path": "data/raw/workforce/hira-providers-2023.xlsx",
+      "url": "https://www.nhis.or.kr/nhis/together/wbhaec06300m01.do?mode=download&articleNo=10847858&attachNo=364634",
+      "bytes": 203501,
+      "sha256": "8e99ee8479ac0da2088abd4fb0aa3ae20bde6d30b12761103e1a30d2f7bb6955",
+      "archive_file_id": "nhis-yearbook-2023-tables.zip",
+      "archive_member": "01-2(심평원) 2023년_제1편_건강보험 일반현황 제2장 요양기관 현황.xlsx"
+    },
+    {
+      "id": "nhis-yearbook-2024-tables.zip",
+      "local_path": "data/raw/workforce/nhis-yearbook-2024-tables.zip",
+      "url": "https://www.nhis.or.kr/nhis/together/wbhaec06300m01.do?mode=download&articleNo=11007426&attachNo=365189",
+      "bytes": 5092746,
+      "sha256": "fd9e7313b08b1a44a49ec6655df27efa142fb167147f639a89fc06af1cd56de6",
+      "publication_month": "2025-11",
+      "landing_url": "https://www.nhis.or.kr/nhis/together/wbhaec06300m01.do?mode=view&articleNo=11007426"
+    },
+    {
+      "id": "nhis-yearbook-2024.pdf",
+      "local_path": "data/raw/workforce/nhis-yearbook-2024.pdf",
+      "url": "https://www.nhis.or.kr/nhis/together/wbhaec06300m01.do?mode=download&articleNo=11007426&attachNo=365191",
+      "bytes": 9724702,
+      "sha256": "adf65c36b2f3bdc8dabab0e9b9c49ed339d156c1824b0b6e8f127eda4edc3b52",
+      "publication_month": "2025-11"
+    },
+    {
+      "id": "hira-providers-2024.xlsx",
+      "local_path": "data/raw/workforce/hira-providers-2024.xlsx",
+      "url": "https://www.nhis.or.kr/nhis/together/wbhaec06300m01.do?mode=download&articleNo=11007426&attachNo=365189",
+      "bytes": 200519,
+      "sha256": "5c2189741886bc7fba458baf60cde8bedcbbaea3b28ae819dfba99b6069caa99",
+      "archive_file_id": "nhis-yearbook-2024-tables.zip",
+      "archive_member": "01-2(심평원) 2024년_제1편 건강보험 일반현황 제2장 요양기관 현황 1부.xlsx"
+    },
+    {
+      "id": "nhis-care-2024.xlsx",
+      "local_path": "data/raw/workforce/nhis-care-2024.xlsx",
+      "url": "https://www.nhis.or.kr/nhis/together/wbhaec06300m01.do?mode=download&articleNo=11007426&attachNo=365189",
+      "bytes": 547515,
+      "sha256": "bf3ad3e9038957eae571b28039f318322a8d6dea03a7bfbe5f924ce87f289506",
+      "archive_file_id": "nhis-yearbook-2024-tables.zip",
+      "archive_member": "03-1(건강공단) 2024년_제3편 건강보험 진료현황.xlsx"
+    }
+  ],
+  "license": {
+    "2024_work_marking": "KOGL Type 1 (attribution)",
+    "marking_url": "https://www.hira.or.kr/bbsDummy.do?brdBltNo=2431&brdScnBltNo=4&pgmid=HIRAA020045010000",
+    "terms_url": "https://www.kogl.or.kr/info/licenseType1.do",
+    "note": "Marking directly observed on the alternate HIRA 2024 yearbook post. NHIS attachment page and the first HIRA post carry no observed work-specific marking. 2023 file-specific marking was not verified. Raw files remain git-ignored; processed file contains selected factual aggregates with attribution, not report facsimiles."
+  },
+  "revision_status": {
+    "hira_corrected_post_date": "2026-01-13",
+    "hira_corrected_post_url": "https://www.hira.or.kr/bbsDummy.do?brdBltNo=2322&brdScnBltNo=4&pgmid=HIRAA020045020000",
+    "checked_against_hira_corrigendum": false,
+    "note": "NHIS current PDF and workbooks were acquired directly. HIRA lists a corrected PDF and corrigendum; its download helper repeatedly timed out, so equality to that corrected attachment has not been established. Acquired NHIS PDF matches the SMHDB mirror byte-for-byte.",
+    "mirror_download_url": "https://seoulmentalhealth.kr/comm/getFile?fileNo=1&fileTy=ATTACH&upperNo=2100"
+  },
+  "definitions": {
+    "workforce_reference": "Year-end personnel reported by NHI-claiming providers to HIRA; physicians use an exclusive-contract (전속) criterion. Persons, not FTE, licensed totals, all employed physicians, or owners.",
+    "physicians": "의사 only, excluding dentists and Korean medicine physicians; includes general practitioners, interns, residents and specialists.",
+    "institution_reference": "Year-end NHI provider registrations, not all Medical Service Act registrations. Provider types remain separate legal/reporting categories.",
+    "region": "Provider location; institution × region is observed. Physician region and institution margins are separate tables, not a joint distribution.",
+    "individual_establishment": "개인 in an institution registration table; counts institutions, not owner physicians or self-employed clinicians.",
+    "care_reference": "NHIS Table III-4, service-date 2024 care, reflecting payments January 2024 through April 2025. NHI insured service users; not all medical spending.",
+    "visit_days": "입내원일수: patient visit-days or inpatient bed-days recorded in claims. Not unique patients, completed cases or quality-adjusted care.",
+    "reimbursed_days": "요양급여일수: includes in-facility medication days; an overlapping visit/medication day counts once.",
+    "patients": "Within-category unique patients. Patients can overlap across settings and provider types; do not sum them to a national unique-patient count.",
+    "medical_expenses_thousand_krw": "Insurer payment plus statutory patient copayment for covered care, in KRW 1,000; not physician income or net institution profit. Workbook precision retained as decimal strings.",
+    "insurer_benefits_thousand_krw": "NHIS share of covered expenses, in KRW 1,000; workbook precision retained as decimal strings.",
+    "zeros": "Source workbook numeric zeros are retained. The PDF commonly displays them as a dash."
+  },
+  "provider_types": [
+    {
+      "id": "tertiary_hospital",
+      "label_ko": "상급종합병원"
+    },
+    {
+      "id": "general_hospital",
+      "label_ko": "종합병원"
+    },
+    {
+      "id": "hospital",
+      "label_ko": "병원"
+    },
+    {
+      "id": "long_term_care_hospital",
+      "label_ko": "요양병원"
+    },
+    {
+      "id": "mental_health_hospital",
+      "label_ko": "정신병원"
+    },
+    {
+      "id": "clinic",
+      "label_ko": "의원"
+    },
+    {
+      "id": "dental_hospital",
+      "label_ko": "치과병원"
+    },
+    {
+      "id": "dental_clinic",
+      "label_ko": "치과의원"
+    },
+    {
+      "id": "midwifery_clinic",
+      "label_ko": "조산원"
+    },
+    {
+      "id": "hospitalized_health_center",
+      "label_ko": "보건의료원"
+    },
+    {
+      "id": "health_center",
+      "label_ko": "보건소"
+    },
+    {
+      "id": "health_subcenter",
+      "label_ko": "보건지소"
+    },
+    {
+      "id": "primary_health_care_post",
+      "label_ko": "보건진료소"
+    },
+    {
+      "id": "korean_medicine_hospital",
+      "label_ko": "한방병원"
+    },
+    {
+      "id": "korean_medicine_clinic",
+      "label_ko": "한의원"
+    },
+    {
+      "id": "pharmacy",
+      "label_ko": "약국"
+    }
+  ],
+  "institutions_by_type": [
+    {
+      "year": 2023,
+      "provider_type": "total",
+      "institutions": 101762,
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2023.xlsx",
+        "sheet": "Ⅰ-9",
+        "cells": "B29",
+        "pdf_file_id": "nhis-yearbook-2023.pdf",
+        "pdf_printed_pages": [
+          40,
+          41
+        ],
+        "pdf_pages_1based": [
+          120,
+          121
+        ]
+      }
+    },
+    {
+      "year": 2023,
+      "provider_type": "tertiary_hospital",
+      "institutions": 45,
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2023.xlsx",
+        "sheet": "Ⅰ-9",
+        "cells": "C29",
+        "pdf_file_id": "nhis-yearbook-2023.pdf",
+        "pdf_printed_pages": [
+          40,
+          41
+        ],
+        "pdf_pages_1based": [
+          120,
+          121
+        ]
+      }
+    },
+    {
+      "year": 2023,
+      "provider_type": "general_hospital",
+      "institutions": 331,
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2023.xlsx",
+        "sheet": "Ⅰ-9",
+        "cells": "D29",
+        "pdf_file_id": "nhis-yearbook-2023.pdf",
+        "pdf_printed_pages": [
+          40,
+          41
+        ],
+        "pdf_pages_1based": [
+          120,
+          121
+        ]
+      }
+    },
+    {
+      "year": 2023,
+      "provider_type": "hospital",
+      "institutions": 1403,
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2023.xlsx",
+        "sheet": "Ⅰ-9",
+        "cells": "E29",
+        "pdf_file_id": "nhis-yearbook-2023.pdf",
+        "pdf_printed_pages": [
+          40,
+          41
+        ],
+        "pdf_pages_1based": [
+          120,
+          121
+        ]
+      }
+    },
+    {
+      "year": 2023,
+      "provider_type": "long_term_care_hospital",
+      "institutions": 1392,
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2023.xlsx",
+        "sheet": "Ⅰ-9",
+        "cells": "F29",
+        "pdf_file_id": "nhis-yearbook-2023.pdf",
+        "pdf_printed_pages": [
+          40,
+          41
+        ],
+        "pdf_pages_1based": [
+          120,
+          121
+        ]
+      }
+    },
+    {
+      "year": 2023,
+      "provider_type": "mental_health_hospital",
+      "institutions": 257,
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2023.xlsx",
+        "sheet": "Ⅰ-9",
+        "cells": "G29",
+        "pdf_file_id": "nhis-yearbook-2023.pdf",
+        "pdf_printed_pages": [
+          40,
+          41
+        ],
+        "pdf_pages_1based": [
+          120,
+          121
+        ]
+      }
+    },
+    {
+      "year": 2023,
+      "provider_type": "clinic",
+      "institutions": 35717,
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2023.xlsx",
+        "sheet": "Ⅰ-9",
+        "cells": "H29",
+        "pdf_file_id": "nhis-yearbook-2023.pdf",
+        "pdf_printed_pages": [
+          40,
+          41
+        ],
+        "pdf_pages_1based": [
+          120,
+          121
+        ]
+      }
+    },
+    {
+      "year": 2023,
+      "provider_type": "dental_hospital",
+      "institutions": 239,
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2023.xlsx",
+        "sheet": "Ⅰ-9",
+        "cells": "I29",
+        "pdf_file_id": "nhis-yearbook-2023.pdf",
+        "pdf_printed_pages": [
+          40,
+          41
+        ],
+        "pdf_pages_1based": [
+          120,
+          121
+        ]
+      }
+    },
+    {
+      "year": 2023,
+      "provider_type": "dental_clinic",
+      "institutions": 19032,
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2023.xlsx",
+        "sheet": "Ⅰ-9",
+        "cells": "J29",
+        "pdf_file_id": "nhis-yearbook-2023.pdf",
+        "pdf_printed_pages": [
+          40,
+          41
+        ],
+        "pdf_pages_1based": [
+          120,
+          121
+        ]
+      }
+    },
+    {
+      "year": 2023,
+      "provider_type": "midwifery_clinic",
+      "institutions": 15,
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2023.xlsx",
+        "sheet": "Ⅰ-9",
+        "cells": "K29",
+        "pdf_file_id": "nhis-yearbook-2023.pdf",
+        "pdf_printed_pages": [
+          40,
+          41
+        ],
+        "pdf_pages_1based": [
+          120,
+          121
+        ]
+      }
+    },
+    {
+      "year": 2023,
+      "provider_type": "hospitalized_health_center",
+      "institutions": 15,
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2023.xlsx",
+        "sheet": "Ⅰ-9",
+        "cells": "L29",
+        "pdf_file_id": "nhis-yearbook-2023.pdf",
+        "pdf_printed_pages": [
+          40,
+          41
+        ],
+        "pdf_pages_1based": [
+          120,
+          121
+        ]
+      }
+    },
+    {
+      "year": 2023,
+      "provider_type": "health_center",
+      "institutions": 246,
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2023.xlsx",
+        "sheet": "Ⅰ-9",
+        "cells": "M29",
+        "pdf_file_id": "nhis-yearbook-2023.pdf",
+        "pdf_printed_pages": [
+          40,
+          41
+        ],
+        "pdf_pages_1based": [
+          120,
+          121
+        ]
+      }
+    },
+    {
+      "year": 2023,
+      "provider_type": "health_subcenter",
+      "institutions": 1313,
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2023.xlsx",
+        "sheet": "Ⅰ-9",
+        "cells": "N29",
+        "pdf_file_id": "nhis-yearbook-2023.pdf",
+        "pdf_printed_pages": [
+          40,
+          41
+        ],
+        "pdf_pages_1based": [
+          120,
+          121
+        ]
+      }
+    },
+    {
+      "year": 2023,
+      "provider_type": "primary_health_care_post",
+      "institutions": 1899,
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2023.xlsx",
+        "sheet": "Ⅰ-9",
+        "cells": "O29",
+        "pdf_file_id": "nhis-yearbook-2023.pdf",
+        "pdf_printed_pages": [
+          40,
+          41
+        ],
+        "pdf_pages_1based": [
+          120,
+          121
+        ]
+      }
+    },
+    {
+      "year": 2023,
+      "provider_type": "korean_medicine_hospital",
+      "institutions": 559,
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2023.xlsx",
+        "sheet": "Ⅰ-9",
+        "cells": "P29",
+        "pdf_file_id": "nhis-yearbook-2023.pdf",
+        "pdf_printed_pages": [
+          40,
+          41
+        ],
+        "pdf_pages_1based": [
+          120,
+          121
+        ]
+      }
+    },
+    {
+      "year": 2023,
+      "provider_type": "korean_medicine_clinic",
+      "institutions": 14592,
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2023.xlsx",
+        "sheet": "Ⅰ-9",
+        "cells": "Q29",
+        "pdf_file_id": "nhis-yearbook-2023.pdf",
+        "pdf_printed_pages": [
+          40,
+          41
+        ],
+        "pdf_pages_1based": [
+          120,
+          121
+        ]
+      }
+    },
+    {
+      "year": 2023,
+      "provider_type": "pharmacy",
+      "institutions": 24707,
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2023.xlsx",
+        "sheet": "Ⅰ-9",
+        "cells": "R29",
+        "pdf_file_id": "nhis-yearbook-2023.pdf",
+        "pdf_printed_pages": [
+          40,
+          41
+        ],
+        "pdf_pages_1based": [
+          120,
+          121
+        ]
+      }
+    },
+    {
+      "year": 2024,
+      "provider_type": "total",
+      "institutions": 103308,
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-9",
+        "cells": "B30",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          40,
+          41
+        ],
+        "pdf_pages_1based": [
+          122,
+          123
+        ]
+      }
+    },
+    {
+      "year": 2024,
+      "provider_type": "tertiary_hospital",
+      "institutions": 47,
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-9",
+        "cells": "C30",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          40,
+          41
+        ],
+        "pdf_pages_1based": [
+          122,
+          123
+        ]
+      }
+    },
+    {
+      "year": 2024,
+      "provider_type": "general_hospital",
+      "institutions": 331,
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-9",
+        "cells": "D30",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          40,
+          41
+        ],
+        "pdf_pages_1based": [
+          122,
+          123
+        ]
+      }
+    },
+    {
+      "year": 2024,
+      "provider_type": "hospital",
+      "institutions": 1412,
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-9",
+        "cells": "E30",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          40,
+          41
+        ],
+        "pdf_pages_1based": [
+          122,
+          123
+        ]
+      }
+    },
+    {
+      "year": 2024,
+      "provider_type": "long_term_care_hospital",
+      "institutions": 1342,
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-9",
+        "cells": "F30",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          40,
+          41
+        ],
+        "pdf_pages_1based": [
+          122,
+          123
+        ]
+      }
+    },
+    {
+      "year": 2024,
+      "provider_type": "mental_health_hospital",
+      "institutions": 263,
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-9",
+        "cells": "G30",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          40,
+          41
+        ],
+        "pdf_pages_1based": [
+          122,
+          123
+        ]
+      }
+    },
+    {
+      "year": 2024,
+      "provider_type": "clinic",
+      "institutions": 36685,
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-9",
+        "cells": "H30",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          40,
+          41
+        ],
+        "pdf_pages_1based": [
+          122,
+          123
+        ]
+      }
+    },
+    {
+      "year": 2024,
+      "provider_type": "dental_hospital",
+      "institutions": 241,
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-9",
+        "cells": "I30",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          40,
+          41
+        ],
+        "pdf_pages_1based": [
+          122,
+          123
+        ]
+      }
+    },
+    {
+      "year": 2024,
+      "provider_type": "dental_clinic",
+      "institutions": 19142,
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-9",
+        "cells": "J30",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          40,
+          41
+        ],
+        "pdf_pages_1based": [
+          122,
+          123
+        ]
+      }
+    },
+    {
+      "year": 2024,
+      "provider_type": "midwifery_clinic",
+      "institutions": 16,
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-9",
+        "cells": "K30",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          40,
+          41
+        ],
+        "pdf_pages_1based": [
+          122,
+          123
+        ]
+      }
+    },
+    {
+      "year": 2024,
+      "provider_type": "hospitalized_health_center",
+      "institutions": 16,
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-9",
+        "cells": "L30",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          40,
+          41
+        ],
+        "pdf_pages_1based": [
+          122,
+          123
+        ]
+      }
+    },
+    {
+      "year": 2024,
+      "provider_type": "health_center",
+      "institutions": 245,
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-9",
+        "cells": "M30",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          40,
+          41
+        ],
+        "pdf_pages_1based": [
+          122,
+          123
+        ]
+      }
+    },
+    {
+      "year": 2024,
+      "provider_type": "health_subcenter",
+      "institutions": 1309,
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-9",
+        "cells": "N30",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          40,
+          41
+        ],
+        "pdf_pages_1based": [
+          122,
+          123
+        ]
+      }
+    },
+    {
+      "year": 2024,
+      "provider_type": "primary_health_care_post",
+      "institutions": 1895,
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-9",
+        "cells": "O30",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          40,
+          41
+        ],
+        "pdf_pages_1based": [
+          122,
+          123
+        ]
+      }
+    },
+    {
+      "year": 2024,
+      "provider_type": "korean_medicine_hospital",
+      "institutions": 581,
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-9",
+        "cells": "P30",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          40,
+          41
+        ],
+        "pdf_pages_1based": [
+          122,
+          123
+        ]
+      }
+    },
+    {
+      "year": 2024,
+      "provider_type": "korean_medicine_clinic",
+      "institutions": 14736,
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-9",
+        "cells": "Q30",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          40,
+          41
+        ],
+        "pdf_pages_1based": [
+          122,
+          123
+        ]
+      }
+    },
+    {
+      "year": 2024,
+      "provider_type": "pharmacy",
+      "institutions": 25047,
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-9",
+        "cells": "R30",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          40,
+          41
+        ],
+        "pdf_pages_1based": [
+          122,
+          123
+        ]
+      }
+    }
+  ],
+  "institutions_by_region_and_type": [
+    {
+      "year": 2023,
+      "region": "seoul",
+      "label_ko": "서울",
+      "total": 24364,
+      "counts": {
+        "tertiary_hospital": 14,
+        "general_hospital": 42,
+        "hospital": 230,
+        "long_term_care_hospital": 110,
+        "mental_health_hospital": 12,
+        "clinic": 9715,
+        "dental_hospital": 60,
+        "dental_clinic": 4879,
+        "midwifery_clinic": 3,
+        "hospitalized_health_center": 0,
+        "health_center": 25,
+        "health_subcenter": 10,
+        "primary_health_care_post": 0,
+        "korean_medicine_hospital": 85,
+        "korean_medicine_clinic": 3628,
+        "pharmacy": 5551
+      },
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2023.xlsx",
+        "sheet": "Ⅰ-9",
+        "cells": "B30:R30",
+        "pdf_file_id": "nhis-yearbook-2023.pdf",
+        "pdf_printed_pages": [
+          40,
+          41
+        ],
+        "pdf_pages_1based": [
+          120,
+          121
+        ]
+      }
+    },
+    {
+      "year": 2023,
+      "region": "busan",
+      "label_ko": "부산",
+      "total": 7209,
+      "counts": {
+        "tertiary_hospital": 3,
+        "general_hospital": 26,
+        "hospital": 142,
+        "long_term_care_hospital": 162,
+        "mental_health_hospital": 23,
+        "clinic": 2597,
+        "dental_hospital": 25,
+        "dental_clinic": 1335,
+        "midwifery_clinic": 1,
+        "hospitalized_health_center": 0,
+        "health_center": 16,
+        "health_subcenter": 11,
+        "primary_health_care_post": 5,
+        "korean_medicine_hospital": 27,
+        "korean_medicine_clinic": 1140,
+        "pharmacy": 1696
+      },
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2023.xlsx",
+        "sheet": "Ⅰ-9",
+        "cells": "B31:R31",
+        "pdf_file_id": "nhis-yearbook-2023.pdf",
+        "pdf_printed_pages": [
+          40,
+          41
+        ],
+        "pdf_pages_1based": [
+          120,
+          121
+        ]
+      }
+    },
+    {
+      "year": 2023,
+      "region": "daegu",
+      "label_ko": "대구",
+      "total": 5461,
+      "counts": {
+        "tertiary_hospital": 5,
+        "general_hospital": 14,
+        "hospital": 91,
+        "long_term_care_hospital": 71,
+        "mental_health_hospital": 16,
+        "clinic": 1980,
+        "dental_hospital": 13,
+        "dental_clinic": 937,
+        "midwifery_clinic": 0,
+        "hospitalized_health_center": 0,
+        "health_center": 9,
+        "health_subcenter": 15,
+        "primary_health_care_post": 18,
+        "korean_medicine_hospital": 18,
+        "korean_medicine_clinic": 898,
+        "pharmacy": 1376
+      },
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2023.xlsx",
+        "sheet": "Ⅰ-9",
+        "cells": "B32:R32",
+        "pdf_file_id": "nhis-yearbook-2023.pdf",
+        "pdf_printed_pages": [
+          40,
+          41
+        ],
+        "pdf_pages_1based": [
+          120,
+          121
+        ]
+      }
+    },
+    {
+      "year": 2023,
+      "region": "incheon",
+      "label_ko": "인천",
+      "total": 4971,
+      "counts": {
+        "tertiary_hospital": 3,
+        "general_hospital": 18,
+        "hospital": 57,
+        "long_term_care_hospital": 62,
+        "mental_health_hospital": 18,
+        "clinic": 1772,
+        "dental_hospital": 11,
+        "dental_clinic": 991,
+        "midwifery_clinic": 1,
+        "hospitalized_health_center": 0,
+        "health_center": 10,
+        "health_subcenter": 27,
+        "primary_health_care_post": 25,
+        "korean_medicine_hospital": 48,
+        "korean_medicine_clinic": 682,
+        "pharmacy": 1246
+      },
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2023.xlsx",
+        "sheet": "Ⅰ-9",
+        "cells": "B33:R33",
+        "pdf_file_id": "nhis-yearbook-2023.pdf",
+        "pdf_printed_pages": [
+          40,
+          41
+        ],
+        "pdf_pages_1based": [
+          120,
+          121
+        ]
+      }
+    },
+    {
+      "year": 2023,
+      "region": "gwangju",
+      "label_ko": "광주",
+      "total": 3023,
+      "counts": {
+        "tertiary_hospital": 2,
+        "general_hospital": 22,
+        "hospital": 77,
+        "long_term_care_hospital": 63,
+        "mental_health_hospital": 9,
+        "clinic": 1050,
+        "dental_hospital": 14,
+        "dental_clinic": 641,
+        "midwifery_clinic": 0,
+        "hospitalized_health_center": 0,
+        "health_center": 5,
+        "health_subcenter": 2,
+        "primary_health_care_post": 10,
+        "korean_medicine_hospital": 88,
+        "korean_medicine_clinic": 316,
+        "pharmacy": 724
+      },
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2023.xlsx",
+        "sheet": "Ⅰ-9",
+        "cells": "B34:R34",
+        "pdf_file_id": "nhis-yearbook-2023.pdf",
+        "pdf_printed_pages": [
+          40,
+          41
+        ],
+        "pdf_pages_1based": [
+          120,
+          121
+        ]
+      }
+    },
+    {
+      "year": 2023,
+      "region": "daejeon",
+      "label_ko": "대전",
+      "total": 3086,
+      "counts": {
+        "tertiary_hospital": 1,
+        "general_hospital": 9,
+        "hospital": 46,
+        "long_term_care_hospital": 47,
+        "mental_health_hospital": 7,
+        "clinic": 1111,
+        "dental_hospital": 7,
+        "dental_clinic": 552,
+        "midwifery_clinic": 1,
+        "hospitalized_health_center": 0,
+        "health_center": 5,
+        "health_subcenter": 6,
+        "primary_health_care_post": 8,
+        "korean_medicine_hospital": 17,
+        "korean_medicine_clinic": 498,
+        "pharmacy": 771
+      },
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2023.xlsx",
+        "sheet": "Ⅰ-9",
+        "cells": "B35:R35",
+        "pdf_file_id": "nhis-yearbook-2023.pdf",
+        "pdf_printed_pages": [
+          40,
+          41
+        ],
+        "pdf_pages_1based": [
+          120,
+          121
+        ]
+      }
+    },
+    {
+      "year": 2023,
+      "region": "ulsan",
+      "label_ko": "울산",
+      "total": 1865,
+      "counts": {
+        "tertiary_hospital": 1,
+        "general_hospital": 8,
+        "hospital": 34,
+        "long_term_care_hospital": 38,
+        "mental_health_hospital": 6,
+        "clinic": 637,
+        "dental_hospital": 4,
+        "dental_clinic": 389,
+        "midwifery_clinic": 0,
+        "hospitalized_health_center": 0,
+        "health_center": 5,
+        "health_subcenter": 8,
+        "primary_health_care_post": 11,
+        "korean_medicine_hospital": 7,
+        "korean_medicine_clinic": 275,
+        "pharmacy": 442
+      },
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2023.xlsx",
+        "sheet": "Ⅰ-9",
+        "cells": "B36:R36",
+        "pdf_file_id": "nhis-yearbook-2023.pdf",
+        "pdf_printed_pages": [
+          40,
+          41
+        ],
+        "pdf_pages_1based": [
+          120,
+          121
+        ]
+      }
+    },
+    {
+      "year": 2023,
+      "region": "sejong",
+      "label_ko": "세종",
+      "total": 619,
+      "counts": {
+        "tertiary_hospital": 0,
+        "general_hospital": 2,
+        "hospital": 3,
+        "long_term_care_hospital": 4,
+        "mental_health_hospital": 1,
+        "clinic": 229,
+        "dental_hospital": 1,
+        "dental_clinic": 99,
+        "midwifery_clinic": 0,
+        "hospitalized_health_center": 0,
+        "health_center": 1,
+        "health_subcenter": 10,
+        "primary_health_care_post": 7,
+        "korean_medicine_hospital": 4,
+        "korean_medicine_clinic": 97,
+        "pharmacy": 161
+      },
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2023.xlsx",
+        "sheet": "Ⅰ-9",
+        "cells": "B37:R37",
+        "pdf_file_id": "nhis-yearbook-2023.pdf",
+        "pdf_printed_pages": [
+          40,
+          41
+        ],
+        "pdf_pages_1based": [
+          120,
+          121
+        ]
+      }
+    },
+    {
+      "year": 2023,
+      "region": "gyeonggi",
+      "label_ko": "경기",
+      "total": 23007,
+      "counts": {
+        "tertiary_hospital": 5,
+        "general_hospital": 66,
+        "hospital": 286,
+        "long_term_care_hospital": 302,
+        "mental_health_hospital": 50,
+        "clinic": 8086,
+        "dental_hospital": 43,
+        "dental_clinic": 4698,
+        "midwifery_clinic": 5,
+        "hospitalized_health_center": 1,
+        "health_center": 48,
+        "health_subcenter": 119,
+        "primary_health_care_post": 158,
+        "korean_medicine_hospital": 139,
+        "korean_medicine_clinic": 3306,
+        "pharmacy": 5695
+      },
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2023.xlsx",
+        "sheet": "Ⅰ-9",
+        "cells": "B38:R38",
+        "pdf_file_id": "nhis-yearbook-2023.pdf",
+        "pdf_printed_pages": [
+          40,
+          41
+        ],
+        "pdf_pages_1based": [
+          120,
+          121
+        ]
+      }
+    },
+    {
+      "year": 2023,
+      "region": "gangwon",
+      "label_ko": "강원",
+      "total": 2657,
+      "counts": {
+        "tertiary_hospital": 2,
+        "general_hospital": 14,
+        "hospital": 36,
+        "long_term_care_hospital": 31,
+        "mental_health_hospital": 9,
+        "clinic": 796,
+        "dental_hospital": 3,
+        "dental_clinic": 430,
+        "midwifery_clinic": 0,
+        "hospitalized_health_center": 2,
+        "health_center": 16,
+        "health_subcenter": 97,
+        "primary_health_care_post": 129,
+        "korean_medicine_hospital": 6,
+        "korean_medicine_clinic": 379,
+        "pharmacy": 707
+      },
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2023.xlsx",
+        "sheet": "Ⅰ-9",
+        "cells": "B39:R39",
+        "pdf_file_id": "nhis-yearbook-2023.pdf",
+        "pdf_printed_pages": [
+          40,
+          41
+        ],
+        "pdf_pages_1based": [
+          120,
+          121
+        ]
+      }
+    },
+    {
+      "year": 2023,
+      "region": "chungbuk",
+      "label_ko": "충북",
+      "total": 2923,
+      "counts": {
+        "tertiary_hospital": 1,
+        "general_hospital": 12,
+        "hospital": 35,
+        "long_term_care_hospital": 38,
+        "mental_health_hospital": 12,
+        "clinic": 936,
+        "dental_hospital": 4,
+        "dental_clinic": 474,
+        "midwifery_clinic": 1,
+        "hospitalized_health_center": 0,
+        "health_center": 14,
+        "health_subcenter": 94,
+        "primary_health_care_post": 159,
+        "korean_medicine_hospital": 11,
+        "korean_medicine_clinic": 407,
+        "pharmacy": 725
+      },
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2023.xlsx",
+        "sheet": "Ⅰ-9",
+        "cells": "B40:R40",
+        "pdf_file_id": "nhis-yearbook-2023.pdf",
+        "pdf_printed_pages": [
+          40,
+          41
+        ],
+        "pdf_pages_1based": [
+          120,
+          121
+        ]
+      }
+    },
+    {
+      "year": 2023,
+      "region": "chungnam",
+      "label_ko": "충남",
+      "total": 3791,
+      "counts": {
+        "tertiary_hospital": 2,
+        "general_hospital": 11,
+        "hospital": 46,
+        "long_term_care_hospital": 68,
+        "mental_health_hospital": 17,
+        "clinic": 1112,
+        "dental_hospital": 11,
+        "dental_clinic": 606,
+        "midwifery_clinic": 0,
+        "hospitalized_health_center": 2,
+        "health_center": 14,
+        "health_subcenter": 150,
+        "primary_health_care_post": 236,
+        "korean_medicine_hospital": 13,
+        "korean_medicine_clinic": 513,
+        "pharmacy": 990
+      },
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2023.xlsx",
+        "sheet": "Ⅰ-9",
+        "cells": "B41:R41",
+        "pdf_file_id": "nhis-yearbook-2023.pdf",
+        "pdf_printed_pages": [
+          40,
+          41
+        ],
+        "pdf_pages_1based": [
+          120,
+          121
+        ]
+      }
+    },
+    {
+      "year": 2023,
+      "region": "jeonbuk",
+      "label_ko": "전북",
+      "total": 3911,
+      "counts": {
+        "tertiary_hospital": 2,
+        "general_hospital": 12,
+        "hospital": 60,
+        "long_term_care_hospital": 79,
+        "mental_health_hospital": 10,
+        "clinic": 1215,
+        "dental_hospital": 3,
+        "dental_clinic": 604,
+        "midwifery_clinic": 0,
+        "hospitalized_health_center": 4,
+        "health_center": 11,
+        "health_subcenter": 148,
+        "primary_health_care_post": 240,
+        "korean_medicine_hospital": 35,
+        "korean_medicine_clinic": 502,
+        "pharmacy": 986
+      },
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2023.xlsx",
+        "sheet": "Ⅰ-9",
+        "cells": "B42:R42",
+        "pdf_file_id": "nhis-yearbook-2023.pdf",
+        "pdf_printed_pages": [
+          40,
+          41
+        ],
+        "pdf_pages_1based": [
+          120,
+          121
+        ]
+      }
+    },
+    {
+      "year": 2023,
+      "region": "jeonnam",
+      "label_ko": "전남",
+      "total": 3476,
+      "counts": {
+        "tertiary_hospital": 1,
+        "general_hospital": 25,
+        "hospital": 73,
+        "long_term_care_hospital": 80,
+        "mental_health_hospital": 10,
+        "clinic": 970,
+        "dental_hospital": 6,
+        "dental_clinic": 513,
+        "midwifery_clinic": 0,
+        "hospitalized_health_center": 3,
+        "health_center": 19,
+        "health_subcenter": 216,
+        "primary_health_care_post": 327,
+        "korean_medicine_hospital": 28,
+        "korean_medicine_clinic": 356,
+        "pharmacy": 849
+      },
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2023.xlsx",
+        "sheet": "Ⅰ-9",
+        "cells": "B43:R43",
+        "pdf_file_id": "nhis-yearbook-2023.pdf",
+        "pdf_printed_pages": [
+          40,
+          41
+        ],
+        "pdf_pages_1based": [
+          120,
+          121
+        ]
+      }
+    },
+    {
+      "year": 2023,
+      "region": "gyeongbuk",
+      "label_ko": "경북",
+      "total": 4472,
+      "counts": {
+        "tertiary_hospital": 0,
+        "general_hospital": 21,
+        "hospital": 52,
+        "long_term_care_hospital": 107,
+        "mental_health_hospital": 26,
+        "clinic": 1299,
+        "dental_hospital": 11,
+        "dental_clinic": 696,
+        "midwifery_clinic": 1,
+        "hospitalized_health_center": 2,
+        "health_center": 22,
+        "health_subcenter": 216,
+        "primary_health_care_post": 298,
+        "korean_medicine_hospital": 8,
+        "korean_medicine_clinic": 618,
+        "pharmacy": 1095
+      },
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2023.xlsx",
+        "sheet": "Ⅰ-9",
+        "cells": "B44:R44",
+        "pdf_file_id": "nhis-yearbook-2023.pdf",
+        "pdf_printed_pages": [
+          40,
+          41
+        ],
+        "pdf_pages_1based": [
+          120,
+          121
+        ]
+      }
+    },
+    {
+      "year": 2023,
+      "region": "gyeongnam",
+      "label_ko": "경남",
+      "total": 5574,
+      "counts": {
+        "tertiary_hospital": 3,
+        "general_hospital": 23,
+        "hospital": 127,
+        "long_term_care_hospital": 119,
+        "mental_health_hospital": 29,
+        "clinic": 1715,
+        "dental_hospital": 22,
+        "dental_clinic": 944,
+        "midwifery_clinic": 1,
+        "hospitalized_health_center": 1,
+        "health_center": 20,
+        "health_subcenter": 173,
+        "primary_health_care_post": 220,
+        "korean_medicine_hospital": 24,
+        "korean_medicine_clinic": 781,
+        "pharmacy": 1372
+      },
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2023.xlsx",
+        "sheet": "Ⅰ-9",
+        "cells": "B45:R45",
+        "pdf_file_id": "nhis-yearbook-2023.pdf",
+        "pdf_printed_pages": [
+          40,
+          41
+        ],
+        "pdf_pages_1based": [
+          120,
+          121
+        ]
+      }
+    },
+    {
+      "year": 2023,
+      "region": "jeju",
+      "label_ko": "제주",
+      "total": 1353,
+      "counts": {
+        "tertiary_hospital": 0,
+        "general_hospital": 6,
+        "hospital": 8,
+        "long_term_care_hospital": 11,
+        "mental_health_hospital": 2,
+        "clinic": 497,
+        "dental_hospital": 1,
+        "dental_clinic": 244,
+        "midwifery_clinic": 1,
+        "hospitalized_health_center": 0,
+        "health_center": 6,
+        "health_subcenter": 11,
+        "primary_health_care_post": 48,
+        "korean_medicine_hospital": 1,
+        "korean_medicine_clinic": 196,
+        "pharmacy": 321
+      },
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2023.xlsx",
+        "sheet": "Ⅰ-9",
+        "cells": "B46:R46",
+        "pdf_file_id": "nhis-yearbook-2023.pdf",
+        "pdf_printed_pages": [
+          40,
+          41
+        ],
+        "pdf_pages_1based": [
+          120,
+          121
+        ]
+      }
+    },
+    {
+      "year": 2024,
+      "region": "seoul",
+      "label_ko": "서울",
+      "total": 24887,
+      "counts": {
+        "tertiary_hospital": 14,
+        "general_hospital": 44,
+        "hospital": 225,
+        "long_term_care_hospital": 107,
+        "mental_health_hospital": 13,
+        "clinic": 10103,
+        "dental_hospital": 56,
+        "dental_clinic": 4882,
+        "midwifery_clinic": 3,
+        "hospitalized_health_center": 0,
+        "health_center": 25,
+        "health_subcenter": 11,
+        "primary_health_care_post": 0,
+        "korean_medicine_hospital": 89,
+        "korean_medicine_clinic": 3654,
+        "pharmacy": 5661
+      },
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-9",
+        "cells": "B31:R31",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          40,
+          41
+        ],
+        "pdf_pages_1based": [
+          122,
+          123
+        ]
+      }
+    },
+    {
+      "year": 2024,
+      "region": "busan",
+      "label_ko": "부산",
+      "total": 7274,
+      "counts": {
+        "tertiary_hospital": 4,
+        "general_hospital": 25,
+        "hospital": 143,
+        "long_term_care_hospital": 160,
+        "mental_health_hospital": 23,
+        "clinic": 2652,
+        "dental_hospital": 25,
+        "dental_clinic": 1331,
+        "midwifery_clinic": 1,
+        "hospitalized_health_center": 0,
+        "health_center": 16,
+        "health_subcenter": 11,
+        "primary_health_care_post": 5,
+        "korean_medicine_hospital": 25,
+        "korean_medicine_clinic": 1150,
+        "pharmacy": 1703
+      },
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-9",
+        "cells": "B32:R32",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          40,
+          41
+        ],
+        "pdf_pages_1based": [
+          122,
+          123
+        ]
+      }
+    },
+    {
+      "year": 2024,
+      "region": "daegu",
+      "label_ko": "대구",
+      "total": 5555,
+      "counts": {
+        "tertiary_hospital": 5,
+        "general_hospital": 14,
+        "hospital": 92,
+        "long_term_care_hospital": 71,
+        "mental_health_hospital": 16,
+        "clinic": 2035,
+        "dental_hospital": 13,
+        "dental_clinic": 946,
+        "midwifery_clinic": 0,
+        "hospitalized_health_center": 0,
+        "health_center": 9,
+        "health_subcenter": 15,
+        "primary_health_care_post": 18,
+        "korean_medicine_hospital": 20,
+        "korean_medicine_clinic": 909,
+        "pharmacy": 1392
+      },
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-9",
+        "cells": "B33:R33",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          40,
+          41
+        ],
+        "pdf_pages_1based": [
+          122,
+          123
+        ]
+      }
+    },
+    {
+      "year": 2024,
+      "region": "incheon",
+      "label_ko": "인천",
+      "total": 5099,
+      "counts": {
+        "tertiary_hospital": 3,
+        "general_hospital": 18,
+        "hospital": 59,
+        "long_term_care_hospital": 62,
+        "mental_health_hospital": 17,
+        "clinic": 1831,
+        "dental_hospital": 13,
+        "dental_clinic": 1006,
+        "midwifery_clinic": 1,
+        "hospitalized_health_center": 0,
+        "health_center": 10,
+        "health_subcenter": 27,
+        "primary_health_care_post": 25,
+        "korean_medicine_hospital": 48,
+        "korean_medicine_clinic": 692,
+        "pharmacy": 1287
+      },
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-9",
+        "cells": "B34:R34",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          40,
+          41
+        ],
+        "pdf_pages_1based": [
+          122,
+          123
+        ]
+      }
+    },
+    {
+      "year": 2024,
+      "region": "gwangju",
+      "label_ko": "광주",
+      "total": 3046,
+      "counts": {
+        "tertiary_hospital": 2,
+        "general_hospital": 23,
+        "hospital": 80,
+        "long_term_care_hospital": 60,
+        "mental_health_hospital": 9,
+        "clinic": 1066,
+        "dental_hospital": 12,
+        "dental_clinic": 644,
+        "midwifery_clinic": 0,
+        "hospitalized_health_center": 0,
+        "health_center": 5,
+        "health_subcenter": 2,
+        "primary_health_care_post": 10,
+        "korean_medicine_hospital": 86,
+        "korean_medicine_clinic": 318,
+        "pharmacy": 729
+      },
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-9",
+        "cells": "B35:R35",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          40,
+          41
+        ],
+        "pdf_pages_1based": [
+          122,
+          123
+        ]
+      }
+    },
+    {
+      "year": 2024,
+      "region": "daejeon",
+      "label_ko": "대전",
+      "total": 3125,
+      "counts": {
+        "tertiary_hospital": 2,
+        "general_hospital": 8,
+        "hospital": 48,
+        "long_term_care_hospital": 45,
+        "mental_health_hospital": 7,
+        "clinic": 1139,
+        "dental_hospital": 7,
+        "dental_clinic": 555,
+        "midwifery_clinic": 1,
+        "hospitalized_health_center": 0,
+        "health_center": 5,
+        "health_subcenter": 6,
+        "primary_health_care_post": 7,
+        "korean_medicine_hospital": 16,
+        "korean_medicine_clinic": 506,
+        "pharmacy": 773
+      },
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-9",
+        "cells": "B36:R36",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          40,
+          41
+        ],
+        "pdf_pages_1based": [
+          122,
+          123
+        ]
+      }
+    },
+    {
+      "year": 2024,
+      "region": "ulsan",
+      "label_ko": "울산",
+      "total": 1859,
+      "counts": {
+        "tertiary_hospital": 1,
+        "general_hospital": 8,
+        "hospital": 31,
+        "long_term_care_hospital": 36,
+        "mental_health_hospital": 6,
+        "clinic": 643,
+        "dental_hospital": 4,
+        "dental_clinic": 384,
+        "midwifery_clinic": 0,
+        "hospitalized_health_center": 0,
+        "health_center": 5,
+        "health_subcenter": 8,
+        "primary_health_care_post": 11,
+        "korean_medicine_hospital": 7,
+        "korean_medicine_clinic": 273,
+        "pharmacy": 442
+      },
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-9",
+        "cells": "B37:R37",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          40,
+          41
+        ],
+        "pdf_pages_1based": [
+          122,
+          123
+        ]
+      }
+    },
+    {
+      "year": 2024,
+      "region": "sejong",
+      "label_ko": "세종",
+      "total": 622,
+      "counts": {
+        "tertiary_hospital": 0,
+        "general_hospital": 2,
+        "hospital": 3,
+        "long_term_care_hospital": 3,
+        "mental_health_hospital": 1,
+        "clinic": 229,
+        "dental_hospital": 1,
+        "dental_clinic": 99,
+        "midwifery_clinic": 0,
+        "hospitalized_health_center": 0,
+        "health_center": 1,
+        "health_subcenter": 10,
+        "primary_health_care_post": 7,
+        "korean_medicine_hospital": 4,
+        "korean_medicine_clinic": 99,
+        "pharmacy": 163
+      },
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-9",
+        "cells": "B38:R38",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          40,
+          41
+        ],
+        "pdf_pages_1based": [
+          122,
+          123
+        ]
+      }
+    },
+    {
+      "year": 2024,
+      "region": "gyeonggi",
+      "label_ko": "경기",
+      "total": 23516,
+      "counts": {
+        "tertiary_hospital": 6,
+        "general_hospital": 66,
+        "hospital": 294,
+        "long_term_care_hospital": 285,
+        "mental_health_hospital": 53,
+        "clinic": 8373,
+        "dental_hospital": 46,
+        "dental_clinic": 4741,
+        "midwifery_clinic": 5,
+        "hospitalized_health_center": 1,
+        "health_center": 48,
+        "health_subcenter": 116,
+        "primary_health_care_post": 155,
+        "korean_medicine_hospital": 150,
+        "korean_medicine_clinic": 3359,
+        "pharmacy": 5818
+      },
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-9",
+        "cells": "B39:R39",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          40,
+          41
+        ],
+        "pdf_pages_1based": [
+          122,
+          123
+        ]
+      }
+    },
+    {
+      "year": 2024,
+      "region": "gangwon",
+      "label_ko": "강원",
+      "total": 2686,
+      "counts": {
+        "tertiary_hospital": 2,
+        "general_hospital": 14,
+        "hospital": 36,
+        "long_term_care_hospital": 32,
+        "mental_health_hospital": 9,
+        "clinic": 816,
+        "dental_hospital": 4,
+        "dental_clinic": 439,
+        "midwifery_clinic": 0,
+        "hospitalized_health_center": 2,
+        "health_center": 16,
+        "health_subcenter": 97,
+        "primary_health_care_post": 129,
+        "korean_medicine_hospital": 6,
+        "korean_medicine_clinic": 376,
+        "pharmacy": 708
+      },
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-9",
+        "cells": "B40:R40",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          40,
+          41
+        ],
+        "pdf_pages_1based": [
+          122,
+          123
+        ]
+      }
+    },
+    {
+      "year": 2024,
+      "region": "chungbuk",
+      "label_ko": "충북",
+      "total": 2926,
+      "counts": {
+        "tertiary_hospital": 1,
+        "general_hospital": 12,
+        "hospital": 39,
+        "long_term_care_hospital": 36,
+        "mental_health_hospital": 12,
+        "clinic": 934,
+        "dental_hospital": 4,
+        "dental_clinic": 475,
+        "midwifery_clinic": 1,
+        "hospitalized_health_center": 1,
+        "health_center": 13,
+        "health_subcenter": 94,
+        "primary_health_care_post": 159,
+        "korean_medicine_hospital": 11,
+        "korean_medicine_clinic": 407,
+        "pharmacy": 727
+      },
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-9",
+        "cells": "B41:R41",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          40,
+          41
+        ],
+        "pdf_pages_1based": [
+          122,
+          123
+        ]
+      }
+    },
+    {
+      "year": 2024,
+      "region": "chungnam",
+      "label_ko": "충남",
+      "total": 3840,
+      "counts": {
+        "tertiary_hospital": 1,
+        "general_hospital": 12,
+        "hospital": 47,
+        "long_term_care_hospital": 66,
+        "mental_health_hospital": 17,
+        "clinic": 1139,
+        "dental_hospital": 12,
+        "dental_clinic": 622,
+        "midwifery_clinic": 0,
+        "hospitalized_health_center": 2,
+        "health_center": 14,
+        "health_subcenter": 150,
+        "primary_health_care_post": 236,
+        "korean_medicine_hospital": 17,
+        "korean_medicine_clinic": 520,
+        "pharmacy": 985
+      },
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-9",
+        "cells": "B42:R42",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          40,
+          41
+        ],
+        "pdf_pages_1based": [
+          122,
+          123
+        ]
+      }
+    },
+    {
+      "year": 2024,
+      "region": "jeonbuk",
+      "label_ko": "전북",
+      "total": 3926,
+      "counts": {
+        "tertiary_hospital": 2,
+        "general_hospital": 11,
+        "hospital": 56,
+        "long_term_care_hospital": 74,
+        "mental_health_hospital": 11,
+        "clinic": 1226,
+        "dental_hospital": 3,
+        "dental_clinic": 606,
+        "midwifery_clinic": 0,
+        "hospitalized_health_center": 4,
+        "health_center": 11,
+        "health_subcenter": 148,
+        "primary_health_care_post": 240,
+        "korean_medicine_hospital": 36,
+        "korean_medicine_clinic": 506,
+        "pharmacy": 992
+      },
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-9",
+        "cells": "B43:R43",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          40,
+          41
+        ],
+        "pdf_pages_1based": [
+          122,
+          123
+        ]
+      }
+    },
+    {
+      "year": 2024,
+      "region": "jeonnam",
+      "label_ko": "전남",
+      "total": 3467,
+      "counts": {
+        "tertiary_hospital": 1,
+        "general_hospital": 25,
+        "hospital": 72,
+        "long_term_care_hospital": 79,
+        "mental_health_hospital": 11,
+        "clinic": 962,
+        "dental_hospital": 7,
+        "dental_clinic": 515,
+        "midwifery_clinic": 1,
+        "hospitalized_health_center": 3,
+        "health_center": 19,
+        "health_subcenter": 215,
+        "primary_health_care_post": 328,
+        "korean_medicine_hospital": 29,
+        "korean_medicine_clinic": 355,
+        "pharmacy": 845
+      },
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-9",
+        "cells": "B44:R44",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          40,
+          41
+        ],
+        "pdf_pages_1based": [
+          122,
+          123
+        ]
+      }
+    },
+    {
+      "year": 2024,
+      "region": "gyeongbuk",
+      "label_ko": "경북",
+      "total": 4514,
+      "counts": {
+        "tertiary_hospital": 0,
+        "general_hospital": 21,
+        "hospital": 50,
+        "long_term_care_hospital": 103,
+        "mental_health_hospital": 26,
+        "clinic": 1317,
+        "dental_hospital": 11,
+        "dental_clinic": 694,
+        "midwifery_clinic": 1,
+        "hospitalized_health_center": 2,
+        "health_center": 22,
+        "health_subcenter": 216,
+        "primary_health_care_post": 297,
+        "korean_medicine_hospital": 9,
+        "korean_medicine_clinic": 630,
+        "pharmacy": 1115
+      },
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-9",
+        "cells": "B45:R45",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          40,
+          41
+        ],
+        "pdf_pages_1based": [
+          122,
+          123
+        ]
+      }
+    },
+    {
+      "year": 2024,
+      "region": "gyeongnam",
+      "label_ko": "경남",
+      "total": 5600,
+      "counts": {
+        "tertiary_hospital": 3,
+        "general_hospital": 22,
+        "hospital": 129,
+        "long_term_care_hospital": 113,
+        "mental_health_hospital": 30,
+        "clinic": 1721,
+        "dental_hospital": 22,
+        "dental_clinic": 955,
+        "midwifery_clinic": 1,
+        "hospitalized_health_center": 1,
+        "health_center": 20,
+        "health_subcenter": 172,
+        "primary_health_care_post": 220,
+        "korean_medicine_hospital": 27,
+        "korean_medicine_clinic": 783,
+        "pharmacy": 1381
+      },
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-9",
+        "cells": "B46:R46",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          40,
+          41
+        ],
+        "pdf_pages_1based": [
+          122,
+          123
+        ]
+      }
+    },
+    {
+      "year": 2024,
+      "region": "jeju",
+      "label_ko": "제주",
+      "total": 1366,
+      "counts": {
+        "tertiary_hospital": 0,
+        "general_hospital": 6,
+        "hospital": 8,
+        "long_term_care_hospital": 10,
+        "mental_health_hospital": 2,
+        "clinic": 499,
+        "dental_hospital": 1,
+        "dental_clinic": 248,
+        "midwifery_clinic": 1,
+        "hospitalized_health_center": 0,
+        "health_center": 6,
+        "health_subcenter": 11,
+        "primary_health_care_post": 48,
+        "korean_medicine_hospital": 1,
+        "korean_medicine_clinic": 199,
+        "pharmacy": 326
+      },
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-9",
+        "cells": "B47:R47",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          40,
+          41
+        ],
+        "pdf_pages_1based": [
+          122,
+          123
+        ]
+      }
+    }
+  ],
+  "physicians_by_type": [
+    {
+      "year": 2023,
+      "provider_type": "total",
+      "physicians": 114699,
+      "general_practitioners": 6041,
+      "interns": 3206,
+      "residents": 9812,
+      "specialists": 95640,
+      "unit": "persons",
+      "source": {
+        "file_id": "hira-providers-2023.xlsx",
+        "sheet": "Ⅰ-13",
+        "cells": "D7:H7",
+        "pdf_file_id": "nhis-yearbook-2023.pdf",
+        "pdf_printed_pages": [
+          48
+        ],
+        "pdf_pages_1based": [
+          128
+        ]
+      }
+    },
+    {
+      "year": 2023,
+      "provider_type": "tertiary_hospital",
+      "physicians": 23346,
+      "general_practitioners": 133,
+      "interns": 2131,
+      "residents": 6875,
+      "specialists": 14207,
+      "unit": "persons",
+      "source": {
+        "file_id": "hira-providers-2023.xlsx",
+        "sheet": "Ⅰ-13",
+        "cells": "D9:H9",
+        "pdf_file_id": "nhis-yearbook-2023.pdf",
+        "pdf_printed_pages": [
+          48
+        ],
+        "pdf_pages_1based": [
+          128
+        ]
+      }
+    },
+    {
+      "year": 2023,
+      "provider_type": "general_hospital",
+      "physicians": 22401,
+      "general_practitioners": 202,
+      "interns": 1023,
+      "residents": 2838,
+      "specialists": 18338,
+      "unit": "persons",
+      "source": {
+        "file_id": "hira-providers-2023.xlsx",
+        "sheet": "Ⅰ-13",
+        "cells": "D10:H10",
+        "pdf_file_id": "nhis-yearbook-2023.pdf",
+        "pdf_printed_pages": [
+          48
+        ],
+        "pdf_pages_1based": [
+          128
+        ]
+      }
+    },
+    {
+      "year": 2023,
+      "provider_type": "hospital",
+      "physicians": 10541,
+      "general_practitioners": 204,
+      "interns": 2,
+      "residents": 41,
+      "specialists": 10294,
+      "unit": "persons",
+      "source": {
+        "file_id": "hira-providers-2023.xlsx",
+        "sheet": "Ⅰ-13",
+        "cells": "D11:H11",
+        "pdf_file_id": "nhis-yearbook-2023.pdf",
+        "pdf_printed_pages": [
+          48
+        ],
+        "pdf_pages_1based": [
+          128
+        ]
+      }
+    },
+    {
+      "year": 2023,
+      "provider_type": "long_term_care_hospital",
+      "physicians": 4834,
+      "general_practitioners": 439,
+      "interns": 0,
+      "residents": 0,
+      "specialists": 4395,
+      "unit": "persons",
+      "source": {
+        "file_id": "hira-providers-2023.xlsx",
+        "sheet": "Ⅰ-13",
+        "cells": "D12:H12",
+        "pdf_file_id": "nhis-yearbook-2023.pdf",
+        "pdf_printed_pages": [
+          48
+        ],
+        "pdf_pages_1based": [
+          128
+        ]
+      }
+    },
+    {
+      "year": 2023,
+      "provider_type": "mental_health_hospital",
+      "physicians": 1167,
+      "general_practitioners": 6,
+      "interns": 0,
+      "residents": 57,
+      "specialists": 1104,
+      "unit": "persons",
+      "source": {
+        "file_id": "hira-providers-2023.xlsx",
+        "sheet": "Ⅰ-13",
+        "cells": "D13:H13",
+        "pdf_file_id": "nhis-yearbook-2023.pdf",
+        "pdf_printed_pages": [
+          48
+        ],
+        "pdf_pages_1based": [
+          128
+        ]
+      }
+    },
+    {
+      "year": 2023,
+      "provider_type": "clinic",
+      "physicians": 50285,
+      "general_practitioners": 4073,
+      "interns": 0,
+      "residents": 0,
+      "specialists": 46212,
+      "unit": "persons",
+      "source": {
+        "file_id": "hira-providers-2023.xlsx",
+        "sheet": "Ⅰ-13",
+        "cells": "D14:H14",
+        "pdf_file_id": "nhis-yearbook-2023.pdf",
+        "pdf_printed_pages": [
+          48
+        ],
+        "pdf_pages_1based": [
+          128
+        ]
+      }
+    },
+    {
+      "year": 2023,
+      "provider_type": "dental_hospital",
+      "physicians": 30,
+      "general_practitioners": 4,
+      "interns": 0,
+      "residents": 0,
+      "specialists": 26,
+      "unit": "persons",
+      "source": {
+        "file_id": "hira-providers-2023.xlsx",
+        "sheet": "Ⅰ-13",
+        "cells": "D15:H15",
+        "pdf_file_id": "nhis-yearbook-2023.pdf",
+        "pdf_printed_pages": [
+          48
+        ],
+        "pdf_pages_1based": [
+          128
+        ]
+      }
+    },
+    {
+      "year": 2023,
+      "provider_type": "dental_clinic",
+      "physicians": 0,
+      "general_practitioners": 0,
+      "interns": 0,
+      "residents": 0,
+      "specialists": 0,
+      "unit": "persons",
+      "source": {
+        "file_id": "hira-providers-2023.xlsx",
+        "sheet": "Ⅰ-13",
+        "cells": "D16:H16",
+        "pdf_file_id": "nhis-yearbook-2023.pdf",
+        "pdf_printed_pages": [
+          48
+        ],
+        "pdf_pages_1based": [
+          128
+        ]
+      }
+    },
+    {
+      "year": 2023,
+      "provider_type": "midwifery_clinic",
+      "physicians": 0,
+      "general_practitioners": 0,
+      "interns": 0,
+      "residents": 0,
+      "specialists": 0,
+      "unit": "persons",
+      "source": {
+        "file_id": "hira-providers-2023.xlsx",
+        "sheet": "Ⅰ-13",
+        "cells": "D17:H17",
+        "pdf_file_id": "nhis-yearbook-2023.pdf",
+        "pdf_printed_pages": [
+          48
+        ],
+        "pdf_pages_1based": [
+          128
+        ]
+      }
+    },
+    {
+      "year": 2023,
+      "provider_type": "hospitalized_health_center",
+      "physicians": 141,
+      "general_practitioners": 10,
+      "interns": 2,
+      "residents": 0,
+      "specialists": 129,
+      "unit": "persons",
+      "source": {
+        "file_id": "hira-providers-2023.xlsx",
+        "sheet": "Ⅰ-13",
+        "cells": "D18:H18",
+        "pdf_file_id": "nhis-yearbook-2023.pdf",
+        "pdf_printed_pages": [
+          48
+        ],
+        "pdf_pages_1based": [
+          128
+        ]
+      }
+    },
+    {
+      "year": 2023,
+      "provider_type": "health_center",
+      "physicians": 567,
+      "general_practitioners": 201,
+      "interns": 12,
+      "residents": 0,
+      "specialists": 354,
+      "unit": "persons",
+      "source": {
+        "file_id": "hira-providers-2023.xlsx",
+        "sheet": "Ⅰ-13",
+        "cells": "D19:H19",
+        "pdf_file_id": "nhis-yearbook-2023.pdf",
+        "pdf_printed_pages": [
+          48
+        ],
+        "pdf_pages_1based": [
+          128
+        ]
+      }
+    },
+    {
+      "year": 2023,
+      "provider_type": "health_subcenter",
+      "physicians": 810,
+      "general_practitioners": 635,
+      "interns": 36,
+      "residents": 1,
+      "specialists": 138,
+      "unit": "persons",
+      "source": {
+        "file_id": "hira-providers-2023.xlsx",
+        "sheet": "Ⅰ-13",
+        "cells": "D20:H20",
+        "pdf_file_id": "nhis-yearbook-2023.pdf",
+        "pdf_printed_pages": [
+          48
+        ],
+        "pdf_pages_1based": [
+          128
+        ]
+      }
+    },
+    {
+      "year": 2023,
+      "provider_type": "primary_health_care_post",
+      "physicians": 0,
+      "general_practitioners": 0,
+      "interns": 0,
+      "residents": 0,
+      "specialists": 0,
+      "unit": "persons",
+      "source": {
+        "file_id": "hira-providers-2023.xlsx",
+        "sheet": "Ⅰ-13",
+        "cells": "D21:H21",
+        "pdf_file_id": "nhis-yearbook-2023.pdf",
+        "pdf_printed_pages": [
+          48
+        ],
+        "pdf_pages_1based": [
+          128
+        ]
+      }
+    },
+    {
+      "year": 2023,
+      "provider_type": "korean_medicine_hospital",
+      "physicians": 577,
+      "general_practitioners": 134,
+      "interns": 0,
+      "residents": 0,
+      "specialists": 443,
+      "unit": "persons",
+      "source": {
+        "file_id": "hira-providers-2023.xlsx",
+        "sheet": "Ⅰ-13",
+        "cells": "D22:H22",
+        "pdf_file_id": "nhis-yearbook-2023.pdf",
+        "pdf_printed_pages": [
+          48
+        ],
+        "pdf_pages_1based": [
+          128
+        ]
+      }
+    },
+    {
+      "year": 2023,
+      "provider_type": "korean_medicine_clinic",
+      "physicians": 0,
+      "general_practitioners": 0,
+      "interns": 0,
+      "residents": 0,
+      "specialists": 0,
+      "unit": "persons",
+      "source": {
+        "file_id": "hira-providers-2023.xlsx",
+        "sheet": "Ⅰ-13",
+        "cells": "D23:H23",
+        "pdf_file_id": "nhis-yearbook-2023.pdf",
+        "pdf_printed_pages": [
+          48
+        ],
+        "pdf_pages_1based": [
+          128
+        ]
+      }
+    },
+    {
+      "year": 2023,
+      "provider_type": "pharmacy",
+      "physicians": 0,
+      "general_practitioners": 0,
+      "interns": 0,
+      "residents": 0,
+      "specialists": 0,
+      "unit": "persons",
+      "source": {
+        "file_id": "hira-providers-2023.xlsx",
+        "sheet": "Ⅰ-13",
+        "cells": "D24:H24",
+        "pdf_file_id": "nhis-yearbook-2023.pdf",
+        "pdf_printed_pages": [
+          48
+        ],
+        "pdf_pages_1based": [
+          128
+        ]
+      }
+    },
+    {
+      "year": 2024,
+      "provider_type": "total",
+      "physicians": 109274,
+      "general_practitioners": 10684,
+      "interns": 113,
+      "residents": 1112,
+      "specialists": 97365,
+      "unit": "persons",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-13",
+        "cells": "D7:H7",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          48
+        ],
+        "pdf_pages_1based": [
+          130
+        ]
+      }
+    },
+    {
+      "year": 2024,
+      "provider_type": "tertiary_hospital",
+      "physicians": 15232,
+      "general_practitioners": 227,
+      "interns": 31,
+      "residents": 578,
+      "specialists": 14396,
+      "unit": "persons",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-13",
+        "cells": "D9:H9",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          48
+        ],
+        "pdf_pages_1based": [
+          130
+        ]
+      }
+    },
+    {
+      "year": 2024,
+      "provider_type": "general_hospital",
+      "physicians": 19773,
+      "general_practitioners": 833,
+      "interns": 79,
+      "residents": 468,
+      "specialists": 18393,
+      "unit": "persons",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-13",
+        "cells": "D10:H10",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          48
+        ],
+        "pdf_pages_1based": [
+          130
+        ]
+      }
+    },
+    {
+      "year": 2024,
+      "provider_type": "hospital",
+      "physicians": 11256,
+      "general_practitioners": 842,
+      "interns": 3,
+      "residents": 22,
+      "specialists": 10389,
+      "unit": "persons",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-13",
+        "cells": "D11:H11",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          48
+        ],
+        "pdf_pages_1based": [
+          130
+        ]
+      }
+    },
+    {
+      "year": 2024,
+      "provider_type": "long_term_care_hospital",
+      "physicians": 4984,
+      "general_practitioners": 728,
+      "interns": 0,
+      "residents": 0,
+      "specialists": 4256,
+      "unit": "persons",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-13",
+        "cells": "D12:H12",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          48
+        ],
+        "pdf_pages_1based": [
+          130
+        ]
+      }
+    },
+    {
+      "year": 2024,
+      "provider_type": "mental_health_hospital",
+      "physicians": 1195,
+      "general_practitioners": 37,
+      "interns": 0,
+      "residents": 44,
+      "specialists": 1114,
+      "unit": "persons",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-13",
+        "cells": "D13:H13",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          48
+        ],
+        "pdf_pages_1based": [
+          130
+        ]
+      }
+    },
+    {
+      "year": 2024,
+      "provider_type": "clinic",
+      "physicians": 54989,
+      "general_practitioners": 7170,
+      "interns": 0,
+      "residents": 0,
+      "specialists": 47819,
+      "unit": "persons",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-13",
+        "cells": "D14:H14",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          48
+        ],
+        "pdf_pages_1based": [
+          130
+        ]
+      }
+    },
+    {
+      "year": 2024,
+      "provider_type": "dental_hospital",
+      "physicians": 32,
+      "general_practitioners": 3,
+      "interns": 0,
+      "residents": 0,
+      "specialists": 29,
+      "unit": "persons",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-13",
+        "cells": "D15:H15",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          48
+        ],
+        "pdf_pages_1based": [
+          130
+        ]
+      }
+    },
+    {
+      "year": 2024,
+      "provider_type": "dental_clinic",
+      "physicians": 0,
+      "general_practitioners": 0,
+      "interns": 0,
+      "residents": 0,
+      "specialists": 0,
+      "unit": "persons",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-13",
+        "cells": "D16:H16",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          48
+        ],
+        "pdf_pages_1based": [
+          130
+        ]
+      }
+    },
+    {
+      "year": 2024,
+      "provider_type": "midwifery_clinic",
+      "physicians": 0,
+      "general_practitioners": 0,
+      "interns": 0,
+      "residents": 0,
+      "specialists": 0,
+      "unit": "persons",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-13",
+        "cells": "D17:H17",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          48
+        ],
+        "pdf_pages_1based": [
+          130
+        ]
+      }
+    },
+    {
+      "year": 2024,
+      "provider_type": "hospitalized_health_center",
+      "physicians": 151,
+      "general_practitioners": 20,
+      "interns": 0,
+      "residents": 0,
+      "specialists": 131,
+      "unit": "persons",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-13",
+        "cells": "D18:H18",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          48
+        ],
+        "pdf_pages_1based": [
+          130
+        ]
+      }
+    },
+    {
+      "year": 2024,
+      "provider_type": "health_center",
+      "physicians": 550,
+      "general_practitioners": 224,
+      "interns": 0,
+      "residents": 0,
+      "specialists": 326,
+      "unit": "persons",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-13",
+        "cells": "D19:H19",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          48
+        ],
+        "pdf_pages_1based": [
+          130
+        ]
+      }
+    },
+    {
+      "year": 2024,
+      "provider_type": "health_subcenter",
+      "physicians": 491,
+      "general_practitioners": 406,
+      "interns": 0,
+      "residents": 0,
+      "specialists": 85,
+      "unit": "persons",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-13",
+        "cells": "D20:H20",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          48
+        ],
+        "pdf_pages_1based": [
+          130
+        ]
+      }
+    },
+    {
+      "year": 2024,
+      "provider_type": "primary_health_care_post",
+      "physicians": 0,
+      "general_practitioners": 0,
+      "interns": 0,
+      "residents": 0,
+      "specialists": 0,
+      "unit": "persons",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-13",
+        "cells": "D21:H21",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          48
+        ],
+        "pdf_pages_1based": [
+          130
+        ]
+      }
+    },
+    {
+      "year": 2024,
+      "provider_type": "korean_medicine_hospital",
+      "physicians": 621,
+      "general_practitioners": 194,
+      "interns": 0,
+      "residents": 0,
+      "specialists": 427,
+      "unit": "persons",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-13",
+        "cells": "D22:H22",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          48
+        ],
+        "pdf_pages_1based": [
+          130
+        ]
+      }
+    },
+    {
+      "year": 2024,
+      "provider_type": "korean_medicine_clinic",
+      "physicians": 0,
+      "general_practitioners": 0,
+      "interns": 0,
+      "residents": 0,
+      "specialists": 0,
+      "unit": "persons",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-13",
+        "cells": "D23:H23",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          48
+        ],
+        "pdf_pages_1based": [
+          130
+        ]
+      }
+    },
+    {
+      "year": 2024,
+      "provider_type": "pharmacy",
+      "physicians": 0,
+      "general_practitioners": 0,
+      "interns": 0,
+      "residents": 0,
+      "specialists": 0,
+      "unit": "persons",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-13",
+        "cells": "D24:H24",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          48
+        ],
+        "pdf_pages_1based": [
+          130
+        ]
+      }
+    }
+  ],
+  "physicians_by_region": [
+    {
+      "year": 2023,
+      "region": "total",
+      "physicians": 114699,
+      "general_practitioners": 6041,
+      "interns": 3206,
+      "residents": 9812,
+      "specialists": 95640,
+      "unit": "persons",
+      "source": {
+        "file_id": "hira-providers-2023.xlsx",
+        "sheet": "Ⅰ-15",
+        "cells": "C7:G7",
+        "pdf_file_id": "nhis-yearbook-2023.pdf",
+        "pdf_printed_pages": [
+          56
+        ],
+        "pdf_pages_1based": [
+          136
+        ]
+      }
+    },
+    {
+      "year": 2023,
+      "region": "seoul",
+      "physicians": 33868,
+      "general_practitioners": 1506,
+      "interns": 1380,
+      "residents": 4382,
+      "specialists": 26600,
+      "unit": "persons",
+      "source": {
+        "file_id": "hira-providers-2023.xlsx",
+        "sheet": "Ⅰ-15",
+        "cells": "C8:G8",
+        "pdf_file_id": "nhis-yearbook-2023.pdf",
+        "pdf_printed_pages": [
+          56
+        ],
+        "pdf_pages_1based": [
+          136
+        ]
+      }
+    },
+    {
+      "year": 2023,
+      "region": "busan",
+      "physicians": 8460,
+      "general_practitioners": 377,
+      "interns": 222,
+      "residents": 654,
+      "specialists": 7207,
+      "unit": "persons",
+      "source": {
+        "file_id": "hira-providers-2023.xlsx",
+        "sheet": "Ⅰ-15",
+        "cells": "C9:G9",
+        "pdf_file_id": "nhis-yearbook-2023.pdf",
+        "pdf_printed_pages": [
+          56
+        ],
+        "pdf_pages_1based": [
+          136
+        ]
+      }
+    },
+    {
+      "year": 2023,
+      "region": "daegu",
+      "physicians": 6335,
+      "general_practitioners": 211,
+      "interns": 215,
+      "residents": 615,
+      "specialists": 5294,
+      "unit": "persons",
+      "source": {
+        "file_id": "hira-providers-2023.xlsx",
+        "sheet": "Ⅰ-15",
+        "cells": "C10:G10",
+        "pdf_file_id": "nhis-yearbook-2023.pdf",
+        "pdf_printed_pages": [
+          56
+        ],
+        "pdf_pages_1based": [
+          136
+        ]
+      }
+    },
+    {
+      "year": 2023,
+      "region": "incheon",
+      "physicians": 5661,
+      "general_practitioners": 295,
+      "interns": 177,
+      "residents": 346,
+      "specialists": 4843,
+      "unit": "persons",
+      "source": {
+        "file_id": "hira-providers-2023.xlsx",
+        "sheet": "Ⅰ-15",
+        "cells": "C11:G11",
+        "pdf_file_id": "nhis-yearbook-2023.pdf",
+        "pdf_printed_pages": [
+          56
+        ],
+        "pdf_pages_1based": [
+          136
+        ]
+      }
+    },
+    {
+      "year": 2023,
+      "region": "gwangju",
+      "physicians": 3783,
+      "general_practitioners": 151,
+      "interns": 108,
+      "residents": 299,
+      "specialists": 3225,
+      "unit": "persons",
+      "source": {
+        "file_id": "hira-providers-2023.xlsx",
+        "sheet": "Ⅰ-15",
+        "cells": "C12:G12",
+        "pdf_file_id": "nhis-yearbook-2023.pdf",
+        "pdf_printed_pages": [
+          56
+        ],
+        "pdf_pages_1based": [
+          136
+        ]
+      }
+    },
+    {
+      "year": 2023,
+      "region": "daejeon",
+      "physicians": 3793,
+      "general_practitioners": 180,
+      "interns": 144,
+      "residents": 396,
+      "specialists": 3073,
+      "unit": "persons",
+      "source": {
+        "file_id": "hira-providers-2023.xlsx",
+        "sheet": "Ⅰ-15",
+        "cells": "C13:G13",
+        "pdf_file_id": "nhis-yearbook-2023.pdf",
+        "pdf_printed_pages": [
+          56
+        ],
+        "pdf_pages_1based": [
+          136
+        ]
+      }
+    },
+    {
+      "year": 2023,
+      "region": "ulsan",
+      "physicians": 1838,
+      "general_practitioners": 103,
+      "interns": 29,
+      "residents": 97,
+      "specialists": 1609,
+      "unit": "persons",
+      "source": {
+        "file_id": "hira-providers-2023.xlsx",
+        "sheet": "Ⅰ-15",
+        "cells": "C14:G14",
+        "pdf_file_id": "nhis-yearbook-2023.pdf",
+        "pdf_printed_pages": [
+          56
+        ],
+        "pdf_pages_1based": [
+          136
+        ]
+      }
+    },
+    {
+      "year": 2023,
+      "region": "sejong",
+      "physicians": 524,
+      "general_practitioners": 32,
+      "interns": 0,
+      "residents": 0,
+      "specialists": 492,
+      "unit": "persons",
+      "source": {
+        "file_id": "hira-providers-2023.xlsx",
+        "sheet": "Ⅰ-15",
+        "cells": "C15:G15",
+        "pdf_file_id": "nhis-yearbook-2023.pdf",
+        "pdf_printed_pages": [
+          56
+        ],
+        "pdf_pages_1based": [
+          136
+        ]
+      }
+    },
+    {
+      "year": 2023,
+      "region": "gyeonggi",
+      "physicians": 24515,
+      "general_practitioners": 1088,
+      "interns": 447,
+      "residents": 1610,
+      "specialists": 21370,
+      "unit": "persons",
+      "source": {
+        "file_id": "hira-providers-2023.xlsx",
+        "sheet": "Ⅰ-15",
+        "cells": "C16:G16",
+        "pdf_file_id": "nhis-yearbook-2023.pdf",
+        "pdf_printed_pages": [
+          56
+        ],
+        "pdf_pages_1based": [
+          136
+        ]
+      }
+    },
+    {
+      "year": 2023,
+      "region": "gangwon",
+      "physicians": 2776,
+      "general_practitioners": 196,
+      "interns": 80,
+      "residents": 258,
+      "specialists": 2242,
+      "unit": "persons",
+      "source": {
+        "file_id": "hira-providers-2023.xlsx",
+        "sheet": "Ⅰ-15",
+        "cells": "C17:G17",
+        "pdf_file_id": "nhis-yearbook-2023.pdf",
+        "pdf_printed_pages": [
+          56
+        ],
+        "pdf_pages_1based": [
+          136
+        ]
+      }
+    },
+    {
+      "year": 2023,
+      "region": "chungbuk",
+      "physicians": 2525,
+      "general_practitioners": 192,
+      "interns": 40,
+      "residents": 115,
+      "specialists": 2178,
+      "unit": "persons",
+      "source": {
+        "file_id": "hira-providers-2023.xlsx",
+        "sheet": "Ⅰ-15",
+        "cells": "C18:G18",
+        "pdf_file_id": "nhis-yearbook-2023.pdf",
+        "pdf_printed_pages": [
+          56
+        ],
+        "pdf_pages_1based": [
+          136
+        ]
+      }
+    },
+    {
+      "year": 2023,
+      "region": "chungnam",
+      "physicians": 3274,
+      "general_practitioners": 282,
+      "interns": 64,
+      "residents": 202,
+      "specialists": 2726,
+      "unit": "persons",
+      "source": {
+        "file_id": "hira-providers-2023.xlsx",
+        "sheet": "Ⅰ-15",
+        "cells": "C19:G19",
+        "pdf_file_id": "nhis-yearbook-2023.pdf",
+        "pdf_printed_pages": [
+          56
+        ],
+        "pdf_pages_1based": [
+          136
+        ]
+      }
+    },
+    {
+      "year": 2023,
+      "region": "jeonbuk",
+      "physicians": 3700,
+      "general_practitioners": 268,
+      "interns": 103,
+      "residents": 295,
+      "specialists": 3034,
+      "unit": "persons",
+      "source": {
+        "file_id": "hira-providers-2023.xlsx",
+        "sheet": "Ⅰ-15",
+        "cells": "C20:G20",
+        "pdf_file_id": "nhis-yearbook-2023.pdf",
+        "pdf_printed_pages": [
+          56
+        ],
+        "pdf_pages_1based": [
+          136
+        ]
+      }
+    },
+    {
+      "year": 2023,
+      "region": "jeonnam",
+      "physicians": 3137,
+      "general_practitioners": 375,
+      "interns": 55,
+      "residents": 90,
+      "specialists": 2617,
+      "unit": "persons",
+      "source": {
+        "file_id": "hira-providers-2023.xlsx",
+        "sheet": "Ⅰ-15",
+        "cells": "C21:G21",
+        "pdf_file_id": "nhis-yearbook-2023.pdf",
+        "pdf_printed_pages": [
+          56
+        ],
+        "pdf_pages_1based": [
+          136
+        ]
+      }
+    },
+    {
+      "year": 2023,
+      "region": "gyeongbuk",
+      "physicians": 3590,
+      "general_practitioners": 326,
+      "interns": 11,
+      "residents": 49,
+      "specialists": 3204,
+      "unit": "persons",
+      "source": {
+        "file_id": "hira-providers-2023.xlsx",
+        "sheet": "Ⅰ-15",
+        "cells": "C22:G22",
+        "pdf_file_id": "nhis-yearbook-2023.pdf",
+        "pdf_printed_pages": [
+          56
+        ],
+        "pdf_pages_1based": [
+          136
+        ]
+      }
+    },
+    {
+      "year": 2023,
+      "region": "gyeongnam",
+      "physicians": 5691,
+      "general_practitioners": 385,
+      "interns": 109,
+      "residents": 335,
+      "specialists": 4862,
+      "unit": "persons",
+      "source": {
+        "file_id": "hira-providers-2023.xlsx",
+        "sheet": "Ⅰ-15",
+        "cells": "C23:G23",
+        "pdf_file_id": "nhis-yearbook-2023.pdf",
+        "pdf_printed_pages": [
+          56
+        ],
+        "pdf_pages_1based": [
+          136
+        ]
+      }
+    },
+    {
+      "year": 2023,
+      "region": "jeju",
+      "physicians": 1229,
+      "general_practitioners": 74,
+      "interns": 22,
+      "residents": 69,
+      "specialists": 1064,
+      "unit": "persons",
+      "source": {
+        "file_id": "hira-providers-2023.xlsx",
+        "sheet": "Ⅰ-15",
+        "cells": "C24:G24",
+        "pdf_file_id": "nhis-yearbook-2023.pdf",
+        "pdf_printed_pages": [
+          56
+        ],
+        "pdf_pages_1based": [
+          136
+        ]
+      }
+    },
+    {
+      "year": 2024,
+      "region": "total",
+      "physicians": 109274,
+      "general_practitioners": 10684,
+      "interns": 113,
+      "residents": 1112,
+      "specialists": 97365,
+      "unit": "persons",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-15",
+        "cells": "C7:G7",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          56
+        ],
+        "pdf_pages_1based": [
+          138
+        ]
+      }
+    },
+    {
+      "year": 2024,
+      "region": "seoul",
+      "physicians": 30689,
+      "general_practitioners": 2858,
+      "interns": 49,
+      "residents": 478,
+      "specialists": 27304,
+      "unit": "persons",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-15",
+        "cells": "C8:G8",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          56
+        ],
+        "pdf_pages_1based": [
+          138
+        ]
+      }
+    },
+    {
+      "year": 2024,
+      "region": "busan",
+      "physicians": 8096,
+      "general_practitioners": 692,
+      "interns": 17,
+      "residents": 74,
+      "specialists": 7313,
+      "unit": "persons",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-15",
+        "cells": "C9:G9",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          56
+        ],
+        "pdf_pages_1based": [
+          138
+        ]
+      }
+    },
+    {
+      "year": 2024,
+      "region": "daegu",
+      "physicians": 5844,
+      "general_practitioners": 429,
+      "interns": 5,
+      "residents": 36,
+      "specialists": 5374,
+      "unit": "persons",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-15",
+        "cells": "C10:G10",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          56
+        ],
+        "pdf_pages_1based": [
+          138
+        ]
+      }
+    },
+    {
+      "year": 2024,
+      "region": "incheon",
+      "physicians": 5634,
+      "general_practitioners": 579,
+      "interns": 6,
+      "residents": 58,
+      "specialists": 4991,
+      "unit": "persons",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-15",
+        "cells": "C11:G11",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          56
+        ],
+        "pdf_pages_1based": [
+          138
+        ]
+      }
+    },
+    {
+      "year": 2024,
+      "region": "gwangju",
+      "physicians": 3599,
+      "general_practitioners": 311,
+      "interns": 1,
+      "residents": 23,
+      "specialists": 3264,
+      "unit": "persons",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-15",
+        "cells": "C12:G12",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          56
+        ],
+        "pdf_pages_1based": [
+          138
+        ]
+      }
+    },
+    {
+      "year": 2024,
+      "region": "daejeon",
+      "physicians": 3484,
+      "general_practitioners": 348,
+      "interns": 4,
+      "residents": 31,
+      "specialists": 3101,
+      "unit": "persons",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-15",
+        "cells": "C13:G13",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          56
+        ],
+        "pdf_pages_1based": [
+          138
+        ]
+      }
+    },
+    {
+      "year": 2024,
+      "region": "ulsan",
+      "physicians": 1819,
+      "general_practitioners": 179,
+      "interns": 0,
+      "residents": 18,
+      "specialists": 1622,
+      "unit": "persons",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-15",
+        "cells": "C14:G14",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          56
+        ],
+        "pdf_pages_1based": [
+          138
+        ]
+      }
+    },
+    {
+      "year": 2024,
+      "region": "sejong",
+      "physicians": 556,
+      "general_practitioners": 58,
+      "interns": 0,
+      "residents": 0,
+      "specialists": 498,
+      "unit": "persons",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-15",
+        "cells": "C15:G15",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          56
+        ],
+        "pdf_pages_1based": [
+          138
+        ]
+      }
+    },
+    {
+      "year": 2024,
+      "region": "gyeonggi",
+      "physicians": 24355,
+      "general_practitioners": 2254,
+      "interns": 17,
+      "residents": 185,
+      "specialists": 21899,
+      "unit": "persons",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-15",
+        "cells": "C16:G16",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          56
+        ],
+        "pdf_pages_1based": [
+          138
+        ]
+      }
+    },
+    {
+      "year": 2024,
+      "region": "gangwon",
+      "physicians": 2562,
+      "general_practitioners": 277,
+      "interns": 0,
+      "residents": 40,
+      "specialists": 2245,
+      "unit": "persons",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-15",
+        "cells": "C17:G17",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          56
+        ],
+        "pdf_pages_1based": [
+          138
+        ]
+      }
+    },
+    {
+      "year": 2024,
+      "region": "chungbuk",
+      "physicians": 2496,
+      "general_practitioners": 316,
+      "interns": 3,
+      "residents": 17,
+      "specialists": 2160,
+      "unit": "persons",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-15",
+        "cells": "C18:G18",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          56
+        ],
+        "pdf_pages_1based": [
+          138
+        ]
+      }
+    },
+    {
+      "year": 2024,
+      "region": "chungnam",
+      "physicians": 3224,
+      "general_practitioners": 398,
+      "interns": 1,
+      "residents": 26,
+      "specialists": 2799,
+      "unit": "persons",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-15",
+        "cells": "C19:G19",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          56
+        ],
+        "pdf_pages_1based": [
+          138
+        ]
+      }
+    },
+    {
+      "year": 2024,
+      "region": "jeonbuk",
+      "physicians": 3473,
+      "general_practitioners": 362,
+      "interns": 5,
+      "residents": 36,
+      "specialists": 3070,
+      "unit": "persons",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-15",
+        "cells": "C20:G20",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          56
+        ],
+        "pdf_pages_1based": [
+          138
+        ]
+      }
+    },
+    {
+      "year": 2024,
+      "region": "jeonnam",
+      "physicians": 3098,
+      "general_practitioners": 470,
+      "interns": 3,
+      "residents": 31,
+      "specialists": 2594,
+      "unit": "persons",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-15",
+        "cells": "C21:G21",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          56
+        ],
+        "pdf_pages_1based": [
+          138
+        ]
+      }
+    },
+    {
+      "year": 2024,
+      "region": "gyeongbuk",
+      "physicians": 3640,
+      "general_practitioners": 397,
+      "interns": 1,
+      "residents": 9,
+      "specialists": 3233,
+      "unit": "persons",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-15",
+        "cells": "C22:G22",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          56
+        ],
+        "pdf_pages_1based": [
+          138
+        ]
+      }
+    },
+    {
+      "year": 2024,
+      "region": "gyeongnam",
+      "physicians": 5474,
+      "general_practitioners": 635,
+      "interns": 1,
+      "residents": 28,
+      "specialists": 4810,
+      "unit": "persons",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-15",
+        "cells": "C23:G23",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          56
+        ],
+        "pdf_pages_1based": [
+          138
+        ]
+      }
+    },
+    {
+      "year": 2024,
+      "region": "jeju",
+      "physicians": 1231,
+      "general_practitioners": 121,
+      "interns": 0,
+      "residents": 22,
+      "specialists": 1088,
+      "unit": "persons",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-15",
+        "cells": "C24:G24",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          56
+        ],
+        "pdf_pages_1based": [
+          138
+        ]
+      }
+    }
+  ],
+  "institutions_by_establishment_2024": [
+    {
+      "provider_type": "total",
+      "total": 103308,
+      "counts": {
+        "national": 132,
+        "public": 3667,
+        "school_foundation": 136,
+        "special_juridical_corporation": 22,
+        "religious_foundation": 3,
+        "social_welfare_foundation": 67,
+        "corporation_aggregate": 141,
+        "juridical_foundation": 174,
+        "company": 133,
+        "medical_corporation": 1282,
+        "consumer_cooperative": 98,
+        "social_cooperative": 58,
+        "individual": 97318,
+        "military_hospital": 77,
+        "other": 0
+      },
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-10",
+        "cells": "C6:R6",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          42,
+          43
+        ],
+        "pdf_pages_1based": [
+          124,
+          125
+        ]
+      }
+    },
+    {
+      "provider_type": "tertiary_hospital",
+      "total": 47,
+      "counts": {
+        "national": 1,
+        "public": 10,
+        "school_foundation": 30,
+        "special_juridical_corporation": 1,
+        "religious_foundation": 0,
+        "social_welfare_foundation": 1,
+        "corporation_aggregate": 0,
+        "juridical_foundation": 2,
+        "company": 0,
+        "medical_corporation": 2,
+        "consumer_cooperative": 0,
+        "social_cooperative": 0,
+        "individual": 0,
+        "military_hospital": 0,
+        "other": 0
+      },
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-10",
+        "cells": "C8:R8",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          42,
+          43
+        ],
+        "pdf_pages_1based": [
+          124,
+          125
+        ]
+      }
+    },
+    {
+      "provider_type": "general_hospital",
+      "total": 331,
+      "counts": {
+        "national": 1,
+        "public": 52,
+        "school_foundation": 36,
+        "special_juridical_corporation": 8,
+        "religious_foundation": 0,
+        "social_welfare_foundation": 1,
+        "corporation_aggregate": 0,
+        "juridical_foundation": 21,
+        "company": 0,
+        "medical_corporation": 137,
+        "consumer_cooperative": 0,
+        "social_cooperative": 0,
+        "individual": 74,
+        "military_hospital": 1,
+        "other": 0
+      },
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-10",
+        "cells": "C9:R9",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          42,
+          43
+        ],
+        "pdf_pages_1based": [
+          124,
+          125
+        ]
+      }
+    },
+    {
+      "provider_type": "hospital",
+      "total": 1412,
+      "counts": {
+        "national": 5,
+        "public": 20,
+        "school_foundation": 8,
+        "special_juridical_corporation": 1,
+        "religious_foundation": 1,
+        "social_welfare_foundation": 12,
+        "corporation_aggregate": 3,
+        "juridical_foundation": 18,
+        "company": 0,
+        "medical_corporation": 261,
+        "consumer_cooperative": 1,
+        "social_cooperative": 0,
+        "individual": 1065,
+        "military_hospital": 17,
+        "other": 0
+      },
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-10",
+        "cells": "C10:R10",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          42,
+          43
+        ],
+        "pdf_pages_1based": [
+          124,
+          125
+        ]
+      }
+    },
+    {
+      "provider_type": "long_term_care_hospital",
+      "total": 1342,
+      "counts": {
+        "national": 0,
+        "public": 75,
+        "school_foundation": 3,
+        "special_juridical_corporation": 1,
+        "religious_foundation": 0,
+        "social_welfare_foundation": 12,
+        "corporation_aggregate": 2,
+        "juridical_foundation": 11,
+        "company": 0,
+        "medical_corporation": 533,
+        "consumer_cooperative": 13,
+        "social_cooperative": 0,
+        "individual": 692,
+        "military_hospital": 0,
+        "other": 0
+      },
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-10",
+        "cells": "C11:R11",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          42,
+          43
+        ],
+        "pdf_pages_1based": [
+          124,
+          125
+        ]
+      }
+    },
+    {
+      "provider_type": "mental_health_hospital",
+      "total": 263,
+      "counts": {
+        "national": 6,
+        "public": 9,
+        "school_foundation": 0,
+        "special_juridical_corporation": 0,
+        "religious_foundation": 0,
+        "social_welfare_foundation": 10,
+        "corporation_aggregate": 0,
+        "juridical_foundation": 5,
+        "company": 0,
+        "medical_corporation": 122,
+        "consumer_cooperative": 0,
+        "social_cooperative": 0,
+        "individual": 111,
+        "military_hospital": 0,
+        "other": 0
+      },
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-10",
+        "cells": "C12:R12",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          42,
+          43
+        ],
+        "pdf_pages_1based": [
+          124,
+          125
+        ]
+      }
+    },
+    {
+      "provider_type": "clinic",
+      "total": 36685,
+      "counts": {
+        "national": 89,
+        "public": 15,
+        "school_foundation": 17,
+        "special_juridical_corporation": 7,
+        "religious_foundation": 0,
+        "social_welfare_foundation": 27,
+        "corporation_aggregate": 108,
+        "juridical_foundation": 68,
+        "company": 116,
+        "medical_corporation": 130,
+        "consumer_cooperative": 53,
+        "social_cooperative": 28,
+        "individual": 36006,
+        "military_hospital": 21,
+        "other": 0
+      },
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-10",
+        "cells": "C13:R13",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          42,
+          43
+        ],
+        "pdf_pages_1based": [
+          124,
+          125
+        ]
+      }
+    },
+    {
+      "provider_type": "dental_hospital",
+      "total": 241,
+      "counts": {
+        "national": 1,
+        "public": 7,
+        "school_foundation": 10,
+        "special_juridical_corporation": 0,
+        "religious_foundation": 0,
+        "social_welfare_foundation": 0,
+        "corporation_aggregate": 0,
+        "juridical_foundation": 2,
+        "company": 0,
+        "medical_corporation": 13,
+        "consumer_cooperative": 0,
+        "social_cooperative": 0,
+        "individual": 205,
+        "military_hospital": 3,
+        "other": 0
+      },
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-10",
+        "cells": "C14:R14",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          42,
+          43
+        ],
+        "pdf_pages_1based": [
+          124,
+          125
+        ]
+      }
+    },
+    {
+      "provider_type": "dental_clinic",
+      "total": 19142,
+      "counts": {
+        "national": 18,
+        "public": 4,
+        "school_foundation": 3,
+        "special_juridical_corporation": 4,
+        "religious_foundation": 0,
+        "social_welfare_foundation": 1,
+        "corporation_aggregate": 23,
+        "juridical_foundation": 10,
+        "company": 12,
+        "medical_corporation": 16,
+        "consumer_cooperative": 18,
+        "social_cooperative": 12,
+        "individual": 19002,
+        "military_hospital": 19,
+        "other": 0
+      },
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-10",
+        "cells": "C15:R15",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          42,
+          43
+        ],
+        "pdf_pages_1based": [
+          124,
+          125
+        ]
+      }
+    },
+    {
+      "provider_type": "midwifery_clinic",
+      "total": 16,
+      "counts": {
+        "national": 0,
+        "public": 0,
+        "school_foundation": 0,
+        "special_juridical_corporation": 0,
+        "religious_foundation": 0,
+        "social_welfare_foundation": 0,
+        "corporation_aggregate": 0,
+        "juridical_foundation": 0,
+        "company": 0,
+        "medical_corporation": 0,
+        "consumer_cooperative": 0,
+        "social_cooperative": 0,
+        "individual": 16,
+        "military_hospital": 0,
+        "other": 0
+      },
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-10",
+        "cells": "C16:R16",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          42,
+          43
+        ],
+        "pdf_pages_1based": [
+          124,
+          125
+        ]
+      }
+    },
+    {
+      "provider_type": "hospitalized_health_center",
+      "total": 16,
+      "counts": {
+        "national": 0,
+        "public": 16,
+        "school_foundation": 0,
+        "special_juridical_corporation": 0,
+        "religious_foundation": 0,
+        "social_welfare_foundation": 0,
+        "corporation_aggregate": 0,
+        "juridical_foundation": 0,
+        "company": 0,
+        "medical_corporation": 0,
+        "consumer_cooperative": 0,
+        "social_cooperative": 0,
+        "individual": 0,
+        "military_hospital": 0,
+        "other": 0
+      },
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-10",
+        "cells": "C17:R17",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          42,
+          43
+        ],
+        "pdf_pages_1based": [
+          124,
+          125
+        ]
+      }
+    },
+    {
+      "provider_type": "health_center",
+      "total": 245,
+      "counts": {
+        "national": 0,
+        "public": 245,
+        "school_foundation": 0,
+        "special_juridical_corporation": 0,
+        "religious_foundation": 0,
+        "social_welfare_foundation": 0,
+        "corporation_aggregate": 0,
+        "juridical_foundation": 0,
+        "company": 0,
+        "medical_corporation": 0,
+        "consumer_cooperative": 0,
+        "social_cooperative": 0,
+        "individual": 0,
+        "military_hospital": 0,
+        "other": 0
+      },
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-10",
+        "cells": "C18:R18",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          42,
+          43
+        ],
+        "pdf_pages_1based": [
+          124,
+          125
+        ]
+      }
+    },
+    {
+      "provider_type": "health_subcenter",
+      "total": 1309,
+      "counts": {
+        "national": 0,
+        "public": 1309,
+        "school_foundation": 0,
+        "special_juridical_corporation": 0,
+        "religious_foundation": 0,
+        "social_welfare_foundation": 0,
+        "corporation_aggregate": 0,
+        "juridical_foundation": 0,
+        "company": 0,
+        "medical_corporation": 0,
+        "consumer_cooperative": 0,
+        "social_cooperative": 0,
+        "individual": 0,
+        "military_hospital": 0,
+        "other": 0
+      },
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-10",
+        "cells": "C19:R19",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          42,
+          43
+        ],
+        "pdf_pages_1based": [
+          124,
+          125
+        ]
+      }
+    },
+    {
+      "provider_type": "primary_health_care_post",
+      "total": 1895,
+      "counts": {
+        "national": 0,
+        "public": 1895,
+        "school_foundation": 0,
+        "special_juridical_corporation": 0,
+        "religious_foundation": 0,
+        "social_welfare_foundation": 0,
+        "corporation_aggregate": 0,
+        "juridical_foundation": 0,
+        "company": 0,
+        "medical_corporation": 0,
+        "consumer_cooperative": 0,
+        "social_cooperative": 0,
+        "individual": 0,
+        "military_hospital": 0,
+        "other": 0
+      },
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-10",
+        "cells": "C20:R20",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          42,
+          43
+        ],
+        "pdf_pages_1based": [
+          124,
+          125
+        ]
+      }
+    },
+    {
+      "provider_type": "korean_medicine_hospital",
+      "total": 581,
+      "counts": {
+        "national": 0,
+        "public": 1,
+        "school_foundation": 21,
+        "special_juridical_corporation": 0,
+        "religious_foundation": 0,
+        "social_welfare_foundation": 0,
+        "corporation_aggregate": 0,
+        "juridical_foundation": 22,
+        "company": 0,
+        "medical_corporation": 41,
+        "consumer_cooperative": 1,
+        "social_cooperative": 0,
+        "individual": 495,
+        "military_hospital": 0,
+        "other": 0
+      },
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-10",
+        "cells": "C21:R21",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          42,
+          43
+        ],
+        "pdf_pages_1based": [
+          124,
+          125
+        ]
+      }
+    },
+    {
+      "provider_type": "korean_medicine_clinic",
+      "total": 14736,
+      "counts": {
+        "national": 11,
+        "public": 9,
+        "school_foundation": 8,
+        "special_juridical_corporation": 0,
+        "religious_foundation": 2,
+        "social_welfare_foundation": 3,
+        "corporation_aggregate": 5,
+        "juridical_foundation": 14,
+        "company": 5,
+        "medical_corporation": 27,
+        "consumer_cooperative": 12,
+        "social_cooperative": 18,
+        "individual": 14606,
+        "military_hospital": 16,
+        "other": 0
+      },
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-10",
+        "cells": "C22:R22",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          42,
+          43
+        ],
+        "pdf_pages_1based": [
+          124,
+          125
+        ]
+      }
+    },
+    {
+      "provider_type": "pharmacy",
+      "total": 25047,
+      "counts": {
+        "national": 0,
+        "public": 0,
+        "school_foundation": 0,
+        "special_juridical_corporation": 0,
+        "religious_foundation": 0,
+        "social_welfare_foundation": 0,
+        "corporation_aggregate": 0,
+        "juridical_foundation": 1,
+        "company": 0,
+        "medical_corporation": 0,
+        "consumer_cooperative": 0,
+        "social_cooperative": 0,
+        "individual": 25046,
+        "military_hospital": 0,
+        "other": 0
+      },
+      "unit": "institutions",
+      "source": {
+        "file_id": "hira-providers-2024.xlsx",
+        "sheet": "Ⅰ-10",
+        "cells": "C23:R23",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          42,
+          43
+        ],
+        "pdf_pages_1based": [
+          124,
+          125
+        ]
+      }
+    }
+  ],
+  "care_by_type_2024": [
+    {
+      "provider_type": "total",
+      "setting": "total",
+      "patients": 48722212,
+      "visit_days": 1081526882,
+      "reimbursed_days": 11999702897,
+      "medical_expenses_thousand_krw": "116237515230.16",
+      "insurer_benefits_thousand_krw": "87577443728.912",
+      "source": {
+        "file_id": "nhis-care-2024.xlsx",
+        "sheet": "3-4",
+        "cells": "D8:H8",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          144,
+          145
+        ],
+        "pdf_pages_1based": [
+          226,
+          227
+        ]
+      }
+    },
+    {
+      "provider_type": "total",
+      "setting": "inpatient",
+      "patients": 7252920,
+      "visit_days": 134139246,
+      "reimbursed_days": 213713205,
+      "medical_expenses_thousand_krw": "40568250090.94",
+      "insurer_benefits_thousand_krw": "33118984455.14",
+      "source": {
+        "file_id": "nhis-care-2024.xlsx",
+        "sheet": "3-4",
+        "cells": "D9:H9",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          144,
+          145
+        ],
+        "pdf_pages_1based": [
+          226,
+          227
+        ]
+      }
+    },
+    {
+      "provider_type": "total",
+      "setting": "outpatient",
+      "patients": 48544478,
+      "visit_days": 947387636,
+      "reimbursed_days": 11785989692,
+      "medical_expenses_thousand_krw": "75669265139.22",
+      "insurer_benefits_thousand_krw": "54458459273.772",
+      "source": {
+        "file_id": "nhis-care-2024.xlsx",
+        "sheet": "3-4",
+        "cells": "D10:H10",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          144,
+          145
+        ],
+        "pdf_pages_1based": [
+          226,
+          227
+        ]
+      }
+    },
+    {
+      "provider_type": "medical_and_community_health_institutions",
+      "setting": "total",
+      "patients": 48691981,
+      "visit_days": 1080241721,
+      "reimbursed_days": 1724387859,
+      "medical_expenses_thousand_krw": "92177651721.89",
+      "insurer_benefits_thousand_krw": "70053689182.734",
+      "source": {
+        "file_id": "nhis-care-2024.xlsx",
+        "sheet": "3-4",
+        "cells": "D13:H13",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          144,
+          145
+        ],
+        "pdf_pages_1based": [
+          226,
+          227
+        ]
+      }
+    },
+    {
+      "provider_type": "medical_and_community_health_institutions",
+      "setting": "inpatient",
+      "patients": 7252920,
+      "visit_days": 134139246,
+      "reimbursed_days": 213713205,
+      "medical_expenses_thousand_krw": "40568250090.94",
+      "insurer_benefits_thousand_krw": "33118984455.14",
+      "source": {
+        "file_id": "nhis-care-2024.xlsx",
+        "sheet": "3-4",
+        "cells": "D14:H14",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          144,
+          145
+        ],
+        "pdf_pages_1based": [
+          226,
+          227
+        ]
+      }
+    },
+    {
+      "provider_type": "medical_and_community_health_institutions",
+      "setting": "outpatient",
+      "patients": 48507102,
+      "visit_days": 946102475,
+      "reimbursed_days": 1510674654,
+      "medical_expenses_thousand_krw": "51609401630.95",
+      "insurer_benefits_thousand_krw": "36934704727.594",
+      "source": {
+        "file_id": "nhis-care-2024.xlsx",
+        "sheet": "3-4",
+        "cells": "D15:H15",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          144,
+          145
+        ],
+        "pdf_pages_1based": [
+          226,
+          227
+        ]
+      }
+    },
+    {
+      "provider_type": "tertiary_hospital",
+      "setting": "total",
+      "patients": 7640052,
+      "visit_days": 54428671,
+      "reimbursed_days": 135043780,
+      "medical_expenses_thousand_krw": "18801169464.33",
+      "insurer_benefits_thousand_krw": "15196235513.58",
+      "source": {
+        "file_id": "nhis-care-2024.xlsx",
+        "sheet": "3-4",
+        "cells": "D18:H18",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          144,
+          145
+        ],
+        "pdf_pages_1based": [
+          226,
+          227
+        ]
+      }
+    },
+    {
+      "provider_type": "tertiary_hospital",
+      "setting": "inpatient",
+      "patients": 1388908,
+      "visit_days": 12579157,
+      "reimbursed_days": 34389953,
+      "medical_expenses_thousand_krw": "11466673227.02",
+      "insurer_benefits_thousand_krw": "9880525461.15",
+      "source": {
+        "file_id": "nhis-care-2024.xlsx",
+        "sheet": "3-4",
+        "cells": "D19:H19",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          144,
+          145
+        ],
+        "pdf_pages_1based": [
+          226,
+          227
+        ]
+      }
+    },
+    {
+      "provider_type": "tertiary_hospital",
+      "setting": "outpatient",
+      "patients": 7447240,
+      "visit_days": 41849514,
+      "reimbursed_days": 100653827,
+      "medical_expenses_thousand_krw": "7334496237.31",
+      "insurer_benefits_thousand_krw": "5315710052.43",
+      "source": {
+        "file_id": "nhis-care-2024.xlsx",
+        "sheet": "3-4",
+        "cells": "D20:H20",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          144,
+          145
+        ],
+        "pdf_pages_1based": [
+          226,
+          227
+        ]
+      }
+    },
+    {
+      "provider_type": "general_hospital",
+      "setting": "total",
+      "patients": 13372094,
+      "visit_days": 95787437,
+      "reimbursed_days": 229486471,
+      "medical_expenses_thousand_krw": "19768845737.25",
+      "insurer_benefits_thousand_krw": "15049401610.29",
+      "source": {
+        "file_id": "nhis-care-2024.xlsx",
+        "sheet": "3-4",
+        "cells": "D23:H23",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          144,
+          145
+        ],
+        "pdf_pages_1based": [
+          226,
+          227
+        ]
+      }
+    },
+    {
+      "provider_type": "general_hospital",
+      "setting": "inpatient",
+      "patients": 3016296,
+      "visit_days": 27371278,
+      "reimbursed_days": 58185664,
+      "medical_expenses_thousand_krw": "13378175942.74",
+      "insurer_benefits_thousand_krw": "10927688849.58",
+      "source": {
+        "file_id": "nhis-care-2024.xlsx",
+        "sheet": "3-4",
+        "cells": "D24:H24",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          144,
+          145
+        ],
+        "pdf_pages_1based": [
+          226,
+          227
+        ]
+      }
+    },
+    {
+      "provider_type": "general_hospital",
+      "setting": "outpatient",
+      "patients": 12821851,
+      "visit_days": 68416159,
+      "reimbursed_days": 171300807,
+      "medical_expenses_thousand_krw": "6390669794.51",
+      "insurer_benefits_thousand_krw": "4121712760.71",
+      "source": {
+        "file_id": "nhis-care-2024.xlsx",
+        "sheet": "3-4",
+        "cells": "D25:H25",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          144,
+          145
+        ],
+        "pdf_pages_1based": [
+          226,
+          227
+        ]
+      }
+    },
+    {
+      "provider_type": "hospital",
+      "setting": "total",
+      "patients": 12773708,
+      "visit_days": 85125266,
+      "reimbursed_days": 119537242,
+      "medical_expenses_thousand_krw": "10275380920.11",
+      "insurer_benefits_thousand_krw": "7570018141.72",
+      "source": {
+        "file_id": "nhis-care-2024.xlsx",
+        "sheet": "3-4",
+        "cells": "D28:H28",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          144,
+          145
+        ],
+        "pdf_pages_1based": [
+          226,
+          227
+        ]
+      }
+    },
+    {
+      "provider_type": "hospital",
+      "setting": "inpatient",
+      "patients": 2153467,
+      "visit_days": 24567325,
+      "reimbursed_days": 46389879,
+      "medical_expenses_thousand_krw": "6850235357.95",
+      "insurer_benefits_thousand_krw": "5352136770.91",
+      "source": {
+        "file_id": "nhis-care-2024.xlsx",
+        "sheet": "3-4",
+        "cells": "D29:H29",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          144,
+          145
+        ],
+        "pdf_pages_1based": [
+          226,
+          227
+        ]
+      }
+    },
+    {
+      "provider_type": "hospital",
+      "setting": "outpatient",
+      "patients": 12541220,
+      "visit_days": 60557941,
+      "reimbursed_days": 73147363,
+      "medical_expenses_thousand_krw": "3425145562.16",
+      "insurer_benefits_thousand_krw": "2217881370.81",
+      "source": {
+        "file_id": "nhis-care-2024.xlsx",
+        "sheet": "3-4",
+        "cells": "D30:H30",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          144,
+          145
+        ],
+        "pdf_pages_1based": [
+          226,
+          227
+        ]
+      }
+    },
+    {
+      "provider_type": "long_term_care_hospital",
+      "setting": "total",
+      "patients": 635897,
+      "visit_days": 55400523,
+      "reimbursed_days": 60716454,
+      "medical_expenses_thousand_krw": "5738904651.69",
+      "insurer_benefits_thousand_krw": "4473994503.26",
+      "source": {
+        "file_id": "nhis-care-2024.xlsx",
+        "sheet": "3-4",
+        "cells": "D33:H33",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          144,
+          145
+        ],
+        "pdf_pages_1based": [
+          226,
+          227
+        ]
+      }
+    },
+    {
+      "provider_type": "long_term_care_hospital",
+      "setting": "inpatient",
+      "patients": 351154,
+      "visit_days": 52911295,
+      "reimbursed_days": 53911285,
+      "medical_expenses_thousand_krw": "5589395637.68",
+      "insurer_benefits_thousand_krw": "4350852461.34",
+      "source": {
+        "file_id": "nhis-care-2024.xlsx",
+        "sheet": "3-4",
+        "cells": "D34:H34",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          144,
+          145
+        ],
+        "pdf_pages_1based": [
+          226,
+          227
+        ]
+      }
+    },
+    {
+      "provider_type": "long_term_care_hospital",
+      "setting": "outpatient",
+      "patients": 323651,
+      "visit_days": 2489228,
+      "reimbursed_days": 6805169,
+      "medical_expenses_thousand_krw": "149509014.01",
+      "insurer_benefits_thousand_krw": "123142041.92",
+      "source": {
+        "file_id": "nhis-care-2024.xlsx",
+        "sheet": "3-4",
+        "cells": "D35:H35",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          144,
+          145
+        ],
+        "pdf_pages_1based": [
+          226,
+          227
+        ]
+      }
+    },
+    {
+      "provider_type": "mental_health_hospital",
+      "setting": "total",
+      "patients": 285902,
+      "visit_days": 7653304,
+      "reimbursed_days": 39444163,
+      "medical_expenses_thousand_krw": "746000701.61",
+      "insurer_benefits_thousand_krw": "580526696.24",
+      "source": {
+        "file_id": "nhis-care-2024.xlsx",
+        "sheet": "3-4",
+        "cells": "D38:H38",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          144,
+          145
+        ],
+        "pdf_pages_1based": [
+          226,
+          227
+        ]
+      }
+    },
+    {
+      "provider_type": "mental_health_hospital",
+      "setting": "inpatient",
+      "patients": 53857,
+      "visit_days": 6025539,
+      "reimbursed_days": 6860074,
+      "medical_expenses_thousand_krw": "623208117.19",
+      "insurer_benefits_thousand_krw": "490599120.51",
+      "source": {
+        "file_id": "nhis-care-2024.xlsx",
+        "sheet": "3-4",
+        "cells": "D39:H39",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          144,
+          145
+        ],
+        "pdf_pages_1based": [
+          226,
+          227
+        ]
+      }
+    },
+    {
+      "provider_type": "mental_health_hospital",
+      "setting": "outpatient",
+      "patients": 256500,
+      "visit_days": 1627765,
+      "reimbursed_days": 32584089,
+      "medical_expenses_thousand_krw": "122792584.42",
+      "insurer_benefits_thousand_krw": "89927575.73",
+      "source": {
+        "file_id": "nhis-care-2024.xlsx",
+        "sheet": "3-4",
+        "cells": "D40:H40",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          144,
+          145
+        ],
+        "pdf_pages_1based": [
+          226,
+          227
+        ]
+      }
+    },
+    {
+      "provider_type": "clinic",
+      "setting": "total",
+      "patients": 45481527,
+      "visit_days": 589871898,
+      "reimbursed_days": 882341889,
+      "medical_expenses_thousand_krw": "26514744279.16",
+      "insurer_benefits_thousand_krw": "19732917607.96",
+      "source": {
+        "file_id": "nhis-care-2024.xlsx",
+        "sheet": "3-4",
+        "cells": "D43:H43",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          144,
+          145
+        ],
+        "pdf_pages_1based": [
+          226,
+          227
+        ]
+      }
+    },
+    {
+      "provider_type": "clinic",
+      "setting": "inpatient",
+      "patients": 1217341,
+      "visit_days": 5611524,
+      "reimbursed_days": 8513842,
+      "medical_expenses_thousand_krw": "1919162872.08",
+      "insurer_benefits_thousand_krw": "1561082670.66",
+      "source": {
+        "file_id": "nhis-care-2024.xlsx",
+        "sheet": "3-4",
+        "cells": "D44:H44",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          144,
+          145
+        ],
+        "pdf_pages_1based": [
+          226,
+          227
+        ]
+      }
+    },
+    {
+      "provider_type": "clinic",
+      "setting": "outpatient",
+      "patients": 45467330,
+      "visit_days": 584260374,
+      "reimbursed_days": 873828047,
+      "medical_expenses_thousand_krw": "24595581407.08",
+      "insurer_benefits_thousand_krw": "18171834937.3",
+      "source": {
+        "file_id": "nhis-care-2024.xlsx",
+        "sheet": "3-4",
+        "cells": "D45:H45",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          144,
+          145
+        ],
+        "pdf_pages_1based": [
+          226,
+          227
+        ]
+      }
+    },
+    {
+      "provider_type": "dental_hospital",
+      "setting": "total",
+      "patients": 1678125,
+      "visit_days": 4652199,
+      "reimbursed_days": 4702674,
+      "medical_expenses_thousand_krw": "372027359.44",
+      "insurer_benefits_thousand_krw": "237788373.65",
+      "source": {
+        "file_id": "nhis-care-2024.xlsx",
+        "sheet": "3-4",
+        "cells": "D48:H48",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          144,
+          145
+        ],
+        "pdf_pages_1based": [
+          226,
+          227
+        ]
+      }
+    },
+    {
+      "provider_type": "dental_hospital",
+      "setting": "inpatient",
+      "patients": 6545,
+      "visit_days": 23852,
+      "reimbursed_days": 62946,
+      "medical_expenses_thousand_krw": "12695454.37",
+      "insurer_benefits_thousand_krw": "10120950.6",
+      "source": {
+        "file_id": "nhis-care-2024.xlsx",
+        "sheet": "3-4",
+        "cells": "D49:H49",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          144,
+          145
+        ],
+        "pdf_pages_1based": [
+          226,
+          227
+        ]
+      }
+    },
+    {
+      "provider_type": "dental_hospital",
+      "setting": "outpatient",
+      "patients": 1678022,
+      "visit_days": 4628347,
+      "reimbursed_days": 4639728,
+      "medical_expenses_thousand_krw": "359331905.07",
+      "insurer_benefits_thousand_krw": "227667423.05",
+      "source": {
+        "file_id": "nhis-care-2024.xlsx",
+        "sheet": "3-4",
+        "cells": "D50:H50",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          144,
+          145
+        ],
+        "pdf_pages_1based": [
+          226,
+          227
+        ]
+      }
+    },
+    {
+      "provider_type": "dental_clinic",
+      "setting": "total",
+      "patients": 23940743,
+      "visit_days": 79436010,
+      "reimbursed_days": 79489657,
+      "medical_expenses_thousand_krw": "5818849540.24",
+      "insurer_benefits_thousand_krw": "4125182805.292",
+      "source": {
+        "file_id": "nhis-care-2024.xlsx",
+        "sheet": "3-4",
+        "cells": "D53:H53",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          144,
+          145
+        ],
+        "pdf_pages_1based": [
+          226,
+          227
+        ]
+      }
+    },
+    {
+      "provider_type": "dental_clinic",
+      "setting": "inpatient",
+      "patients": 168,
+      "visit_days": 168,
+      "reimbursed_days": 739,
+      "medical_expenses_thousand_krw": "46085.34",
+      "insurer_benefits_thousand_krw": "36743.69",
+      "source": {
+        "file_id": "nhis-care-2024.xlsx",
+        "sheet": "3-4",
+        "cells": "D54:H54",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          144,
+          145
+        ],
+        "pdf_pages_1based": [
+          226,
+          227
+        ]
+      }
+    },
+    {
+      "provider_type": "dental_clinic",
+      "setting": "outpatient",
+      "patients": 23940734,
+      "visit_days": 79435842,
+      "reimbursed_days": 79488918,
+      "medical_expenses_thousand_krw": "5818803454.9",
+      "insurer_benefits_thousand_krw": "4125146061.602",
+      "source": {
+        "file_id": "nhis-care-2024.xlsx",
+        "sheet": "3-4",
+        "cells": "D55:H55",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          144,
+          145
+        ],
+        "pdf_pages_1based": [
+          226,
+          227
+        ]
+      }
+    },
+    {
+      "provider_type": "midwifery_clinic",
+      "setting": "total",
+      "patients": 135,
+      "visit_days": 329,
+      "reimbursed_days": 331,
+      "medical_expenses_thousand_krw": "422734.3",
+      "insurer_benefits_thousand_krw": "419880.74",
+      "source": {
+        "file_id": "nhis-care-2024.xlsx",
+        "sheet": "3-4",
+        "cells": "D58:H58",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          144,
+          145
+        ],
+        "pdf_pages_1based": [
+          226,
+          227
+        ]
+      }
+    },
+    {
+      "provider_type": "midwifery_clinic",
+      "setting": "inpatient",
+      "patients": 135,
+      "visit_days": 329,
+      "reimbursed_days": 331,
+      "medical_expenses_thousand_krw": "422734.3",
+      "insurer_benefits_thousand_krw": "419880.74",
+      "source": {
+        "file_id": "nhis-care-2024.xlsx",
+        "sheet": "3-4",
+        "cells": "D59:H59",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          144,
+          145
+        ],
+        "pdf_pages_1based": [
+          226,
+          227
+        ]
+      }
+    },
+    {
+      "provider_type": "midwifery_clinic",
+      "setting": "outpatient",
+      "patients": 0,
+      "visit_days": 0,
+      "reimbursed_days": 0,
+      "medical_expenses_thousand_krw": "0",
+      "insurer_benefits_thousand_krw": "0",
+      "source": {
+        "file_id": "nhis-care-2024.xlsx",
+        "sheet": "3-4",
+        "cells": "D60:H60",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          144,
+          145
+        ],
+        "pdf_pages_1based": [
+          226,
+          227
+        ]
+      }
+    },
+    {
+      "provider_type": "community_health_agencies",
+      "setting": "total",
+      "patients": 1186454,
+      "visit_days": 6369243,
+      "reimbursed_days": 53095547,
+      "medical_expenses_thousand_krw": "129901082.54",
+      "insurer_benefits_thousand_krw": "98890130.454",
+      "source": {
+        "file_id": "nhis-care-2024.xlsx",
+        "sheet": "3-4",
+        "cells": "D63:H63",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          144,
+          145
+        ],
+        "pdf_pages_1based": [
+          226,
+          227
+        ]
+      }
+    },
+    {
+      "provider_type": "community_health_agencies",
+      "setting": "inpatient",
+      "patients": 720,
+      "visit_days": 9240,
+      "reimbursed_days": 12647,
+      "medical_expenses_thousand_krw": "879318.28",
+      "insurer_benefits_thousand_krw": "704345.61",
+      "source": {
+        "file_id": "nhis-care-2024.xlsx",
+        "sheet": "3-4",
+        "cells": "D64:H64",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          144,
+          145
+        ],
+        "pdf_pages_1based": [
+          226,
+          227
+        ]
+      }
+    },
+    {
+      "provider_type": "community_health_agencies",
+      "setting": "outpatient",
+      "patients": 1186341,
+      "visit_days": 6360003,
+      "reimbursed_days": 53082900,
+      "medical_expenses_thousand_krw": "129021764.26",
+      "insurer_benefits_thousand_krw": "98185784.844",
+      "source": {
+        "file_id": "nhis-care-2024.xlsx",
+        "sheet": "3-4",
+        "cells": "D65:H65",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          144,
+          145
+        ],
+        "pdf_pages_1based": [
+          226,
+          227
+        ]
+      }
+    },
+    {
+      "provider_type": "korean_medicine_hospital",
+      "setting": "total",
+      "patients": 880512,
+      "visit_days": 8657428,
+      "reimbursed_days": 10635359,
+      "medical_expenses_thousand_krw": "852298020.79",
+      "insurer_benefits_thousand_krw": "617236900.73",
+      "source": {
+        "file_id": "nhis-care-2024.xlsx",
+        "sheet": "3-4",
+        "cells": "D68:H68",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          144,
+          145
+        ],
+        "pdf_pages_1based": [
+          226,
+          227
+        ]
+      }
+    },
+    {
+      "provider_type": "korean_medicine_hospital",
+      "setting": "inpatient",
+      "patients": 200833,
+      "visit_days": 4747482,
+      "reimbursed_days": 5091665,
+      "medical_expenses_thousand_krw": "691575182.08",
+      "insurer_benefits_thousand_krw": "518383482.78",
+      "source": {
+        "file_id": "nhis-care-2024.xlsx",
+        "sheet": "3-4",
+        "cells": "D69:H69",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          144,
+          145
+        ],
+        "pdf_pages_1based": [
+          226,
+          227
+        ]
+      }
+    },
+    {
+      "provider_type": "korean_medicine_hospital",
+      "setting": "outpatient",
+      "patients": 738592,
+      "visit_days": 3909946,
+      "reimbursed_days": 5543694,
+      "medical_expenses_thousand_krw": "160722838.71",
+      "insurer_benefits_thousand_krw": "98853417.95",
+      "source": {
+        "file_id": "nhis-care-2024.xlsx",
+        "sheet": "3-4",
+        "cells": "D70:H70",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          144,
+          145
+        ],
+        "pdf_pages_1based": [
+          226,
+          227
+        ]
+      }
+    },
+    {
+      "provider_type": "korean_medicine_clinic",
+      "setting": "total",
+      "patients": 10744522,
+      "visit_days": 92859413,
+      "reimbursed_days": 109894292,
+      "medical_expenses_thousand_krw": "3159107230.43",
+      "insurer_benefits_thousand_krw": "2371077018.818",
+      "source": {
+        "file_id": "nhis-care-2024.xlsx",
+        "sheet": "3-4",
+        "cells": "D73:H73",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          144,
+          145
+        ],
+        "pdf_pages_1based": [
+          226,
+          227
+        ]
+      }
+    },
+    {
+      "provider_type": "korean_medicine_clinic",
+      "setting": "inpatient",
+      "patients": 14967,
+      "visit_days": 292057,
+      "reimbursed_days": 294180,
+      "medical_expenses_thousand_krw": "35780161.91",
+      "insurer_benefits_thousand_krw": "26433717.57",
+      "source": {
+        "file_id": "nhis-care-2024.xlsx",
+        "sheet": "3-4",
+        "cells": "D74:H74",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          144,
+          145
+        ],
+        "pdf_pages_1based": [
+          226,
+          227
+        ]
+      }
+    },
+    {
+      "provider_type": "korean_medicine_clinic",
+      "setting": "outpatient",
+      "patients": 10737600,
+      "visit_days": 92567356,
+      "reimbursed_days": 109600112,
+      "medical_expenses_thousand_krw": "3123327068.52",
+      "insurer_benefits_thousand_krw": "2344643301.248",
+      "source": {
+        "file_id": "nhis-care-2024.xlsx",
+        "sheet": "3-4",
+        "cells": "D75:H75",
+        "pdf_file_id": "nhis-yearbook-2024.pdf",
+        "pdf_printed_pages": [
+          144,
+          145
+        ],
+        "pdf_pages_1based": [
+          226,
+          227
+        ]
+      }
+    }
+  ],
+  "validation": {
+    "result": "passed",
+    "checks": [
+      "All extracted institution categories sum to national and regional totals in both years",
+      "Every institution category sums across the 17 regions to its national value",
+      "Every physician qualification split sums to physician count",
+      "Institution and region physician margins each reconcile to national qualifications",
+      "Every 2024 establishment-form split reconciles to institution count",
+      "Care inpatient/outpatient days reconcile exactly; monetary subtotals reconcile within 0.01 thousand KRW",
+      "2024 provider/care PDF table headers and footnotes visually inspected; workbook counts agree with PDF",
+      "NHIS 2024 PDF SHA-256 equals independently downloaded SMHDB mirror"
+    ],
+    "not_established": [
+      "HIRA corrected attachment equality or corrigendum applicability",
+      "2026 population levels",
+      "Physician region × institution × employment-role joint distribution",
+      "Clinical FTE from headcount",
+      "Within-group physician income distributions"
+    ]
+  }
+}

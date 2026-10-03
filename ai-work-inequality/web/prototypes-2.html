@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>병원의 세 장면 · Physician Futures</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;height:100%;overflow:hidden}body{font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo",sans-serif;background:#f7f8f8;color:#20343c;display:flex;flex-direction:column}header{height:76px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 30px;border-bottom:1px solid #dce3e5;background:#fff;gap:20px}h1{font-size:15px;font-weight:600;letter-spacing:-.4px;margin:0}nav{display:flex;gap:4px}button{font:inherit;cursor:pointer;border:0;background:transparent;padding:12px 20px;border-radius:4px;color:#728189;font-size:14px}button[aria-current=true]{background:#203c47;color:white}button:focus-visible{outline:3px solid #ed9a70;outline-offset:3px}button span{opacutaway:.55;font-size:11px;margin-right:7px}a{font-size:12px;color:#61767f;text-decoration:none}iframe{width:100%;border:0;flex:1;min-height:0;background:#f7f8f8}@media(max-width:600px){header{height:99px;padding:12px 16px;display:grid;grid-template-columns:1fr auto;gap:8px}h1{font-size:13px}nav{grid-row:2;grid-column:1/-1;justify-content:space-between}button{padding:9px 12px;font-size:13px}a{grid-row:1;grid-column:2}}
+</style>
+</head>
+<body>
+<header><h1>병원의 세 장면</h1><nav aria-label="시각화 프로토타입"><button data-view="neighborhood" aria-current="true"><span>04</span>동네</button><button data-view="cutaway" aria-current="false"><span>05</span>병원 내부</button><button data-view="street" aria-current="false"><span>06</span>거리</button></nav><a href="./prototypes.html#city" target="_blank">이전 2번 ↗</a></header>
+<iframe id="stage" src="./prototypes/neighborhood.html" title="동네 애니메이션"></iframe>
+<script>
+const buttons=[...document.querySelectorAll('button[data-view]')],stage=document.querySelector('#stage');
+function show(name){const selected=buttons.find(b=>b.dataset.view===name)||buttons[0];for(const button of buttons)button.setAttribute('aria-current',String(button===selected));stage.src=`./prototypes/${selected.dataset.view}.html`;stage.title=`${selected.textContent.trim()} 애니메이션`;history.replaceState(null,'',`#${selected.dataset.view}`);}
+for(const button of buttons)button.addEventListener('click',()=>show(button.dataset.view));
+if(location.hash)show(location.hash.slice(1));
+</script>
+</body></html>

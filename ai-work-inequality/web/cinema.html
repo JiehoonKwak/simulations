@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#f2f0e6" />
+    <title>Medicine, reimagined · 2026–2036</title>
+    <link rel="stylesheet" href="./cinema/style.css" />
+  </head>
+  <body>
+    <div id="film" data-scene="continuous">
+      <header class="masthead">
+        <a class="wordmark" href="./cinema.html" aria-label="Restart the film"
+          ><span class="brand-mark" aria-hidden="true">＋</span> Medicine,
+          reimagined</a
+        >
+        <nav class="header-actions">
+          <button
+            id="inspect"
+            class="quiet-button"
+            aria-expanded="false"
+            aria-controls="inspector"
+          >
+            Evidence &amp; results</button
+          ><button
+            id="settings-open"
+            class="quiet-button"
+            aria-expanded="false"
+            aria-controls="settings"
+          >
+            Assumptions <span aria-hidden="true">☷</span>
+          </button>
+        </nav>
+      </header>
+      <main>
+        <div class="scene-heading">
+          <div>
+            <p class="eyebrow">2026–2036 SCENARIOS</p>
+            <h1>Who shares the gains?</h1>
+          </div>
+          <div class="year-block">
+            <strong id="year">2026</strong><span>→ 2036</span>
+          </div>
+        </div>
+        <div
+          class="readouts"
+          aria-label="Scenario-weighted scenario indices, 2026 equals 100"
+        >
+          <div><span>Clinical work</span><strong id="working">100</strong></div>
+          <div><span>Care index</span><strong id="volume">100</strong></div>
+          <div><span>Real earnings</span><strong id="income">100</strong></div>
+          <small class="index-key">2026 = 100</small>
+        </div>
+        <div class="canvas-wrap">
+          <canvas
+            id="scene"
+            role="img"
+            aria-label="Practice proprietors and salaried physicians in two schematic work settings"
+          ></canvas>
+        </div>
+      </main>
+      <footer class="transport">
+        <div class="context-row">
+          <div class="group-legend" aria-label="Compared physician groups">
+            <button data-group="proprietor"><i></i>Practice proprietors</button
+            ><button data-group="salaried"><i></i>Salaried physicians</button>
+          </div>
+          <div class="playback-options">
+            <label class="sr-only" for="speed">Playback speed</label
+            ><select id="speed">
+              <option value="0.5">0.5×</option>
+              <option value="1" selected>1× · 16s</option>
+              <option value="2">2× · 8s</option></select
+            ><button id="loop" class="tour-button" aria-pressed="true">
+              <span class="tour-dot"></span> Loop
+            </button>
+          </div>
+        </div>
+        <div class="playback-row">
+          <button id="play" class="play-button" aria-label="Pause">Ⅱ</button
+          ><button id="restart" class="restart-button" aria-label="Restart">
+            ↺</button
+          ><span class="timeline-edge">2026</span
+          ><label class="sr-only" for="timeline">Year</label
+          ><input
+            id="timeline"
+            type="range"
+            min="0"
+            max="10"
+            step="0.01"
+            value="0"
+          /><span class="timeline-edge">2036</span>
+        </div>
+        <div class="footnote">
+          <span>Evidence-anchored scenarios</span
+          ><span>Schematic work settings · illustrative care flow</span>
+        </div>
+      </footer>
+      <aside
+        id="settings"
+        class="drawer"
+        aria-labelledby="settings-title"
+        hidden
+      >
+        <div class="drawer-top">
+          <div>
+            <p class="eyebrow">SCENARIO</p>
+            <h2 id="settings-title">Change the assumptions</h2>
+          </div>
+          <button data-close aria-label="Close assumptions">×</button>
+        </div>
+        <label class="field-label" for="preset">Scenario</label
+        ><select id="preset"></select>
+        <p id="preset-description" class="muted"></p>
+        <div id="parameter-controls"></div>
+        <details>
+          <summary>More assumptions</summary>
+          <div id="more-controls"></div>
+        </details>
+        <button id="reset-conditions" class="text-button">
+          Reset assumptions ↺
+        </button>
+      </aside>
+      <aside
+        id="inspector"
+        class="drawer evidence-drawer"
+        aria-labelledby="inspector-title"
+        hidden
+      >
+        <div class="drawer-top">
+          <div>
+            <p class="eyebrow">EVIDENCE &amp; RESULTS</p>
+            <h2 id="inspector-title">Two groups, one future</h2>
+          </div>
+          <button data-close aria-label="Close evidence and results">×</button>
+        </div>
+        <p class="muted" id="results-year"></p>
+        <div id="group-results"></div>
+        <dl id="distribution-results"></dl>
+        <h3>Earnings through time</h3>
+        <p class="chart-note">
+          Each group starts at 100 · solid: current · dashed: default
+        </p>
+        <svg
+          id="earnings-chart"
+          viewBox="0 0 320 150"
+          role="img"
+          aria-label="Two groups' earnings paths with sensitivity ranges under current and default assumptions"
+        ></svg>
+        <div class="mini-legend">
+          <span>● Proprietors</span><span>● Salaried</span
+          ><span class="band-key">▰ Sensitivity</span>
+        </div>
+        <details>
+          <summary>Observed anchor &amp; sources</summary>
+          <p class="muted">
+            The earnings anchor is Korea's adjusted 2020 group means for
+            full-time physicians; residents excluded. The 2026 starting
+            distribution uses that relative earnings structure; it is not an
+            observed 2026 income estimate.
+          </p>
+          <div id="baseline-results"></div>
+          <p class="muted">
+            Administrative remuneration is winsorized at the 1st and 99th
+            percentiles. The proprietor weight is reconstructed from the same
+            table’s group and overall means; it is not an observed workforce
+            headcount share.
+          </p>
+          <p class="muted">
+            Clinical work is a modeled workload index. The two buildings and
+            their illustrative actor slots depict work settings, not a census of
+            clinic or hospital ownership.
+          </p>
+          <ul class="source-list" id="sources"></ul>
+        </details>
+        <details>
+          <summary>How to read the results</summary>
+          <p id="sensitivity-explanation" class="muted"></p>
+          <p class="muted">
+            Earnings indices track group means, including reduced or lost
+            earnings. Retained positions and required clinical work are separate
+            outcomes. The role earnings ratio compares the two group means. Care
+            index is a weighted average of within-role activity indices.
+          </p>
+          <p class="muted">
+            Two-point Gini under reconstructed weights; a lower bound only if
+            the two means and weights describe one nonnegative eligible earnings
+            population. Within-role inequality is unobserved.
+          </p>
+          <p class="muted">
+            The solid and dashed paths hold the observed anchor fixed and vary
+            model assumptions. They are conditional scenarios, without assigned
+            forecast probabilities.
+          </p>
+        </details>
+        <button id="export-results" class="text-button">
+          Download scenario &amp; results ↓
+        </button>
+        <p id="signature" class="chart-note"></p>
+      </aside>
+      <p id="error" role="alert" hidden></p>
+    </div>
+    <script type="module" src="./cinema/app.mjs"></script>
+  </body>
+</html>

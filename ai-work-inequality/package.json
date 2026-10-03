@@ -1,0 +1,19 @@
+{
+  "name": "physician-futures-explorer",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "node scripts/serve.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "build": "node scripts/build-baseline.mjs && node scripts/build-cinema.mjs",
+    "build:legacy": "node scripts/build.mjs",
+    "extract": "uv run python scripts/extract-income.py && uv run python scripts/extract-workforce.py",
+    "analyze": "node scripts/analyze-empirical.mjs",
+    "figures": "uv run python scripts/plot-results.py",
+    "build:motion": "node scripts/build-motion.mjs",
+    "build:cinema": "node scripts/build-cinema.mjs"
+  }
+}

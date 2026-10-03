@@ -1,0 +1,1837 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>의사의 다음 10년 · Simulation Lab</title>
+    <style>:root {
+  font-family:
+    Inter, "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", system-ui,
+    sans-serif;
+  color: #142c38;
+  background: #f6f8f8;
+  font-synthesis: none;
+  --teal: #007f78;
+  --muted: #57707a;
+  --line: #dbe4e7;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+}
+button,
+input,
+select {
+  font: inherit;
+}
+button,
+select {
+  cursor: pointer;
+}
+button {
+  border: 1px solid #c8d5d9;
+  background: white;
+  border-radius: 6px;
+  padding: 8px 11px;
+  color: #193e4b;
+  font-size: 13px;
+  font-weight: 600;
+}
+button:hover {
+  background: #edf5f4;
+  border-color: #00877f;
+}
+button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+select {
+  border: 1px solid #c8d5d9;
+  border-radius: 5px;
+  padding: 9px 30px 9px 10px;
+  background: white;
+  color: #163745;
+  max-width: 100%;
+  font-size: 13px;
+}
+input[type="range"] {
+  accent-color: var(--teal);
+  cursor: pointer;
+  width: 100%;
+  margin: 9px 0 0;
+}
+input[type="number"] {
+  width: 96px;
+  border: 1px solid #c8d5d9;
+  border-radius: 5px;
+  padding: 6px;
+  color: inherit;
+}
+button:focus-visible,
+select:focus-visible,
+input:focus-visible,
+summary:focus-visible {
+  outline: 3px solid #eeaa6d;
+  outline-offset: 3px;
+}
+a {
+  color: #007f78;
+}
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+h2 {
+  font-size: 17px;
+  letter-spacing: -0.4px;
+}
+h3 {
+  font-size: 14px;
+}
+.small {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+.masthead {
+  height: 58px;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40px;
+  background: white;
+}
+.brand {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.8px;
+}
+.brand span {
+  font-weight: 500;
+  letter-spacing: 0;
+  margin-left: 24px;
+  color: var(--muted);
+}
+.status {
+  font-size: 11px;
+  color: var(--muted);
+}
+.intro {
+  max-width: 1500px;
+  margin: auto;
+  padding: 32px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.eyebrow {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: var(--teal);
+  margin-bottom: 10px;
+}
+h1 {
+  font-size: 34px;
+  letter-spacing: -1.6px;
+  font-weight: 750;
+}
+.intro p:not(.eyebrow) {
+  font-size: 14px;
+  color: var(--muted);
+  margin-top: 10px;
+}
+.horizon {
+  font-size: 30px;
+  font-weight: 350;
+  letter-spacing: -1px;
+}
+.horizon span {
+  color: #85aaa9;
+  padding: 0 8px;
+}
+.workspace {
+  max-width: 1500px;
+  display: grid;
+  grid-template-columns: 270px minmax(0, 1fr);
+  gap: 30px;
+  margin: auto;
+  padding: 0 40px 48px;
+}
+aside {
+  background: #edf3f3;
+  border-top: 3px solid #2e636c;
+  padding: 21px 18px;
+  align-self: start;
+  border-radius: 0 0 8px 8px;
+}
+.aside-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+.text-button {
+  border: none;
+  background: transparent;
+  padding: 4px;
+  color: var(--teal);
+}
+.field-label {
+  display: block;
+  font-size: 12px;
+  margin-bottom: 8px;
+  font-weight: 650;
+}
+#preset {
+  width: 100%;
+}
+#preset-description {
+  margin-top: 8px;
+}
+.parameter-group {
+  margin-top: 25px;
+  padding-top: 15px;
+  border-top: 1px solid #ccdcdd;
+}
+.parameter-group h3 {
+  font-size: 11px;
+  letter-spacing: 0.7px;
+  margin-bottom: 17px;
+  color: #44636b;
+}
+.parameter {
+  margin-top: 19px;
+}
+.parameter-line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.parameter label {
+  font-size: 12px;
+  font-weight: 600;
+}
+.parameter output {
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  color: var(--teal);
+  font-weight: 700;
+}
+.parameter .small {
+  font-size: 11px;
+  line-height: 1.5;
+  margin-top: 4px;
+}
+.seed-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 26px;
+  font-size: 12px;
+}
+.seed-row + p {
+  margin-top: 6px;
+}
+.file-actions {
+  display: flex;
+  gap: 5px;
+  margin-top: 14px;
+}
+.file-actions button {
+  font-size: 11px;
+  padding: 8px;
+}
+.playback {
+  border-bottom: 1px solid var(--line);
+  padding: 0 0 18px;
+}
+.time-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.year {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+.year > span {
+  font-size: 46px;
+  letter-spacing: -2px;
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+}
+.year small {
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  color: var(--muted);
+}
+.play-actions {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+.play-actions > button:not(.primary) {
+  font-size: 18px;
+  min-width: 35px;
+  padding: 5px 9px;
+}
+.primary {
+  background: var(--teal);
+  border-color: var(--teal);
+  color: white;
+  min-width: 84px;
+}
+.primary:hover {
+  background: #00665e;
+  color: white;
+}
+.timeline-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: var(--muted);
+  margin-top: 6px;
+}
+.kpis {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  padding: 22px 0 24px;
+  border-bottom: 1px solid var(--line);
+  gap: 14px;
+}
+.kpi-label {
+  font-size: 11px;
+  color: var(--muted);
+}
+.kpi-value {
+  font-size: 28px;
+  letter-spacing: -1px;
+  font-weight: 650;
+  margin-top: 7px;
+  font-variant-numeric: tabular-nums;
+}
+.kpi-value small {
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0;
+  margin-left: 3px;
+}
+.kpi-note {
+  font-size: 10px;
+  color: var(--muted);
+  margin-top: 5px;
+}
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 13px;
+}
+.section-head p {
+  margin-top: 5px;
+}
+.distribution {
+  padding-top: 25px;
+}
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px 19px;
+  font-size: 11px;
+  color: #425d66;
+  margin: 15px 0 2px;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.legend-item i {
+  height: 8px;
+  width: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible;
+}
+svg text {
+  font-family: inherit;
+  font-size: 11px;
+  fill: #52707c;
+}
+svg .axis-line {
+  stroke: #dbe5e8;
+  stroke-width: 1;
+}
+svg .dot {
+  cursor: pointer;
+  transition:
+    cy 0.62s ease,
+    cx 0.62s ease,
+    fill 0.2s;
+  stroke: white;
+  stroke-width: 0.5;
+}
+svg .dot:focus {
+  outline: none;
+  stroke: #142c38;
+  stroke-width: 3;
+}
+.chart-caption {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 10px;
+  line-height: 1.6;
+  color: var(--muted);
+  margin-top: 3px;
+}
+.person {
+  margin-top: 12px;
+  background: #edf5f4;
+  border-left: 3px solid var(--teal);
+  padding: 14px;
+  font-size: 12px;
+  line-height: 1.8;
+}
+.person-title {
+  display: flex;
+  justify-content: space-between;
+}
+.person table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 8px;
+  text-align: right;
+  font-size: 10px;
+}
+.person th,
+.person td {
+  padding: 4px;
+  border-bottom: 1px solid #d7e4e4;
+}
+.person th:first-child,
+.person td:first-child {
+  text-align: left;
+}
+.comparison {
+  margin: 25px 0;
+  padding: 17px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+.comparison p {
+  margin-top: 5px;
+}
+.comparison-actions {
+  display: flex;
+  gap: 5px;
+  flex-shrink: 0;
+}
+.trajectories {
+  padding-bottom: 15px;
+}
+.drivers {
+  border-top: 1px solid var(--line);
+  padding-top: 22px;
+  margin-top: 12px;
+}
+#drivers {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 19px 24px;
+  margin: 23px 0 18px;
+}
+.driver-label {
+  display: flex;
+  justify-content: space-between;
+  gap: 4px;
+  font-size: 11px;
+}
+.driver-value {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.driver-track {
+  height: 5px;
+  background: #e0e9eb;
+  margin-top: 9px;
+}
+.driver-fill {
+  height: 5px;
+  background: #339991;
+  transition: width 0.4s;
+}
+.sensitivity {
+  border-top: 1px solid var(--line);
+  margin-top: 25px;
+  padding-top: 23px;
+}
+.sensitivity table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+.sensitivity th {
+  text-align: right;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 500;
+  padding: 10px;
+}
+.sensitivity th:first-child {
+  text-align: left;
+}
+.sensitivity td {
+  padding: 12px 10px;
+  text-align: right;
+  border-bottom: 1px solid #e6edef;
+  font-variant-numeric: tabular-nums;
+}
+.sensitivity td:first-child {
+  text-align: left;
+}
+.sensitivity .current-row {
+  background: #e9f3f1;
+}
+.sensitivity-bar {
+  display: inline-block;
+  height: 6px;
+  background: #53a39b;
+  margin-right: 8px;
+  vertical-align: middle;
+  width: var(--w);
+  max-width: 95px;
+}
+.assumptions {
+  margin-top: 27px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 16px 0;
+  font-size: 13px;
+}
+summary {
+  cursor: pointer;
+  font-weight: 650;
+}
+.details-content {
+  padding-top: 15px;
+  max-width: 760px;
+  font-size: 12px;
+  line-height: 1.9;
+  color: #47616b;
+}
+.details-content p {
+  margin-top: 10px;
+}
+footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  font-size: 10px;
+  color: var(--muted);
+  padding-top: 18px;
+}
+#notice {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #173d46;
+  color: white;
+  border-radius: 6px;
+  padding: 12px 20px;
+  font-size: 12px;
+  z-index: 10;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+#notice.show {
+  opacity: 1;
+}
+#error {
+  background: #fff0ea;
+  border-left: 4px solid #d0583e;
+  color: #7e2d21;
+  margin: 0 40px 20px;
+  padding: 16px;
+  font-size: 13px;
+}
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+@media (max-width: 1000px) {
+  .workspace {
+    padding: 0 24px 35px;
+    gap: 22px;
+    grid-template-columns: 235px minmax(0, 1fr);
+  }
+  .intro {
+    padding: 28px 24px;
+  }
+  .masthead {
+    padding: 0 24px;
+  }
+  .horizon {
+    font-size: 23px;
+  }
+  .kpi-value {
+    font-size: 24px;
+  }
+  #drivers {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .chart-caption {
+    flex-direction: column;
+    gap: 2px;
+  }
+  .comparison {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .section-head {
+    flex-wrap: wrap;
+  }
+}
+@media (max-width: 700px) {
+  .masthead {
+    padding: 0 17px;
+    height: 52px;
+  }
+  .brand {
+    font-size: 9px;
+  }
+  .brand span {
+    display: none;
+  }
+  .status {
+    font-size: 9px;
+  }
+  .intro {
+    padding: 24px 17px;
+    align-items: flex-start;
+  }
+  .intro h1 {
+    font-size: 28px;
+  }
+  .intro p:not(.eyebrow) {
+    font-size: 12px;
+    max-width: 245px;
+    line-height: 1.7;
+  }
+  .horizon {
+    display: none;
+  }
+  .workspace {
+    display: flex;
+    flex-direction: column;
+    padding: 0 17px 28px;
+    gap: 24px;
+  }
+  aside {
+    width: 100%;
+    order: 2;
+    padding: 18px;
+  }
+  main {
+    min-width: 0;
+    width: 100%;
+    order: 1;
+  }
+  .kpis {
+    gap: 12px 8px;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .kpi-value {
+    font-size: 26px;
+  }
+  .time-top {
+    gap: 8px;
+  }
+  .play-actions {
+    gap: 4px;
+  }
+  .play-actions > button:not(.primary) {
+    min-width: 28px;
+    padding: 5px 7px;
+  }
+  .play-actions select {
+    padding: 7px;
+    font-size: 11px;
+  }
+  .primary {
+    min-width: 68px;
+    padding: 8px;
+  }
+  .year > span {
+    font-size: 37px;
+  }
+  .year small {
+    display: none;
+  }
+  .section-head h2 {
+    font-size: 16px;
+  }
+  .legend {
+    gap: 8px 12px;
+  }
+  .section-head select {
+    font-size: 11px;
+    padding: 7px;
+  }
+  .distribution svg {
+    min-height: 220px;
+  }
+  .chart-caption {
+    font-size: 10px;
+  }
+  .person {
+    overflow-x: auto;
+  }
+  .person table {
+    min-width: 570px;
+  }
+  .sensitivity td,
+  .sensitivity th {
+    padding: 10px 5px;
+  }
+  .sensitivity-bar {
+    display: none;
+  }
+  footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  #parameters {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 22px;
+  }
+  .parameter-group {
+    min-width: 0;
+  }
+  #error {
+    margin: 0 17px 20px;
+  }
+  .small {
+    font-size: 11px;
+  }
+}
+
+.paired {
+  margin: -7px 0 25px;
+}
+.paired .small {
+  line-height: 1.9;
+}
+.paired p {
+  margin-top: 7px;
+}
+@media (max-width: 700px) {
+  .distribution,
+  .trajectories {
+    overflow-x: auto;
+  }
+  .distribution svg,
+  .trajectories svg {
+    width: 720px;
+    max-width: none;
+  }
+  .distribution .chart-caption {
+    max-width: 340px;
+  }
+}
+
+/* Keep the complete distribution in the first desktop viewport. */
+.masthead {
+  height: 44px;
+}
+.intro {
+  padding-top: 20px;
+  padding-bottom: 22px;
+}
+.eyebrow {
+  margin-bottom: 6px;
+}
+h1 {
+  font-size: 30px;
+}
+.intro p:not(.eyebrow) {
+  margin-top: 7px;
+}
+.playback {
+  padding-bottom: 12px;
+}
+.year > span {
+  font-size: 39px;
+}
+.timeline-labels {
+  margin-top: 3px;
+}
+.kpis {
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+.kpi-value {
+  margin-top: 5px;
+  font-size: 27px;
+}
+.distribution {
+  padding-top: 18px;
+}
+.distribution .section-head {
+  margin-bottom: 8px;
+}
+.legend {
+  margin-top: 9px;
+  margin-bottom: 0;
+}
+.live-drivers {
+  font-size: 11px;
+  color: #3e6f73;
+  padding: 7px 0;
+  border-top: 1px solid #e2eaec;
+  line-height: 1.6;
+}
+.chart-caption {
+  font-size: 10px;
+}
+.parameter-line {
+  align-items: flex-start;
+}
+.parameter output {
+  flex-shrink: 0;
+}
+.parameter label {
+  line-height: 1.6;
+}
+@media (max-width: 700px) {
+  .intro {
+    padding: 20px 17px;
+  }
+  .intro h1 {
+    font-size: 28px;
+  }
+  .live-drivers {
+    max-width: 345px;
+  }
+  .distribution svg {
+    min-height: 0;
+  }
+}
+
+@media (min-width: 701px) {
+  .intro {
+    padding-top: 14px;
+    padding-bottom: 17px;
+  }
+  .eyebrow {
+    display: none;
+  }
+  .intro h1 {
+    font-size: 29px;
+  }
+}
+
+.distribution-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  font-size: 11px;
+  color: var(--muted);
+  padding: 5px 0 16px;
+}
+.distribution-summary strong {
+  font-weight: 650;
+  color: #173b48;
+  margin-left: 5px;
+}
+
+@media (min-width: 701px) {
+  .intro {
+    padding: 12px 40px;
+  }
+  .intro h1 {
+    font-size: 28px;
+  }
+  .intro p:not(.eyebrow) {
+    font-size: 12px;
+    margin-top: 4px;
+  }
+  .intro .eyebrow {
+    display: none;
+  }
+  .horizon {
+    font-size: 25px;
+  }
+  .playback {
+    padding-bottom: 9px;
+  }
+  .year > span {
+    font-size: 34px;
+  }
+  .playback input[type="range"] {
+    margin-top: 5px;
+  }
+  .kpis {
+    padding: 12px 0;
+  }
+  .kpi-value {
+    font-size: 25px;
+    margin-top: 4px;
+  }
+  .kpi-note {
+    margin-top: 3px;
+  }
+  .distribution {
+    padding-top: 14px;
+  }
+  .distribution .section-head {
+    margin-bottom: 4px;
+  }
+  .distribution .section-head p {
+    margin-top: 3px;
+  }
+  .live-drivers {
+    padding: 5px 0;
+  }
+  .legend {
+    margin-top: 6px;
+  }
+}
+</style>
+  </head>
+  <body>
+    <header class="masthead">
+      <div class="brand">SIMULATION LAB <span>01 / 의료와 AI</span></div>
+      <div class="status">가정 기반 모형 · 한국 통계로 교정 전</div>
+    </header>
+    <div class="intro">
+      <div>
+        <p class="eyebrow">PHYSICIAN FUTURES</p>
+        <h1>의사의 다음 10년</h1>
+        <p>기술, 제도, 수요가 바뀔 때 — 누가 일하고, 누가 소득을 얻을까요?</p>
+      </div>
+      <div class="horizon">2026 <span>→</span> 2036</div>
+    </div>
+    <div id="error" role="alert" hidden></div>
+    <div class="workspace">
+      <aside aria-label="시뮬레이션 가정">
+        <div class="aside-title">
+          <h2>미래의 조건</h2>
+          <button id="reset" class="text-button">초기화</button>
+        </div>
+        <label class="field-label" for="preset">조건 조합</label
+        ><select id="preset"></select>
+        <p id="preset-description" class="small"></p>
+        <div id="parameters"></div>
+        <div class="seed-row">
+          <label for="seed">가상 집단 seed</label
+          ><input
+            id="seed"
+            type="number"
+            value="42"
+            min="0"
+            max="4294967295"
+            step="1"
+          />
+        </div>
+        <p class="small">같은 seed는 같은 출발 집단을 만듭니다.</p>
+        <div class="file-actions">
+          <button id="export-config">설정 저장</button
+          ><button id="import-config">설정 불러오기</button
+          ><input
+            id="file-input"
+            type="file"
+            accept="application/json,.json"
+            hidden
+          />
+        </div>
+      </aside>
+      <main>
+        <section class="playback" aria-label="시간 재생">
+          <div class="time-top">
+            <div class="year">
+              <span id="year">2026</span><small>YEAR</small>
+            </div>
+            <div class="play-actions">
+              <button id="restart" title="2026년으로" aria-label="2026년으로">
+                ↺</button
+              ><button id="previous" aria-label="이전 연도">‹</button
+              ><button id="play" class="primary">▶ 재생</button
+              ><button id="next" aria-label="다음 연도">›</button
+              ><select id="speed" aria-label="재생 속도">
+                <option value="1200">1×</option>
+                <option value="650">2×</option>
+                <option value="2400">0.5×</option>
+              </select>
+            </div>
+          </div>
+          <input
+            id="timeline"
+            type="range"
+            min="0"
+            max="10"
+            step="1"
+            value="0"
+            aria-label="연도"
+          />
+          <div class="timeline-labels">
+            <span>2026 · 출발점</span><span>2031</span><span>2036</span>
+          </div>
+        </section>
+        <section class="kpis" id="kpis" aria-label="현재 연도 결과"></section>
+        <section class="distribution">
+          <div class="section-head">
+            <div>
+              <h2>같은 의사들, 달라지는 소득</h2>
+              <p class="small">
+                점 하나 = 의사 한 명 · 실질소득: 2026년 전체 평균 = 100
+              </p>
+            </div>
+            <select id="dimension" aria-label="의사 비교 기준">
+              <option value="setting">병원 · 지역</option>
+              <option value="role">소유 · 고용</option>
+              <option value="clinical">진료 구성</option>
+              <option value="experience">경험</option>
+            </select>
+          </div>
+          <div
+            id="live-drivers"
+            class="live-drivers"
+            aria-label="현재 기술과 시장 요인"
+          ></div>
+          <div id="legend" class="legend"></div>
+          <svg
+            id="distribution-chart"
+            viewBox="0 0 900 250"
+            role="img"
+            aria-label="의사 집단별 소득 분포"
+          ></svg>
+          <div class="chart-caption">
+            <span>● 진료 중 · ○ 진료 이탈 · 모든 의사를 계속 추적합니다.</span
+            ><span>진료 이탈 후 소유 수입도 소득에 포함됩니다.</span>
+          </div>
+          <div id="person" class="person" hidden></div>
+        </section>
+        <section class="comparison">
+          <div>
+            <h3>같은 출발점에서 비교</h3>
+            <p id="comparison-description" class="small">
+              지금의 조건을 고정한 뒤, 왼쪽에서 가정을 바꿔보세요.
+            </p>
+          </div>
+          <div class="comparison-actions">
+            <button id="pin">현재 조건 고정</button
+            ><button id="unpin" hidden>비교 해제</button>
+          </div>
+        </section>
+        <div class="paired">
+          <button id="paired-run" disabled>여러 초기집단 확인</button
+          ><span class="small">
+            조건을 고정하면 100개 초기집단을 비교합니다.</span
+          >
+          <div id="paired-results" class="small" aria-live="polite"></div>
+        </div>
+        <section class="trajectories">
+          <div class="section-head">
+            <h2>10년의 소득 경로</h2>
+            <span class="small">실선: 현재 조건 · 점선: 고정한 조건</span>
+          </div>
+          <svg
+            id="trajectory-chart"
+            viewBox="0 0 900 240"
+            role="img"
+            aria-label="집단별 10년 소득 추이"
+          ></svg>
+        </section>
+        <div
+          id="distribution-summary"
+          class="distribution-summary"
+          aria-label="분포 보조 지표"
+        ></div>
+        <section class="drivers">
+          <div class="section-head">
+            <h2>이 해의 기술과 시장</h2>
+            <span class="small">2026년 대비 추가 자동화와 보급</span>
+          </div>
+          <div id="drivers"></div>
+          <p class="small">
+            추가 자동화 가능 비중·보급은 0–100%, 수가·수요·외부 의사 공급 압력은
+            2026년 대비 배수입니다. 함께 변하는 요인을 표시하며, 인과 기여도를
+            분해한 결과는 아닙니다.
+          </p>
+        </section>
+        <section class="sensitivity">
+          <div class="section-head">
+            <div>
+              <h2>가정 하나를 바꾸면</h2>
+              <p class="small">나머지 조건과 seed를 고정한 2036년 결과</p>
+            </div>
+            <select id="sweep-param" aria-label="민감도를 볼 가정"></select>
+          </div>
+          <div id="sweep-results"></div>
+        </section>
+        <details class="assumptions">
+          <summary>모형의 구조와 해석</summary>
+          <div class="details-content">
+            <h3>진료 → 완료된 치료 → 수입 → 고용</h3>
+            <p>
+              진단·처방과 처치를 연결한 가상 의료기관 집단을 계산합니다. AI
+              능력, 실제 보급, 허용 범위가 필요한 의사 노동과 진료 여력을
+              바꾸고, 수요·수가·비용은 매출과 보수, 소유자의 이익에 영향을
+              줍니다.
+            </p>
+            <p>
+              모든 소득지수는 2026년 전체 의사 평균을 100으로 놓습니다. 고용
+              유지율은 처음 등장한 의사 중 진료를 계속하는 비율이며, 한국의 실제
+              고용률이 아닙니다. 폐업률은 가상 의료기관 기준입니다. 자율성은
+              모형에서 정의한 판단 권한의 지표입니다. 집단 임상 자율성은 출발
+              집단 전체 평균이며, 진료에서 이탈한 의사는 0으로 계산합니다.
+            </p>
+            <p>
+              이 결과는 임의의 가상 집단과 명시한 규칙의 계산값입니다. 실제 한국
+              의사의 소득·폐업 확률이나 2036년 예측치로 읽지 않습니다. 같은
+              seed의 차이는 가정의 효과를 비교하는 한 예이며, 현실의 확률을
+              뜻하지 않습니다.
+            </p>
+            <p>
+              기초자료 출처:
+              <a
+                href="https://opendata.hira.or.kr/"
+                target="_blank"
+                rel="noopener"
+                >건강보험심사평가원 의료자원·진료 통계</a
+              >
+              ·
+              <a href="https://kosis.kr/" target="_blank" rel="noopener"
+                >KOSIS 국가통계포털</a
+              >. 현재 표시된 집단과 계수는 이 통계에 맞춰 교정되지 않았습니다.
+            </p>
+          </div>
+        </details>
+        <footer>
+          <span id="verification"></span
+          ><button id="download-results" class="text-button">
+            전체 계산 결과 JSON ↓
+          </button>
+        </footer>
+      </main>
+    </div>
+    <div id="notice" role="status" aria-live="polite"></div>
+    <script type="module">import { PARAMS, DEFAULT_PARAMS, PRESETS, simulate } from "data:text/javascript;base64,LyoqIElsbHVzdHJhdGl2ZSBjb21wbGV0ZS1jYXJlIG1vZGVsOyBzZWUgLi4vZG9jcy9tb2RlbC1tZXRob2QubWQuIE5vIGVtcGlyaWNhbCBmb3JlY2FzdC4gKi8KZXhwb3J0IGNvbnN0IFZFUlNJT04gPSAicGh5c2ljaWFucy0wLjEuMCI7CmV4cG9ydCBjb25zdCBQQVJBTVMgPSBbCiAgWwogICAgImNvZ25pdGlvblJhdGUiLAogICAgIu2MkOuLqCDstpTqsIAg7J6Q64+Z7ZmUIiwKICAgICJBSSDrsJzsoIQiLAogICAgMCwKICAgIDEsCiAgICAwLjA1LAogICAgMC44LAogICAgIiIsCiAgICAiMjAzNuuFhCDsp4Tri6jCt+yymOuwqSDsl4XrrLTsnZggMjAyNuuFhCDrjIDruYQg7LaU6rCAIOyekOuPme2ZlCDqsIDriqUg67mE7JyoLiDtmITsnqwgQUkg7ISx64qlIOygkOyImOqwgCDslYTri5nri4jri6QuIiwKICBdLAogIFsKICAgICJwcm9jZWR1cmVSYXRlIiwKICAgICLsspjsuZgg7LaU6rCAIOyekOuPme2ZlCIsCiAgICAiQUkg67Cc7KCEIiwKICAgIDAsCiAgICAxLAogICAgMC4wNSwKICAgIDAuNSwKICAgICIiLAogICAgIjIwMzbrhYQg7LmY66OMwrfsiJjsiKAg7JeF66y07J2YIDIwMjbrhYQg64yA67mEIOy2lOqwgCDsnpDrj5ntmZQg6rCA64qlIOu5hOycqC4g7YyQ64uo6rO8IOuzhOuPhOuhnCDsm4Dsp4HsnoXri4jri6QuIiwKICBdLAogIFsKICAgICJjb21tdW5pY2F0aW9uUmF0ZSIsCiAgICAi7IaM7Ya1IOy2lOqwgCDsnpDrj5ntmZQiLAogICAgIkFJIOuwnOyghCIsCiAgICAwLAogICAgMSwKICAgIDAuMDUsCiAgICAwLjYsCiAgICAiIiwKICAgICIyMDM264WEIO2ZmOyekCDshozthrUg7JeF66y07J2YIDIwMjbrhYQg64yA67mEIOy2lOqwgCDsnpDrj5ntmZQg6rCA64qlIOu5hOycqC4iLAogIF0sCiAgWwogICAgInRpbWluZyIsCiAgICAi67Cc7KCEIOyLnOygkCIsCiAgICAiQUkg67Cc7KCEIiwKICAgIC0xLAogICAgMSwKICAgIDAuMSwKICAgIDAsCiAgICAiIiwKICAgICLsnYzsiJjripQg7LSI6riw7JeQIOu5oOuluCDrs7TquIksIOyWkeyImOuKlCDtm4TquLDsl5Ag67mg66W4IOuztOq4iS4gMjAzNuuFhCDriqXroKXsnYAg6rCZ7Iq164uI64ukLiIsCiAgXSwKICBbCiAgICAiYWRvcHRpb25Db3N0IiwKICAgICJBSSDrj4TsnoXCt+yatOyYgSDruYTsmqkiLAogICAgIuuPhOyeheqzvCDrtoTrsLAiLAogICAgMCwKICAgIDEsCiAgICAwLjA1LAogICAgMC4zLAogICAgIiIsCiAgICAi7LSI6riwIOydmOyCrCAx66qF64u5IOyXsOqwhCDruYTsmqkg67aA64u0LiDrhpLsnYAg67mE7Jqp7J2AIOuPhOyeheuloOuPhCDrgq7stqXri4jri6QuIiwKICBdLAogIFsKICAgICJzY2FsZUFkdmFudGFnZSIsCiAgICAi6rec66qo7JeQIOuUsOuluCDruYTsmqkg7LCo7J20IiwKICAgICLrj4TsnoXqs7wg67aE67CwIiwKICAgIDAsCiAgICAxLAogICAgMC4wNSwKICAgIDAuNCwKICAgICIiLAogICAgIuuMgO2YlSDquLDqtIDsnZggQUkg67mE7JqpIOygiOqwkCDsoJXrj4QuIDDsnbTrqbQg6rec66qo67OEIOu5hOyaqeydtCDqsJnsirXri4jri6QuIiwKICBdLAogIFsKICAgICJ3YWdlU2hhcmUiLAogICAgIuydmOyCrCDrhbjrj5nsnZgg67Cw67aEIOuqqyIsCiAgICAi64+E7J6F6rO8IOu2hOuwsCIsCiAgICAwLjIsCiAgICAwLjksCiAgICAwLjA1LAogICAgMC42NSwKICAgICIiLAogICAgIuyWkeydmCDsmIHsl4Xsnonsl6wg7KSRIOydmOyCrCDrhbjrj5nsl5Ag67Cw67aE7ZWY64qUIOuqqe2RnCDruYTsnKguIOuCmOuouOyngOuKlCDshozsnKDsmYAg7Jyg67O07J207J21LiIsCiAgXSwKICBbCiAgICAibGljZW5zaW5nIiwKICAgICLrrLTsnZjsgqwg7J2Y66OM7ZaJ7JyEIO2XiOyaqSIsCiAgICAi7KCc64+E7JmAIOyImOyalCIsCiAgICAwLAogICAgMSwKICAgIDAuMDUsCiAgICAwLjUsCiAgICAiIiwKICAgICIyMDM264WEIOydmOyCrCDsp4HsoJEg7IiY7ZaJIOydmOustCDsmYTtmZQg7KCV64+ELiBBSSDriqXroKXCt+uPhOyeheqzvCDtlajqu5gg7J6R64+ZLiIsCiAgXSwKICBbCiAgICAiZmVlQ2hhbmdlIiwKICAgICLsi6Tsp4gg7IiY6rCAIOuzgO2ZlCIsCiAgICAi7KCc64+E7JmAIOyImOyalCIsCiAgICAtNjAsCiAgICA0MCwKICAgIDUsCiAgICAtMTAsCiAgICAiJSIsCiAgICAiMjAzNuuFhCDsmYTro4wg7KeE66OMIDHqsbTri7kg7Iuk7KeIIOyngOq4ieyVoeydmCAyMDI264WEIOuMgOu5hCDrs4DtmZQuIiwKICBdLAogIFsKICAgICJob3VzZWhvbGRDaGFuZ2UiLAogICAgIu2ZmOyekCDsp4Dstpzsl6zroKUg67OA7ZmUIiwKICAgICLsoJzrj4TsmYAg7IiY7JqUIiwKICAgIC02MCwKICAgIDYwLAogICAgNSwKICAgIC0xMCwKICAgICIlIiwKICAgICLrs7jsnbjrtoDri7TsnLzroZwg6rWs66ek7ZWgIOyImCDsnojripQg7KeE66OM65+J7J2YIOuzgO2ZlC4g67O07ZeYIOyngOybkOu2hOqzvCDrs4TqsJwuIiwKICBdLAogIFsKICAgICJpbnN1cmFuY2VDaGFuZ2UiLAogICAgIuuztO2XmCDsp4Dsm5Ag7KeE66OM65+JIOuzgO2ZlCIsCiAgICAi7KCc64+E7JmAIOyImOyalCIsCiAgICAtNjAsCiAgICA2MCwKICAgIDUsCiAgICAxMCwKICAgICIlIiwKICAgICLrs7Ttl5jsnbQg7KeA7JuQ7ZWY64qUIOynhOujjOufieydmCDrs4DtmZQuIOuztO2XmCDsmIjsgrDslaHsnbTrgpgg7J246rWsIOyghOunneydtCDslYTri5nri4jri6QuIiwKICBdLAogIFsKICAgICJyZWdpb25hbERlbWFuZENoYW5nZSIsCiAgICAi67mE7IiY64+E6raMIOq1rOunpCDsp4Tro4zrn4kg67OA7ZmUIiwKICAgICLsoJzrj4TsmYAg7IiY7JqUIiwKICAgIC00MCwKICAgIDQwLAogICAgNSwKICAgIDAsCiAgICAiJSIsCiAgICAi67mE7IiY64+E6raMIOynhOujjCDsiJjsmpTsnZgg7LaU6rCAIOuzgO2ZlCDqsIDsoJUuIOyWkeyImOuKlCDspp3qsIAsIOydjOyImOuKlCDqsJDshozsnbTrqbAg7IiY64+E6raM7J2AIOyngeygkSDrsJTqvrjsp4Ag7JWK7Iq164uI64ukLiIsCiAgXSwKICBbCiAgICAic3VwcGx5Q2hhbmdlIiwKICAgICLsmbjrtoAg7J2Y7IKsIOqzteq4iSDslZXroKUiLAogICAgIuygnOuPhOyZgCDsiJjsmpQiLAogICAgLTMwLAogICAgODAsCiAgICA1LAogICAgMTUsCiAgICAiJSIsCiAgICAi7JuQ656YIOydmOyCrCDsp5Hri6gg67CW7J2YIOuFuOuPmSDqsr3sn4EuIOuztOyImCDrsLDrtoTsnYQg67CU6r6466mwIOyLoOq3nCDsnZjsgqzrpbwg7IOd7ISx7ZWY7KeAIOyViuyKteuLiOuLpC4iLAogIF0sCl0ubWFwKChba2V5LCBsYWJlbCwgZ3JvdXAsIG1pbiwgbWF4LCBzdGVwLCB2YWx1ZSwgdW5pdCwgZGVzY3JpcHRpb25dKSA9PgogIE9iamVjdC5mcmVlemUoewogICAga2V5LAogICAgbGFiZWwsCiAgICBncm91cCwKICAgIG1pbiwKICAgIG1heCwKICAgIHN0ZXAsCiAgICBkZWZhdWx0OiB2YWx1ZSwKICAgIHVuaXQsCiAgICBkZXNjcmlwdGlvbiwKICB9KSwKKTsKZXhwb3J0IGNvbnN0IERFRkFVTFRfUEFSQU1TID0gT2JqZWN0LmZyZWV6ZSgKICBPYmplY3QuZnJvbUVudHJpZXMoUEFSQU1TLm1hcCgocCkgPT4gW3Aua2V5LCBwLmRlZmF1bHRdKSksCik7CmV4cG9ydCBjb25zdCBQUkVTRVRTID0gWwogIHsKICAgIGlkOiAicmVmZXJlbmNlIiwKICAgIGxhYmVsOiAi6riw7KSAIOqwgOyglSIsCiAgICBkZXNjcmlwdGlvbjogIuuKpeugpSDrsJzsoIQsIOykkeqwhCDruYTsmqnqs7wg67aA67aE7KCBIOygnOuPhCDrs4DtmZQiLAogICAgcGFyYW1zOiB7IC4uLkRFRkFVTFRfUEFSQU1TIH0sCiAgfSwKICB7CiAgICBpZDogImhvbGQiLAogICAgbGFiZWw6ICIyMDI264WEIOyhsOqxtCDsnKDsp4AiLAogICAgZGVzY3JpcHRpb246ICLstpTqsIAgQUkg67Cc7KCE6rO8IOqyveygnMK37KCc64+EIOuzgO2ZlOulvCDrqqjrkZAg66mI7LaYIOuMgOyhsOq1sCIsCiAgICBwYXJhbXM6IHsKICAgICAgLi4uREVGQVVMVF9QQVJBTVMsCiAgICAgIGNvZ25pdGlvblJhdGU6IDAsCiAgICAgIHByb2NlZHVyZVJhdGU6IDAsCiAgICAgIGNvbW11bmljYXRpb25SYXRlOiAwLAogICAgICBmZWVDaGFuZ2U6IDAsCiAgICAgIGhvdXNlaG9sZENoYW5nZTogMCwKICAgICAgaW5zdXJhbmNlQ2hhbmdlOiAwLAogICAgICBzdXBwbHlDaGFuZ2U6IDAsCiAgICAgIGxpY2Vuc2luZzogMCwKICAgIH0sCiAgfSwKICB7CiAgICBpZDogImFjY2Vzc2libGUiLAogICAgbGFiZWw6ICLsoIDruYTsmqkg67O06riJIMK3IOyImO2WiSDsnZjrrLQg7Jyg7KeAIiwKICAgIGRlc2NyaXB0aW9uOiAi66qo65OgIOq3nOuqqOyXkOyEnCDsi7wgQUksIOydmOyCrCDsp4HsoJEg7IiY7ZaJIOydmOustCDsnKDsp4AiLAogICAgcGFyYW1zOiB7CiAgICAgIC4uLkRFRkFVTFRfUEFSQU1TLAogICAgICBhZG9wdGlvbkNvc3Q6IDAuMDUsCiAgICAgIHNjYWxlQWR2YW50YWdlOiAwLAogICAgICBsaWNlbnNpbmc6IDAsCiAgICAgIGZlZUNoYW5nZTogMCwKICAgICAgc3VwcGx5Q2hhbmdlOiAwLAogICAgfSwKICB9LAogIHsKICAgIGlkOiAiZXF1aXBtZW50IiwKICAgIGxhYmVsOiAi7LKY7LmYIOuwnOyghCDCtyDqt5zrqqjrs4Qg67mE7JqpIOywqOydtCIsCiAgICBkZXNjcmlwdGlvbjogIuyymOy5mCDsnpDrj5ntmZTsmYAg64aS7J2AIOyepeu5hCDruYTsmqksIO2BsCDqt5zrqqjsnZgg67mE7JqpIOygiOqwkCIsCiAgICBwYXJhbXM6IHsKICAgICAgLi4uREVGQVVMVF9QQVJBTVMsCiAgICAgIHByb2NlZHVyZVJhdGU6IDEsCiAgICAgIGFkb3B0aW9uQ29zdDogMC44LAogICAgICBzY2FsZUFkdmFudGFnZTogMSwKICAgICAgbGljZW5zaW5nOiAwLjgsCiAgICB9LAogIH0sCiAgewogICAgaWQ6ICJkZW1hbmQiLAogICAgbGFiZWw6ICLsiJjqsIAgwrcg6rWs66ekIOynhOujjOufiSDqsJDshowiLAogICAgZGVzY3JpcHRpb246ICLtmZjsnpDsmYAg67O07ZeY7J2YIOyngOybkCDsp4Tro4zrn4ksIOyLpOyniCDsiJjqsIDqsIAg7ZWo6ruYIOqwkOyGjCIsCiAgICBwYXJhbXM6IHsKICAgICAgLi4uREVGQVVMVF9QQVJBTVMsCiAgICAgIGZlZUNoYW5nZTogLTQ1LAogICAgICBob3VzZWhvbGRDaGFuZ2U6IC00NSwKICAgICAgaW5zdXJhbmNlQ2hhbmdlOiAtMzUsCiAgICB9LAogIH0sCiAgewogICAgaWQ6ICJwZXJtaXNzaW9uIiwKICAgIGxhYmVsOiAi6rSR67KU7JyEIOyekOuPme2ZlCDtl4jsmqkiLAogICAgZGVzY3JpcHRpb246ICLshLgg64ql66Cl7J2YIOu5oOuluCDrsJzsoIQsIOuCruydgCDrj4TsnoXruYTsmYAg7IiY7ZaJIOydmOustCDsmYTtmZQiLAogICAgcGFyYW1zOiB7CiAgICAgIC4uLkRFRkFVTFRfUEFSQU1TLAogICAgICBjb2duaXRpb25SYXRlOiAxLAogICAgICBwcm9jZWR1cmVSYXRlOiAxLAogICAgICBjb21tdW5pY2F0aW9uUmF0ZTogMSwKICAgICAgYWRvcHRpb25Db3N0OiAwLjEsCiAgICAgIGxpY2Vuc2luZzogMSwKICAgICAgdGltaW5nOiAtMC43LAogICAgfSwKICB9LApdOwpjb25zdCBjbGFtcCA9ICh2LCBtaW4gPSAwLCBtYXggPSAxKSA9PiBNYXRoLm1heChtaW4sIE1hdGgubWluKG1heCwgdikpOwpjb25zdCBzdW0gPSAoYSkgPT4gYS5yZWR1Y2UoKHgsIHkpID0+IHggKyB5LCAwKTsKY29uc3QgbWVhbiA9IChhKSA9PiAoYS5sZW5ndGggPyBzdW0oYSkgLyBhLmxlbmd0aCA6IDApOwpmdW5jdGlvbiBybmcoc2VlZCkgewogIGxldCBhID0gc2VlZCA+Pj4gMDsKICByZXR1cm4gKCkgPT4gewogICAgYSArPSAweDZkMmI3OWY1OwogICAgbGV0IHQgPSBhOwogICAgdCA9IE1hdGguaW11bCh0IF4gKHQgPj4+IDE1KSwgdCB8IDEpOwogICAgdCBePSB0ICsgTWF0aC5pbXVsKHQgXiAodCA+Pj4gNyksIHQgfCA2MSk7CiAgICByZXR1cm4gKCh0IF4gKHQgPj4+IDE0KSkgPj4+IDApIC8gNDI5NDk2NzI5NjsKICB9Owp9CmV4cG9ydCBmdW5jdGlvbiBnaW5pKHZhbHVlcykgewogIGNvbnN0IGEgPSBbLi4udmFsdWVzXS5zb3J0KChhLCBiKSA9PiBhIC0gYiksCiAgICB0b3RhbCA9IHN1bShhKTsKICByZXR1cm4gdG90YWwKICAgID8gc3VtKGEubWFwKCh2LCBpKSA9PiAoMiAqIGkgLSBhLmxlbmd0aCArIDEpICogdikpIC8gKGEubGVuZ3RoICogdG90YWwpCiAgICA6IG51bGw7Cn0KLyoqIEFubnVhbCBjb21wbGV0ZS1jYXJlIGNhcGFjaXR5OiBldmVyeSBlcGlzb2RlIG11c3QgcGFzcyBhbGwgdGhyZWUgc3RhZ2VzLiAqLwpleHBvcnQgZnVuY3Rpb24gY2FyZUNhcGFjaXR5KHsKICBob3VycywKICBodW1hblRpbWUsCiAgdHJlYXRtZW50Q2FwYWNpdHksCiAgZmFjaWxpdHlDYXBhY2l0eSA9IEluZmluaXR5LAp9KSB7CiAgcmV0dXJuIE1hdGgubWluKAogICAgaHVtYW5UaW1lID4gMCA/IGhvdXJzIC8gaHVtYW5UaW1lIDogSW5maW5pdHksCiAgICB0cmVhdG1lbnRDYXBhY2l0eSwKICAgIGZhY2lsaXR5Q2FwYWNpdHksCiAgKTsKfQovKiogQWxsIG1vbmV0YXJ5IGZsb3dzIHVzZSBvbmUgcmVhbCB1bml0OyBubyBuZWdhdGl2ZSBkaXZpZGVuZHMgb3IgaGlkZGVuIGZpbmFuY2luZy4gKi8KZXhwb3J0IGZ1bmN0aW9uIHNldHRsZUFjY291bnRzKHsKICByZXZlbnVlLAogIG5vbkxhYm9yQ29zdCwKICB3YWdlRnJhY3Rpb24sCiAgcmVzZXJ2ZSwKICBtaW5pbXVtV2FnZXMgPSAwLAp9KSB7CiAgY29uc3Qgb3BlcmF0aW5nU3VycGx1cyA9IHJldmVudWUgLSBub25MYWJvckNvc3Q7CiAgaWYgKG9wZXJhdGluZ1N1cnBsdXMgKyByZXNlcnZlIC0gbWluaW11bVdhZ2VzIDwgLTFlLTkpCiAgICByZXR1cm4geyBzb2x2ZW50OiBmYWxzZSB9OwogIGNvbnN0IHdhZ2VzID0gTWF0aC5tYXgoCiAgICBtaW5pbXVtV2FnZXMsCiAgICBNYXRoLm1heCgwLCBvcGVyYXRpbmdTdXJwbHVzKSAqIGNsYW1wKHdhZ2VGcmFjdGlvbiksCiAgKTsKICBjb25zdCBwcm9maXQgPSBvcGVyYXRpbmdTdXJwbHVzIC0gd2FnZXMsCiAgICBkaXZpZGVuZHMgPSBNYXRoLm1heCgwLCBwcm9maXQpICogMC44OwogIGNvbnN0IGVuZFJlc2VydmUgPSByZXNlcnZlICsgcHJvZml0IC0gZGl2aWRlbmRzOwogIHJldHVybiB7CiAgICBzb2x2ZW50OiB0cnVlLAogICAgd2FnZXMsCiAgICBwcm9maXQsCiAgICBkaXZpZGVuZHMsCiAgICBlbmRSZXNlcnZlLAogICAgb3BlcmF0aW5nU3VycGx1cywKICB9Owp9CmZ1bmN0aW9uIHBvcHVsYXRpb24oc2VlZCkgewogIGNvbnN0IHJhbmRvbSA9IHJuZyhzZWVkKSwKICAgIHByb3ZpZGVycyA9IFtdLAogICAgcGh5c2ljaWFucyA9IFtdOwogIGZvciAobGV0IGogPSAwOyBqIDwgMTY7IGorKykgewogICAgY29uc3QgbiA9IGogJSAyID8gMTYgOiA4LAogICAgICByZWdpb24gPSBqICUgNCA8IDIgPyAibWV0cm8iIDogInJlZ2lvbmFsIiwKICAgICAgc2l6ZSA9IG4gPT09IDE2ID8gImxhcmdlIiA6ICJzbWFsbCI7CiAgICBjb25zdCBjbGluaWNhbCA9IFsiY29nbml0aXZlIiwgIm1peGVkIiwgInByb2NlZHVyYWwiXVtqICUgM107CiAgICBjb25zdCB0ZWFtID0gW107CiAgICBmb3IgKGxldCBrID0gMDsgayA8IG47IGsrKykgewogICAgICBjb25zdCBwZXJzb24gPSB7CiAgICAgICAgaWQ6IGBEJHtwaHlzaWNpYW5zLmxlbmd0aCArIDF9YCwKICAgICAgICBwcm92aWRlcklkOiBgUCR7aiArIDF9YCwKICAgICAgICByZWdpb24sCiAgICAgICAgc2l6ZSwKICAgICAgICByb2xlOiBrID09PSAwID8gIm93bmVyIiA6ICJlbXBsb3llZSIsCiAgICAgICAgY2xpbmljYWwsCiAgICAgICAgc2tpbGw6IDAuNjUgKyAwLjcgKiByYW5kb20oKSwKICAgICAgICBleHBlcmllbmNlOiBNYXRoLmZsb29yKHJhbmRvbSgpICogMzEpLAogICAgICB9OwogICAgICB0ZWFtLnB1c2gocGVyc29uKTsKICAgICAgcGh5c2ljaWFucy5wdXNoKHBlcnNvbik7CiAgICB9CiAgICBwcm92aWRlcnMucHVzaCh7CiAgICAgIGlkOiBgUCR7aiArIDF9YCwKICAgICAgcmVnaW9uLAogICAgICBzaXplLAogICAgICBjbGluaWNhbCwKICAgICAgdGVhbSwKICAgICAgbiwKICAgICAgYmFzZVZvbHVtZTogbiAqIDkuOCwKICAgICAgcXVhbGl0eTogbWVhbih0ZWFtLm1hcCgoZCkgPT4gZC5za2lsbCkpLAogICAgICByZXNlcnZlOiBuICogMywKICAgICAgY2xvc2VkOiBmYWxzZSwKICAgIH0pOwogIH0KICByZXR1cm4geyBwcm92aWRlcnMsIHBoeXNpY2lhbnMgfTsKfQpmdW5jdGlvbiBncm91cFJlc3VsdHMocGVvcGxlKSB7CiAgY29uc3QgZ3JvdXBzID0gW107CiAgY29uc3QgbGFiZWxzID0gewogICAgbWV0cm86ICLsiJjrj4TqtowiLAogICAgcmVnaW9uYWw6ICLruYTsiJjrj4TqtowiLAogICAgbGFyZ2U6ICLrjIDtmJUiLAogICAgc21hbGw6ICLshoztmJUiLAogICAgb3duZXI6ICLshozsnKAg7J2Y7IKsIiwKICAgIGVtcGxveWVlOiAi67SJ7KeBIOydmOyCrCIsCiAgICBjb2duaXRpdmU6ICLtjJDri6gg67mE7KSRIOuGkuydjCIsCiAgICBtaXhlZDogIu2YvO2VqSDsp4Tro4wiLAogICAgcHJvY2VkdXJhbDogIuyymOy5mCDruYTspJEg64aS7J2MIiwKICAgIGp1bmlvcjogIuqyve2XmCAxMOuFhCDrr7jrp4wiLAogICAgc2VuaW9yOiAi6rK97ZeYIDEw64WEIOydtOyDgSIsCiAgfTsKICBmb3IgKGNvbnN0IGRpbWVuc2lvbiBvZiBbInNldHRpbmciLCAicm9sZSIsICJjbGluaWNhbCIsICJleHBlcmllbmNlIl0pIHsKICAgIGNvbnN0IGJ1Y2tldHMgPSBuZXcgTWFwKCk7CiAgICBmb3IgKGNvbnN0IGQgb2YgcGVvcGxlKSB7CiAgICAgIGNvbnN0IGtleSA9CiAgICAgICAgZGltZW5zaW9uID09PSAic2V0dGluZyIKICAgICAgICAgID8gYCR7ZC5yZWdpb259LSR7ZC5zaXplfWAKICAgICAgICAgIDogZGltZW5zaW9uID09PSAiZXhwZXJpZW5jZSIKICAgICAgICAgICAgPyBkLmV4cGVyaWVuY2UgPCAxMAogICAgICAgICAgICAgID8gImp1bmlvciIKICAgICAgICAgICAgICA6ICJzZW5pb3IiCiAgICAgICAgICAgIDogZFtkaW1lbnNpb25dOwogICAgICBpZiAoIWJ1Y2tldHMuaGFzKGtleSkpIGJ1Y2tldHMuc2V0KGtleSwgW10pOwogICAgICBidWNrZXRzLmdldChrZXkpLnB1c2goZCk7CiAgICB9CiAgICBmb3IgKGNvbnN0IFtrZXksIG1lbWJlcnNdIG9mIGJ1Y2tldHMpCiAgICAgIGdyb3Vwcy5wdXNoKHsKICAgICAgICBkaW1lbnNpb24sCiAgICAgICAga2V5LAogICAgICAgIGxhYmVsOgogICAgICAgICAgZGltZW5zaW9uID09PSAic2V0dGluZyIKICAgICAgICAgICAgPyBrZXkKICAgICAgICAgICAgICAgIC5zcGxpdCgiLSIpCiAgICAgICAgICAgICAgICAubWFwKCh4KSA9PiBsYWJlbHNbeF0pCiAgICAgICAgICAgICAgICAuam9pbigiIMK3ICIpCiAgICAgICAgICAgIDogbGFiZWxzW2tleV0sCiAgICAgICAgaW5jb21lSW5kZXg6IG1lYW4obWVtYmVycy5tYXAoKGQpID0+IGQuaW5jb21lSW5kZXgpKSwKICAgICAgICBlbXBsb3ltZW50UmF0ZTogbWVhbihtZW1iZXJzLm1hcCgoZCkgPT4gK2QuZW1wbG95ZWQpKSwKICAgICAgICBhdXRvbm9teTogbWVhbihtZW1iZXJzLm1hcCgoZCkgPT4gZC5hdXRvbm9teSkpLAogICAgICAgIGNvdW50OiBtZW1iZXJzLmxlbmd0aCwKICAgICAgfSk7CiAgfQogIHJldHVybiBncm91cHM7Cn0KZnVuY3Rpb24gaGFzaCh0ZXh0KSB7CiAgbGV0IGggPSAyMTY2MTM2MjYxOwogIGZvciAobGV0IGkgPSAwOyBpIDwgdGV4dC5sZW5ndGg7IGkrKykKICAgIGggPSBNYXRoLmltdWwoaCBeIHRleHQuY2hhckNvZGVBdChpKSwgMTY3Nzc2MTkpOwogIHJldHVybiAoaCA+Pj4gMCkudG9TdHJpbmcoMTYpLnBhZFN0YXJ0KDgsICIwIik7Cn0KZXhwb3J0IGZ1bmN0aW9uIHNpbXVsYXRlKGlucHV0ID0ge30sIHNlZWQgPSA0MikgewogIGlmICghaW5wdXQgfHwgdHlwZW9mIGlucHV0ICE9PSAib2JqZWN0IiB8fCBBcnJheS5pc0FycmF5KGlucHV0KSkKICAgIHRocm93IG5ldyBUeXBlRXJyb3IoIlBhcmFtZXRlcnMgbXVzdCBiZSBhbiBvYmplY3QiKTsKICBmb3IgKGNvbnN0IGtleSBvZiBPYmplY3Qua2V5cyhpbnB1dCkpCiAgICBpZiAoIVBBUkFNUy5zb21lKChwKSA9PiBwLmtleSA9PT0ga2V5KSkKICAgICAgdGhyb3cgbmV3IFJhbmdlRXJyb3IoYFVua25vd24gcGFyYW1ldGVyOiAke2tleX1gKTsKICBjb25zdCBwYXJhbXMgPSB7IC4uLkRFRkFVTFRfUEFSQU1TLCAuLi5pbnB1dCB9OwogIGZvciAoY29uc3QgcCBvZiBQQVJBTVMpCiAgICBpZiAoCiAgICAgIHR5cGVvZiBwYXJhbXNbcC5rZXldICE9PSAibnVtYmVyIiB8fAogICAgICAhTnVtYmVyLmlzRmluaXRlKHBhcmFtc1twLmtleV0pIHx8CiAgICAgIHBhcmFtc1twLmtleV0gPCBwLm1pbiB8fAogICAgICBwYXJhbXNbcC5rZXldID4gcC5tYXgKICAgICkKICAgICAgdGhyb3cgbmV3IFJhbmdlRXJyb3IoYEludmFsaWQgcGFyYW1ldGVyOiAke3Aua2V5fWApOwogIGlmICghTnVtYmVyLmlzSW50ZWdlcihzZWVkKSB8fCBzZWVkIDwgMCB8fCBzZWVkID4gNDI5NDk2NzI5NSkKICAgIHRocm93IG5ldyBSYW5nZUVycm9yKCJTZWVkIG11c3QgYmUgYW4gdW5zaWduZWQgMzItYml0IGludGVnZXIiKTsKICBjb25zdCB7IHByb3ZpZGVycywgcGh5c2ljaWFucyB9ID0gcG9wdWxhdGlvbihzZWVkKSwKICAgIGZyYW1lcyA9IFtdLAogICAgeWVhcnMgPSBBcnJheS5mcm9tKHsgbGVuZ3RoOiAxMSB9LCAoXywgaSkgPT4gMjAyNiArIGkpOwogIGNvbnN0IGJhc2VWb2x1bWUgPSBzdW0ocHJvdmlkZXJzLm1hcCgocCkgPT4gcC5iYXNlVm9sdW1lKSk7CiAgbGV0IGluaXRpYWxNZWFuID0gMCwKICAgIGluaXRpYWxMb3dlcklkcywKICAgIG1heGltdW1SZXNpZHVhbCA9IDA7CiAgZm9yIChsZXQgdCA9IDA7IHQgPD0gMTA7IHQrKykgewogICAgY29uc3QgdSA9IHQgLyAxMCwKICAgICAgcGF0aCA9IE1hdGgucG93KHUsIE1hdGguZXhwKHBhcmFtcy50aW1pbmcpKTsKICAgIGNvbnN0IGNhcGFiaWxpdHkgPSAocmF0ZSkgPT4gKHJhdGUgKiBNYXRoLmV4cG0xKDIgKiBwYXRoKSkgLyBNYXRoLmV4cG0xKDIpOwogICAgY29uc3QgY29nbml0aW9uID0gY2FwYWJpbGl0eShwYXJhbXMuY29nbml0aW9uUmF0ZSksCiAgICAgIHByb2NlZHVyZSA9IGNhcGFiaWxpdHkocGFyYW1zLnByb2NlZHVyZVJhdGUpLAogICAgICBjb21tdW5pY2F0aW9uID0gY2FwYWJpbGl0eShwYXJhbXMuY29tbXVuaWNhdGlvblJhdGUpOwogICAgY29uc3QgZmVlID0gMSArIChwYXJhbXMuZmVlQ2hhbmdlIC8gMTAwKSAqIHUsCiAgICAgIHN1cHBseSA9IDEgKyAocGFyYW1zLnN1cHBseUNoYW5nZSAvIDEwMCkgKiB1LAogICAgICBwZXJtaXNzaW9uID0gcGFyYW1zLmxpY2Vuc2luZyAqIHU7CiAgICBjb25zdCBmdXR1cmVXYWdlRnJhY3Rpb24gPSAoMC42NSArIChwYXJhbXMud2FnZVNoYXJlIC0gMC42NSkgKiB1KSAvIHN1cHBseTsKICAgIGNvbnN0IHN0YXRlcyA9IHByb3ZpZGVycy5tYXAoKHApID0+IHsKICAgICAgY29uc3QgY29zdEZhY3RvciA9CiAgICAgICAgcC5zaXplID09PSAibGFyZ2UiID8gMSAtIDAuNyAqIHBhcmFtcy5zY2FsZUFkdmFudGFnZSA6IDE7CiAgICAgIGNvbnN0IGF2YWlsYWJsZSA9IE1hdGgubWF4KGNvZ25pdGlvbiwgcHJvY2VkdXJlLCBjb21tdW5pY2F0aW9uKTsKICAgICAgY29uc3QgYWRvcHRpb24gPQogICAgICAgIGF2YWlsYWJsZSA+IDAKICAgICAgICAgID8gY2xhbXAocGF0aCAvICgwLjQ1ICsgcGFyYW1zLmFkb3B0aW9uQ29zdCAqIGNvc3RGYWN0b3IgKiAxLjgpKQogICAgICAgICAgOiAwOwogICAgICBjb25zdCB3ZWlnaHRzID0KICAgICAgICBwLmNsaW5pY2FsID09PSAiY29nbml0aXZlIgogICAgICAgICAgPyBbMC41NSwgMC4yNSwgMC4yXQogICAgICAgICAgOiBwLmNsaW5pY2FsID09PSAicHJvY2VkdXJhbCIKICAgICAgICAgICAgPyBbMC4yNSwgMC42LCAwLjE1XQogICAgICAgICAgICA6IFswLjQsIDAuNCwgMC4yXTsKICAgICAgY29uc3QgY2FwYWJpbGl0aWVzID0gW2NvZ25pdGlvbiwgcHJvY2VkdXJlLCBjb21tdW5pY2F0aW9uXTsKICAgICAgY29uc3QgdGltZXMgPSB3ZWlnaHRzLm1hcCgKICAgICAgICAodywgaSkgPT4KICAgICAgICAgIHcgKiAoMSAtIGFkb3B0aW9uICogY2FwYWJpbGl0aWVzW2ldICogKDAuMzUgKyAwLjY1ICogcGVybWlzc2lvbikpLAogICAgICApOwogICAgICBjb25zdCBodW1hblRpbWUgPSBzdW0odGltZXMpLAogICAgICAgIGF1dG9ub215ID0gMSAtIGFkb3B0aW9uICogY29nbml0aW9uICogcGVybWlzc2lvbjsKICAgICAgY29uc3QgY2FwYWNpdHkgPSBjYXJlQ2FwYWNpdHkoewogICAgICAgIGhvdXJzOiBwLm4gKiAxMCwKICAgICAgICBodW1hblRpbWUsCiAgICAgICAgdHJlYXRtZW50Q2FwYWNpdHk6IHAubiAqIDEwICogKDEgKyAyICogYWRvcHRpb24gKiBwcm9jZWR1cmUpLAogICAgICAgIGZhY2lsaXR5Q2FwYWNpdHk6IHAubiAqIDMwLAogICAgICB9KTsKICAgICAgY29uc3QgaW5zdXJhbmNlU2hhcmUgPQogICAgICAgIHAuY2xpbmljYWwgPT09ICJwcm9jZWR1cmFsIiA/IDAuOCA6IHAuY2xpbmljYWwgPT09ICJtaXhlZCIgPyAwLjcgOiAwLjY7CiAgICAgIGNvbnN0IGRlbWFuZEZhY3RvciA9CiAgICAgICAgaW5zdXJhbmNlU2hhcmUgKiAoMSArIChwYXJhbXMuaW5zdXJhbmNlQ2hhbmdlIC8gMTAwKSAqIHUpICsKICAgICAgICAoMSAtIGluc3VyYW5jZVNoYXJlKSAqICgxICsgKHBhcmFtcy5ob3VzZWhvbGRDaGFuZ2UgLyAxMDApICogdSk7CiAgICAgIGNvbnN0IHF1YWxpdHlOb3cgPSBwLnF1YWxpdHkgKyAoMS40IC0gcC5xdWFsaXR5KSAqIGFkb3B0aW9uICogY29nbml0aW9uOwogICAgICByZXR1cm4gewogICAgICAgIHAsCiAgICAgICAgYWRvcHRpb24sCiAgICAgICAgY29zdEZhY3RvciwKICAgICAgICBodW1hblRpbWUsCiAgICAgICAgYXV0b25vbXksCiAgICAgICAgY2FwYWNpdHksCiAgICAgICAgZGVtYW5kRmFjdG9yLAogICAgICAgIHdlaWdodDogKHAuYmFzZVZvbHVtZSAqIHF1YWxpdHlOb3cpIC8gcC5xdWFsaXR5LAogICAgICB9OwogICAgfSk7CiAgICBjb25zdCByZWdpb25EZW1hbmQgPSB7fTsKICAgIGNvbnN0IHJlZ2lvbldlaWdodCA9IHt9OwogICAgZm9yIChjb25zdCByZWdpb24gb2YgWyJtZXRybyIsICJyZWdpb25hbCJdKSB7CiAgICAgIHJlZ2lvbkRlbWFuZFtyZWdpb25dID0gc3VtKAogICAgICAgIHN0YXRlcwogICAgICAgICAgLmZpbHRlcigocykgPT4gcy5wLnJlZ2lvbiA9PT0gcmVnaW9uKQogICAgICAgICAgLm1hcCgKICAgICAgICAgICAgKHMpID0+CiAgICAgICAgICAgICAgcy5wLmJhc2VWb2x1bWUgKgogICAgICAgICAgICAgIHMuZGVtYW5kRmFjdG9yICoKICAgICAgICAgICAgICAocmVnaW9uID09PSAicmVnaW9uYWwiCiAgICAgICAgICAgICAgICA/IDEgKyAocGFyYW1zLnJlZ2lvbmFsRGVtYW5kQ2hhbmdlIC8gMTAwKSAqIHUKICAgICAgICAgICAgICAgIDogMSksCiAgICAgICAgICApLAogICAgICApOwogICAgICByZWdpb25XZWlnaHRbcmVnaW9uXSA9IHN1bSgKICAgICAgICBzdGF0ZXMKICAgICAgICAgIC5maWx0ZXIoKHMpID0+IHMucC5yZWdpb24gPT09IHJlZ2lvbiAmJiAhcy5wLmNsb3NlZCkKICAgICAgICAgIC5tYXAoKHMpID0+IHMud2VpZ2h0KSwKICAgICAgKTsKICAgIH0KICAgIGNvbnN0IGN1cnJlbnQgPSBbXSwKICAgICAgcHJvdmlkZXJSb3dzID0gW107CiAgICBsZXQgbWF4UmVzaWR1YWwgPSAwLAogICAgICBjYXBhY2l0eVZpb2xhdGlvbiA9IDA7CiAgICBmb3IgKGNvbnN0IHMgb2Ygc3RhdGVzKSB7CiAgICAgIGNvbnN0IHAgPSBzLnAsCiAgICAgICAgYmVnaW5SZXNlcnZlID0gcC5yZXNlcnZlOwogICAgICBsZXQgdm9sdW1lID0gcC5jbG9zZWQKICAgICAgICA/IDAKICAgICAgICA6IE1hdGgubWluKAogICAgICAgICAgICBzLmNhcGFjaXR5LAogICAgICAgICAgICByZWdpb25XZWlnaHRbcC5yZWdpb25dCiAgICAgICAgICAgICAgPyAocmVnaW9uRGVtYW5kW3AucmVnaW9uXSAqIHMud2VpZ2h0KSAvIHJlZ2lvbldlaWdodFtwLnJlZ2lvbl0KICAgICAgICAgICAgICA6IDAsCiAgICAgICAgICApOwogICAgICBsZXQgcmV2ZW51ZSA9IHZvbHVtZSAqIGZlZTsKICAgICAgbGV0IGFpQ29zdCA9IHAuY2xvc2VkCiAgICAgICAgPyAwCiAgICAgICAgOiBwLm4gKgogICAgICAgICAgcy5hZG9wdGlvbiAqCiAgICAgICAgICBwYXJhbXMuYWRvcHRpb25Db3N0ICoKICAgICAgICAgIHMuY29zdEZhY3RvciAqCiAgICAgICAgICAoMC43ICsgMS44ICogcHJvY2VkdXJlKTsKICAgICAgbGV0IGZpeGVkQ29zdCA9IHAuY2xvc2VkID8gMCA6IHAubiAqIDIsCiAgICAgICAgdmFyaWFibGVDb3N0ID0gdm9sdW1lICogMC4yOwogICAgICBsZXQgbmVlZGVkID0KICAgICAgICBwLmNsb3NlZCB8fCB2b2x1bWUgPT09IDAKICAgICAgICAgID8gMAogICAgICAgICAgOiBNYXRoLm1pbigKICAgICAgICAgICAgICBwLm4sCiAgICAgICAgICAgICAgTWF0aC5jZWlsKE1hdGgubWF4KDAsICh2b2x1bWUgKiBzLmh1bWFuVGltZSkgLyAxMCAtIDFlLTEwKSksCiAgICAgICAgICAgICk7CiAgICAgIGxldCBsZWRnZXIgPSBzZXR0bGVBY2NvdW50cyh7CiAgICAgICAgcmV2ZW51ZSwKICAgICAgICBub25MYWJvckNvc3Q6IGFpQ29zdCArIGZpeGVkQ29zdCArIHZhcmlhYmxlQ29zdCwKICAgICAgICB3YWdlRnJhY3Rpb246IG5lZWRlZCA/IGZ1dHVyZVdhZ2VGcmFjdGlvbiA6IDAsCiAgICAgICAgcmVzZXJ2ZTogcC5yZXNlcnZlLAogICAgICAgIG1pbmltdW1XYWdlczogbmVlZGVkICogMC44LAogICAgICB9KTsKICAgICAgaWYgKCFsZWRnZXIuc29sdmVudCkgewogICAgICAgIHAuY2xvc2VkID0gdHJ1ZTsKICAgICAgICBuZWVkZWQgPSB2b2x1bWUgPSByZXZlbnVlID0gYWlDb3N0ID0gZml4ZWRDb3N0ID0gdmFyaWFibGVDb3N0ID0gMDsKICAgICAgICBsZWRnZXIgPSBzZXR0bGVBY2NvdW50cyh7CiAgICAgICAgICByZXZlbnVlOiAwLAogICAgICAgICAgbm9uTGFib3JDb3N0OiAwLAogICAgICAgICAgd2FnZUZyYWN0aW9uOiAwLAogICAgICAgICAgcmVzZXJ2ZTogcC5yZXNlcnZlLAogICAgICAgIH0pOwogICAgICB9CiAgICAgIHAucmVzZXJ2ZSA9IGxlZGdlci5lbmRSZXNlcnZlOwogICAgICBjb25zdCByYW5rZWQgPSBbCiAgICAgICAgcC50ZWFtWzBdLAogICAgICAgIC4uLnAudGVhbQogICAgICAgICAgLnNsaWNlKDEpCiAgICAgICAgICAuc29ydCgoYSwgYikgPT4gYi5za2lsbCAtIGEuc2tpbGwgfHwgYS5pZC5sb2NhbGVDb21wYXJlKGIuaWQpKSwKICAgICAgXTsKICAgICAgY29uc3QgcmV0YWluZWQgPSBuZXcgU2V0KHJhbmtlZC5zbGljZSgwLCBuZWVkZWQpLm1hcCgoZCkgPT4gZC5pZCkpOwogICAgICBjb25zdCB3YWdlV2VpZ2h0cyA9IHAudGVhbS5tYXAoKGQpID0+CiAgICAgICAgcmV0YWluZWQuaGFzKGQuaWQpCiAgICAgICAgICA/IDEgKyAoZC5za2lsbCAtIDEpICogKDEgLSBzLmFkb3B0aW9uICogY29nbml0aW9uKSAqIDAuNQogICAgICAgICAgOiAwLAogICAgICApOwogICAgICBjb25zdCB0b3RhbFdlaWdodCA9IHN1bSh3YWdlV2VpZ2h0cyk7CiAgICAgIGxldCB3YWdlc1JlY2VpdmVkID0gMCwKICAgICAgICBkaXZpZGVuZHNSZWNlaXZlZCA9IDA7CiAgICAgIHAudGVhbS5mb3JFYWNoKChkLCBpKSA9PiB7CiAgICAgICAgY29uc3QgZW1wbG95ZWQgPSByZXRhaW5lZC5oYXMoZC5pZCksCiAgICAgICAgICBsYWJvckluY29tZSA9IGVtcGxveWVkCiAgICAgICAgICAgID8gMC44ICsKICAgICAgICAgICAgICAoKGxlZGdlci53YWdlcyAtIG5lZWRlZCAqIDAuOCkgKiB3YWdlV2VpZ2h0c1tpXSkgLyB0b3RhbFdlaWdodAogICAgICAgICAgICA6IDA7CiAgICAgICAgY29uc3Qgb3duZXJzaGlwSW5jb21lID0gZC5yb2xlID09PSAib3duZXIiID8gbGVkZ2VyLmRpdmlkZW5kcyA6IDA7CiAgICAgICAgd2FnZXNSZWNlaXZlZCArPSBsYWJvckluY29tZTsKICAgICAgICBkaXZpZGVuZHNSZWNlaXZlZCArPSBvd25lcnNoaXBJbmNvbWU7CiAgICAgICAgY3VycmVudC5wdXNoKHsKICAgICAgICAgIC4uLmQsCiAgICAgICAgICBpbmNvbWU6IGxhYm9ySW5jb21lICsgb3duZXJzaGlwSW5jb21lLAogICAgICAgICAgbGFib3JJbmNvbWUsCiAgICAgICAgICBvd25lcnNoaXBJbmNvbWUsCiAgICAgICAgICBpbmNvbWVJbmRleDogMCwKICAgICAgICAgIGVtcGxveWVkLAogICAgICAgICAgYWN0aXZlOiBlbXBsb3llZCwKICAgICAgICAgIGF1dG9ub215OiBlbXBsb3llZCA/IHMuYXV0b25vbXkgOiAwLAogICAgICAgIH0pOwogICAgICB9KTsKICAgICAgY29uc3Qgbm9uTGFib3JDb3N0ID0gYWlDb3N0ICsgZml4ZWRDb3N0ICsgdmFyaWFibGVDb3N0OwogICAgICBtYXhSZXNpZHVhbCA9IE1hdGgubWF4KAogICAgICAgIG1heFJlc2lkdWFsLAogICAgICAgIE1hdGguYWJzKHJldmVudWUgLSBub25MYWJvckNvc3QgLSBsZWRnZXIud2FnZXMgLSBsZWRnZXIucHJvZml0KSwKICAgICAgICBNYXRoLmFicyhwLnJlc2VydmUgLSBiZWdpblJlc2VydmUgLSBsZWRnZXIucHJvZml0ICsgbGVkZ2VyLmRpdmlkZW5kcyksCiAgICAgICAgTWF0aC5hYnMod2FnZXNSZWNlaXZlZCAtIGxlZGdlci53YWdlcyksCiAgICAgICAgTWF0aC5hYnMoZGl2aWRlbmRzUmVjZWl2ZWQgLSBsZWRnZXIuZGl2aWRlbmRzKSwKICAgICAgKTsKICAgICAgY2FwYWNpdHlWaW9sYXRpb24gPSBNYXRoLm1heCgKICAgICAgICBjYXBhY2l0eVZpb2xhdGlvbiwKICAgICAgICB2b2x1bWUgLSBzLmNhcGFjaXR5LAogICAgICAgIHZvbHVtZSAqIHMuaHVtYW5UaW1lIC0gbmVlZGVkICogMTAsCiAgICAgICk7CiAgICAgIHByb3ZpZGVyUm93cy5wdXNoKHsKICAgICAgICBpZDogcC5pZCwKICAgICAgICByZWdpb246IHAucmVnaW9uLAogICAgICAgIHNpemU6IHAuc2l6ZSwKICAgICAgICBjbG9zZWQ6IHAuY2xvc2VkLAogICAgICAgIHJldmVudWUsCiAgICAgICAgcHJvZml0OiBsZWRnZXIucHJvZml0LAogICAgICAgIHZvbHVtZSwKICAgICAgICBhZG9wdGlvbjogcC5jbG9zZWQgPyAwIDogcy5hZG9wdGlvbiwKICAgICAgICBoZWFkY291bnQ6IG5lZWRlZCwKICAgICAgICB3YWdlczogbGVkZ2VyLndhZ2VzLAogICAgICAgIGRpdmlkZW5kczogbGVkZ2VyLmRpdmlkZW5kcywKICAgICAgICBhaUNvc3QsCiAgICAgICAgZml4ZWRDb3N0LAogICAgICAgIHZhcmlhYmxlQ29zdCwKICAgICAgICBub25MYWJvckNvc3QsCiAgICAgICAgYmVnaW5SZXNlcnZlLAogICAgICAgIHJlc2VydmU6IHAucmVzZXJ2ZSwKICAgICAgICBjYXBhY2l0eTogcy5jYXBhY2l0eSwKICAgICAgICBodW1hblRpbWU6IHMuaHVtYW5UaW1lLAogICAgICB9KTsKICAgIH0KICAgIGN1cnJlbnQuc29ydCgoYSwgYikgPT4gTnVtYmVyKGEuaWQuc2xpY2UoMSkpIC0gTnVtYmVyKGIuaWQuc2xpY2UoMSkpKTsKICAgIGlmICh0ID09PSAwKSB7CiAgICAgIGluaXRpYWxNZWFuID0gbWVhbihjdXJyZW50Lm1hcCgoZCkgPT4gZC5pbmNvbWUpKTsKICAgICAgaW5pdGlhbExvd2VySWRzID0gbmV3IFNldCgKICAgICAgICBbLi4uY3VycmVudF0KICAgICAgICAgIC5zb3J0KChhLCBiKSA9PiBhLmluY29tZSAtIGIuaW5jb21lKQogICAgICAgICAgLnNsaWNlKDAsIGN1cnJlbnQubGVuZ3RoIC8gMikKICAgICAgICAgIC5tYXAoKGQpID0+IGQuaWQpLAogICAgICApOwogICAgfQogICAgY3VycmVudC5mb3JFYWNoKChkKSA9PiAoZC5pbmNvbWVJbmRleCA9IChkLmluY29tZSAvIGluaXRpYWxNZWFuKSAqIDEwMCkpOwogICAgY29uc3QgaW5jb21lcyA9IGN1cnJlbnQubWFwKChkKSA9PiBkLmluY29tZSksCiAgICAgIHRvdGFsSW5jb21lID0gc3VtKGluY29tZXMpLAogICAgICB0b3RhbFZvbHVtZSA9IHN1bShwcm92aWRlclJvd3MubWFwKChwKSA9PiBwLnZvbHVtZSkpLAogICAgICBkZW1hbmQgPSBzdW0oT2JqZWN0LnZhbHVlcyhyZWdpb25EZW1hbmQpKTsKICAgIGNvbnN0IG1ldHJpY3MgPSB7CiAgICAgIGluY29tZUluZGV4OiBtZWFuKGN1cnJlbnQubWFwKChkKSA9PiBkLmluY29tZUluZGV4KSksCiAgICAgIGVtcGxveW1lbnRSYXRlOiBtZWFuKGN1cnJlbnQubWFwKChkKSA9PiArZC5lbXBsb3llZCkpLAogICAgICBhdXRvbm9teTogbWVhbihjdXJyZW50Lm1hcCgoZCkgPT4gZC5hdXRvbm9teSkpLAogICAgICBjbG9zZWRSYXRlOiBtZWFuKHByb3ZpZGVyUm93cy5tYXAoKHApID0+ICtwLmNsb3NlZCkpLAogICAgICBnaW5pOiBnaW5pKGluY29tZXMpLAogICAgICB0b3BTaGFyZTogdG90YWxJbmNvbWUKICAgICAgICA/IHN1bSgKICAgICAgICAgICAgWy4uLmluY29tZXNdCiAgICAgICAgICAgICAgLnNvcnQoKGEsIGIpID0+IGIgLSBhKQogICAgICAgICAgICAgIC5zbGljZSgwLCBNYXRoLmNlaWwoY3VycmVudC5sZW5ndGggKiAwLjEpKSwKICAgICAgICAgICkgLyB0b3RhbEluY29tZQogICAgICAgIDogbnVsbCwKICAgICAgdm9sdW1lSW5kZXg6ICh0b3RhbFZvbHVtZSAvIGJhc2VWb2x1bWUpICogMTAwLAogICAgICB1bm1ldFJhdGU6IGRlbWFuZCA/IGNsYW1wKDEgLSB0b3RhbFZvbHVtZSAvIGRlbWFuZCkgOiAwLAogICAgICBsb3dlckhhbGZJbmNvbWVJbmRleDogbWVhbigKICAgICAgICBjdXJyZW50CiAgICAgICAgICAuZmlsdGVyKChkKSA9PiBpbml0aWFsTG93ZXJJZHMuaGFzKGQuaWQpKQogICAgICAgICAgLm1hcCgoZCkgPT4gZC5pbmNvbWVJbmRleCksCiAgICAgICksCiAgICB9OwogICAgY29uc3QgZHJpdmVycyA9IHsKICAgICAgY29nbml0aW9uLAogICAgICBwcm9jZWR1cmUsCiAgICAgIGNvbW11bmljYXRpb24sCiAgICAgIGFkb3B0aW9uOiBtZWFuKHByb3ZpZGVyUm93cy5tYXAoKHApID0+IHAuYWRvcHRpb24pKSwKICAgICAgZmVlLAogICAgICBkZW1hbmQ6IGRlbWFuZCAvIGJhc2VWb2x1bWUsCiAgICAgIHN1cHBseSwKICAgICAgYXV0b25vbXk6IG1ldHJpY3MuYXV0b25vbXksCiAgICB9OwogICAgbWF4aW11bVJlc2lkdWFsID0gTWF0aC5tYXgobWF4aW11bVJlc2lkdWFsLCBtYXhSZXNpZHVhbCwgY2FwYWNpdHlWaW9sYXRpb24pOwogICAgZnJhbWVzLnB1c2goewogICAgICB5ZWFyOiB5ZWFyc1t0XSwKICAgICAgZHJpdmVycywKICAgICAgbWV0cmljcywKICAgICAgcGh5c2ljaWFuczogY3VycmVudCwKICAgICAgcHJvdmlkZXJzOiBwcm92aWRlclJvd3MsCiAgICAgIGdyb3VwczogZ3JvdXBSZXN1bHRzKGN1cnJlbnQpLAogICAgICBhdWRpdDogeyBtYXhSZXNpZHVhbCwgY2FwYWNpdHlWaW9sYXRpb24gfSwKICAgIH0pOwogIH0KICBjb25zdCBwYXNzZWQgPSBtYXhpbXVtUmVzaWR1YWwgPCAxZS03OwogIGlmICghcGFzc2VkKQogICAgdGhyb3cgbmV3IEVycm9yKAogICAgICBgTW9kZWwgYWNjb3VudGluZyBvciBjYXBhY2l0eSB2YWxpZGF0aW9uIGZhaWxlZDogJHttYXhpbXVtUmVzaWR1YWx9YCwKICAgICk7CiAgcmV0dXJuIHsKICAgIHZlcnNpb246IFZFUlNJT04sCiAgICBzZWVkLAogICAgcGFyYW1zLAogICAgeWVhcnMsCiAgICBmcmFtZXMsCiAgICBzaWduYXR1cmU6IGhhc2goSlNPTi5zdHJpbmdpZnkoeyB2ZXJzaW9uOiBWRVJTSU9OLCBzZWVkLCBwYXJhbXMsIGZyYW1lcyB9KSksCiAgICBjaGVja3M6IHsgcGFzc2VkLCBtYXhSZXNpZHVhbDogbWF4aW11bVJlc2lkdWFsIH0sCiAgICBpbml0aWFsUGh5c2ljaWFuczogZnJhbWVzWzBdLnBoeXNpY2lhbnMsCiAgfTsKfQo=";
+const $ = (id) => document.getElementById(id);
+const COLORS = [
+  "#00877d",
+  "#d46b4d",
+  "#3e7eab",
+  "#9a729c",
+  "#a48638",
+  "#627b87",
+];
+const state = {
+  params: { ...DEFAULT_PARAMS },
+  seed: 42,
+  index: 0,
+  dimension: "setting",
+  result: null,
+  reference: null,
+  selected: null,
+  playing: false,
+  timer: null,
+  sweepCache: null,
+};
+const fmt = (x, d = 1) =>
+  Number.isFinite(x)
+    ? x.toLocaleString("ko-KR", {
+        minimumFractionDigits: d,
+        maximumFractionDigits: d,
+      })
+    : "—";
+const pct = (x) => (Number.isFinite(x) ? `${fmt(x * 100)}%` : "—");
+const paramValue = (p, v) =>
+  `${fmt(v, p.step < 1 ? (p.step < 0.1 ? 2 : 1) : 0)}${p.unit ? ` ${p.unit}` : ""}`;
+const escapeHTML = (x) =>
+  String(x).replace(
+    /[&<>"']/g,
+    (c) =>
+      ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[
+        c
+      ],
+  );
+function notice(text) {
+  $("notice").textContent = text;
+  $("notice").classList.add("show");
+  clearTimeout(notice.timer);
+  notice.timer = setTimeout(() => $("notice").classList.remove("show"), 3200);
+}
+function fail(error) {
+  pause();
+  $("error").hidden = false;
+  $("error").textContent = `계산을 표시할 수 없습니다: ${error.message}`;
+}
+function checked(params, seed) {
+  const result = simulate(params, seed);
+  if (!result.checks.passed)
+    throw new Error("모형의 검증 조건을 통과하지 못했습니다.");
+  return result;
+}
+function run() {
+  clearPaired();
+  try {
+    state.result = checked(state.params, state.seed);
+    state.sweepCache = null;
+    $("error").hidden = true;
+    render();
+    renderSweep();
+  } catch (e) {
+    fail(e);
+  }
+}
+function createControls() {
+  $("preset").innerHTML =
+    '<option value="custom">직접 조절</option>' +
+    PRESETS.map(
+      (p) =>
+        `<option value="${escapeHTML(p.id)}">${escapeHTML(p.label)}</option>`,
+    ).join("");
+  const groups = [...new Set(PARAMS.map((p) => p.group))];
+  $("parameters").innerHTML = groups
+    .map(
+      (group) =>
+        `<section class="parameter-group"><h3>${escapeHTML(group)}</h3>${PARAMS.filter(
+          (p) => p.group === group,
+        )
+          .map(
+            (p) =>
+              `<div class="parameter"><div class="parameter-line"><label for="param-${p.key}">${escapeHTML(p.label)}</label><output id="out-${p.key}" for="param-${p.key}"></output></div><input id="param-${p.key}" type="range" min="${p.min}" max="${p.max}" step="${p.step}" value="${state.params[p.key]}" aria-describedby="desc-${p.key}"><p class="small" id="desc-${p.key}">${escapeHTML(p.description)}</p></div>`,
+          )
+          .join("")}</section>`,
+    )
+    .join("");
+  $("sweep-param").innerHTML = PARAMS.map(
+    (p) => `<option value="${p.key}">${escapeHTML(p.label)}</option>`,
+  ).join("");
+  for (const p of PARAMS)
+    $(`param-${p.key}`).addEventListener("input", (e) => {
+      pause();
+      state.params[p.key] = Number(e.target.value);
+      $("preset").value = "custom";
+      $("preset-description").textContent = "각 조건을 직접 조절하고 있습니다.";
+      syncControls();
+      run();
+    });
+  syncControls();
+}
+function syncControls() {
+  for (const p of PARAMS) {
+    $(`param-${p.key}`).value = state.params[p.key];
+    $(`out-${p.key}`).textContent = paramValue(p, state.params[p.key]);
+  }
+  $("seed").value = state.seed;
+}
+const frame = () => state.result.frames[state.index];
+const groupsOf = (f) => f.groups.filter((g) => g.dimension === state.dimension);
+function personGroup(p, groups) {
+  if (state.dimension === "role")
+    return groups.findIndex((g) => g.key === p.role);
+  if (state.dimension === "clinical")
+    return groups.findIndex((g) => g.key === p.clinical);
+  if (state.dimension === "setting")
+    return groups.findIndex(
+      (g) =>
+        g.key === `${p.region}-${p.size}` ||
+        g.key === `${p.size}-${p.region}` ||
+        g.key === `${p.region}_${p.size}` ||
+        (g.key.includes(p.region) && g.key.includes(p.size)),
+    );
+  return groups.findIndex(
+    (g) =>
+      g.key === (p.experience >= 10 ? "experienced" : "early") ||
+      g.key === (p.experience >= 10 ? "senior" : "junior"),
+  );
+}
+function stableHash(s) {
+  let h = 2166136261;
+  for (const c of String(s)) h = Math.imul(h ^ c.charCodeAt(0), 16777619);
+  return h >>> 0;
+}
+function incomeMax() {
+  let max = 150;
+  for (const r of [state.result, state.reference].filter(Boolean))
+    for (const f of r.frames)
+      for (const p of f.physicians) max = Math.max(max, p.incomeIndex);
+  return Math.ceil(max / 100) * 100;
+}
+function render() {
+  const f = frame();
+  $("year").textContent = f.year;
+  $("timeline").value = state.index;
+  $("timeline").setAttribute("aria-valuetext", `${f.year}년`);
+  $("previous").disabled = state.index === 0;
+  $("next").disabled = state.index === 10;
+  const ref = state.reference?.frames[state.index];
+  $("distribution-summary").innerHTML =
+    `<span>초기 하위 50% 소득 <strong>${fmt(f.metrics.lowerHalfIncomeIndex)}</strong></span><span>상위 10% 소득 점유율 <strong>${pct(f.metrics.topShare)}</strong></span><span>소득 없는 의사 <strong>${pct(f.physicians.filter((p) => p.incomeIndex <= 0).length / f.physicians.length)}</strong></span><span>소득 Gini <strong>${fmt(f.metrics.gini, 3)}</strong></span>`;
+  const specs = [
+    ["평균 실질소득", "incomeIndex", "", "출발 집단 전체 · 2026년 평균 100"],
+    ["고용 유지율", "employmentRate", "%", "출발 의사 집단 중 진료 중인 비율"],
+    ["집단 임상 자율성", "autonomy", "%", "출발 집단 평균 · 진료 이탈은 0"],
+    ["의료기관 폐업률", "closedRate", "%", "가상 의료기관 기준"],
+  ];
+  $("kpis").innerHTML = specs
+    .map(([label, key, unit, note]) => {
+      const v = f.metrics[key] * (unit ? 100 : 1),
+        r = ref?.metrics[key] * (unit ? 100 : 1);
+      return `<div><div class="kpi-label">${label}</div><div class="kpi-value">${fmt(v)}<small>${unit}</small></div><div class="kpi-note">${ref ? `고정 조건 대비 ${v - r >= 0 ? "+" : ""}${fmt(v - r)}${unit ? "%p" : ""}` : note}</div></div>`;
+    })
+    .join("");
+  $("verification").textContent =
+    `계산 검증 통과 · seed ${state.seed} · ${state.result.version} · ${state.result.signature}`;
+  const groups = groupsOf(f);
+  $("legend").innerHTML = groups
+    .map(
+      (g, i) =>
+        `<span class="legend-item"><i style="background:${COLORS[i % COLORS.length]}"></i>${escapeHTML(g.label)}</span>`,
+    )
+    .join("");
+  $("live-drivers").textContent =
+    `판단 추가 자동화 ${pct(f.drivers.cognition)} · 처치 ${pct(f.drivers.procedure)} · 보급 ${pct(f.drivers.adoption)} · 수가 ${fmt(f.drivers.fee, 2)}×`;
+  renderDistribution(groups);
+  renderTrajectories(groups);
+  renderDrivers();
+  renderPerson();
+  renderComparison();
+}
+let currentStructure = "";
+function renderDistribution(groups) {
+  const svg = $("distribution-chart"),
+    f = frame(),
+    max = incomeMax(),
+    left = 58,
+    right = 875,
+    top = 20,
+    bottom = 182,
+    zero = 212;
+  const x = (i) => left + ((i + 0.5) * (right - left)) / groups.length,
+    y = (v) => bottom - (v / max) * (bottom - top);
+  const structure = `${state.dimension}/${state.seed}/${max}/${groups.map((g) => g.key).join(",")}`;
+  if (currentStructure !== structure) {
+    currentStructure = structure;
+    let content = "";
+    for (let tick = 0; tick <= 4; tick++) {
+      let val = (max * tick) / 4,
+        yy = y(val);
+      content += `<line x1="${left}" y1="${yy}" x2="${right}" y2="${yy}" class="axis-line"/><text x="${left - 12}" y="${yy + 4}" text-anchor="end">${fmt(val, 0)}</text>`;
+    }
+    content += `<text x="${left}" y="13">실질소득 지수</text><rect x="${left}" y="198" width="${right - left}" height="28" rx="4" fill="#eaf0f1"/><text x="${left - 10}" y="216" text-anchor="end">무소득</text>`;
+    groups.forEach((g, i) => {
+      content += `<text x="${x(i)}" y="240" text-anchor="middle">${escapeHTML(g.label)}</text>`;
+    });
+    content += '<g id="reference-dots"></g><g id="physician-dots"></g>';
+    svg.innerHTML = content;
+    for (const p of f.physicians) {
+      const circle = document.createElementNS(
+        "http://www.w3.org/2000/svg",
+        "circle",
+      );
+      circle.id = `dot-${p.id}`;
+      circle.classList.add("dot");
+      circle.setAttribute("r", "3.5");
+      circle.setAttribute("tabindex", "0");
+      circle.setAttribute("role", "button");
+      circle.addEventListener("click", () => {
+        state.selected = p.id;
+        renderPerson();
+        renderDistribution(groupsOf(frame()));
+      });
+      circle.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          state.selected = p.id;
+          renderPerson();
+          renderDistribution(groupsOf(frame()));
+        }
+      });
+      $("physician-dots").append(circle);
+    }
+  }
+  const groupOf = (p) => {
+    let i = personGroup(p, groups);
+    if (i < 0 && state.dimension === "experience") {
+      const years = p.experience;
+      i =
+        groups.length === 2
+          ? years >= 15
+            ? 1
+            : 0
+          : Math.min(groups.length - 1, Math.floor(years / 10));
+    }
+    return Math.max(0, i);
+  };
+  const coords = (p) => {
+    const i = groupOf(p);
+    return {
+      i,
+      cx:
+        x(i) +
+        ((((stableHash(p.id) % 1000) / 1000 - 0.5) * (right - left)) /
+          groups.length) *
+          0.72,
+      cy:
+        p.incomeIndex > 0
+          ? y(p.incomeIndex)
+          : zero + ((stableHash(`${p.id}exit`) % 9) - 4),
+    };
+  };
+  for (const p of f.physicians) {
+    const d = $(`dot-${p.id}`),
+      { i, cx, cy } = coords(p);
+    d.setAttribute("cx", cx);
+    d.setAttribute("cy", cy);
+    d.setAttribute("fill", p.employed ? COLORS[i % COLORS.length] : "#f6f8f8");
+    d.setAttribute("r", state.selected === p.id ? "6" : "3.5");
+    d.style.stroke =
+      state.selected === p.id
+        ? "#142c38"
+        : p.employed
+          ? "white"
+          : COLORS[i % COLORS.length];
+    d.style.strokeWidth = p.employed ? ".5" : "1.3";
+    d.setAttribute(
+      "aria-label",
+      `의사 ${p.id}, 소득 ${fmt(p.incomeIndex)}, ${p.employed ? "진료 중" : "진료 이탈"}`,
+    );
+    d.innerHTML = `<title>의사 ${escapeHTML(p.id)} · 소득 ${fmt(p.incomeIndex)} · 자율성 ${pct(p.autonomy)}</title>`;
+  }
+  if (state.reference) {
+    $("reference-dots").innerHTML = state.reference.frames[
+      state.index
+    ].physicians
+      .map((p) => {
+        const { cx, cy } = coords(p);
+        return `<circle cx="${cx}" cy="${cy}" r="3.6" fill="none" stroke="#aebdc2" stroke-width=".8" opacity=".65"/>`;
+      })
+      .join("");
+  } else $("reference-dots").innerHTML = "";
+}
+function renderTrajectories(groups) {
+  const W = 900,
+    H = 240,
+    L = 58,
+    R = 875,
+    T = 18,
+    B = 208;
+  let max = 150;
+  for (const result of [state.result, state.reference].filter(Boolean))
+    for (const f of result.frames)
+      for (const g of groupsOf(f)) max = Math.max(max, g.incomeIndex);
+  max = Math.ceil(max / 50) * 50;
+  const x = (i) => L + (i * (R - L)) / 10,
+    y = (v) => B - (v / max) * (B - T);
+  let s = "";
+  for (let j = 0; j <= 3; j++) {
+    const v = (max * j) / 3;
+    s += `<line x1="${L}" y1="${y(v)}" x2="${R}" y2="${y(v)}" class="axis-line"/><text x="${L - 12}" y="${y(v) + 4}" text-anchor="end">${fmt(v, 0)}</text>`;
+  }
+  for (let i = 0; i <= 10; i += 2)
+    s += `<text x="${x(i)}" y="232" text-anchor="middle">${2026 + i}</text>`;
+  for (const [ri, result] of [state.result, state.reference].entries()) {
+    if (!result) continue;
+    groups.forEach((g, i) => {
+      const vals = result.frames.map(
+        (f) => groupsOf(f).find((x) => x.key === g.key)?.incomeIndex ?? 0,
+      );
+      s += `<path d="${vals.map((v, j) => `${j ? "L" : "M"}${x(j)},${y(v)}`).join(" ")}" fill="none" stroke="${COLORS[i % COLORS.length]}" stroke-width="${ri ? 1.5 : 2.5}" ${ri ? 'stroke-dasharray="5 5" opacity=".45"' : ""}/>`;
+      if (!ri)
+        s += `<circle cx="${x(state.index)}" cy="${y(vals[state.index])}" r="4" fill="${COLORS[i % COLORS.length]}"/>`;
+    });
+  }
+  s += `<line x1="${x(state.index)}" x2="${x(state.index)}" y1="${T}" y2="${B}" stroke="#1f4858" stroke-dasharray="3 5" opacity=".4"/>`;
+  $("trajectory-chart").innerHTML = s;
+}
+function renderDrivers() {
+  const d = frame().drivers;
+  const spec = [
+    ["판단 추가 자동화", "cognition", 1],
+    ["처치 추가 자동화", "procedure", 1],
+    ["소통 추가 자동화", "communication", 1],
+    ["실제 AI 보급", "adoption", 1],
+    ["수가", "fee", 2],
+    ["의료 수요", "demand", 2],
+    ["외부 의사 공급 압력", "supply", 2],
+    ["출발 집단 자율성", "autonomy", 1],
+  ];
+  $("drivers").innerHTML = spec
+    .map(
+      ([label, key, scale]) =>
+        `<div><div class="driver-label"><span>${label}</span><span class="driver-value">${scale === 1 ? pct(d[key]) : `${fmt(d[key], 2)}×`}</span></div><div class="driver-track"><div class="driver-fill" style="width:${Math.max(0, Math.min(100, (d[key] / scale) * 100))}%"></div></div></div>`,
+    )
+    .join("");
+}
+function renderPerson() {
+  const el = $("person");
+  if (state.selected === null) {
+    el.hidden = true;
+    return;
+  }
+  const p = frame().physicians.find((p) => p.id === state.selected);
+  if (!p) {
+    el.hidden = true;
+    return;
+  }
+  el.hidden = false;
+  const selectedFrames = state.result.frames.filter((_, i) => i % 2 === 0);
+  el.innerHTML = `<div class="person-title"><strong>의사 ${escapeHTML(p.id)} · ${p.role === "owner" ? "소유 의사" : "봉직의"} · ${p.region === "metro" ? "수도권" : "지역"} · 2026년 경력 ${fmt(p.experience, 0)}년</strong><button id="close-person" class="text-button" aria-label="개인 경로 닫기">닫기</button></div><p>${frame().year}년: ${p.employed ? "진료 중" : "진료 이탈"} · 소득 ${fmt(p.incomeIndex)} · 자율성 ${pct(p.autonomy)}</p><table><thead><tr><th>개인 경로</th>${selectedFrames.map((f) => `<th>${f.year}</th>`).join("")}</tr></thead><tbody>${[
+    ["소득", "incomeIndex"],
+    ["자율성", "autonomy"],
+    ["진료", "employed"],
+  ]
+    .map(
+      ([label, key]) =>
+        `<tr><td>${label}</td>${selectedFrames
+          .map((f) => {
+            const v = f.physicians.find((q) => q.id === p.id)[key];
+            return `<td>${key === "employed" ? (v ? "유지" : "이탈") : key === "autonomy" ? pct(v) : fmt(v)}</td>`;
+          })
+          .join("")}</tr>`,
+    )
+    .join("")}</tbody></table>`;
+  $("close-person").onclick = () => {
+    state.selected = null;
+    renderPerson();
+    renderDistribution(groupsOf(frame()));
+  };
+}
+function renderComparison() {
+  const ref = state.reference;
+  $("paired-run").disabled = !ref;
+  $("unpin").hidden = !ref;
+  $("pin").textContent = ref ? "현재 조건으로 다시 고정" : "현재 조건 고정";
+  if (!ref) {
+    $("comparison-description").textContent =
+      "지금의 조건을 고정한 뒤, 왼쪽에서 가정을 바꿔보세요.";
+    return;
+  }
+  const diffs = PARAMS.filter((p) => ref.params[p.key] !== state.params[p.key]);
+  $("comparison-description").textContent = diffs.length
+    ? diffs
+        .map(
+          (p) =>
+            `${p.label}: ${paramValue(p, ref.params[p.key])} → ${paramValue(p, state.params[p.key])}`,
+        )
+        .join(" · ")
+    : "현재 조건과 같습니다. 회색 빈 점과 점선은 고정 조건입니다.";
+}
+function renderSweep() {
+  if (!state.result) return;
+  const p = PARAMS.find((p) => p.key === $("sweep-param").value);
+  let values = [
+    p.min,
+    p.min + (p.max - p.min) * 0.25,
+    state.params[p.key],
+    p.min + (p.max - p.min) * 0.75,
+    p.max,
+  ].map((v) =>
+    Number((Math.round((v - p.min) / p.step) * p.step + p.min).toFixed(8)),
+  );
+  values = [...new Set(values)].sort((a, b) => a - b);
+  try {
+    const rows = values.map((v) => ({
+      v,
+      result: checked({ ...state.params, [p.key]: v }, state.seed).frames.at(-1)
+        .metrics,
+    }));
+    state.sweepCache = { parameter: p.key, rows };
+    const max = Math.max(...rows.map((r) => r.result.incomeIndex));
+    $("sweep-results").innerHTML =
+      `<table><thead><tr><th>${escapeHTML(p.label)}</th><th>평균 소득</th><th>고용 유지율</th><th>초기 하위 50% 소득</th></tr></thead><tbody>${rows.map((r) => `<tr class="${Math.abs(r.v - state.params[p.key]) < 1e-7 ? "current-row" : ""}"><td>${paramValue(p, r.v)}${Math.abs(r.v - state.params[p.key]) < 1e-7 ? " · 현재" : ""}</td><td><span class="sensitivity-bar" style="--w:${(r.result.incomeIndex / max) * 95}px"></span>${fmt(r.result.incomeIndex)}</td><td>${pct(r.result.employmentRate)}</td><td>${fmt(r.result.lowerHalfIncomeIndex)}</td></tr>`).join("")}</tbody></table>`;
+  } catch (e) {
+    fail(e);
+  }
+}
+function pause() {
+  state.playing = false;
+  clearTimeout(state.timer);
+  $("play").textContent = "▶ 재생";
+  $("play").setAttribute("aria-pressed", "false");
+}
+function tick() {
+  if (!state.playing) return;
+  if (state.index === 10) {
+    pause();
+    return;
+  }
+  state.index++;
+  render();
+  state.timer = setTimeout(tick, Number($("speed").value));
+}
+function download(name, data) {
+  const url = URL.createObjectURL(
+    new Blob([JSON.stringify(data, null, 2)], { type: "application/json" }),
+  );
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = name;
+  document.body.append(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 3000);
+}
+function config() {
+  return {
+    schema: "physician-futures-config-v1",
+    seed: state.seed,
+    params: { ...state.params },
+  };
+}
+function restore(data) {
+  if (
+    !data ||
+    data.schema !== "physician-futures-config-v1" ||
+    !Number.isInteger(data.seed) ||
+    data.seed < 0 ||
+    data.seed > 4294967295 ||
+    !data.params
+  )
+    throw new Error("지원하는 설정 JSON이 아닙니다.");
+  const params = {};
+  for (const p of PARAMS) {
+    const value = data.params[p.key];
+    if (
+      typeof value !== "number" ||
+      !Number.isFinite(value) ||
+      value < p.min ||
+      value > p.max
+    )
+      throw new Error(`${p.label} 값이 허용 범위를 벗어났습니다.`);
+    params[p.key] = value;
+  }
+  const result = checked(params, data.seed);
+  pause();
+  state.params = params;
+  state.seed = data.seed;
+  state.result = result;
+  state.reference = null;
+  state.index = 0;
+  state.selected = null;
+  currentStructure = "";
+  syncControls();
+  $("preset").value = "custom";
+  $("preset-description").textContent = "저장한 설정을 불러왔습니다.";
+  $("error").hidden = true;
+  render();
+  renderSweep();
+  notice("설정을 복원했습니다.");
+}
+createControls();
+$("preset-description").textContent =
+  "조건을 바꾸고 같은 집단의 10년을 비교하세요.";
+$("preset").onchange = (e) => {
+  const p = PRESETS.find((p) => p.id === e.target.value);
+  if (!p) return;
+  pause();
+  state.params = { ...DEFAULT_PARAMS, ...p.params };
+  $("preset-description").textContent = p.description;
+  syncControls();
+  run();
+};
+$("seed").onchange = (e) => {
+  const seed = Number(e.target.value);
+  if (!Number.isInteger(seed) || seed < 0 || seed > 4294967295) {
+    e.target.value = state.seed;
+    notice("seed는 0–4294967295 사이 정수입니다.");
+    return;
+  }
+  pause();
+  state.seed = seed;
+  state.reference = null;
+  state.selected = null;
+  currentStructure = "";
+  run();
+  notice("새 집단으로 계산했습니다. 고정 비교를 해제했습니다.");
+};
+$("reset").onclick = () => {
+  pause();
+  state.params = { ...DEFAULT_PARAMS };
+  state.seed = 42;
+  state.index = 0;
+  state.reference = null;
+  state.selected = null;
+  state.dimension = "setting";
+  $("dimension").value = "setting";
+  $("preset").value = "custom";
+  $("preset-description").textContent = "기본 가정으로 돌아왔습니다.";
+  currentStructure = "";
+  syncControls();
+  run();
+};
+$("play").onclick = () => {
+  if (state.playing) {
+    pause();
+    return;
+  }
+  if (state.index === 10) {
+    state.index = 0;
+    render();
+  }
+  state.playing = true;
+  $("play").textContent = "Ⅱ 일시정지";
+  $("play").setAttribute("aria-pressed", "true");
+  state.timer = setTimeout(tick, Number($("speed").value));
+};
+$("timeline").oninput = (e) => {
+  pause();
+  state.index = Number(e.target.value);
+  render();
+};
+$("previous").onclick = () => {
+  pause();
+  state.index = Math.max(0, state.index - 1);
+  render();
+};
+$("next").onclick = () => {
+  pause();
+  state.index = Math.min(10, state.index + 1);
+  render();
+};
+$("restart").onclick = () => {
+  pause();
+  state.index = 0;
+  render();
+};
+$("dimension").onchange = (e) => {
+  state.dimension = e.target.value;
+  render();
+};
+$("sweep-param").onchange = renderSweep;
+$("pin").onclick = () => {
+  clearPaired();
+  state.reference = state.result;
+  currentStructure = "";
+  render();
+  notice("현재 조건을 고정했습니다. 가정을 바꿔 비교하세요.");
+};
+$("unpin").onclick = () => {
+  clearPaired();
+  state.reference = null;
+  currentStructure = "";
+  render();
+};
+$("export-config").onclick = () =>
+  download("physician-futures-config.json", config());
+$("import-config").onclick = () => $("file-input").click();
+$("file-input").onchange = async (e) => {
+  try {
+    const file = e.target.files[0];
+    if (!file) return;
+    if (file.size > 100000) throw new Error("설정 파일이 너무 큽니다.");
+    restore(JSON.parse(await file.text()));
+  } catch (err) {
+    notice(`설정을 불러오지 못했습니다: ${err.message}`);
+  } finally {
+    e.target.value = "";
+  }
+};
+$("download-results").onclick = () =>
+  download("physician-futures-results.json", {
+    ...state.result,
+    reference: state.reference,
+    sensitivity: state.sweepCache,
+  });
+window.explorer = {
+  getState: () => ({
+    params: { ...state.params },
+    seed: state.seed,
+    index: state.index,
+    playing: state.playing,
+    dimension: state.dimension,
+    signature: state.result?.signature,
+    reference: !!state.reference,
+    sweep: state.sweepCache,
+  }),
+  getResult: () => state.result,
+  exportConfig: config,
+  restoreConfig: restore,
+};
+let pairedToken = 0;
+function clearPaired() {
+  pairedToken++;
+  if ($("paired-results")) $("paired-results").textContent = "";
+  if ($("paired-run")) $("paired-run").textContent = "여러 초기집단 확인";
+}
+$("paired-run").onclick = async () => {
+  if (!state.reference) return;
+  const token = ++pairedToken,
+    params = { ...state.params },
+    reference = { ...state.reference.params };
+  const differences = [];
+  $("paired-run").disabled = true;
+  try {
+    for (let seed = 0; seed < 100; seed++) {
+      if (token !== pairedToken) return;
+      const a = checked(params, seed).frames.at(-1).metrics,
+        b = checked(reference, seed).frames.at(-1).metrics;
+      differences.push({
+        income: a.incomeIndex - b.incomeIndex,
+        employment: 100 * (a.employmentRate - b.employmentRate),
+      });
+      if (seed % 5 === 0) {
+        $("paired-run").textContent = `초기집단 비교 ${seed + 1}/100`;
+        await new Promise((resolve) => setTimeout(resolve, 0));
+      }
+    }
+    const summary = (key) => {
+      const v = differences.map((d) => d[key]).sort((a, b) => a - b);
+      const q = (p) => {
+        const i = (v.length - 1) * p,
+          l = Math.floor(i);
+        return v[l] + (v[Math.ceil(i)] - v[l]) * (i - l);
+      };
+      return {
+        median: q(0.5),
+        lo: q(0.1),
+        hi: q(0.9),
+        positive: v.filter((n) => n > 1e-8).length,
+      };
+    };
+    const income = summary("income"),
+      employment = summary("employment");
+    $("paired-results").innerHTML =
+      `<p><strong>2036년 · 현재 조건 − 고정 조건</strong></p><p>평균소득 차이: 중앙값 ${fmt(income.median)} · 10–90% 범위 ${fmt(income.lo)} ~ ${fmt(income.hi)} · 증가한 집단 ${income.positive}/100</p><p>고용 유지율 차이: 중앙값 ${fmt(employment.median)}%p · 10–90% 범위 ${fmt(employment.lo)} ~ ${fmt(employment.hi)}%p · 증가한 집단 ${employment.positive}/100</p><p>seed 0–99의 초기집단 가정에 따른 변동입니다. 현실 예측의 신뢰구간이 아닙니다.</p>`;
+  } catch (e) {
+    fail(e);
+  } finally {
+    if (token === pairedToken) {
+      $("paired-run").textContent = "여러 초기집단 다시 확인";
+      $("paired-run").disabled = !state.reference;
+    }
+  }
+};
+
+run();
+</script>
+  </body>
+</html>

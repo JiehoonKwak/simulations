@@ -1,34 +1,28 @@
-# simulations
+# Personal Simulation Lab
 
-다양한 사회·경제 질문을 작은 재현 가능한 모형으로 탐구하는 프로젝트예요.
+My personal lab for exploring questions through small, reproducible simulations
+across topics. Each project keeps its own research, model design, code, and
+artifacts together.
 
-첫 주제는 **한국 맥락의 AI·일자리·불평등**이에요. 미래 예측이나 정책 정답을
-제시하기보다, 어떤 가정이 서로 다른 결과를 만드는지 살펴봐요.
+## Projects
 
-> 같은 기술적 AI 성능 향상 아래, 기업 간 도입 격차와 신규 과업 수요,
-> 노동자의 이동 지연, 이윤의 소유 분포가 고용과 실질소득 분포를 어떻게 바꾸나요?
+| Project | Focus | Status |
+| --- | --- | --- |
+| [AI, work, and inequality](ai-work-inequality/) | AI adoption, work, and income distribution in the Korean context; physicians as the first case | Evidence-anchored physician scenarios (2026–2036), continuous animation and sensitivity figures |
 
-## 현재 단계
+## Organization
 
-2026-09-30: 선행근거 검토와 첫 모형 설계 단계예요. 시뮬레이터와 결과 데이터는
-아직 없어요. 모든 제안 수치는 **illustrative**, 한국 자료로 교정되지 않았어요.
-winner-takes-all·K자 양극화·폭넓은 번영은 결과를 읽는 관점이며 시나리오에
-주입하는 목표값이 아니에요.
+Each simulation lives in its own top-level folder. Start with its README for
+current decisions, open questions, and available run instructions. Add project-local
+folders such as `docs/`, `researches/`, `scripts/`, and `artifacts/` as needed.
+Repository-wide agent guidance lives in [AGENTS.md](AGENTS.md).
+Documentation and research are maintained in English.
 
-- [근거와 적용 한계](docs/evidence.md)
-- [첫 모형·시나리오·검증 기준](docs/model-design.md)
-- [애니메이션 스토리보드](docs/storyboard.md)
+## Publication and rights
 
-다음 단계에서는 수요·임금 규칙을 선택한 뒤 표준 라이브러리만 쓰는 작은 Python
-엔진과 검사부터 만들어요. 검사를 통과한 실제 출력만 간단한 HTML 재생기에 연결해요.
-외부 호스팅은 이번 범위에 없어요.
+Only original code, documentation, and generated visualizations are intended for
+publication. Personal notes, credentials, restricted inputs, paper PDFs, and
+third-party source tables or figures are excluded. Keep source links and original
+summaries; verify redistribution terms before adding external data.
 
-## 공개 범위와 권리
-
-이 프로젝트에서 작성한 코드·설명·생성 시각화만 공개 대상으로 삼아요.
-개인 노트, 다른 프로젝트, 인증정보, 원자료, 논문 PDF, 원문 표·그림은 포함하지 않아요.
-출처는 링크와 짧은 자체 요약으로 남겨요. 공개 열람 가능하다는 이유로
-원자료의 재배포가 허용된다고 간주하지 않아요. 데이터 도입 시 자료별 이용조건을
-확인하기 전에는 저장소에 추가하지 않아요.
-
-프로젝트 라이선스는 **미정**이에요. 아직 LICENSE를 선택하지 않았어요.
+A repository license has not yet been selected.
