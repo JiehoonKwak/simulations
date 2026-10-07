@@ -3,6 +3,10 @@
 This monorepo hosts independent simulation projects across topics. Economics is
 one area of exploration, not the scope of the repository.
 
+Read [STATE.md](STATE.md) for the lab state index, then the selected project's
+README and current method owners. Historical designs and legacy prototype
+contracts do not override the current implementation or its interpretation limits.
+
 - Keep each simulation in its own descriptive, lowercase, hyphenated top-level
   folder. Place its documentation, research, code, inputs, and artifacts inside
   that folder; create subdirectories only when needed.

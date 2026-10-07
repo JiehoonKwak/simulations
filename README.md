@@ -15,6 +15,7 @@ artifacts together.
 Each simulation lives in its own top-level folder. Start with its README for
 current decisions, open questions, and available run instructions. Add project-local
 folders such as `docs/`, `researches/`, `scripts/`, and `artifacts/` as needed.
+The [state index](STATE.md) routes to current model and evidence owners.
 Repository-wide agent guidance lives in [AGENTS.md](AGENTS.md).
 Documentation and research are maintained in English.
 

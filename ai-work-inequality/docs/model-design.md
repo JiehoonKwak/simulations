@@ -1,5 +1,9 @@
 # Scope decisions and design history
 
+Status: **Historical design record**. Last source revision: 2026-10-03 (`151ef04`); status clarified 2026-10-08.
+General-industry candidate and 2026-10-01 physician exploration checkpoint; implementation now supersedes the old do-not-implement and no-checks-run instructions.
+Current successor: [model-method.md](model-method.md), with [project entrypoint](../README.md).
+
 ## Agreed scope and pre-implementation questions (2026-10-01)
 
 The first case focuses on physicians, licensed professionals who also perform knowledge work. The central question is **which physicians survive changes in the medical market, and who loses economic standing or leaves clinical practice**. Implementation was authorized after this discussion on 2026-10-01. The working explorer and its explicit illustrative rules are documented in [model-method.md](model-method.md).

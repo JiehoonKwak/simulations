@@ -1,5 +1,9 @@
 # Physician model v0.1: mechanisms and interpretation
 
+Status: **Legacy v0.1 reference**. Last source revision: 2026-10-03 (`151ef04`); status clarified 2026-10-08.
+Preserved synthetic prototype; its 16-provider/192-person accounting and person-level outcomes do not describe the current empirical release.
+Current successor: [model-method.md](model-method.md), with [project entrypoint](../README.md).
+
 The implemented browser engine is `web/model.mjs`. It models an illustrative,
 synthetic original cohort from 2026 through 2036. It is not calibrated to Korean
 physician incomes, hospital counts, demographics, or AI forecasts. Monetary units
