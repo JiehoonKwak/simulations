@@ -20,4 +20,18 @@ The 2026-10-03 release record at commit `b89be38` reports 37 tests, 13,972 deter
 
 Missing matched 2023 role means and eligible earnings counts, the separate HIRA corrigendum's applicability, national task shares, and observed compensation contracts remain consequential evidence gaps. See the source and method owners before revising anchors or identifying stronger conclusions.
 
+## Cross-Mac continuation
+
+Prepared on 2026-10-08 at `~/DevHub/sideprojects/simulations` on both M3 Max
+and M1 Pro. Both paths use the existing `ctx` workspace identity
+`simulations-e7381072`; M1's Codex app also has a local `simulations` project.
+GitHub carries tracked source and artifacts. Ignored `ai-work-inequality/data/raw/`
+was copied directly over SSH and checksum-matched; each Mac owns its own `.venv`.
+M1 passed `uv sync --locked`, all 37 tests and `npm run build`; its built film
+rendered and its playback and evidence/results controls worked through an SSH
+tunnel. No real conversation has been handed off yet. When ready, finish the
+source turn and run `ctx handoff push --to m1pro --harness codex --session ID`
+from this repository on M3. The first receipt and resumed conversation still need
+to be checked at that time.
+
 No newer research target is selected here after the earnings-maintenance release. Choose the next question from these gaps and the existing scenario conclusions; read the [development rationale](ai-work-inequality/docs/decisions/2026-10-08-development-rationale.md) before changing the accepted visual direction or reviving older assumptions. Use the project's [verification workflow](ai-work-inequality/.agents/skills/verify-physician-futures/SKILL.md) for substantive future changes.
