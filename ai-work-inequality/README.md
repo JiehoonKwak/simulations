@@ -5,6 +5,9 @@ could change physician work and earnings in Korea. The current experience is a
 continuous English animation comparing **practice proprietors** and **salaried
 physicians**, with assumptions, source evidence and sensitivity results in drawers.
 
+The scope excludes individual career-strategy recommendations and does not
+presume a winning group.
+
 The empirical anchors are official 2020 adjusted physician remuneration means.
 Official 2023/2024 workforce and utilization tables provide separate context.
 Twelve primary studies inform mechanisms and a trial-transport check, including
