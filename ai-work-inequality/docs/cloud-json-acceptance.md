@@ -37,3 +37,25 @@ file matches byte for byte.
 | `result.json` | `c0ea7ba9588dc887271a34518a18c4be5ca9d1817a56d951ff1c5ba565c81047` | 5 | 34 |
 
 Combined: 8 values, sum 90, sorted `[2, 3, 5, 7, 11, 17, 17, 28]`.
+
+## Codex continuation (Switchboard #74)
+
+`codex-json-acceptance.py` uses the standard-library summarizer above, requires
+exactly the two inputs with the recorded checksums, and verifies the previously
+published Claude JSON against a fresh input summary before writing anything.
+Its deterministic Codex result adds `claude_result.path` and `claude_result.sha256`
+to the same numeric summary. It writes only to the selected Codex directory in
+the external workspace; source inputs and the Claude result remain read only.
+
+```sh
+python3 scripts/codex-json-acceptance.py --data-root <prepared-workspace>
+python3 scripts/codex-json-acceptance.py --data-root <prepared-workspace> --check
+```
+
+The second command is read-only and checks byte equality. Independent final
+verification must recalculate input hashes and recursively collect numbers
+without importing the producing script. Expected combined count is 8, sum 90,
+and sorted values are `[2, 3, 5, 7, 11, 17, 17, 28]`. The consumed Claude file's
+SHA-256 is `9642b54c88d80ef85b70cbc195f339b9d7b0e2985ea1de36b6186df72270236b`.
+For M1 verification, use the supervisor's readback workspace. This acceptance
+does not alter the analysis models or user-facing simulations.
