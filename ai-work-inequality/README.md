@@ -95,6 +95,7 @@ an assigned probability. See the numerical report for thresholds and boundaries.
 - [Research evidence](docs/evidence.md)
 - [Interface and accepted direction](docs/storyboard.md)
 - [Verification workflow](.agents/skills/verify-physician-futures/SKILL.md)
+- [Hosted cloud JSON acceptance](docs/cloud-json-acceptance.md) (infrastructure check, not model work)
 
 ## Earlier prototypes
 
