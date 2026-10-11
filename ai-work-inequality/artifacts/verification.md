@@ -306,3 +306,15 @@ These results verify the conditional calculation and user-visible workflow.
 Direct `file:` execution remains untested through the browser tool. Role-specific
 2023 remuneration, national task shares, compensation contracts and out-of-sample
 income/employment forecast accuracy remain unidentified, not completed validations.
+
+## Direct `file:` execution — 2026-10-11
+
+The unchanged portable film `artifacts/physician-futures-film.html` (411,839 bytes,
+rebuilt byte-identical from the committed inputs) was opened as a `file:` URL in
+headless Chromium through agent-browser. `location.protocol` was `file:`. The clock
+advanced on load (time 1.073 to 1.833, playing), *Evidence & results* rendered
+per-role results and break-even conditions, and the UI export (signature `28109a1c`,
+*Less work, same care*) passed `replay-export.mjs`: frames, the 243-run sensitivity
+result, earnings conditions, input hashes and scenario/comparison identities
+matched an independent engine rerun. Page errors were empty. Other browsers,
+including Safari and Firefox, were not tested with `file:` URLs.

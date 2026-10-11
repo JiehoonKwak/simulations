@@ -1,6 +1,6 @@
 # Personal Simulation Lab state
 
-Updated: 2026-10-10 11:27:11 (Asia/Seoul)
+Updated: 2026-10-11 14:17:13 (Asia/Seoul)
 
 ## Current goal
 
@@ -28,7 +28,7 @@ lab whose topic scope is broader than economics ([lab overview](README.md)).
 - Matched 2023 role means and eligible earnings counts remain missing ([income data](ai-work-inequality/docs/income-data.md)).
 - The separate HIRA corrigendum's applicability remains unverified ([workforce data](ai-work-inequality/docs/workforce-data.md)).
 - National task shares and observed compensation contracts remain unidentified ([model limits](ai-work-inequality/docs/model-method.md)).
-- Direct `file:` browser execution remains untested; recorded checks used HTTP ([dated verification](ai-work-inequality/artifacts/verification.md)).
+- Direct `file:` execution is verified only in headless Chromium; other browsers remain untested ([dated verification](ai-work-inequality/artifacts/verification.md)).
 
 ## Next step
 
