@@ -1,16 +1,21 @@
-# Interactive exploration
+# Legacy interactive exploration (v0.1)
+
+The preserved synthetic 192-person explorer. Not current behavior; its numbers
+never validate the empirical model.
 
 ## Sub-features
 
 Live parameters; playback/scrubbing; group and individual views; fixed reference;
 100-population comparison; sensitivity sweep; configuration and standalone export.
 
-## User entry
+## How to get to it (user POV)
 
-Open the localhost URL after `npm run dev`, or the built
-`artifacts/physician-futures.html` directly. No account or network data is required.
+`npm run dev`, then `/explorer.html` (source `web/index.html`) or `/standalone.html`
+(built `artifacts/physician-futures.html` from `npm run build:legacy`). No account
+or network data is required. `node scripts/evaluate.mjs` regenerates
+`artifacts/ensemble-report.json`.
 
-## Drive with browser controls
+## Driving it with browser controls
 
 1. Use `#reset`; the timeline starts at 2026 and all settings share this baseline.
    Click `#play`, observe a later year, click again, and verify the year remains
@@ -47,3 +52,7 @@ Open the localhost URL after `npm run dev`, or the built
   baseline grouping. Regional demand has an explicit separate control.
 - Synthetic seeds vary skills/ownership assignment, not all structural uncertainty.
 - The current chart and the old general-industry design are not interchangeable.
+- The interface is Korean; drive it by element id and option value (for example
+  `select '#preset' accessible`), not English labels.
+- `evaluate.mjs` rewrites `generatedAt` on every run; restore the file when that is
+  the only change.
