@@ -1,0 +1,39 @@
+{
+  "declaration_version": 1,
+  "project": "simulations-e7381072",
+  "retained": [
+    {
+      "path": "ai-work-inequality/data",
+      "purpose": "Empirical model inputs and curated workforce/income evidence, including unique extraction provenance that is not yet Git-owned; private original inputs stay outside Git.",
+      "kind": "input"
+    }
+  ],
+  "exclude": [],
+  "recipients": {
+    "m3max": {
+      "mode": "automatic",
+      "paths": [
+        "ai-work-inequality/data"
+      ]
+    },
+    "m1pro": {
+      "mode": "automatic",
+      "paths": [
+        "ai-work-inequality/data"
+      ]
+    },
+    "bv": {
+      "mode": "selected",
+      "paths": [
+        "ai-work-inequality/data"
+      ]
+    }
+  },
+  "archive": {
+    "mode": "nas",
+    "paths": [
+      "ai-work-inequality/data"
+    ]
+  },
+  "snapshots": []
+}

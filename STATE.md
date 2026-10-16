@@ -1,6 +1,6 @@
 # Personal Simulation Lab state
 
-Updated: 2026-10-11 14:17:13 (Asia/Seoul)
+Updated: 2026-10-16 23:25 (Asia/Seoul)
 
 ## Current goal
 
@@ -15,6 +15,7 @@ lab whose topic scope is broader than economics ([lab overview](README.md)).
 
 ## Decisions in force
 
+- [`.ctxdata.json`](.ctxdata.json) retains empirical inputs and their extraction provenance under `ai-work-inequality/data`; Cloud stays enabled and authority remains NAS-v1 without peer-v2 enrollment.
 - Keep simulations self-contained in top-level folders and write documentation/research in English — [repository rules](AGENTS.md).
 - Exclude individual career advice and a predetermined winning group — [project scope](ai-work-inequality/README.md).
 - Use the empirical physician model; earlier designs and synthetic v0.1 are historical references — [current method](ai-work-inequality/docs/model-method.md).
