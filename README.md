@@ -15,9 +15,19 @@ artifacts together.
 Each simulation lives in its own top-level folder. Start with its README for
 current decisions, open questions, and available run instructions. Add project-local
 folders such as `docs/`, `researches/`, `scripts/`, and `artifacts/` as needed.
-The [state index](STATE.md) routes to current model and evidence owners.
+The [unfinished work](STATE.md) lists current work, next steps and blockers;
+each project's README and topic docs own current behavior and decisions.
 Repository-wide agent guidance lives in [AGENTS.md](AGENTS.md).
 Documentation and research are maintained in English.
+
+## Data continuity
+
+[`.ctxdata.json`](.ctxdata.json) declares retained empirical inputs and extraction
+provenance under `ai-work-inequality/data`, including provenance not yet owned by
+Git. Private original inputs stay outside Git. Cloud access is enabled; data
+authority is NAS-v1, without peer-v2 enrollment. The
+[cross-Mac continuation guide](docs/cross-mac-continuation.md) owns conversation
+handoff instructions.
 
 ## Publication and rights
 
